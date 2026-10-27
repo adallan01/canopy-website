@@ -85,11 +85,20 @@ p,h1,h2,h3,ul{margin:0}
 .hero{min-height:clamp(600px,90vh,960px)}
 .bleed.has-upload > .hero-pic{display:none}
 .hero-pic .photo{object-position:68% 50%}
-@media (max-width:767px){.hero-pic .photo{object-position:60% 55%}}
+@media (max-aspect-ratio:1/1){.hero-pic .photo{object-position:60% 50%}}
 /* light hero: dark text on a bright photo */
 .hero.light{background:#E9ECEB;color:var(--ink)}
-.hero.light::after{background:linear-gradient(90deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.2) 45%,rgba(255,255,255,0) 65%)}
-.hero.light .lede{color:#22393B}
+.hero.light::after{background:linear-gradient(90deg,rgba(255,255,255,.72) 0%,rgba(255,255,255,.4) 32%,rgba(255,255,255,0) 52%)}
+.hero.light .lede{color:#22393B;max-width:min(460px,40vw)}
+.hero.light .h-hero{font-size:clamp(2rem,3.6vw,3.6rem);max-width:min(620px,44vw)}
+/* portrait screens (phones, upright tablets): tall photo, text on a light fade at the bottom */
+@media (max-aspect-ratio:1/1){
+  .hero.light{min-height:100vh;min-height:100svh}
+  .hero.light::after{background:linear-gradient(0deg,rgba(238,240,239,.94) 0%,rgba(238,240,239,.8) 26%,rgba(238,240,239,0) 48%)}
+  .hero.light .h-hero{font-size:clamp(1.8rem,7.4vw,2.8rem);max-width:none}
+  .hero.light .lede{max-width:36ch;font-size:1rem}
+  .hero.light .wrap{gap:18px;padding-block:32px}
+}
 .hero.light .btn.ghost{color:var(--ink);border-color:rgba(11,26,28,.5)}
 .hero.light .btn.ghost:hover{border-color:var(--ink)}
 .top{color:var(--ink)}
@@ -260,7 +269,7 @@ p,h1,h2,h3,ul{margin:0}
   <section class="bleed hero light has-media" data-sec="Hero" data-sid="hero" data-slot="hero" data-slot-l="Hero background" data-default-media="images/hero-desktop.webp" aria-labelledby="hero-title">
     <canvas data-seed="1931" aria-hidden="true"></canvas>
     <picture class="hero-pic">
-      <source media="(max-width: 767px)" srcset="images/hero-mobile.webp">
+      <source media="(max-aspect-ratio: 1/1)" srcset="images/hero-mobile.webp">
       <img class="photo" src="images/hero-desktop.webp" alt="A white electric motorcycle, scooter and cargo three-wheeler parked on a pale concrete forecourt" width="2688" height="1520" fetchpriority="high">
     </picture>
     <div class="wrap">
