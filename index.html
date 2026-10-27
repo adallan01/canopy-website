@@ -114,6 +114,9 @@ p,h1,h2,h3,ul{margin:0}
 #film.band > .wrap{transform:translateY(-85%)}
 #film.band.light .btn.ghost{color:var(--ink);border-color:rgba(11,26,28,.5)}
 #film.band.light .btn.ghost:hover{border-color:var(--ink)}
+#film > .default-pic .photo{transform:scaleX(-1)}
+@media (min-width:768px){#film.band.light::after{background:linear-gradient(270deg,rgba(255,255,255,.75) 0%,rgba(255,255,255,.4) 30%,rgba(255,255,255,0) 50%)}#film.band > .wrap{justify-items:end;text-align:right}#film .btns{justify-content:flex-end}}
+@media (max-width:767px){#film.band > .wrap{transform:none}#film.band.light > .default-pic .photo{object-position:90% 50%}}
 #demo.band > .photo{object-position:50% 50%}
 #demo.band > .wrap{transform:translateY(-30%)}.band .wrap{display:grid;gap:20px}
 .band .shot{top:28px}
