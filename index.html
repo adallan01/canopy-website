@@ -83,6 +83,17 @@ p,h1,h2,h3,ul{margin:0}
 .shot::before{content:"Photo · ";color:var(--teal)}
 
 .hero{min-height:clamp(600px,90vh,960px)}
+.bleed.has-upload > .hero-pic{display:none}
+.hero-pic .photo{object-position:68% 50%}
+@media (max-width:767px){.hero-pic .photo{object-position:60% 55%}}
+/* light hero: dark text on a bright photo */
+.hero.light{background:#E9ECEB;color:var(--ink)}
+.hero.light::after{background:linear-gradient(90deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.2) 45%,rgba(255,255,255,0) 65%)}
+.hero.light .lede{color:#22393B}
+.hero.light .btn.ghost{color:var(--ink);border-color:rgba(11,26,28,.5)}
+.hero.light .btn.ghost:hover{border-color:var(--ink)}
+.top{color:var(--ink)}
+.top nav a:hover{color:var(--teal-deep)}
 .hero .wrap{display:grid;gap:28px}
 .band{min-height:clamp(440px,62vw,820px)}
 .band .wrap{display:grid;gap:20px}
@@ -246,8 +257,12 @@ p,h1,h2,h3,ul{margin:0}
 
 <main id="top">
 
-  <section class="bleed hero" data-sec="Hero" data-sid="hero" data-slot="hero" data-slot-l="Hero background" aria-labelledby="hero-title">
+  <section class="bleed hero light has-media" data-sec="Hero" data-sid="hero" data-slot="hero" data-slot-l="Hero background" data-default-media="images/hero-desktop.webp" aria-labelledby="hero-title">
     <canvas data-seed="1931" aria-hidden="true"></canvas>
+    <picture class="hero-pic">
+      <source media="(max-width: 767px)" srcset="images/hero-mobile.webp">
+      <img class="photo" src="images/hero-desktop.webp" alt="A white electric motorcycle, scooter and cargo three-wheeler parked on a pale concrete forecourt" width="2688" height="1520" fetchpriority="high">
+    </picture>
     <div class="wrap">
       <h1 id="hero-title" class="h-hero" data-k="hero.title" data-l="Headline">Every electric vehicle. Under one Canopy.</h1>
       <p class="lede" data-k="hero.sub" data-l="Subheadline">See every vehicle and every battery in one place, whatever the brand.</p>
@@ -543,7 +558,7 @@ p,h1,h2,h3,ul{margin:0}
       if(cur&&(!m||cur.dataset.id!==m.id)){cur.remove();cur=null}
       if(m&&!cur){var el=mediaEl(m,saved.text['alt.'+slot],false);el.className='photo';el.dataset.id=m.id;el.addEventListener('error',function(){sec.classList.remove('has-media');el.remove();drawAll()});sec.insertBefore(el,sec.firstChild)}
       if(m&&cur){var a=saved.text['alt.'+slot]||'';if(cur.tagName==='IMG')cur.alt=a}
-      sec.classList.toggle('has-media',!!m);
+      sec.classList.toggle('has-media',!!m||sec.hasAttribute('data-default-media'));sec.classList.toggle('has-upload',!!m);
     });
     drawAll();
   }
@@ -713,10 +728,11 @@ p,h1,h2,h3,ul{margin:0}
   function renderSlot(slot){
     var r=slotRefs[slot],m=curMedia(slot),pending=has(draft.media,slot);
     r.prev.textContent='';
-    if(m){r.prev.appendChild(mediaEl(m,r.alt.value,true))}else{r.prev.appendChild(el('span',null,'No photo or video yet. The teal line art shows until you add one.'))}
+    var dflt=SLOTS[slot].dataset.defaultMedia;
+    if(m){r.prev.appendChild(mediaEl(m,r.alt.value,true))}else if(dflt){var di=document.createElement('img');di.src=dflt;di.alt='';r.prev.appendChild(di)}else{r.prev.appendChild(el('span',null,'No photo or video yet. The teal line art shows until you add one.'))}
     if(r.busy){r.prev.appendChild(el('div','busy','Uploading…'))}
     r.badge.className='badge'+(pending?'':(m?'':' gray'));
-    r.badge.textContent=pending?(m?'New · not saved':'Removed · not saved'):(m?(m.kind==='video'?'Video':'Photo'):'Empty');
+    r.badge.textContent=pending?(m?'New · not saved':'Removed · not saved'):(m?(m.kind==='video'?'Video':'Photo'):(dflt?'Built-in photo':'Empty'));
     r.upTxt.textContent=r.busy?'Uploading…':(m?'Replace':'Upload');
     r.up.toggleAttribute('disabled',r.busy||!assets);r.file.disabled=r.busy||!assets;
     r.rm.hidden=!m;r.rm.disabled=r.busy;
