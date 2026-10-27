@@ -107,6 +107,19 @@ p,h1,h2,h3,ul{margin:0}
 .band{min-height:clamp(440px,62vw,820px)}
 .band .wrap{display:grid;gap:20px}
 .band .shot{top:28px}
+.bleed.has-upload > .default-pic{display:none}
+/* light band: dark text on a bright photo, fade from the left */
+.band.light{background:#E9ECEB;color:var(--ink)}
+.band.light::after{background:linear-gradient(90deg,rgba(255,255,255,.75) 0%,rgba(255,255,255,.4) 30%,rgba(255,255,255,0) 50%)}
+.band.light .photo{object-position:70% 50%}
+.band.light .h-sec{max-width:min(560px,38vw)}
+.band.light .lede{color:#22393B;max-width:min(440px,36vw)}
+@media (max-width:767px){
+  .band.light{min-height:640px}
+  .band.light .photo{height:calc(100% - 190px);object-position:72% 50%}
+  .band.light::after{background:linear-gradient(0deg,#E9ECEB 0%,#E9ECEB 190px,rgba(233,236,235,0) 290px)}
+  .band.light .h-sec,.band.light .lede{max-width:none}
+}
 
 /* sections */
 .sec{padding-block:clamp(80px,10vw,160px)}
@@ -293,8 +306,9 @@ p,h1,h2,h3,ul{margin:0}
     </div>
   </section>
 
-  <section class="bleed band" data-sec="Why it matters" data-sid="why" data-slot="why" data-slot-l="Section background" aria-labelledby="why-title">
+  <section class="bleed band light has-media" data-sec="Why it matters" data-sid="why" data-slot="why" data-slot-l="Section background" data-default-media="images/why-it-matters.webp" aria-labelledby="why-title">
     <canvas data-seed="2207" aria-hidden="true"></canvas>
+    <picture class="default-pic"><img class="photo" src="images/why-it-matters.webp" alt="A fleet manager checks a tablet beside a row of electric scooters and cargo three-wheelers outside a depot" width="2688" height="1520" loading="lazy"></picture>
     <div class="wrap">
       <h2 id="why-title" class="h-sec" data-k="why.title" data-l="Headline">Electric fleets are growing faster than the tools to run them.</h2>
       <p class="lede mute" data-k="why.sub" data-l="Subheadline">Most fleets still run on scattered apps, trackers and spreadsheets.</p>
