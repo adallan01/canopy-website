@@ -108,7 +108,9 @@ p,h1,h2,h3,ul{margin:0}
 #explorer.band{align-items:center}
 #explorer.band > .wrap{transform:translateY(-40%)}
 #why.band > .wrap{transform:translateY(-50%)}
-#film.band > .wrap{transform:translateY(-50%)}
+#film.band > .wrap{transform:translateY(-100%)}
+#film.band.light .btn.ghost{color:var(--ink);border-color:rgba(11,26,28,.5)}
+#film.band.light .btn.ghost:hover{border-color:var(--ink)}
 .band .wrap{display:grid;gap:20px}
 .band .shot{top:28px}
 .bleed.has-upload > .default-pic{display:none}
@@ -399,7 +401,7 @@ p,h1,h2,h3,ul{margin:0}
     </div>
   </section>
 
-  <section id="film" class="bleed band gap-top has-media" data-sec="Built for the worst day" data-sid="worst" data-slot="worst" data-slot-l="Section background" data-default-media="images/worst-day.webp" aria-labelledby="worst-title">
+  <section id="film" class="bleed band light gap-top has-media" data-sec="Built for the worst day" data-sid="worst" data-slot="worst" data-slot-l="Section background" data-default-media="images/worst-day.webp" aria-labelledby="worst-title">
     <canvas data-seed="9173" aria-hidden="true"></canvas>
     <picture class="default-pic"><img class="photo" src="images/worst-day.webp" alt="A rider kneels to repair an electric motorcycle on a wet mountain road while a companion looks on" width="2688" height="1520" loading="lazy"></picture>
     <div class="wrap">
