@@ -94,10 +94,10 @@ p,h1,h2,h3,ul{margin:0}
 /* portrait screens (phones, upright tablets): tall photo, text on a light fade at the bottom */
 @media (max-aspect-ratio:1/1){
   .hero.light{min-height:100vh;min-height:100svh}
-  .hero.light::after{background:linear-gradient(0deg,rgba(238,240,239,.94) 0%,rgba(238,240,239,.8) 26%,rgba(238,240,239,0) 48%)}
+  .hero.light::after{background:linear-gradient(0deg,rgba(238,240,239,.9) 0%,rgba(238,240,239,.8) 42%,rgba(238,240,239,0) 64%)}
   .hero.light .h-hero{font-size:clamp(1.8rem,7.4vw,2.8rem);max-width:none}
   .hero.light .lede{max-width:36ch;font-size:1rem}
-  .hero.light .wrap{gap:18px;padding-block:32px}
+  .hero.light .wrap{gap:18px;padding-top:32px;padding-bottom:calc(32px + 20vh);padding-bottom:calc(32px + 20svh)}
 }
 .hero.light .btn.ghost{color:var(--ink);border-color:rgba(11,26,28,.5)}
 .hero.light .btn.ghost:hover{border-color:var(--ink)}
