@@ -199,6 +199,13 @@ p,h1,h2,h3,ul{margin:0}
 }
 .aud .wrap{max-width:none;display:grid;gap:10px;padding-left:clamp(24px,3vw,48px);padding-right:clamp(24px,3vw,48px)}
 .aud .shot{top:24px;right:24px}
+/* who it's for: text sits in the bright top-left of each photo, in dark ink */
+.aud .bleed.has-media{align-items:flex-start;color:var(--ink)}
+.aud .bleed.has-media::after{background:linear-gradient(165deg,rgba(255,255,255,.6) 0%,rgba(255,255,255,.22) 28%,rgba(255,255,255,0) 48%)}
+.aud .bleed.has-media > .wrap{padding-top:clamp(28px,3.2vw,52px)}
+.aud .bleed.has-media .h-item{color:var(--ink)}
+.aud .bleed.has-media .mute{color:#22393B;max-width:26ch}
+@media (max-width:760px){.aud .bleed.has-media .h-item{max-width:10.5em}.aud .bleed.has-media .mute{max-width:17ch}}
 @media (max-width:760px){.aud{grid-template-columns:1fr}}
 .gap-top{margin-top:2px}
 
