@@ -110,6 +110,16 @@ p,h1,h2,h3,ul{margin:0}
 .top{color:var(--ink)}
 .top nav a:hover{color:var(--teal-deep)}
 .hero .wrap{display:grid;gap:28px}
+/* showcase (reusable): light band, centered copy, one large hero image below */
+.showcase{background:#EEF0EF;color:var(--ink);padding-block:clamp(80px,10vw,152px) clamp(64px,8vw,128px)}
+.showcase-in{display:grid;justify-items:center;text-align:center}
+.showcase .label{justify-content:center;color:var(--teal-deep);margin-bottom:22px}
+.showcase .label::after{content:"";flex:none;width:28px;height:2px;background:currentColor}
+.showcase .h-sec{max-width:16em;margin-inline:auto}
+.showcase .lede{color:#22393B;max-width:40ch;margin:22px auto 0;font-size:clamp(1.02rem,1.25vw,1.2rem);line-height:1.55}
+.showcase-media{width:100%;max-width:1160px;margin-top:clamp(48px,6vw,88px)}
+.showcase-media > .photo{display:block;width:100%;height:auto;margin:0 auto}
+.showcase-media:not(.has-media){aspect-ratio:16/8.5;border-radius:24px;background:linear-gradient(180deg,rgba(11,26,28,.035),rgba(11,26,28,.06))}
 /* numbers (Figure-style spec list): photo on the left melting into the band, stats stacked on the right */
 .stats-band{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);background:#EEF0EF;color:var(--ink);overflow:hidden}
 .stats-band > .default-pic,.stats-band > .photo{grid-column:1;grid-row:1;position:relative;display:block;min-height:100%}
@@ -593,6 +603,16 @@ p,h1,h2,h3,ul{margin:0}
         <div><h3 class="h-item" data-k="does.3.t" data-l="Feature 3 title">Stop safely.</h3><p data-k="does.3.d" data-l="Feature 3 text">Safe Lock only locks a vehicle once it has come to a safe stop.</p><div class="step-pic has-media" data-slot="does3" data-slot-l="Feature 3 image" data-default-media="images/does-stop.webp"><canvas data-seed="4373" aria-hidden="true"></canvas><picture class="default-pic"><img class="photo" src="images/does-stop.webp" alt="An electric motorcycle parked on its stand in a beam of light" width="1600" height="1195" loading="lazy"></picture></div></div>
         <div><h3 class="h-item" data-k="does.4.t" data-l="Feature 4 title">Just ask.</h3><p data-k="does.4.d" data-l="Feature 4 text">Rover AI answers "Which bikes are overdue?" in seconds.</p><div class="step-pic has-media" data-slot="does4" data-slot-l="Feature 4 image" data-default-media="images/does-ask.webp"><canvas data-seed="4494" aria-hidden="true"></canvas><picture class="default-pic"><img class="photo" src="images/does-ask.webp" alt="A tablet showing Rover AI in the Canopy app, with suggested questions like Show overdue bikes" width="1600" height="1195" loading="lazy"></picture></div></div>
       </div>
+    </div>
+  </section>
+
+  <!-- Reusable "showcase" section: centered eyebrow, headline, subtext and one hero media slot -->
+  <section id="devices" class="showcase" data-sec="Across devices" data-sid="devices" aria-labelledby="devices-title">
+    <div class="wrap showcase-in">
+      <p class="label" data-k="dev.label" data-l="Small label">Canopy across devices</p>
+      <h2 id="devices-title" class="h-sec" data-k="dev.title" data-l="Headline">One platform. Every screen.</h2>
+      <p class="lede" data-k="dev.sub" data-l="Subheadline">Monitor vehicles, batteries, alerts and fleet performance from the office or on the move — with Canopy on desktop and mobile.</p>
+      <div class="showcase-media" data-slot="devices" data-slot-l="Devices image (laptop + phone mockup)"></div>
     </div>
   </section>
 
