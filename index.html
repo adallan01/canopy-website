@@ -112,14 +112,14 @@ p,h1,h2,h3,ul{margin:0}
 .hero .wrap{display:grid;gap:28px}
 /* showcase (reusable): split editorial header, a large hero image, captions aligned under each device */
 .showcase{background:#EBEBEB;color:var(--ink);padding-block:clamp(88px,10vw,152px) clamp(72px,8vw,128px)}
-.sc-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(32px,6vw,112px);align-items:end}
+.sc-head{display:grid;grid-template-columns:1fr;gap:clamp(20px,2vw,28px);justify-items:start}
 .sc-title .label{color:var(--teal-deep);margin-bottom:20px}
 .sc-title .h-sec{max-width:11em}
 .sc-copy .lede{color:#22393B;max-width:44ch;font-size:clamp(1.02rem,1.2vw,1.18rem);line-height:1.6;text-wrap:balance}
-.sc-chips{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:26px 0 0;padding:0}
+.sc-chips{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:clamp(22px,2.2vw,30px) 0 0;padding:0}
 .sc-chips li{display:inline-flex;align-items:center;gap:9px;padding:9px 16px 9px 13px;border-radius:999px;background:rgba(255,255,255,.55);border:1px solid rgba(11,26,28,.1);font-size:.9rem;font-weight:600;color:var(--ink)}
 .sc-chips li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal-deep)}
-.showcase-media{position:relative;width:100%;margin-top:clamp(48px,6vw,96px)}
+.showcase-media{position:relative;width:100%;margin-top:clamp(36px,4.5vw,72px)}
 .showcase-media .photo{display:block;width:100%;height:auto;-webkit-mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent),linear-gradient(180deg,transparent,#000 4%,#000 94%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent),linear-gradient(180deg,transparent,#000 4%,#000 94%,transparent);mask-composite:intersect}
 .showcase-media.has-upload > .default-pic{display:none}
 .showcase-media:not(.has-media){aspect-ratio:16/8.8;border-radius:24px;background:rgba(11,26,28,.05)}
@@ -128,7 +128,6 @@ p,h1,h2,h3,ul{margin:0}
 .sc-cap-k{font-size:.76rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-deep)}
 .sc-cap-d{color:#22393B;font-size:.98rem;line-height:1.5;max-width:40ch}
 @media (max-width:860px){
-  .sc-head{grid-template-columns:1fr;gap:20px;align-items:start}
   .sc-caps{grid-template-columns:1fr 1fr;padding-inline:0}
 }
 @media (max-width:520px){.sc-caps{grid-template-columns:1fr}.sc-chips li{font-size:.85rem;padding:8px 14px 8px 12px}}
