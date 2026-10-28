@@ -15,6 +15,7 @@
 /* Layout: Figure-style one-pager. Near-black ground, full-bleed image bands, huge extra-bold caps headlines, label/value spec rows. No motion.
    Admin view (#admin): light, calm workspace — sticky save bar, section list, one card per section. */
 :root{
+  --h-size:clamp(2rem,3.8vw,3.6rem);      /* one size for the hero and every section headline */
   color-scheme:dark;
   --ink:#0B1A1C;        /* page ground */
   --ink-2:#0F2325;      /* image placeholder ground */
@@ -46,8 +47,9 @@ p,h1,h2,h3,ul{margin:0}
 @media (max-width:520px){.wrap{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}
 
 /* type */
-.h-hero{font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:clamp(2.2rem,5.4vw,5.4rem);line-height:1;letter-spacing:-.02em;text-wrap:balance;max-width:1100px}
-.h-sec{font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:clamp(1.7rem,3.4vw,3.2rem);line-height:1.05;letter-spacing:-.015em;text-wrap:balance;max-width:900px}
+@media (max-width:767px){:root{--h-size:clamp(1.7rem,7vw,2.4rem)}}
+.h-hero{font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:var(--h-size);line-height:1.02;letter-spacing:-.02em;text-wrap:balance;max-width:1100px}
+.h-sec{font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:var(--h-size);line-height:1.05;letter-spacing:-.015em;text-wrap:balance;max-width:900px}
 .h-item{font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:clamp(1.1rem,1.4vw,1.3rem);line-height:1.2;letter-spacing:0}
 .label{display:flex;align-items:center;gap:12px;font-size:.76rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
 .label::before{content:"";flex:none;width:28px;height:2px;background:currentColor}
@@ -93,12 +95,12 @@ p,h1,h2,h3,ul{margin:0}
 .hero.light{background:#E9ECEB;color:var(--ink)}
 .hero.light::after{background:linear-gradient(90deg,rgba(255,255,255,.72) 0%,rgba(255,255,255,.4) 32%,rgba(255,255,255,0) 52%)}
 .hero.light .lede{color:#22393B;max-width:min(460px,40vw)}
-.hero.light .h-hero{font-size:clamp(2.3rem,4.14vw,4.14rem);max-width:11.5em}
+.hero.light .h-hero{max-width:11.5em}
 /* portrait screens (phones, upright tablets): tall photo, text on a light fade at the bottom */
 @media (max-aspect-ratio:1/1){
   .hero.light{min-height:100vh;min-height:100svh}
   .hero.light::after{background:linear-gradient(0deg,rgba(238,240,239,.9) 0%,rgba(238,240,239,.8) 42%,rgba(238,240,239,0) 64%)}
-  .hero.light .h-hero{font-size:clamp(1.8rem,7.4vw,2.8rem);max-width:none}
+  .hero.light .h-hero{max-width:none}
   .hero.light .lede{max-width:36ch;font-size:1rem}
   .hero.light .wrap{gap:18px;padding-top:32px;padding-bottom:calc(32px + 6vh);padding-bottom:calc(32px + 6svh)}
 }
@@ -164,7 +166,6 @@ p,h1,h2,h3,ul{margin:0}
   #why.band > .wrap{padding-top:clamp(56px,6.5vw,112px)}
   #why.band.light .photo{object-position:70% 0%}
   #why.band.light::after{background:linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.2) 30%,rgba(255,255,255,0) 48%)}
-  #why.band.light .h-sec{font-size:clamp(2rem,3.9vw,3.7rem)}
   #why.band.light .lede{max-width:26em}
 }
 /* upright tablets: photo on top, text on a light panel below (same idea as phones) */
@@ -172,7 +173,6 @@ p,h1,h2,h3,ul{margin:0}
   #why.band.light{min-height:860px}
   #why.band.light .photo{height:calc(100% - 300px);object-position:72% 50%}
   #why.band.light::after{background:linear-gradient(0deg,#E9ECEB 0%,#E9ECEB 300px,rgba(233,236,235,0) 400px)}
-  #why.band.light .h-sec{font-size:clamp(2rem,4.6vw,2.8rem)}
   #why.band.light .lede{max-width:34em}
 }
 @media (max-width:767px){#why.band.light .h-sec{font-size:min(1.7rem,calc((100vw - 32px) / 12.8))}}
