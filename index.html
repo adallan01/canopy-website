@@ -174,6 +174,17 @@ p,h1,h2,h3,ul{margin:0}
 @media (max-width:980px){.rows,.rows.three{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.rows,.rows.three{grid-template-columns:1fr}}
 .specs{padding-block:clamp(48px,6vw,80px)}
+/* explorer specs: four rounded cards, each led by a big figure */
+.spec-head{margin-bottom:24px}
+.spec-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.spec{display:flex;flex-direction:column;gap:10px;min-width:0;padding:28px 26px 30px;border:1px solid var(--line);border-radius:16px;background:var(--ink-2)}
+.spec-ic{display:grid;place-items:center;width:46px;height:46px;margin-bottom:18px;border-radius:12px;background:rgba(20,184,166,.12);color:var(--teal)}
+.spec-ic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.spec-val{font-family:var(--f-head);font-weight:800;font-size:clamp(1.9rem,2.5vw,2.5rem);line-height:1;letter-spacing:-.02em;color:var(--white)}
+.spec-t{margin-top:8px;font-size:.76rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
+.spec p{color:var(--mute);font-size:.98rem;line-height:1.5}
+@media (max-width:991px){.spec-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.spec-grid{grid-template-columns:1fr}.spec{padding:24px 22px 26px}}
 .step-n{font-size:.76rem;font-weight:600;letter-spacing:.12em;color:var(--mute)}
 
 /* audience grid: four full-bleed cards */
@@ -382,13 +393,14 @@ p,h1,h2,h3,ul{margin:0}
       <p class="lede mute" data-k="exp.sub" data-l="Subheadline">The small box that makes any electric vehicle smart.</p>
     </div>
   </section>
-  <section class="specs" data-sec="Explorer" data-sid="explorer" aria-label="Explorer specifications">
+  <section id="explorer-specs" class="specs" data-sec="Explorer" data-sid="explorer" aria-label="Explorer specifications">
     <div class="wrap">
-      <div class="rows">
-        <div><span class="key" data-k="exp.1.t" data-l="Spec 1 title">Always connected</span><p data-k="exp.1.d" data-l="Spec 1 text">4G, with 3G and 2G backup.</p></div>
-        <div><span class="key" data-k="exp.2.t" data-l="Spec 2 title">Never lost</span><p data-k="exp.2.d" data-l="Spec 2 text">Finds vehicles through cell towers and Bluetooth when GPS drops.</p></div>
-        <div><span class="key" data-k="exp.3.t" data-l="Spec 3 title">Hard to silence</span><p data-k="exp.3.d" data-l="Spec 3 text">Keeps reporting for 72+ hours if its power is cut.</p></div>
-        <div><span class="key" data-k="exp.4.t" data-l="Spec 4 title">Reads the vehicle</span><p data-k="exp.4.d" data-l="Spec 4 text">Battery and motor data from the bike, with updates over the air.</p></div>
+      <p class="label spec-head" data-k="exp.specs.label" data-l="Specs label">Explorer at a glance</p>
+      <div class="spec-grid">
+        <div class="spec"><span class="spec-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19v-3M10 19v-6M15 19v-9M20 19V5"/></svg></span><span class="spec-val" data-k="exp.1.v" data-l="Spec 1 figure">4G</span><h3 class="spec-t" data-k="exp.1.t" data-l="Spec 1 title">Always connected</h3><p data-k="exp.1.d" data-l="Spec 1 text">4G, with 3G and 2G backup.</p></div>
+        <div class="spec"><span class="spec-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.8-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 15.2 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/></svg></span><span class="spec-val" data-k="exp.2.v" data-l="Spec 2 figure">3 ways</span><h3 class="spec-t" data-k="exp.2.t" data-l="Spec 2 title">Never lost</h3><p data-k="exp.2.d" data-l="Spec 2 text">Finds vehicles through cell towers and Bluetooth when GPS drops.</p></div>
+        <div class="spec"><span class="spec-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5.2c0 4.5-3 8.3-7 9.8-4-1.5-7-5.3-7-9.8V6l7-3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></span><span class="spec-val" data-k="exp.3.v" data-l="Spec 3 figure">72+ hrs</span><h3 class="spec-t" data-k="exp.3.t" data-l="Spec 3 title">Hard to silence</h3><p data-k="exp.3.d" data-l="Spec 3 text">Keeps reporting for 72+ hours if its power is cut.</p></div>
+        <div class="spec"><span class="spec-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg></span><span class="spec-val" data-k="exp.4.v" data-l="Spec 4 figure">Live + OTA</span><h3 class="spec-t" data-k="exp.4.t" data-l="Spec 4 title">Reads the vehicle</h3><p data-k="exp.4.d" data-l="Spec 4 text">Battery and motor data from the bike, with updates over the air.</p></div>
       </div>
     </div>
   </section>
