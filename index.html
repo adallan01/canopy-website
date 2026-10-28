@@ -428,6 +428,17 @@ p,h1,h2,h3,ul{margin:0}
 .sys-lines path.dash{stroke-dasharray:3 5}
 .sys-lines circle{fill:var(--s-bg);stroke:rgba(11,26,28,.32);stroke-width:1.25;transition:fill .35s ease,stroke .35s ease,opacity .35s ease}
 .sys-lines circle.hi{fill:var(--teal-deep);stroke:var(--teal-deep)}
+/* subtle life: pulses travel the lit lines, lit junctions breathe, the Live dot glows */
+.sys.js .sys-lines circle.sys-flow{fill:#14B8A6;stroke:#FFFFFF;stroke-width:1;opacity:0;filter:drop-shadow(0 0 3px rgba(20,184,166,.85));transition:opacity .5s ease}
+.sys.js .sys-diagram.done .sys-lines circle.sys-flow.on{opacity:1}
+.sys.js .sys-lines circle.sys-flow:not(.on){opacity:0!important}
+.sys-diagram.done .sys-lines circle.jn.hi{transform-box:fill-box;transform-origin:center;animation:sysBreathe 2.6s ease-in-out infinite}
+.sys-diagram.done .sys-lines path.dash.hi{animation:sysDash 1.2s linear infinite}
+.sys-hub-live i{animation:sysLive 2.4s ease-in-out infinite}
+@keyframes sysBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
+@keyframes sysDash{to{stroke-dashoffset:-16}}
+@keyframes sysLive{0%,100%{box-shadow:0 0 0 3px rgba(20,184,166,.18);opacity:1}50%{box-shadow:0 0 0 6px rgba(20,184,166,.06);opacity:.55}}
+@keyframes sysDrip{from{background-position:0 -18px,0 0}to{background-position:0 46px,0 0}}
 .sys-diagram.focus .sys-lines path:not(.hi),.sys-diagram.focus .sys-lines circle:not(.hi){opacity:.32}
 .sys-stage{position:relative;z-index:1;display:flex;flex-direction:column;min-width:0}
 .sys-sh{min-height:62px;margin-bottom:24px}
@@ -521,7 +532,7 @@ p,h1,h2,h3,ul{margin:0}
 @media (max-width:1199px){
   .sys-diagram{grid-template-columns:1fr;row-gap:64px}
   .sys-lines{display:none}
-  .sys-stage:not([data-stage="1"])::before{content:"";position:absolute;left:50%;top:-56px;width:1px;height:46px;background:linear-gradient(rgba(11,26,28,.18),var(--teal-deep));transform-origin:top;transition:transform .7s cubic-bezier(.65,0,.35,1)}
+  .sys-stage:not([data-stage="1"])::before{content:"";position:absolute;left:50%;top:-56px;width:1px;height:46px;background:linear-gradient(rgba(20,184,166,0),#5FE0D0,rgba(20,184,166,0)) 0 -18px/1px 18px no-repeat,linear-gradient(rgba(11,26,28,.18),var(--teal-deep));animation:sysDrip 2.4s ease-in-out infinite;transform-origin:top;transition:transform .7s cubic-bezier(.65,0,.35,1)}
   .sys-stage:not([data-stage="1"])::after{content:"";position:absolute;left:50%;top:-12px;width:7px;height:7px;margin-left:-3px;border-radius:50%;background:var(--teal-deep)}
   .sys.js .sys-diagram:not(.r3) .sys-stage[data-stage="2"]::before,.sys.js .sys-diagram:not(.r5) .sys-stage[data-stage="3"]::before,.sys.js .sys-diagram:not(.r7) .sys-stage[data-stage="4"]::before{transform:scaleY(0)}
   .sys-sh{min-height:0;margin-bottom:16px;text-align:center}
@@ -551,7 +562,8 @@ p,h1,h2,h3,ul{margin:0}
 }
 @media (prefers-reduced-motion:reduce){
   .sys .sys-stage > *,.sys .sys-node,.sys .sys-hub,.sys .sys-details,.sys .sys-lines path,.sys .sys-lines circle{transition:none!important}
-  .sys-detail.enter{animation:none}
+  .sys-detail.enter,.sys-hub-live i,.sys-lines circle,.sys-lines path,.sys-stage::before{animation:none!important}
+  .sys .sys-lines circle.sys-flow{display:none}
 }
 </style>
 </head>
@@ -920,9 +932,16 @@ p,h1,h2,h3,ul{margin:0}
     Object.keys(EDGES).forEach(function(id){
       var p=document.createElementNS(NS,'path');p.dataset.g=EDGES[id][2];
       if(id==='s')p.setAttribute('class','dash');else{p.setAttribute('class','draw');p.setAttribute('pathLength','1')}
-      svg.appendChild(p);pathEls[id]=p;
+      p.id='sys-e-'+id;svg.appendChild(p);pathEls[id]=p;
     });
-    Object.keys(DOTS).forEach(function(id){var c=document.createElementNS(NS,'circle');c.setAttribute('r','3.5');c.dataset.g=DOTS[id].g;svg.appendChild(c);dotEls[id]=c});
+    Object.keys(DOTS).forEach(function(id){var c=document.createElementNS(NS,'circle');c.setAttribute('r','3.5');c.dataset.g=DOTS[id].g;c.setAttribute('class','jn');svg.appendChild(c);dotEls[id]=c});
+    /* travelling pulses: one small light per line, shown only on lit lines once the diagram has built */
+    var flowEls={},flowOK=!mqRM.matches&&typeof SVGAnimateMotionElement!=='undefined';
+    if(flowOK)Object.keys(EDGES).forEach(function(id,i){
+      var c=document.createElementNS(NS,'circle');c.setAttribute('r','2.6');c.setAttribute('class','sys-flow');
+      var a=document.createElementNS(NS,'animateMotion');a.setAttribute('dur',(id.charAt(0)==='v'?2.2:2.6)+'s');a.setAttribute('repeatCount','indefinite');a.setAttribute('begin',(-(i*0.37)%2.2).toFixed(2)+'s');a.setAttribute('calcMode','spline');a.setAttribute('keyTimes','0;1');a.setAttribute('keySplines','.45 0 .55 1');
+      var m=document.createElementNS(NS,'mpath');m.setAttribute('href','#sys-e-'+id);a.appendChild(m);c.appendChild(a);svg.appendChild(c);flowEls[id]=c;
+    });
 
     /* orthogonal path with soft rounded corners */
     function rpath(pts,r){
@@ -966,6 +985,7 @@ p,h1,h2,h3,ul{margin:0}
       Object.keys(dotEls).forEach(function(k){dotEls[k].classList.toggle('hi',DOTS[k].e.some(function(e){return hi.indexOf(e)>=0}))});
       /* lit lines and dots sit on top of the grey ones */
       hi.forEach(function(e){svg.appendChild(pathEls[e])});Object.keys(dotEls).forEach(function(k){svg.appendChild(dotEls[k])});
+      Object.keys(flowEls).forEach(function(e){var on=hi.indexOf(e)>=0;flowEls[e].classList.toggle('on',on);flowEls[e].classList.toggle('hi',on);if(on)svg.appendChild(flowEls[e])});
       Object.keys(nodes).forEach(function(n){
         nodes[n].classList.toggle('on',n===sel);
         nodes[n].classList.toggle('dim',focus&&!relNodes[n]);
