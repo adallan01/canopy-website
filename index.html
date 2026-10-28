@@ -150,8 +150,13 @@ p,h1,h2,h3,ul{margin:0}
 .logo-item{text-align:center;transition:opacity .5s ease,filter .5s ease,transform .5s ease}
 .logo-item.out{opacity:0;filter:blur(6px);transform:translateY(4px)}
 .logo-name{font-family:var(--f-head);font-weight:600;font-size:clamp(1rem,1.3vw,1.25rem);line-height:1.1;letter-spacing:-.01em;text-wrap:balance;color:rgba(11,26,28,.62)}
-.logo-item > .photo{display:block;width:auto;height:auto;max-width:100%;max-height:clamp(24px,2.5vw,34px);object-fit:contain;filter:grayscale(1) brightness(0);opacity:.7}
-.logo-item.has-upload .logo-name{display:none}
+.logo-band{--ls:1}
+.logo-item > .default-pic{display:grid;place-items:center;max-width:100%;min-width:0}
+.logo-item .photo{display:block;width:auto;height:calc(var(--lh,32px) * var(--ls));max-width:100%;object-fit:contain;filter:grayscale(1) brightness(0);opacity:.72}
+.logo-item.has-media .logo-name,.logo-item.has-upload .logo-name{display:none}
+.logo-item.has-upload > .default-pic{display:none}
+@media (max-width:899px){.logo-band{--ls:.85}}
+@media (max-width:519px){.logo-band{--ls:.7}}
 @media (max-width:899px){.logo-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (max-width:519px){.logo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .band{min-height:clamp(440px,62vw,820px)}
@@ -420,18 +425,18 @@ p,h1,h2,h3,ul{margin:0}
   <section id="logos" class="logo-band" data-sec="Logo strip" data-sid="logos" aria-label="Organisations that run on Canopy">
     <div class="wrap">
       <div class="logo-grid" id="logo-grid">
-        <div class="logo-item" data-slot="logo1" data-slot-l="Logo 1 · Bolt"><span class="logo-name" data-k="logo.1" data-l="Logo 1 name">Bolt</span></div>
-        <div class="logo-item" data-slot="logo2" data-slot-l="Logo 2 · Greenspoon"><span class="logo-name" data-k="logo.2" data-l="Logo 2 name">Greenspoon</span></div>
-        <div class="logo-item" data-slot="logo3" data-slot-l="Logo 3 · M-KOPA"><span class="logo-name" data-k="logo.3" data-l="Logo 3 name">M-KOPA</span></div>
-        <div class="logo-item" data-slot="logo4" data-slot-l="Logo 4 · KPLC"><span class="logo-name" data-k="logo.4" data-l="Logo 4 name">KPLC</span></div>
-        <div class="logo-item" data-slot="logo5" data-slot-l="Logo 5 · Wetu"><span class="logo-name" data-k="logo.5" data-l="Logo 5 name">Wetu</span></div>
+        <div class="logo-item has-media" data-slot="logo1" data-slot-l="Logo 1 · Bolt" data-default-media="images/logos/bolt.webp"><picture class="default-pic"><img class="photo" src="images/logos/bolt.webp" alt="Bolt" width="276" height="160" style="--lh:50.5px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.1" data-l="Logo 1 name">Bolt</span></div>
+        <div class="logo-item has-media" data-slot="logo2" data-slot-l="Logo 2 · Greenspoon" data-default-media="images/logos/greenspoon.webp"><picture class="default-pic"><img class="photo" src="images/logos/greenspoon.webp" alt="Greenspoon" width="416" height="160" style="--lh:46px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.2" data-l="Logo 2 name">Greenspoon</span></div>
+        <div class="logo-item has-media" data-slot="logo3" data-slot-l="Logo 3 · M-KOPA" data-default-media="images/logos/mkopa.webp"><picture class="default-pic"><img class="photo" src="images/logos/mkopa.webp" alt="M-KOPA" width="696" height="160" style="--lh:31.8px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.3" data-l="Logo 3 name">M-KOPA</span></div>
+        <div class="logo-item has-media" data-slot="logo4" data-slot-l="Logo 4 · KPLC" data-default-media="images/logos/kplc.webp"><picture class="default-pic"><img class="photo" src="images/logos/kplc.webp" alt="Kenya Power (KPLC)" width="369" height="160" style="--lh:54px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.4" data-l="Logo 4 name">KPLC</span></div>
+        <div class="logo-item has-media" data-slot="logo5" data-slot-l="Logo 5 · Wetu" data-default-media="images/logos/wetu.webp"><picture class="default-pic"><img class="photo" src="images/logos/wetu.webp" alt="WeTu" width="367" height="160" style="--lh:43.8px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.5" data-l="Logo 5 name">Wetu</span></div>
         <div class="logo-item" data-slot="logo6" data-slot-l="Logo 6 · Fortune Credit"><span class="logo-name" data-k="logo.6" data-l="Logo 6 name">Fortune Credit</span></div>
-        <div class="logo-item" data-slot="logo7" data-slot-l="Logo 7 · Watu"><span class="logo-name" data-k="logo.7" data-l="Logo 7 name">Watu</span></div>
-        <div class="logo-item" data-slot="logo8" data-slot-l="Logo 8 · Platinum Credit"><span class="logo-name" data-k="logo.8" data-l="Logo 8 name">Platinum Credit</span></div>
-        <div class="logo-item" data-slot="logo9" data-slot-l="Logo 9 · Roam"><span class="logo-name" data-k="logo.9" data-l="Logo 9 name">Roam</span></div>
-        <div class="logo-item" data-slot="logo10" data-slot-l="Logo 10 · Spiro"><span class="logo-name" data-k="logo.10" data-l="Logo 10 name">Spiro</span></div>
-        <div class="logo-item" data-slot="logo11" data-slot-l="Logo 11 · Ampersand"><span class="logo-name" data-k="logo.11" data-l="Logo 11 name">Ampersand</span></div>
-        <div class="logo-item" data-slot="logo12" data-slot-l="Logo 12 · Total Energies"><span class="logo-name" data-k="logo.12" data-l="Logo 12 name">Total Energies</span></div>
+        <div class="logo-item has-media" data-slot="logo7" data-slot-l="Logo 7 · Watu" data-default-media="images/logos/watu.webp"><picture class="default-pic"><img class="photo" src="images/logos/watu.webp" alt="Watu" width="564" height="160" style="--lh:35.3px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.7" data-l="Logo 7 name">Watu</span></div>
+        <div class="logo-item has-media" data-slot="logo8" data-slot-l="Logo 8 · Platinum Credit" data-default-media="images/logos/platinum.webp"><picture class="default-pic"><img class="photo" src="images/logos/platinum.webp" alt="Platinum Credit" width="487" height="160" style="--lh:38.0px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.8" data-l="Logo 8 name">Platinum Credit</span></div>
+        <div class="logo-item has-media" data-slot="logo9" data-slot-l="Logo 9 · Roam" data-default-media="images/logos/roam.webp"><picture class="default-pic"><img class="photo" src="images/logos/roam.webp" alt="Roam" width="873" height="160" style="--lh:28.4px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.9" data-l="Logo 9 name">Roam</span></div>
+        <div class="logo-item has-media" data-slot="logo10" data-slot-l="Logo 10 · Spiro" data-default-media="images/logos/spiro.webp"><picture class="default-pic"><img class="photo" src="images/logos/spiro.webp" alt="Spiro" width="412" height="160" style="--lh:41.3px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.10" data-l="Logo 10 name">Spiro</span></div>
+        <div class="logo-item has-media" data-slot="logo11" data-slot-l="Logo 11 · Ampersand" data-default-media="images/logos/ampersand.webp"><picture class="default-pic"><img class="photo" src="images/logos/ampersand.webp" alt="Ampersand" width="334" height="160" style="--lh:45.9px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.11" data-l="Logo 11 name">Ampersand</span></div>
+        <div class="logo-item has-media" data-slot="logo12" data-slot-l="Logo 12 · Total Energies" data-default-media="images/logos/total.webp"><picture class="default-pic"><img class="photo" src="images/logos/total.webp" alt="TotalEnergies" width="219" height="160" style="--lh:48px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.12" data-l="Logo 12 name">Total Energies</span></div>
       </div>
     </div>
   </section>
