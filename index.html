@@ -114,7 +114,8 @@ p,h1,h2,h3,ul{margin:0}
 .stats-band .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 55%}
 .stats-band.has-upload > .default-pic{display:none}
 .stats-band > .photo{position:relative;inset:auto;width:100%;height:100%;min-height:100%}
-.stats-band::after{content:"";grid-column:1;grid-row:1;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(238,240,239,0) 62%,#EEF0EF 100%)}
+.stats-band::after{content:"";grid-column:1;grid-row:1;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(238,240,239,0) 0%,rgba(238,240,239,.04) 18%,rgba(238,240,239,.14) 34%,rgba(238,240,239,.3) 50%,rgba(238,240,239,.52) 66%,rgba(238,240,239,.76) 82%,rgba(238,240,239,.92) 93%,#EEF0EF 100%)}
+.stats-band:not(.has-media)::after{display:none}
 .stats-col{grid-column:2;grid-row:1;position:relative;z-index:2;padding:clamp(56px,7vw,112px) clamp(24px,4.4vw,64px) clamp(56px,7vw,112px) clamp(8px,2vw,32px)}
 .stats-list{display:grid;margin:0}
 .stat{display:grid;justify-items:end;text-align:right;gap:clamp(4px,.6vw,10px);padding:clamp(28px,3.4vw,52px) 0 clamp(16px,1.6vw,24px);position:relative}
@@ -133,7 +134,8 @@ p,h1,h2,h3,ul{margin:0}
 @media (max-width:860px){
   .stats-band{grid-template-columns:1fr}
   .stats-band > .default-pic,.stats-band > .photo,.stats-band::after{grid-column:1;grid-row:1;height:auto;aspect-ratio:4/3;min-height:0}
-  .stats-band::after{background:linear-gradient(180deg,rgba(238,240,239,0) 60%,#EEF0EF 100%)}
+  .stats-band::after{background:linear-gradient(180deg,rgba(238,240,239,0) 0%,rgba(238,240,239,.08) 30%,rgba(238,240,239,.3) 55%,rgba(238,240,239,.65) 80%,#EEF0EF 100%)}
+  .stats-band:not(.has-media) .stats-col{padding-top:48px}
   .stats-col{grid-column:1;grid-row:2;padding:8px 24px 64px}
 }
 /* logo strip under the hero: light band continuing the hero, names (or uploaded logos) in dark ink */
@@ -475,8 +477,7 @@ p,h1,h2,h3,ul{margin:0}
   })();
   </script>
 
-  <section id="numbers" class="stats-band has-media" data-sec="Numbers" data-sid="numbers" data-slot="numbers" data-slot-l="Numbers image" data-default-media="images/numbers.webp" aria-label="Canopy in numbers">
-    <picture class="default-pic"><img class="photo" src="images/numbers.webp" alt="An electric motorcycle parked on its stand in a beam of light" width="2000" height="1493" loading="lazy"></picture>
+  <section id="numbers" class="stats-band" data-sec="Numbers" data-sid="numbers" data-slot="numbers" data-slot-l="Numbers image" aria-label="Canopy in numbers">
     <div class="stats-col">
       <dl class="stats-list">
         <div class="stat"><dt class="stat-l" data-k="num.1.l" data-l="Number 1 label">Vehicles connected</dt><dd class="stat-v"><span class="stat-src" data-k="num.1.v" data-l="Number 1">[X]+</span></dd></div>
