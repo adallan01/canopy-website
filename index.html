@@ -10,7 +10,7 @@
 <meta name="description" content="Canopy connects electric motorcycles, scooters, three-wheelers and small cars, so the people who finance, run and build them can see every vehicle and every battery in one place.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap">
 <style>
 /* Layout: Figure-style one-pager. Near-black ground, full-bleed image bands, huge extra-bold caps headlines, label/value spec rows. No motion.
    Admin view (#admin): light, calm workspace — sticky save bar, section list, one card per section. */
@@ -108,6 +108,34 @@ p,h1,h2,h3,ul{margin:0}
 .top{color:var(--ink)}
 .top nav a:hover{color:var(--teal-deep)}
 .hero .wrap{display:grid;gap:28px}
+/* numbers (Figure-style spec list): photo on the left melting into the band, stats stacked on the right */
+.stats-band{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);background:#EEF0EF;color:var(--ink);overflow:hidden}
+.stats-band > .default-pic,.stats-band > .photo{grid-column:1;grid-row:1;position:relative;display:block;min-height:100%}
+.stats-band .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 55%}
+.stats-band.has-upload > .default-pic{display:none}
+.stats-band > .photo{position:relative;inset:auto;width:100%;height:100%;min-height:100%}
+.stats-band::after{content:"";grid-column:1;grid-row:1;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(238,240,239,0) 62%,#EEF0EF 100%)}
+.stats-col{grid-column:2;grid-row:1;position:relative;z-index:2;padding:clamp(56px,7vw,112px) clamp(24px,4.4vw,64px) clamp(56px,7vw,112px) clamp(8px,2vw,32px)}
+.stats-list{display:grid;margin:0}
+.stat{display:grid;justify-items:end;text-align:right;gap:clamp(4px,.6vw,10px);padding:clamp(28px,3.4vw,52px) 0 clamp(16px,1.6vw,24px);position:relative}
+.stat::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:rgba(11,26,28,.28);transform-origin:right}
+.stat-l{font-size:clamp(.88rem,1vw,1rem);font-weight:600;color:#5E6E6F}
+.stat-v{margin:0;position:relative;font-family:var(--f-head);font-weight:300;font-size:clamp(2.8rem,6vw,5.8rem);line-height:1;letter-spacing:-.03em;text-transform:uppercase;color:#3F4D4E;font-variant-numeric:tabular-nums;white-space:nowrap}
+.stat-fx{position:absolute;right:0;top:0;white-space:nowrap}
+.stat-ch{display:inline-block;text-align:center;white-space:pre}
+/* motion: before a row plays, its rule is undrawn, label hidden, figure shows the zeroed state */
+.stats-band.fx .stat::after{transform:scaleX(0);transition:transform 1.1s cubic-bezier(.22,.61,.36,1)}
+.stats-band.fx .stat-l{opacity:0;transform:translateY(8px);transition:opacity .7s ease,transform .7s ease}
+.stats-band.fx .stat-src{visibility:hidden}
+.stats-band.fx .stat.in::after{transform:scaleX(1)}
+.stats-band.fx .stat.in .stat-l{opacity:1;transform:none}
+.stats-band.fx .stat.done .stat-src{visibility:visible}
+@media (max-width:860px){
+  .stats-band{grid-template-columns:1fr}
+  .stats-band > .default-pic,.stats-band > .photo,.stats-band::after{grid-column:1;grid-row:1;height:auto;aspect-ratio:4/3;min-height:0}
+  .stats-band::after{background:linear-gradient(180deg,rgba(238,240,239,0) 60%,#EEF0EF 100%)}
+  .stats-col{grid-column:1;grid-row:2;padding:8px 24px 64px}
+}
 /* logo strip under the hero: light band continuing the hero, names (or uploaded logos) in dark ink */
 .logo-band{background:#EEF0EF;color:var(--ink);padding-block:clamp(28px,3.5vw,48px)}
 .logo-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(16px,2vw,28px) clamp(16px,2.5vw,40px);align-items:center}
@@ -447,16 +475,60 @@ p,h1,h2,h3,ul{margin:0}
   })();
   </script>
 
-  <section class="specs" data-sec="Numbers" data-sid="numbers" aria-label="Canopy in numbers">
-    <div class="wrap">
-      <div class="rows">
-        <div><span class="val" data-k="num.1.v" data-l="Number 1">[X]+</span><span class="key" data-k="num.1.l" data-l="Number 1 label">Vehicles connected</span></div>
-        <div><span class="val" data-k="num.2.v" data-l="Number 2">72+ hrs</span><span class="key" data-k="num.2.l" data-l="Number 2 label">Backup power if cut off</span></div>
-        <div><span class="val" data-k="num.3.v" data-l="Number 3">3 ways</span><span class="key" data-k="num.3.l" data-l="Number 3 label">To find a vehicle without GPS</span></div>
-        <div><span class="val" data-k="num.4.v" data-l="Number 4">Any brand</span><span class="key" data-k="num.4.l" data-l="Number 4 label">One platform for mixed fleets</span></div>
-      </div>
+  <section id="numbers" class="stats-band has-media" data-sec="Numbers" data-sid="numbers" data-slot="numbers" data-slot-l="Numbers image" data-default-media="images/numbers.webp" aria-label="Canopy in numbers">
+    <picture class="default-pic"><img class="photo" src="images/numbers.webp" alt="An electric motorcycle parked on its stand in a beam of light" width="2000" height="1493" loading="lazy"></picture>
+    <div class="stats-col">
+      <dl class="stats-list">
+        <div class="stat"><dt class="stat-l" data-k="num.1.l" data-l="Number 1 label">Vehicles connected</dt><dd class="stat-v"><span class="stat-src" data-k="num.1.v" data-l="Number 1">[X]+</span></dd></div>
+        <div class="stat"><dt class="stat-l" data-k="num.2.l" data-l="Number 2 label">Backup power if cut off</dt><dd class="stat-v"><span class="stat-src" data-k="num.2.v" data-l="Number 2">72+ hrs</span></dd></div>
+        <div class="stat"><dt class="stat-l" data-k="num.3.l" data-l="Number 3 label">To find a vehicle without GPS</dt><dd class="stat-v"><span class="stat-src" data-k="num.3.v" data-l="Number 3">3 ways</span></dd></div>
+        <div class="stat"><dt class="stat-l" data-k="num.4.l" data-l="Number 4 label">One platform for mixed fleets</dt><dd class="stat-v"><span class="stat-src" data-k="num.4.v" data-l="Number 4">Any brand</span></dd></div>
+      </dl>
     </div>
   </section>
+  <script>
+  /* numbers: Figure-style "number shuffler". Each row's figure scrambles and locks in, character by character, as it scrolls into view. */
+  (function(){
+    var band=document.getElementById('numbers');if(!band)return;
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+    band.classList.add('fx');
+    var DIG='0123456789',LET='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    function rnd(set){return set.charAt(Math.floor(Math.random()*set.length))}
+    function kind(c){return /[0-9]/.test(c)?DIG:/[A-Za-z]/.test(c)?LET:null}
+    function startState(t){return t.split('').map(function(c){var k=kind(c);return k===DIG?'0':k===LET?rnd(LET):c}).join('')}
+    function prep(row){
+      var dd=row.querySelector('.stat-v'),src=dd.querySelector('.stat-src'),fx=document.createElement('span');
+      fx.className='stat-fx';fx.setAttribute('aria-hidden','true');fx.textContent=startState(src.textContent.trim().toUpperCase());dd.appendChild(fx);
+    }
+    function play(row,delay){
+      var dd=row.querySelector('.stat-v'),src=dd.querySelector('.stat-src'),fx=dd.querySelector('.stat-fx');
+      var target=src.textContent.trim().toUpperCase();
+      fx.textContent='';
+      var cells=target.split('').map(function(c){var b=document.createElement('span');b.className='stat-ch';b.textContent=c===' '?'\u00A0':c;fx.appendChild(b);return b});
+      cells.forEach(function(b){b.style.width=b.getBoundingClientRect().width+'px'});
+      cells.forEach(function(b,i){var k=kind(target[i]);b.textContent=k===DIG?'0':k===LET?rnd(LET):(target[i]===' '?'\u00A0':target[i])});
+      setTimeout(function(){
+        row.classList.add('in');
+        var t0=performance.now(),last=0;
+        (function tick(now){
+          var t=now-t0,done=true;
+          if(now-last>48){last=now;
+            cells.forEach(function(b,i){var k=kind(target[i]);if(!k)return;
+              if(t<260+i*90){b.textContent=rnd(k);done=false}else b.textContent=target[i]});
+          }else done=false;
+          if(!done)requestAnimationFrame(tick);
+          else{fx.remove();row.classList.add('done')}
+        })(t0);
+      },delay);
+    }
+    var rows=[].slice.call(band.querySelectorAll('.stat'));
+    rows.forEach(prep);
+    var io=new IntersectionObserver(function(es){
+      var k=0;es.forEach(function(e){if(e.isIntersecting){io.unobserve(e.target);play(e.target,k++*140)}});
+    },{threshold:.55});
+    rows.forEach(function(r){io.observe(r)});
+  })();
+  </script>
 
   <section id="why" class="bleed band light has-media" data-sec="Why it matters" data-sid="why" data-slot="why" data-slot-l="Section background" data-default-media="images/why-it-matters.webp" aria-labelledby="why-title">
     <canvas data-seed="2207" aria-hidden="true"></canvas>
