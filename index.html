@@ -192,6 +192,11 @@ p,h1,h2,h3,ul{margin:0}
 .who-head .sec-head{margin-bottom:0}
 .aud{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;background:var(--ink)}
 .aud .bleed{min-height:clamp(380px,44vw,640px)}
+/* who it's for: soft, slow zoom on the card photo when hovered */
+@media (hover:hover) and (prefers-reduced-motion:no-preference){
+  .aud .bleed .photo{transition:transform 1.1s cubic-bezier(.22,.61,.36,1)}
+  .aud .bleed:hover .photo{transform:scale(1.045)}
+}
 .aud .wrap{max-width:none;display:grid;gap:10px;padding-left:clamp(24px,3vw,48px);padding-right:clamp(24px,3vw,48px)}
 .aud .shot{top:24px;right:24px}
 @media (max-width:760px){.aud{grid-template-columns:1fr}}
