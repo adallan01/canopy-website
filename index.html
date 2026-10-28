@@ -429,15 +429,15 @@ p,h1,h2,h3,ul{margin:0}
 .sys-lines circle{fill:var(--s-bg);stroke:rgba(11,26,28,.32);stroke-width:1.25;transition:fill .35s ease,stroke .35s ease,opacity .35s ease}
 .sys-lines circle.hi{fill:var(--teal-deep);stroke:var(--teal-deep)}
 /* subtle life: pulses travel the lit lines, lit junctions breathe, the Live dot glows */
-.sys.js .sys-lines circle.sys-flow{fill:#E5484D;stroke:#FFFFFF;stroke-width:1;opacity:0;filter:drop-shadow(0 0 3px rgba(229,72,77,.75));transition:opacity .5s ease}
+.sys.js .sys-lines circle.sys-flow{fill:#E5484D;stroke:#FFFFFF;stroke-width:1.2;opacity:0;filter:drop-shadow(0 0 5px rgba(229,72,77,.9));transition:opacity .5s ease}
 .sys.js .sys-diagram.done .sys-lines circle.sys-flow.on{opacity:1}
 .sys.js .sys-lines circle.sys-flow:not(.on){opacity:0!important}
-.sys-diagram.done .sys-lines circle.jn.hi{transform-box:fill-box;transform-origin:center;animation:sysBreathe 2.6s ease-in-out infinite}
+.sys-diagram.done .sys-lines circle.jn.hi{fill:#E5484D;stroke:#E5484D;transform-box:fill-box;transform-origin:center;animation:sysBreathe 2.6s ease-in-out infinite}
 .sys-diagram.done .sys-lines path.dash.hi{animation:sysDash 1.2s linear infinite}
 .sys-hub-live i{animation:sysLive 2.4s ease-in-out infinite}
 @keyframes sysBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
 @keyframes sysDash{to{stroke-dashoffset:-16}}
-@keyframes sysLive{0%,100%{box-shadow:0 0 0 3px rgba(20,184,166,.18);opacity:1}50%{box-shadow:0 0 0 6px rgba(20,184,166,.06);opacity:.55}}
+@keyframes sysLive{0%,100%{box-shadow:0 0 0 3px rgba(229,72,77,.3);opacity:1}50%{box-shadow:0 0 0 7px rgba(229,72,77,.08);opacity:.55}}
 @keyframes sysDrip{from{background-position:0 -18px,0 0}to{background-position:0 46px,0 0}}
 .sys-diagram.focus .sys-lines path:not(.hi),.sys-diagram.focus .sys-lines circle:not(.hi){opacity:.32}
 .sys-stage{position:relative;z-index:1;display:flex;flex-direction:column;min-width:0}
@@ -469,7 +469,7 @@ p,h1,h2,h3,ul{margin:0}
 .sys-hub-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 2px 0}
 .sys-hub-logo{display:block;height:20px;width:auto;filter:brightness(0) invert(1)}
 .sys-hub-live{display:inline-flex;align-items:center;gap:8px;font-size:.7rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#9FB3B4}
-.sys-hub-live i{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 4px rgba(20,184,166,.18)}
+.sys-hub-live i{width:7px;height:7px;border-radius:50%;background:#E5484D;box-shadow:0 0 0 4px rgba(229,72,77,.25)}
 .sys-hub-screen{display:block;border-radius:10px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.06)}
 .sys-hub-screen svg{display:block;width:100%;height:auto}
 .sys-hub-row{display:flex;flex-wrap:wrap;align-items:center;gap:5px}
@@ -938,7 +938,7 @@ p,h1,h2,h3,ul{margin:0}
     /* travelling pulses: one small light per line, shown only on lit lines once the diagram has built */
     var flowEls={},flowOK=!mqRM.matches&&typeof SVGAnimateMotionElement!=='undefined';
     if(flowOK)Object.keys(EDGES).forEach(function(id,i){
-      var c=document.createElementNS(NS,'circle');c.setAttribute('r','2.6');c.setAttribute('class','sys-flow');
+      var c=document.createElementNS(NS,'circle');c.setAttribute('r','4');c.setAttribute('class','sys-flow');
       var a=document.createElementNS(NS,'animateMotion');a.setAttribute('dur',(id.charAt(0)==='v'?2.2:2.6)+'s');a.setAttribute('repeatCount','indefinite');a.setAttribute('begin',(-(i*0.37)%2.2).toFixed(2)+'s');a.setAttribute('calcMode','spline');a.setAttribute('keyTimes','0;1');a.setAttribute('keySplines','.45 0 .55 1');
       var m=document.createElementNS(NS,'mpath');m.setAttribute('href','#sys-e-'+id);a.appendChild(m);c.appendChild(a);svg.appendChild(c);flowEls[id]=c;
     });
