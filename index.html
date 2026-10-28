@@ -115,7 +115,7 @@ p,h1,h2,h3,ul{margin:0}
 .sc-head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(32px,6vw,112px);align-items:end}
 .sc-title .label{color:var(--teal-deep);margin-bottom:20px}
 .sc-title .h-sec{max-width:11em}
-.sc-copy .lede{color:#22393B;max-width:44ch;font-size:clamp(1.02rem,1.2vw,1.18rem);line-height:1.6}
+.sc-copy .lede{color:#22393B;max-width:44ch;font-size:clamp(1.02rem,1.2vw,1.18rem);line-height:1.6;text-wrap:balance}
 .sc-chips{display:flex;flex-wrap:wrap;gap:10px;list-style:none;margin:26px 0 0;padding:0}
 .sc-chips li{display:inline-flex;align-items:center;gap:9px;padding:9px 16px 9px 13px;border-radius:999px;background:rgba(255,255,255,.55);border:1px solid rgba(11,26,28,.1);font-size:.9rem;font-weight:600;color:var(--ink)}
 .sc-chips li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--teal-deep)}
@@ -628,7 +628,7 @@ p,h1,h2,h3,ul{margin:0}
           <h2 id="devices-title" class="h-sec" data-k="dev.title" data-l="Headline">One platform. Every screen.</h2>
         </div>
         <div class="sc-copy">
-          <p class="lede" data-k="dev.sub" data-l="Subheadline">Monitor vehicles, batteries, alerts and fleet performance from the office or on the move — with Canopy on desktop and mobile.</p>
+          <p class="lede" data-k="dev.sub" data-l="Subheadline">Manage your entire fleet, from desktop to mobile.</p>
           <ul class="sc-chips" aria-label="What you can see">
             <li data-k="dev.chip1" data-l="Chip 1">Live map</li>
             <li data-k="dev.chip2" data-l="Chip 2">Battery health</li>
@@ -637,11 +637,7 @@ p,h1,h2,h3,ul{margin:0}
           </ul>
         </div>
       </div>
-      <div class="showcase-media has-media" data-slot="devices" data-slot-l="Devices image (laptop + phone mockup)" data-default-media="images/devices.webp"><picture class="default-pic"><img class="photo" src="images/devices.webp" alt="The Canopy dashboard on a laptop beside the Canopy live map on a phone" width="2000" height="1099" loading="lazy"></picture></div>
-      <div class="sc-caps">
-        <div><p class="sc-cap-k" data-k="dev.c1.t" data-l="Caption 1 title">On desktop</p><p class="sc-cap-d" data-k="dev.c1.d" data-l="Caption 1 text">The full command centre: fleet status, live map and device health in one view.</p></div>
-        <div><p class="sc-cap-k" data-k="dev.c2.t" data-l="Caption 2 title">On mobile</p><p class="sc-cap-d" data-k="dev.c2.d" data-l="Caption 2 text">The same live map, in your pocket.</p></div>
-      </div>
+      <div class="showcase-media has-media" data-slot="devices" data-slot-l="Devices image (laptop + phone mockup)" data-default-media="images/devices.webp"><picture class="default-pic"><img class="photo" src="images/devices.webp" alt="Canopy on a tablet, a phone and a laptop: the fleet dashboard and the live map" width="1600" height="906" loading="lazy"></picture></div>
     </div>
   </section>
 
