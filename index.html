@@ -108,6 +108,20 @@ p,h1,h2,h3,ul{margin:0}
 .top{color:var(--ink)}
 .top nav a:hover{color:var(--teal-deep)}
 .hero .wrap{display:grid;gap:28px}
+/* logo strip under the hero: light band continuing the hero, names (or uploaded logos) in dark ink */
+.logo-band{background:#EEF0EF;color:var(--ink);padding-block:clamp(28px,3.5vw,48px)}
+.logo-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(16px,2vw,28px) clamp(16px,2.5vw,40px);align-items:center}
+.logo-grid.rotating{display:block}
+.logo-slots{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:0 clamp(16px,2.5vw,40px);align-items:center}
+.logo-pool{display:none}
+.logo-slot,.logo-item{display:grid;place-items:center;min-width:0;height:clamp(44px,4.5vw,60px)}
+.logo-item{text-align:center;transition:opacity .5s ease,filter .5s ease,transform .5s ease}
+.logo-item.out{opacity:0;filter:blur(6px);transform:translateY(4px)}
+.logo-name{font-family:var(--f-head);font-weight:700;font-size:clamp(1rem,1.3vw,1.25rem);line-height:1.1;letter-spacing:-.01em;text-wrap:balance;color:rgba(11,26,28,.62)}
+.logo-item > .photo{display:block;width:auto;height:auto;max-width:100%;max-height:clamp(24px,2.5vw,34px);object-fit:contain;filter:grayscale(1) brightness(0);opacity:.7}
+.logo-item.has-upload .logo-name{display:none}
+@media (max-width:899px){.logo-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:519px){.logo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .band{min-height:clamp(440px,62vw,820px)}
 #explorer.band{align-items:center}
 #explorer.band > .wrap{transform:translateY(-40%)}
@@ -372,6 +386,66 @@ p,h1,h2,h3,ul{margin:0}
       </div>
     </div>
   </section>
+
+  <section id="logos" class="logo-band" data-sec="Logo strip" data-sid="logos" aria-label="Organisations that run on Canopy">
+    <div class="wrap">
+      <div class="logo-grid" id="logo-grid">
+        <div class="logo-item" data-slot="logo1" data-slot-l="Logo 1 · Bolt"><span class="logo-name" data-k="logo.1" data-l="Logo 1 name">Bolt</span></div>
+        <div class="logo-item" data-slot="logo2" data-slot-l="Logo 2 · Greenspoon"><span class="logo-name" data-k="logo.2" data-l="Logo 2 name">Greenspoon</span></div>
+        <div class="logo-item" data-slot="logo3" data-slot-l="Logo 3 · M-KOPA"><span class="logo-name" data-k="logo.3" data-l="Logo 3 name">M-KOPA</span></div>
+        <div class="logo-item" data-slot="logo4" data-slot-l="Logo 4 · KPLC"><span class="logo-name" data-k="logo.4" data-l="Logo 4 name">KPLC</span></div>
+        <div class="logo-item" data-slot="logo5" data-slot-l="Logo 5 · Wetu"><span class="logo-name" data-k="logo.5" data-l="Logo 5 name">Wetu</span></div>
+        <div class="logo-item" data-slot="logo6" data-slot-l="Logo 6 · Fortune Credit"><span class="logo-name" data-k="logo.6" data-l="Logo 6 name">Fortune Credit</span></div>
+        <div class="logo-item" data-slot="logo7" data-slot-l="Logo 7 · Watu"><span class="logo-name" data-k="logo.7" data-l="Logo 7 name">Watu</span></div>
+        <div class="logo-item" data-slot="logo8" data-slot-l="Logo 8 · Platinum Credit"><span class="logo-name" data-k="logo.8" data-l="Logo 8 name">Platinum Credit</span></div>
+        <div class="logo-item" data-slot="logo9" data-slot-l="Logo 9 · Roam"><span class="logo-name" data-k="logo.9" data-l="Logo 9 name">Roam</span></div>
+        <div class="logo-item" data-slot="logo10" data-slot-l="Logo 10 · Spiro"><span class="logo-name" data-k="logo.10" data-l="Logo 10 name">Spiro</span></div>
+        <div class="logo-item" data-slot="logo11" data-slot-l="Logo 11 · Ampersand"><span class="logo-name" data-k="logo.11" data-l="Logo 11 name">Ampersand</span></div>
+        <div class="logo-item" data-slot="logo12" data-slot-l="Logo 12 · Total Energies"><span class="logo-name" data-k="logo.12" data-l="Logo 12 name">Total Energies</span></div>
+      </div>
+    </div>
+  </section>
+  <script>
+  /* logo strip: slots swap one at a time with a soft fade, like sanalabs.com; static grid if motion is reduced */
+  (function(){
+    var grid=document.getElementById('logo-grid');if(!grid)return;
+    var items=[].slice.call(grid.querySelectorAll('.logo-item'));
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
+    var slotsEl=null,poolEl=null,slots=[],queue=[],timer=null,last=-1,onScreen=true,n=0;
+    function count(){var w=grid.clientWidth;return w<520?3:w<900?4:6}
+    function stop(){clearInterval(timer);timer=null}
+    function start(){if(!timer&&onScreen&&!document.hidden&&slotsEl)timer=setInterval(swap,2200)}
+    function build(){
+      stop();
+      items.forEach(function(it){it.classList.remove('out');grid.appendChild(it)});
+      if(slotsEl){slotsEl.remove();poolEl.remove();slotsEl=poolEl=null}
+      grid.classList.remove('rotating');n=count();
+      if(reduce.matches||items.length<=n)return;
+      slotsEl=document.createElement('div');slotsEl.className='logo-slots';slotsEl.style.setProperty('--n',n);
+      poolEl=document.createElement('div');poolEl.className='logo-pool';poolEl.setAttribute('aria-hidden','true');
+      slots=[];
+      for(var i=0;i<n;i++){var s=document.createElement('div');s.className='logo-slot';s.appendChild(items[i]);slotsEl.appendChild(s);slots.push(s)}
+      queue=items.slice(n);queue.forEach(function(it){poolEl.appendChild(it)});
+      grid.appendChild(slotsEl);grid.appendChild(poolEl);grid.classList.add('rotating');
+      start();
+    }
+    function swap(){
+      var i;do{i=Math.floor(Math.random()*n)}while(n>1&&i===last);last=i;
+      var slot=slots[i],cur=slot.firstElementChild,next=queue.shift();if(!cur||!next)return;
+      cur.classList.add('out');
+      setTimeout(function(){
+        if(cur.parentNode!==slot||!poolEl)return;
+        poolEl.appendChild(cur);cur.classList.remove('out');queue.push(cur);
+        next.classList.add('out');slot.appendChild(next);void next.offsetWidth;next.classList.remove('out');
+      },500);
+    }
+    if('IntersectionObserver' in window){new IntersectionObserver(function(e){onScreen=e[0].isIntersecting;onScreen?start():stop()}).observe(grid)}
+    document.addEventListener('visibilitychange',function(){document.hidden?stop():start()});
+    var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(count()!==n)build()},200)});
+    if(reduce.addEventListener)reduce.addEventListener('change',build);
+    build();
+  })();
+  </script>
 
   <section class="specs" data-sec="Numbers" data-sid="numbers" aria-label="Canopy in numbers">
     <div class="wrap">
