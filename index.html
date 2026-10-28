@@ -111,14 +111,15 @@ p,h1,h2,h3,ul{margin:0}
 .top nav a:hover{color:var(--teal-deep)}
 .hero .wrap{display:grid;gap:28px}
 /* showcase (reusable): light band, centered copy, one large hero image below */
-.showcase{background:#EEF0EF;color:var(--ink);padding-block:clamp(80px,10vw,152px) clamp(64px,8vw,128px)}
+.showcase{background:#F1EFEE;color:var(--ink);padding-block:clamp(80px,10vw,152px) clamp(64px,8vw,128px)}
 .showcase-in{display:grid;justify-items:center;text-align:center}
 .showcase .label{justify-content:center;color:var(--teal-deep);margin-bottom:22px}
 .showcase .label::after{content:"";flex:none;width:28px;height:2px;background:currentColor}
 .showcase .h-sec{max-width:16em;margin-inline:auto}
 .showcase .lede{color:#22393B;max-width:40ch;margin:22px auto 0;font-size:clamp(1.02rem,1.25vw,1.2rem);line-height:1.55}
 .showcase-media{width:100%;max-width:1160px;margin-top:clamp(48px,6vw,88px)}
-.showcase-media > .photo{display:block;width:100%;height:auto;margin:0 auto}
+.showcase-media .photo{display:block;width:100%;height:auto;margin:0 auto;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 96.5%,transparent),linear-gradient(180deg,transparent,#000 7%,#000 88%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 7%,#000 96.5%,transparent),linear-gradient(180deg,transparent,#000 7%,#000 88%,transparent);mask-composite:intersect}
+.showcase-media.has-upload > .default-pic{display:none}
 .showcase-media:not(.has-media){aspect-ratio:16/8.5;border-radius:24px;background:linear-gradient(180deg,rgba(11,26,28,.035),rgba(11,26,28,.06))}
 /* numbers (Figure-style spec list): photo on the left melting into the band, stats stacked on the right */
 .stats-band{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);background:#EEF0EF;color:var(--ink);overflow:hidden}
@@ -612,7 +613,7 @@ p,h1,h2,h3,ul{margin:0}
       <p class="label" data-k="dev.label" data-l="Small label">Canopy across devices</p>
       <h2 id="devices-title" class="h-sec" data-k="dev.title" data-l="Headline">One platform. Every screen.</h2>
       <p class="lede" data-k="dev.sub" data-l="Subheadline">Monitor vehicles, batteries, alerts and fleet performance from the office or on the move — with Canopy on desktop and mobile.</p>
-      <div class="showcase-media" data-slot="devices" data-slot-l="Devices image (laptop + phone mockup)"></div>
+      <div class="showcase-media has-media" data-slot="devices" data-slot-l="Devices image (laptop + phone mockup)" data-default-media="images/devices.webp"><picture class="default-pic"><img class="photo" src="images/devices.webp" alt="The Canopy live fleet map on a laptop beside the Canopy mobile dashboard on a phone" width="1672" height="941" loading="lazy"></picture></div>
     </div>
   </section>
 
