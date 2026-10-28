@@ -203,9 +203,11 @@ p,h1,h2,h3,ul{margin:0}
 .aud .bleed.has-media{align-items:flex-start;color:var(--ink)}
 .aud .bleed.has-media::after{background:linear-gradient(165deg,rgba(255,255,255,.6) 0%,rgba(255,255,255,.22) 28%,rgba(255,255,255,0) 48%)}
 .aud .bleed.has-media > .wrap{padding-top:clamp(28px,3.2vw,52px)}
-.aud .bleed.has-media .h-item{color:var(--ink)}
-.aud .bleed.has-media .mute{color:#22393B;max-width:26ch}
-@media (max-width:760px){.aud .bleed.has-media .h-item{max-width:10.5em}.aud .bleed.has-media .mute{max-width:17ch}}
+.aud .bleed.has-media .h-item{color:var(--ink);font-size:clamp(1.3rem,2.04vw,1.92rem);line-height:1.08;letter-spacing:-.01em;max-width:13em;text-wrap:balance}
+.aud .bleed.has-media > .wrap{gap:12px}
+.aud .bleed.has-media .mute{font-size:1.05rem}
+.aud .bleed.has-media .mute{color:#22393B;max-width:24ch}
+@media (max-width:760px){.aud .bleed.has-media .h-item{max-width:10em}.aud .bleed.has-media .mute{max-width:15ch;font-size:1rem}}
 @media (max-width:760px){.aud{grid-template-columns:1fr}}
 .gap-top{margin-top:2px}
 
