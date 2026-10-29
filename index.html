@@ -376,11 +376,12 @@ p,h1,h2,h3,ul{margin:0}
 .ft-head .label{color:var(--teal-deep)}
 .ft-head .h-sec{margin-top:18px;color:#0B1A1C}
 .ft-sub{margin:18px auto 0;color:#56686A;max-width:44ch;text-wrap:balance}
-.ft-grid-wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2vw,28px)}
-.ft-card{display:flex;flex-direction:column;gap:clamp(20px,2.2vw,32px);padding:clamp(24px,3vw,44px) clamp(24px,3vw,44px) 0;border-radius:28px;background:#fff;overflow:hidden;transition:box-shadow .45s ease,transform .45s cubic-bezier(.2,.7,.2,1)}
+.ft-grid-wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,1.2vw,18px);padding-inline:clamp(10px,1.2vw,18px)}
+.ft-card{display:flex;flex-direction:column;padding:0;border-radius:28px;background:#fff;overflow:hidden;transition:box-shadow .45s ease,transform .45s cubic-bezier(.2,.7,.2,1)}
+.ft-text{padding:clamp(28px,3.2vw,52px) clamp(28px,3.4vw,56px) clamp(24px,2.6vw,40px)}
 .ft-t{margin:0;font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:clamp(1.3rem,1.9vw,1.8rem);line-height:1.05;letter-spacing:-.01em;color:#0B1A1C}
 .ft-d{margin:10px 0 0;font-size:clamp(.98rem,1.1vw,1.08rem);line-height:1.5;color:#56686A;max-width:42ch;text-wrap:pretty}
-.ft-media{position:relative;aspect-ratio:4/3;margin-top:auto;border-radius:18px 18px 0 0;overflow:hidden;background:#0E1D1F}
+.ft-media{position:relative;aspect-ratio:4/3;margin-top:auto;border-radius:0;overflow:hidden;background:#0E1D1F}
 .ft-media > .photo{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
 .ft-media > .photo.fit-contain{object-fit:contain}
 .ft-media.has-media > .ft-fb{display:none}
@@ -421,8 +422,8 @@ p,h1,h2,h3,ul{margin:0}
 .ft.js.in .ft-a,.ft.js.in .ft-card{opacity:1;transform:none}
 @media (hover:hover){.ft.js .ft-card.in:hover{transform:translateY(-3px)}}
 @media (prefers-reduced-motion:reduce){.ft *{animation:none!important;transition:none!important}.ft-car{display:none!important}}
-@media (max-width:860px){.ft-grid-wrap{grid-template-columns:1fr}.ft-card{max-width:620px;width:100%;margin-inline:auto}}
-@media (max-width:767px){.ft{padding-block:72px}.ft-card{border-radius:22px;padding:24px 22px 0}.ft-media{border-radius:14px 14px 0 0}}
+@media (max-width:860px){.ft-grid-wrap{grid-template-columns:1fr}}
+@media (max-width:767px){.ft{padding-block:72px}.ft-card{border-radius:20px}.ft-text{padding:24px 22px 20px}}
 .gap-top{margin-top:2px}
 
 /* footer: Figure-style — wordmark + sign-up left, big numbered menu right, blurred photo behind */
@@ -1167,7 +1168,8 @@ p,h1,h2,h3,ul{margin:0}
         <h2 id="features-title" class="h-sec ft-a" data-k="ft.title" data-l="Headline">More than a dot on a map.</h2>
         <p class="lede ft-sub ft-a" data-k="ft.sub" data-l="Subheadline">The tools behind every vehicle, battery and journey.</p>
       </div>
-      <div class="ft-grid-wrap">
+    </div>
+    <div class="ft-grid-wrap">
         <article class="ft-card" style="--i:0">
           <div class="ft-text"><h3 class="ft-t" data-k="ft.1.t" data-l="Feature 1 title">Geofencing</h3><p class="ft-d" data-k="ft.1.d" data-l="Feature 1 text">Set boundaries. Know when vehicles enter or leave.</p></div>
           <div class="ft-media has-media" data-slot="ft-geo" data-default-media="images/feat-geofencing.webp" data-slot-l="Geofencing — image / video (4:3)" data-slot-hint="A Canopy screen showing geofencing, 2400 × 1800 px (4:3). Videos loop muted." data-fit-option data-lazy data-slot-empty="Nothing uploaded yet. The site shows a simple teal line drawing until you add one."><picture class="default-pic"><img class="photo" src="images/feat-geofencing.webp" alt="The Canopy live map on a laptop: a list of vehicles with status and battery level beside a satellite map of Nairobi with vehicle pins" width="1600" height="1200" loading="lazy" decoding="async"></picture><div class="ft-fb" aria-hidden="true"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><g class="ft-grid" stroke="rgba(163,182,183,.07)" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M0 250H400M50 0V300M100 0V300M150 0V300M200 0V300M250 0V300M300 0V300M350 0V300"/></g><path d="M-10 214C70 196 120 232 196 206S330 150 410 170" fill="none" stroke="rgba(163,182,183,.16)" stroke-width="5"/><path d="M118 -10C140 80 128 170 160 310" fill="none" stroke="rgba(163,182,183,.12)" stroke-width="4"/><path class="ft-zone" d="M122 92L238 70L300 136L262 226L150 232L104 160Z"/><path class="ft-zone-line" d="M122 92L238 70L300 136L262 226L150 232L104 160Z"/><g fill="#EAF2F1"><circle cx="170" cy="130" r="4"/><circle cx="214" cy="112" r="4"/><circle cx="238" cy="172" r="4"/><circle cx="182" cy="196" r="4"/></g><circle class="ft-ping" cx="318" cy="196" r="6"/><circle cx="318" cy="196" r="4.5" fill="#14B8A6"/></svg></div></div>
@@ -1185,7 +1187,6 @@ p,h1,h2,h3,ul{margin:0}
           <div class="ft-media" data-slot="ft-asset" data-slot-l="Asset management — image / video (4:3)" data-slot-hint="A Canopy screen showing asset management, 2400 × 1800 px (4:3). Videos loop muted." data-fit-option data-lazy data-slot-empty="Nothing uploaded yet. The site shows a simple teal line drawing until you add one."><div class="ft-fb" aria-hidden="true"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><g class="ft-grid" stroke="rgba(163,182,183,.07)" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M0 250H400M50 0V300M100 0V300M150 0V300M200 0V300M250 0V300M300 0V300M350 0V300"/></g><g class="ft-row" style="--i:0"><rect x="76" y="58" width="248" height="32" rx="9" fill="rgba(234,242,241,.06)" stroke="rgba(163,182,183,.14)"/><circle cx="96" cy="74" r="8" fill="none" stroke="#14B8A6" stroke-width="1.6"/><rect x="114" y="70" width="92" height="4" rx="2" fill="rgba(234,242,241,.55)"/><rect x="114" y="78" width="52" height="3" rx="1.5" fill="rgba(163,182,183,.3)"/><rect x="270" y="69" width="38" height="10" rx="5" fill="rgba(20,184,166,.22)"/><circle cx="278" cy="74" r="2.5" fill="#14B8A6"/></g><g class="ft-row" style="--i:1"><rect x="76" y="100" width="248" height="32" rx="9" fill="rgba(234,242,241,.06)" stroke="rgba(163,182,183,.14)"/><circle cx="96" cy="116" r="8" fill="none" stroke="#14B8A6" stroke-width="1.6"/><rect x="114" y="112" width="74" height="4" rx="2" fill="rgba(234,242,241,.55)"/><rect x="114" y="120" width="64" height="3" rx="1.5" fill="rgba(163,182,183,.3)"/><rect x="270" y="111" width="38" height="10" rx="5" fill="rgba(20,184,166,.22)"/><circle cx="278" cy="116" r="2.5" fill="#14B8A6"/></g><g class="ft-row" style="--i:2"><rect x="76" y="142" width="248" height="32" rx="9" fill="rgba(234,242,241,.06)" stroke="rgba(163,182,183,.14)"/><circle cx="96" cy="158" r="8" fill="none" stroke="#14B8A6" stroke-width="1.6"/><rect x="114" y="154" width="108" height="4" rx="2" fill="rgba(234,242,241,.55)"/><rect x="114" y="162" width="40" height="3" rx="1.5" fill="rgba(163,182,183,.3)"/><rect x="270" y="153" width="38" height="10" rx="5" fill="rgba(163,182,183,.18)"/><circle cx="278" cy="158" r="2.5" fill="#A3B6B7"/></g><g class="ft-row" style="--i:3"><rect x="76" y="184" width="248" height="32" rx="9" fill="rgba(234,242,241,.06)" stroke="rgba(163,182,183,.14)"/><circle cx="96" cy="200" r="8" fill="none" stroke="#14B8A6" stroke-width="1.6"/><rect x="114" y="196" width="66" height="4" rx="2" fill="rgba(234,242,241,.55)"/><rect x="114" y="204" width="58" height="3" rx="1.5" fill="rgba(163,182,183,.3)"/><rect x="270" y="195" width="38" height="10" rx="5" fill="rgba(20,184,166,.22)"/><circle cx="278" cy="200" r="2.5" fill="#14B8A6"/></g><g class="ft-row" style="--i:4"><rect x="76" y="226" width="248" height="32" rx="9" fill="rgba(234,242,241,.06)" stroke="rgba(163,182,183,.14)"/><circle cx="96" cy="242" r="8" fill="none" stroke="#14B8A6" stroke-width="1.6"/><rect x="114" y="238" width="86" height="4" rx="2" fill="rgba(234,242,241,.55)"/><rect x="114" y="246" width="46" height="3" rx="1.5" fill="rgba(163,182,183,.3)"/><rect x="270" y="237" width="38" height="10" rx="5" fill="rgba(20,184,166,.22)"/><circle cx="278" cy="242" r="2.5" fill="#14B8A6"/></g></svg></div></div>
         </article>
       </div>
-    </div>
   </section>
   <script>
   /* Features: reveal on scroll; animations and uploaded videos only run while the section is on screen */
