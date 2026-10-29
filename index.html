@@ -461,7 +461,6 @@ p,h1,h2,h3,ul{margin:0}
 .sys-head{display:grid;gap:20px;margin-bottom:clamp(56px,6.5vw,96px)}
 .sys-head .h-sec{max-width:none}
 .sys-head .lede{color:var(--s-mute);max-width:42ch}
-.sys-hint{display:none;font-size:.85rem;color:var(--s-mute)}
 /* diagram */
 .sys-diagram{position:relative;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr) minmax(0,1.42fr) minmax(0,1.08fr);column-gap:clamp(52px,6.2vw,104px)}
 .sys-lines{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:0}
@@ -485,7 +484,7 @@ p,h1,h2,h3,ul{margin:0}
 .sys-stage{position:relative;z-index:1;display:flex;flex-direction:column;min-width:0}
 .sys-sh{min-height:62px;margin-bottom:24px}
 .sys-sk{display:flex;align-items:center;gap:10px;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--s-mute)}
-.sys-sk b,.sys-d-k b{font-weight:700;color:var(--teal-deep)}
+.sys-sk b{font-weight:700;color:var(--teal-deep)}
 .sys-st{margin-top:9px;font-family:var(--f-head);font-weight:800;font-size:.92rem;line-height:1.25;text-transform:uppercase;color:var(--s-ink)}
 .sys-sb{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px}
 /* nodes */
@@ -520,31 +519,7 @@ p,h1,h2,h3,ul{margin:0}
 .sys-hub-row > span:last-child::before{content:"\2193";margin-right:7px;opacity:.8}
 .sys-hub.on{border-color:var(--teal);box-shadow:0 0 0 3px rgba(20,184,166,.24),0 34px 60px -32px rgba(0,122,122,.6)}
 /* detail panel */
-.sys-details{position:relative;margin-top:clamp(44px,5vw,72px)}
-.sys-detail{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(28px,4.4vw,72px);align-items:center;padding:clamp(20px,2.4vw,32px);border-radius:24px;background:#FFFFFF;border:1px solid rgba(11,26,28,.08);box-shadow:0 30px 60px -48px rgba(11,26,28,.35)}
-.sys-detail[hidden]{display:none}
-.sys-detail.enter{animation:sysIn .5s cubic-bezier(.22,.61,.36,1)}
 @keyframes sysIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.sys-d-text{padding-left:clamp(0px,1vw,12px)}
-.sys-d-k{display:flex;align-items:center;gap:10px;font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--s-mute)}
-.sys-d-t{margin-top:14px;font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:clamp(1.4rem,2.1vw,2rem);line-height:1.06;letter-spacing:-.01em;color:var(--s-ink)}
-.sys-d-p{margin-top:14px;font-size:1.02rem;line-height:1.6;color:var(--s-mute);max-width:40ch}
-.sys-d-fig{margin:0;min-width:0}
-.sys-media{position:relative;aspect-ratio:16/10;border-radius:16px;overflow:hidden;background:#0F2325}
-.sys-media > .photo{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
-.sys-media > .photo.fit-contain{object-fit:contain}
-.sys-media.has-media > .sys-fb{display:none}
-.sys-cap{margin-top:10px;font-size:.86rem;line-height:1.45;color:var(--s-mute)}
-.sys-cap[hidden]{display:none}
-/* drawn fallback shown until media is uploaded */
-.sys-fb{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(55% 60% at 50% 50%,rgba(20,184,166,.2),rgba(20,184,166,0) 72%),linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px) 0 0/28px 28px,linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px) 0 0/28px 28px,#0F2325}
-.sys-fb::before,.sys-fb::after{content:"";position:absolute;left:50%;top:50%;border-radius:50%;transform:translate(-50%,-50%);pointer-events:none}
-.sys-fb::before{width:30%;aspect-ratio:1;border:1px solid rgba(20,184,166,.3)}
-.sys-fb::after{width:52%;aspect-ratio:1;border:1px solid rgba(20,184,166,.13)}
-.sys-fb-ic{position:relative;z-index:1;width:clamp(48px,6vw,72px);height:auto;aspect-ratio:1;fill:none;stroke:var(--teal);stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round}
-.sys-fb-screen{padding:clamp(14px,2.2vw,28px);background:radial-gradient(70% 70% at 50% 40%,rgba(20,184,166,.16),rgba(20,184,166,0) 70%),#0B1A1C}
-.sys-fb-screen::before,.sys-fb-screen::after{display:none}
-.sys-fb-screen svg{width:100%;height:auto;border-radius:10px;box-shadow:0 24px 48px -24px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.06)}
 /* reveal: only while JS runs and before each step; without JS everything simply shows */
 .sys.js .sys-diagram:not(.r1) .sys-stage[data-stage="1"] > *,
 .sys.js .sys-diagram:not(.r3) .sys-stage[data-stage="2"] > *,
@@ -568,8 +543,6 @@ p,h1,h2,h3,ul{margin:0}
 .sys.js .sys-diagram.r6 .sys-lines circle[data-g="o"],
 .sys.js .sys-diagram.r6 .sys-lines path.dash{opacity:1}
 .sys.js .sys-diagram.focus.r6 .sys-lines circle:not(.hi),.sys.js .sys-diagram.focus.r6 .sys-lines path.dash:not(.hi){opacity:.32}
-.sys.js .sys-details{transition:opacity .7s ease,transform .7s cubic-bezier(.22,.61,.36,1)}
-.sys.js .sys-details:not(.in){opacity:0;transform:translateY(12px)}
 /* tablet + phone: a vertical connected flow */
 @media (max-width:1199px){
   .sys-diagram{grid-template-columns:1fr;row-gap:64px}
@@ -585,13 +558,6 @@ p,h1,h2,h3,ul{margin:0}
   .sys-stage[data-stage="1"] .sys-node:nth-child(4){grid-column:2 / span 2}
   .sys-stage[data-stage="3"] .sys-sb{display:block;max-width:560px;width:100%;margin:0 auto}
   .sys-node-aux{grid-column:1 / -1;margin-top:0}
-  .sys-stage .sys-details{margin-top:18px}
-  .sys-hint{display:block;margin-top:-4px}
-  .sys-details.closed{display:none}
-  .sys-detail{grid-template-columns:1fr;gap:20px;padding:18px}
-  .sys-d-text{padding:4px 4px 0}
-  .sys-d-t{margin-top:10px}
-  .sys-d-p{max-width:none}
 }
 @media (max-width:639px){
   .sys-stage[data-stage="1"] .sys-sb{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -603,8 +569,7 @@ p,h1,h2,h3,ul{margin:0}
   .sys-nl{font-size:.88rem}
 }
 @media (prefers-reduced-motion:reduce){
-  .sys .sys-stage > *,.sys .sys-node,.sys .sys-hub,.sys .sys-details,.sys .sys-lines path,.sys .sys-lines circle{transition:none!important}
-  .sys-detail.enter,.sys-hub-live i,.sys-lines circle,.sys-lines path,.sys-stage::before{animation:none!important}
+  .sys .sys-stage > *,.sys .sys-node,.sys .sys-hub,.sys .sys-lines path,.sys .sys-lines circle{transition:none!important}
   .sys .sys-lines circle.sys-flow{display:none}
 }
 </style>
@@ -878,7 +843,6 @@ p,h1,h2,h3,ul{margin:0}
         <p class="label" data-k="sys.label" data-l="Small label">The Canopy system</p>
         <h2 id="system-title" class="h-sec" data-k="sys.title" data-l="Headline">Every vehicle. One connected view.</h2>
         <p class="lede" data-k="sys.sub" data-l="Subheadline">From vehicle data to smarter decisions. Everything flows through Canopy.</p>
-        <p class="sys-hint" data-k="sys.hint" data-l="Phone hint">Tap any step to see more.</p>
       </div>
 
       <div class="sys-diagram" id="sys-diagram">
@@ -887,26 +851,26 @@ p,h1,h2,h3,ul{margin:0}
         <div class="sys-stage" data-stage="1">
           <div class="sys-sh"><p class="sys-sk"><b>01</b><span data-k="sys.s1.k" data-l="Stage 1 name">Vehicles &amp; batteries</span></p><p class="sys-st" data-k="sys.s1.t" data-l="Stage 1 line">Every brand. Every asset.</p></div>
           <div class="sys-sb">
-            <button type="button" class="sys-node" data-node="v0" data-detail="vehicles" style="--i:0"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-moto"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.moto" data-l="Node · Motorcycles">Motorcycles</span></span></button>
-            <button type="button" class="sys-node" data-node="v1" data-detail="vehicles" style="--i:1"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-scooter"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.scooter" data-l="Node · Scooters">Scooters</span></span></button>
-            <button type="button" class="sys-node" data-node="v2" data-detail="vehicles" style="--i:2"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-trike"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.trike" data-l="Node · Three-wheelers">Three-wheelers</span></span></button>
-            <button type="button" class="sys-node" data-node="v3" data-detail="vehicles" style="--i:3"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-car"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.car" data-l="Node · Compact cars">Compact cars</span></span></button>
-            <button type="button" class="sys-node" data-node="v4" data-detail="vehicles" style="--i:4"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-battery"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.battery" data-l="Node · Batteries">Batteries</span></span></button>
+            <button type="button" class="sys-node" data-node="v0" style="--i:0"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-moto"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.moto" data-l="Node · Motorcycles">Motorcycles</span></span></button>
+            <button type="button" class="sys-node" data-node="v1" style="--i:1"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-scooter"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.scooter" data-l="Node · Scooters">Scooters</span></span></button>
+            <button type="button" class="sys-node" data-node="v2" style="--i:2"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-trike"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.trike" data-l="Node · Three-wheelers">Three-wheelers</span></span></button>
+            <button type="button" class="sys-node" data-node="v3" style="--i:3"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-car"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.car" data-l="Node · Compact cars">Compact cars</span></span></button>
+            <button type="button" class="sys-node" data-node="v4" style="--i:4"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-battery"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.battery" data-l="Node · Batteries">Batteries</span></span></button>
           </div>
         </div>
 
         <div class="sys-stage" data-stage="2">
           <div class="sys-sh"><p class="sys-sk"><b>02</b><span data-k="sys.s2.k" data-l="Stage 2 name">Connectivity</span></p><p class="sys-st" data-k="sys.s2.t" data-l="Stage 2 line">Connected at the source.</p></div>
           <div class="sys-sb">
-            <button type="button" class="sys-node sys-node-lg" data-node="explorer" data-detail="explorer" style="--i:0"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-explorer"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.explorer" data-l="Node · Explorer">Explorer</span><span class="sys-ns" data-k="sys.n.explorer.s" data-l="Node · Explorer line">Canopy's connectivity device</span></span></button>
-            <button type="button" class="sys-node sys-node-lg" data-node="trackers" data-detail="trackers" style="--i:1"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-tracker"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.trackers" data-l="Node · Compatible trackers">Compatible trackers</span><span class="sys-ns" data-k="sys.n.trackers.s" data-l="Node · Trackers line">Supported existing devices</span></span></button>
+            <button type="button" class="sys-node sys-node-lg" data-node="explorer" style="--i:0"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-explorer"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.explorer" data-l="Node · Explorer">Explorer</span><span class="sys-ns" data-k="sys.n.explorer.s" data-l="Node · Explorer line">Canopy's connectivity device</span></span></button>
+            <button type="button" class="sys-node sys-node-lg" data-node="trackers" style="--i:1"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-tracker"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.trackers" data-l="Node · Compatible trackers">Compatible trackers</span><span class="sys-ns" data-k="sys.n.trackers.s" data-l="Node · Trackers line">Supported existing devices</span></span></button>
           </div>
         </div>
 
         <div class="sys-stage" data-stage="3">
           <div class="sys-sh"><p class="sys-sk"><b>03</b><span data-k="sys.s3.k" data-l="Stage 3 name">Canopy intelligence</span></p><p class="sys-st" data-k="sys.s3.t" data-l="Stage 3 line">One platform. Complete visibility.</p></div>
           <div class="sys-sb">
-            <button type="button" class="sys-node sys-hub" data-node="hub" data-detail="hub">
+            <button type="button" class="sys-node sys-hub" data-node="hub">
               <span class="sys-hub-top"><img class="sys-hub-logo" src="canopy-logo.svg" alt="Canopy" width="123" height="38"><span class="sys-hub-live"><i></i><span data-k="sys.hub.live" data-l="Hub status">Live</span></span></span>
               <span class="sys-hub-screen"><svg viewBox="0 0 320 190" role="presentation"><use href="#si-screen"/></svg></span>
               <span class="sys-hub-row"><span data-k="sys.hub.c1" data-l="Hub tag 1">Vehicles</span><span data-k="sys.hub.c2" data-l="Hub tag 2">Batteries</span><span data-k="sys.hub.c3" data-l="Hub tag 3">Devices</span><span data-k="sys.hub.c4" data-l="Hub tag 4">One view</span></span>
@@ -917,52 +881,13 @@ p,h1,h2,h3,ul{margin:0}
         <div class="sys-stage" data-stage="4">
           <div class="sys-sh"><p class="sys-sk"><b>04</b><span data-k="sys.s4.k" data-l="Stage 4 name">Insight &amp; action</span></p><p class="sys-st" data-k="sys.s4.t" data-l="Stage 4 line">Track. Monitor. Understand. Act.</p></div>
           <div class="sys-sb">
-            <button type="button" class="sys-node" data-node="o0" data-detail="live" style="--i:0"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-pin"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.live" data-l="Node · Live visibility">Live visibility</span><span class="sys-ns" data-k="sys.n.live.s" data-l="Node · Live visibility line">Locations, zones and trip history</span></span></button>
-            <button type="button" class="sys-node" data-node="o1" data-detail="battery" style="--i:1"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-bhealth"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.bat" data-l="Node · Battery intelligence">Battery intelligence</span><span class="sys-ns" data-k="sys.n.bat.s" data-l="Node · Battery line">Battery health and performance</span></span></button>
-            <button type="button" class="sys-node" data-node="o2" data-detail="alerts" style="--i:2"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-bell"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.alerts" data-l="Node · Smart alerts">Smart alerts</span><span class="sys-ns" data-k="sys.n.alerts.s" data-l="Node · Alerts line">Operational and geofence notifications</span></span></button>
-            <button type="button" class="sys-node" data-node="o3" data-detail="rover" style="--i:3"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-rover"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.rover" data-l="Node · Rover AI">Rover AI</span><span class="sys-ns" data-k="sys.n.rover.s" data-l="Node · Rover AI line">Fleet answers in natural language</span></span></button>
-            <button type="button" class="sys-node sys-node-aux" data-node="safelock" data-detail="safelock" style="--i:4"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-lock"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.lock" data-l="Node · Safe Lock">Safe Lock</span><span class="sys-ns" data-k="sys.n.lock.s" data-l="Node · Safe Lock line">Only after a safe stop, where supported</span></span></button>
+            <button type="button" class="sys-node" data-node="o0" style="--i:0"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-pin"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.live" data-l="Node · Live visibility">Live visibility</span><span class="sys-ns" data-k="sys.n.live.s" data-l="Node · Live visibility line">Locations, zones and trip history</span></span></button>
+            <button type="button" class="sys-node" data-node="o1" style="--i:1"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-bhealth"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.bat" data-l="Node · Battery intelligence">Battery intelligence</span><span class="sys-ns" data-k="sys.n.bat.s" data-l="Node · Battery line">Battery health and performance</span></span></button>
+            <button type="button" class="sys-node" data-node="o2" style="--i:2"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-bell"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.alerts" data-l="Node · Smart alerts">Smart alerts</span><span class="sys-ns" data-k="sys.n.alerts.s" data-l="Node · Alerts line">Operational and geofence notifications</span></span></button>
+            <button type="button" class="sys-node" data-node="o3" style="--i:3"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-rover"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.rover" data-l="Node · Rover AI">Rover AI</span><span class="sys-ns" data-k="sys.n.rover.s" data-l="Node · Rover AI line">Fleet answers in natural language</span></span></button>
+            <button type="button" class="sys-node sys-node-aux" data-node="safelock" style="--i:4"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-lock"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.lock" data-l="Node · Safe Lock">Safe Lock</span><span class="sys-ns" data-k="sys.n.lock.s" data-l="Node · Safe Lock line">Only after a safe stop, where supported</span></span></button>
           </div>
         </div>
-      </div>
-
-      <div class="sys-details" id="sys-details" aria-live="polite">
-        <article class="sys-detail" data-detail="vehicles" hidden>
-          <div class="sys-d-text"><p class="sys-d-k"><b>01</b><span data-k="sys.s1.k">Vehicles &amp; batteries</span></p><h3 class="sys-d-t" data-k="sys.d.veh.t" data-l="Detail · Vehicles title">Every brand. Every asset.</h3><p class="sys-d-p" data-k="sys.d.veh.p" data-l="Detail · Vehicles text">Electric motorcycles, scooters, three-wheelers and compact cars, and the batteries that power them, all in one place.</p></div>
-          <figure class="sys-d-fig"><div class="sys-media" data-slot="sys-fleet" data-slot-l="Vehicles — image / video" data-media-controls data-fit-option data-slot-empty="Nothing uploaded yet. The site shows a drawn illustration until you add one."><div class="sys-fb" aria-hidden="true"><svg viewBox="0 0 24 24" class="sys-fb-ic"><use href="#si-moto"/></svg></div></div><figcaption class="sys-cap" data-cap-for="sys-fleet" hidden></figcaption></figure>
-        </article>
-        <article class="sys-detail" data-detail="explorer" hidden>
-          <div class="sys-d-text"><p class="sys-d-k"><b>02</b><span data-k="sys.s2.k">Connectivity</span></p><h3 class="sys-d-t" data-k="sys.d.exp.t" data-l="Detail · Explorer title">Explorer</h3><p class="sys-d-p" data-k="sys.d.exp.p" data-l="Detail · Explorer text">Canopy's own connectivity device, fitted to the vehicle. It stays connected and keeps reporting, even if its power is cut.</p></div>
-          <figure class="sys-d-fig"><div class="sys-media" data-slot="sys-explorer" data-slot-l="Explorer product — image / video" data-media-controls data-fit-option data-slot-empty="Nothing uploaded yet. The site shows a drawn illustration until you add one."><div class="sys-fb" aria-hidden="true"><svg viewBox="0 0 24 24" class="sys-fb-ic"><use href="#si-explorer"/></svg></div></div><figcaption class="sys-cap" data-cap-for="sys-explorer" hidden></figcaption></figure>
-        </article>
-        <article class="sys-detail" data-detail="trackers" hidden>
-          <div class="sys-d-text"><p class="sys-d-k"><b>02</b><span data-k="sys.s2.k">Connectivity</span></p><h3 class="sys-d-t" data-k="sys.d.trk.t" data-l="Detail · Trackers title">Compatible trackers</h3><p class="sys-d-p" data-k="sys.d.trk.p" data-l="Detail · Trackers text">Already using trackers? Link supported devices and see them in Canopy, alongside the rest of your fleet.</p></div>
-          <figure class="sys-d-fig"><div class="sys-media" data-slot="sys-trackers" data-slot-l="Compatible trackers — image / video" data-media-controls data-fit-option data-slot-empty="Nothing uploaded yet. The site shows a drawn illustration until you add one."><div class="sys-fb" aria-hidden="true"><svg viewBox="0 0 24 24" class="sys-fb-ic"><use href="#si-tracker"/></svg></div></div><figcaption class="sys-cap" data-cap-for="sys-trackers" hidden></figcaption></figure>
-        </article>
-        <article class="sys-detail" data-detail="hub" hidden>
-          <div class="sys-d-text"><p class="sys-d-k"><b>03</b><span data-k="sys.s3.k">Canopy intelligence</span></p><h3 class="sys-d-t" data-k="sys.d.hub.t" data-l="Detail · Canopy title">One platform. Complete visibility.</h3><p class="sys-d-p" data-k="sys.d.hub.p" data-l="Detail · Canopy text">Vehicle and battery data come together in Canopy, powering live visibility, alerts, insights and Rover AI.</p></div>
-          <figure class="sys-d-fig"><div class="sys-media" data-slot="sys-platform" data-slot-l="Canopy platform — screenshot / video" data-media-controls data-fit-option data-slot-empty="Nothing uploaded yet. The site shows a drawn dashboard until you add one."><div class="sys-fb sys-fb-screen" aria-hidden="true"><svg viewBox="0 0 320 190"><use href="#si-screen"/></svg></div></div><figcaption class="sys-cap" data-cap-for="sys-platform" hidden></figcaption></figure>
-        </article>
-        <article class="sys-detail" data-detail="live" hidden>
-          <div class="sys-d-text"><p class="sys-d-k"><b>04</b><span data-k="sys.s4.k">Insight &amp; action</span></p><h3 class="sys-d-t" data-k="sys.d.live.t" data-l="Detail · Live visibility title">Live visibility</h3><p class="sys-d-p" data-k="sys.d.live.p" data-l="Detail · Live visibility text">See where every vehicle is, the zones it moves through and the trips it has taken, on one live map.</p></div>
-          <figure class="sys-d-fig"><div class="sys-media" data-slot="sys-map" data-slot-l="Live fleet map — image / video" data-media-controls data-fit-option data-slot-empty="Nothing uploaded yet. The site shows a drawn illustration until you add one."><div class="sys-fb" aria-hidden="true"><svg viewBox="0 0 24 24" class="sys-fb-ic"><use href="#si-pin"/></svg></div></div><figcaption class="sys-cap" data-cap-for="sys-map" hidden></figcaption></figure>
-        </article>
-        <article class="sys-detail" data-detail="battery" hidden>
-          <div class="sys-d-text"><p class="sys-d-k"><b>04</b><span data-k="sys.s4.k">Insight &amp; action</span></p><h3 class="sys-d-t" data-k="sys.d.bat.t" data-l="Detail · Battery title">Battery intelligence</h3><p class="sys-d-p" data-k="sys.d.bat.p" data-l="Detail · Battery text">Follow battery health and performance over time, across every vehicle in the fleet.</p></div>
-          <figure class="sys-d-fig"><div class="sys-media" data-slot="sys-battery" data-slot-l="Battery monitoring — image / video" data-media-controls data-fit-option data-slot-empty="Nothing uploaded yet. The site shows a drawn illustration until you add one."><div class="sys-fb" aria-hidden="true"><svg viewBox="0 0 24 24" class="sys-fb-ic"><use href="#si-bhealth"/></svg></div></div><figcaption class="sys-cap" data-cap-for="sys-battery" hidden></figcaption></figure>
-        </article>
-        <article class="sys-detail" data-detail="alerts" hidden>
-          <div class="sys-d-text"><p class="sys-d-k"><b>04</b><span data-k="sys.s4.k">Insight &amp; action</span></p><h3 class="sys-d-t" data-k="sys.d.alr.t" data-l="Detail · Alerts title">Smart alerts</h3><p class="sys-d-p" data-k="sys.d.alr.p" data-l="Detail · Alerts text">Operational and geofence alerts tell your team the moment something needs attention.</p></div>
-          <figure class="sys-d-fig"><div class="sys-media" data-slot="sys-alerts" data-slot-l="Alert management — image / video" data-media-controls data-fit-option data-slot-empty="Nothing uploaded yet. The site shows a drawn illustration until you add one."><div class="sys-fb" aria-hidden="true"><svg viewBox="0 0 24 24" class="sys-fb-ic"><use href="#si-bell"/></svg></div></div><figcaption class="sys-cap" data-cap-for="sys-alerts" hidden></figcaption></figure>
-        </article>
-        <article class="sys-detail" data-detail="rover" hidden>
-          <div class="sys-d-text"><p class="sys-d-k"><b>04</b><span data-k="sys.s4.k">Insight &amp; action</span></p><h3 class="sys-d-t" data-k="sys.d.rov.t" data-l="Detail · Rover AI title">Rover AI</h3><p class="sys-d-p" data-k="sys.d.rov.p" data-l="Detail · Rover AI text">Ask about your fleet in plain words, like "Which bikes are overdue?", and get an answer in seconds.</p></div>
-          <figure class="sys-d-fig"><div class="sys-media" data-slot="sys-rover" data-slot-l="Rover AI — image / video" data-media-controls data-fit-option data-slot-empty="Nothing uploaded yet. The site shows a drawn illustration until you add one."><div class="sys-fb" aria-hidden="true"><svg viewBox="0 0 24 24" class="sys-fb-ic"><use href="#si-rover"/></svg></div></div><figcaption class="sys-cap" data-cap-for="sys-rover" hidden></figcaption></figure>
-        </article>
-        <article class="sys-detail" data-detail="safelock" hidden>
-          <div class="sys-d-text"><p class="sys-d-k"><b>04</b><span data-k="sys.s4.k">Insight &amp; action</span></p><h3 class="sys-d-t" data-k="sys.d.lock.t" data-l="Detail · Safe Lock title">Safe Lock</h3><p class="sys-d-p" data-k="sys.d.lock.p" data-l="Detail · Safe Lock text">Immobilise a vehicle from Canopy. It only locks once the vehicle has come to a safe stop, where supported.</p></div>
-          <figure class="sys-d-fig"><div class="sys-media" data-slot="sys-safelock" data-slot-l="Safe Lock — image / video" data-media-controls data-fit-option data-slot-empty="Nothing uploaded yet. The site shows a drawn illustration until you add one."><div class="sys-fb" aria-hidden="true"><svg viewBox="0 0 24 24" class="sys-fb-ic"><use href="#si-lock"/></svg></div></div><figcaption class="sys-cap" data-cap-for="sys-safelock" hidden></figcaption></figure>
-        </article>
       </div>
     </div>
   </section>
@@ -972,7 +897,7 @@ p,h1,h2,h3,ul{margin:0}
      vertical flow and the detail panel opens inside the tapped stage (below 1200px). */
   (function(){
     var sec=document.getElementById('system');if(!sec)return;
-    var dia=document.getElementById('sys-diagram'),svg=document.getElementById('sys-lines'),details=document.getElementById('sys-details');
+    var dia=document.getElementById('sys-diagram'),svg=document.getElementById('sys-lines');
     var NS='http://www.w3.org/2000/svg';
     var mqNarrow=window.matchMedia('(max-width:1199px)'),mqRM=window.matchMedia('(prefers-reduced-motion: reduce)');
     var hoverOK=window.matchMedia('(hover:hover) and (pointer:fine)').matches;
@@ -1045,7 +970,7 @@ p,h1,h2,h3,ul{margin:0}
     }
 
     /* selection state: sel = clicked node (or null); preview = hovered node */
-    var sel=null,preview=null,shown=null;
+    var sel=null,preview=null;
     function paint(){
       var id=preview||sel,hi=rel(id),focus=!!id;
       dia.classList.toggle('focus',focus);
@@ -1061,45 +986,29 @@ p,h1,h2,h3,ul{margin:0}
         nodes[n].setAttribute('aria-pressed',n===sel?'true':'false');
       });
     }
-    function showDetail(key,animate){
-      if(key===shown)return;shown=key;
-      [].forEach.call(details.querySelectorAll('.sys-detail'),function(d){
-        var on=d.dataset.detail===key;d.hidden=!on;d.classList.remove('enter');
-        if(on&&animate&&!mqRM.matches){void d.offsetWidth;d.classList.add('enter')}
-        [].forEach.call(d.querySelectorAll('video'),function(v){if(on&&!mqRM.matches){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()});
-      });
-    }
-    function place(){
-      /* phones/tablets: open the panel inside the stage that holds the active node; desktop: below the diagram */
-      details.classList.toggle('closed',mqNarrow.matches&&!sel);
-      if(mqNarrow.matches){var n=nodes[sel||'hub'],st=n&&n.closest('.sys-stage');if(st&&details.parentNode!==st)st.appendChild(details)}
-      else if(details.parentNode!==dia.parentNode)dia.parentNode.insertBefore(details,dia.nextSibling);
-    }
     function select(id){
       sel=(sel===id)?null:id;preview=null;
-      paint();place();showDetail(nodes[sel||'hub'].dataset.detail,true);
-      if(mqNarrow.matches&&sel&&!mqRM.matches&&details.scrollIntoView){details.scrollIntoView({block:'nearest',behavior:'smooth'})}
+      paint();
     }
     Object.keys(nodes).forEach(function(id){
-      var b=nodes[id];b.setAttribute('aria-controls','sys-details');b.setAttribute('aria-pressed','false');
+      var b=nodes[id];b.setAttribute('aria-pressed','false');
       b.addEventListener('click',function(){select(id)});
       if(hoverOK){
         b.addEventListener('mouseenter',function(){if(mqNarrow.matches)return;preview=id;paint()});
         b.addEventListener('mouseleave',function(){preview=null;paint()});
       }
     });
-    document.addEventListener('canopy:media',function(){var s=shown;shown=null;showDetail(s,false)});
 
     /* reveal in order: vehicles → lines → connectivity → lines → Canopy → lines → insight */
     var steps=['r1','r2','r3','r4','r5','r6','r7'],started=false;
-    function finish(){dia.classList.add('done');details.classList.add('in')}
+    function finish(){dia.classList.add('done')}
     function run(){
       if(started)return;started=true;layout();
       if(mqRM.matches){steps.forEach(function(s){dia.classList.add(s)});finish();return}
       var t=[0,420,900,1260,1700,2150,2500];
       steps.forEach(function(s,i){setTimeout(function(){dia.classList.add(s);if(s==='r7')setTimeout(finish,500)},t[i])});
     }
-    function runStage(n){var map={1:['r1','r2'],2:['r3','r4'],3:['r5','r6'],4:['r7']};(map[n]||[]).forEach(function(s){dia.classList.add(s)});if(n==='3'||n===3){details.classList.add('in')}if(['r1','r3','r5','r7'].every(function(s){return dia.classList.contains(s)}))finish()}
+    function runStage(n){var map={1:['r1','r2'],2:['r3','r4'],3:['r5','r6'],4:['r7']};(map[n]||[]).forEach(function(s){dia.classList.add(s)});if(['r1','r3','r5','r7'].every(function(s){return dia.classList.contains(s)}))finish()}
     if(mqRM.matches){started=true;steps.forEach(function(s){dia.classList.add(s)});finish()}
     else if('IntersectionObserver' in window){
       if(mqNarrow.matches){
@@ -1114,10 +1023,10 @@ p,h1,h2,h3,ul{margin:0}
     var raf=0;function relayout(){cancelAnimationFrame(raf);raf=requestAnimationFrame(layout)}
     if('ResizeObserver' in window)new ResizeObserver(relayout).observe(dia);else window.addEventListener('resize',relayout);
     if(document.fonts&&document.fonts.ready)document.fonts.ready.then(relayout);
-    var onMQ=function(){place();relayout();if(mqNarrow.matches===false&&!started){steps.forEach(function(s){dia.classList.add(s)});finish()}};
+    var onMQ=function(){relayout();if(mqNarrow.matches===false&&!started){steps.forEach(function(s){dia.classList.add(s)});finish()}};
     if(mqNarrow.addEventListener)mqNarrow.addEventListener('change',onMQ);else if(mqNarrow.addListener)mqNarrow.addListener(onMQ);
 
-    layout();paint();place();showDetail('hub',false);
+    layout();paint();
   })();
   </script>
 
