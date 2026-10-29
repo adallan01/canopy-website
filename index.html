@@ -374,10 +374,9 @@ p,h1,h2,h3,ul{margin:0}
 .ft{background:#FFFFFF;color:#0B1A1C;padding-block:clamp(96px,11vw,176px) clamp(96px,10vw,160px)}
 .ft-head{display:flex;flex-direction:column;align-items:center;text-align:center;margin:0 auto clamp(48px,5.5vw,88px);max-width:1180px;padding-inline:8px}
 .ft-head .label{color:var(--teal-deep)}
-.ft-statement{margin-top:clamp(18px,2vw,28px);font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:var(--h-size);line-height:1.04;letter-spacing:-.02em;text-wrap:balance}
-.ft-statement .ft-h,.ft-statement .ft-sub{display:inline;margin:0;font:inherit;letter-spacing:inherit}
-.ft-statement .ft-h{color:#0B1A1C}
-.ft-statement .ft-sub{color:#A9B6B7}
+.ft-statement{margin-top:clamp(18px,2vw,26px)}
+.ft-statement .ft-h{display:block;margin:0;font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:var(--h-size);line-height:1.04;letter-spacing:-.02em;color:#0B1A1C;text-wrap:balance}
+.ft-statement .ft-sub{display:block;margin:clamp(16px,1.6vw,22px) auto 0;max-width:46ch;font-size:clamp(1.1rem,1.45vw,1.4rem);font-weight:500;line-height:1.45;letter-spacing:-.005em;color:#6B7B7D;text-wrap:balance}
 .ft-grid-wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,1vw,16px);margin:0 auto;padding-inline:clamp(10px,1vw,16px)}
 .ft-card{--tile:#F2F5F6;position:relative;display:flex;flex-direction:column;border-radius:30px;background:var(--tile);overflow:hidden;isolation:isolate;transition:background-color .6s ease}
 .ft-card.dark{--tile:#0B1A1C}
@@ -425,7 +424,7 @@ p,h1,h2,h3,ul{margin:0}
 .ft.js.in .ft-a,.ft.js.in .ft-card{opacity:1;transform:none}.ft.js.in .ft-media{transform:none}
 @media (prefers-reduced-motion:reduce){.ft *{animation:none!important;transition:none!important}.ft-car{display:none!important}}
 @media (max-width:860px){.ft-grid-wrap{grid-template-columns:1fr}}
-@media (max-width:767px){.ft{padding-block:80px}.ft-card{border-radius:22px}.ft-head{align-items:flex-start;text-align:left}.ft-text{padding:32px 24px 0}.ft-d{font-size:clamp(1.4rem,6.4vw,1.8rem)}}
+@media (max-width:767px){.ft{padding-block:80px}.ft-card{border-radius:22px}.ft-head{align-items:flex-start;text-align:left}.ft-statement .ft-sub{margin-left:0}.ft-text{padding:32px 24px 0}.ft-d{font-size:clamp(1.4rem,6.4vw,1.8rem)}}
 .gap-top{margin-top:2px}
 
 /* footer: Figure-style — wordmark + sign-up left, big numbered menu right, blurred photo behind */
