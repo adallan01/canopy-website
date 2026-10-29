@@ -131,6 +131,12 @@ p,h1,h2,h3,ul{margin:0}
   .sc-caps{grid-template-columns:1fr 1fr;padding-inline:0}
 }
 @media (max-width:520px){.sc-caps{grid-template-columns:1fr}.sc-chips li{font-size:.85rem;padding:8px 14px 8px 12px}}
+/* desktop: headline, chips and the whole device mockup fit in one screen */
+@media (min-width:1024px){
+  .showcase{min-height:100vh;min-height:100svh;box-sizing:border-box;display:flex;align-items:center;padding-block:clamp(48px,7vh,96px) clamp(32px,5vh,72px)}
+  .showcase > .wrap{width:100%}
+  .showcase-media{margin:clamp(16px,3vh,40px) auto 0;width:min(100%,calc((100vh - 330px) * 1.778));width:min(100%,calc((100svh - 330px) * 1.778));min-width:min(100%,760px)}
+}
 .showcase-media:not(.has-media){aspect-ratio:16/8.5;border-radius:24px;background:linear-gradient(180deg,rgba(11,26,28,.035),rgba(11,26,28,.06))}
 /* numbers (Figure-style spec list): photo on the left melting into the band, stats stacked on the right */
 .stats-band{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);background:#EEF0EF;color:var(--ink);overflow:hidden}
