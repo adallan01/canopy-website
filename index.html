@@ -289,6 +289,40 @@ p,h1,h2,h3,ul{margin:0}
 @media (max-width:1023px){.xs-grid{grid-template-columns:1fr;gap:56px}.xs-copy{max-width:640px}.xs::before,.xs::after{-webkit-mask-image:radial-gradient(ellipse 90% 80% at 50% 60%,#000 30%,transparent 100%);mask-image:radial-gradient(ellipse 90% 80% at 50% 60%,#000 30%,transparent 100%)}}
 @media (max-width:767px){.xs{padding-block:80px 72px}.xs::after{display:none}.xs::before{background-size:56px 56px}.xs-btns{margin-top:32px}.xs-frame{padding:12px}.xs-grid{gap:44px}}
 @media (max-width:479px){.xs-btn{flex:1 1 100%}}
+/* Global view: dark dotted world map, copy lower-left, live stat lower-right */
+.gm{position:relative;overflow:hidden;background:radial-gradient(70% 60% at 55% 42%,#0C1516 0%,#060A0B 70%);color:#fff;padding-block:clamp(80px,8vw,128px) clamp(64px,6vw,104px)}
+.gm-map{max-width:1500px;margin:0 auto;padding-inline:clamp(0px,2vw,32px)}
+.gm-map svg{display:block;width:100%;height:auto;overflow:hidden}
+.gm-land path{fill:none;stroke:rgba(196,214,214,.13);stroke-width:2.6;stroke-linecap:round}
+.gm-act circle{fill:#F4FAF9;opacity:var(--o,.7);filter:drop-shadow(0 0 2px rgba(255,255,255,.45))}
+.gm-act circle.tw{animation:gmTw var(--tw,4s) ease-in-out var(--td,0s) infinite}
+@keyframes gmTw{0%,100%{opacity:var(--o,.7)}50%{opacity:.18}}
+.gm-core{fill:#14B8A6}
+.gm-ring{fill:none;stroke:#14B8A6;stroke-width:1;transform-box:fill-box;transform-origin:center;animation:gmRing 3.2s ease-out infinite}
+@keyframes gmRing{0%{transform:scale(1);opacity:.75}100%{transform:scale(4.2);opacity:0}}
+.gm-loc{stroke:url(#gm-locg);stroke-width:1.2}
+.gm-foot{position:relative;display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-top:clamp(-260px,-15vw,-120px)}
+.gm-copy{max-width:520px}
+.gm .label{color:var(--teal)}
+.gm .h-sec{margin:20px 0 0;color:#fff;max-width:none}
+.gm .h-sec span{display:block}
+.gm-lede{margin:22px 0 0;max-width:36ch;color:#A3B6B7;font-size:clamp(1rem,1.15vw,1.1rem);line-height:1.6}
+.gm-stat{text-align:right;flex:none}
+.gm-stat-l{display:inline-flex;align-items:center;gap:10px;margin:0;font-size:.74rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:#A3B6B7}
+.gm-stat-l i{width:7px;height:7px;border-radius:50%;background:#14B8A6;box-shadow:0 0 0 4px rgba(20,184,166,.18);animation:gmLive 2.4s ease-in-out infinite}
+@keyframes gmLive{0%,100%{opacity:1}50%{opacity:.45}}
+.gm-stat-v{margin:10px 0 0;font-family:var(--f-head);font-weight:800;font-size:clamp(3rem,6.4vw,6.2rem);line-height:.95;letter-spacing:-.03em;color:#fff;font-variant-numeric:tabular-nums}
+/* entry */
+.gm.js .gm-land{opacity:0;transition:opacity 1.4s ease}
+.gm.js .gm-act circle,.gm.js .gm-hub{opacity:0;transition:opacity .9s ease var(--dl,0s)}
+.gm.js .gm-a{opacity:0;transform:translateY(14px);transition:opacity .9s cubic-bezier(.2,.7,.2,1) calc(.5s + var(--d,0s)),transform .9s cubic-bezier(.2,.7,.2,1) calc(.5s + var(--d,0s))}
+.gm.js.in .gm-land{opacity:1}
+.gm.js.in .gm-act circle{opacity:var(--o,.7)}
+.gm.js.in .gm-hub{opacity:1}
+.gm.js.in .gm-a{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.gm *{animation:none!important;transition:none!important}}
+@media (max-width:1023px){.gm-foot{margin-top:-60px}.gm-stat-v{font-size:clamp(2.6rem,8vw,4.4rem)}}
+@media (max-width:767px){.gm{padding-block:72px 64px}.gm-map{padding:0}.gm-land path{stroke-width:3.4}.gm-foot{flex-direction:column;align-items:flex-start;gap:36px;margin-top:28px}.gm-stat{text-align:left}}
 /* explorer specs: four rounded cards, each led by a big figure */
 .spec-head{margin-bottom:24px}
 .spec-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
@@ -1066,6 +1100,68 @@ p,h1,h2,h3,ul{margin:0}
       <div class="showcase-media has-media" data-slot="devices" data-slot-l="Devices image (laptop + phone mockup)" data-default-media="images/devices.webp"><picture class="default-pic"><img class="photo" src="images/devices.webp" alt="Canopy on a tablet, a phone and a laptop: the fleet dashboard and the live map" width="1600" height="906" loading="lazy"></picture></div>
     </div>
   </section>
+
+  <!-- Global view: dotted world map (Natural Earth projection), activity clusters and live stat -->
+  <section id="global" class="gm" data-sec="Global view" data-sid="global" aria-labelledby="global-title">
+    <div class="gm-map" aria-hidden="true"><svg id="gm-svg" viewBox="0 7 1200 532" preserveAspectRatio="xMidYMid meet"><defs><linearGradient id="gm-locg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14B8A6" stop-opacity="0"/><stop offset="1" stop-color="#14B8A6" stop-opacity=".85"/></linearGradient></defs><g class="gm-land"><path id="gm-land"/></g><g class="gm-act" id="gm-act"></g><g class="gm-hubs" id="gm-hubs"></g></svg></div>
+    <div class="wrap gm-foot">
+      <div class="gm-copy">
+        <p class="label gm-a" style="--d:0s" data-k="gm.label" data-l="Small label">Global view</p>
+        <h2 id="global-title" class="h-sec gm-a" style="--d:.08s"><span data-k="gm.title.1" data-l="Headline line 1">One fleet.</span> <span data-k="gm.title.2" data-l="Headline line 2">One live map.</span></h2>
+        <p class="gm-lede gm-a" style="--d:.24s" data-k="gm.sub" data-l="Supporting text">See vehicles, batteries and activity across your network in real time.</p>
+      </div>
+      <div class="gm-stat gm-a" style="--d:.4s">
+        <p class="gm-stat-l"><i aria-hidden="true"></i><span data-k="gm.stat.l" data-l="Stat label">Live assets</span></p>
+        <p class="gm-stat-v" data-k="gm.stat.v" data-l="Stat figure (numbers count up, e.g. 12,400+)">[X]+</p>
+      </div>
+    </div>
+  </section>
+  <script>
+  /* Global view map. LAND is the world's land as a dot grid (run-length rows). HUBS are illustrative activity
+     clusters — [longitude, latitude, radius in map px, density 0–1, teal highlight 1/0] — edit them to match real operations. */
+  (function(){
+    var sec=document.getElementById('global');if(!sec)return;
+    var LAND={W:1200,S:7,r0:1,k:219.3476,tx:600.0000,ty:311.9979,enc:"20.6.2m|1j.2.3.l.j.2.d.2.1j|1c.1.3.1.4.3.2.h.b.2.28|19.1.1.1.1.1.2.3.2.2.7.d.q.2.9.8.8.3.11|16.3.6.1.1.1.1.4.8.9.1.1.w.1.3.d.2.1.5.1.10|m.1.l.5.2.2.2.5.8.8.1.1.q.2.3.2.1.1.1.q.9.1.m|q.a.2.5.2.1.2.1.1.4.1.1.2.3.6.9.g.7.4.1.4.2.1.1.2.x.1.3.l|j.2.5.t.4.4.3.7.i.a.1.9.2.13.k|k.1.2.w.1.5.6.4.6.3.a.4.1.5.1.1g.j|n.r.9.1.7.2.k.4.1.1i.1.5.i|m.6.1.k.7.3.9.1.j.4.2.1g.3.3.k|n.2.6.1.1.g.6.4.1.1.r.1.1.2.3.1b.7.1.m|m.1.a.h.5.6.m.2.4.1.1.1.2.1b.7.3.l|j.1.d.j.2.8.k.1.1.1.4.1.4.1a.1.1.7.2.l|x.u.j.1.1.2.2.1k.6.1.l|x.s.1.1.l.2.1.1l.s|x.o.1.1.2.2.m.1p.q|x.p.1.1.p.1o.r|x.q.q.6.1.6.2.6.2.10.2.1.p|w.n.r.1.2.4.1.2.1.5.5.3.2.10.3.1.o|w.n.r.5.4.2.1.4.2.1.3.3.2.x.u|v.m.t.4.1.1.1.1.4.2.1.a.2.t.1.3.5.1.o|w.k.u.3.6.2.2.2.1.9.3.s.3.2.4.1.o|v.l.y.4.a.1.1.12.2.1.3.2.o|w.j.w.7.c.12.5.1.q|x.h.w.a.3.1.6.12.w|x.g.w.d.1.1a.v|x.9.6.1.u.1.1.r.1.w.v|x.1.1.6.7.1.v.l.1.6.2.v.v|10.5.7.1.u.n.1.6.2.1.1.s.v|y.1.1.4.12.o.2.9.4.n.1.1.u|11.3.8.2.s.p.1.9.5.1.1.7.2.9.y|10.5.2.2.4.2.r.p.2.8.7.6.3.6.11|11.4.1.2.5.1.1.1.1.2.n.q.1.7.8.5.5.5.7.1.t|13.5.y.q.2.4.a.4.6.1.1.4.6.1.t|16.4.w.r.1.3.c.2.9.5.5.1.t|18.2.w.t.e.3.8.5.z|19.1.5.2.q.r.2.2.c.2.8.1.2.2.6.1.s|1a.1.1.1.1.7.m.v.c.1.9.1.2.1.9.1.q|1b.1.1.9.m.t.f.1.k.1.q|1d.b.l.5.2.l.o.2.6.1.u|1d.c.t.i.o.1.1.1.5.2.u|1c.e.s.h.q.1.5.3.u|1c.d.t.g.r.2.3.4.u|1b.h.q.f.t.1.3.3.2.1.2.1.2.3.k|1b.k.o.e.t.2.4.1.2.1.5.5.i|1b.m.n.c.v.1.6.1.1.1.6.4.h|1c.l.n.c.w.4.c.4.g|1c.l.n.c.11.1.3.1.6.2.1.1.g|1d.j.o.d.1l.1.9|1d.j.o.d.16.3.m|1e.h.p.d.3.1.10.1.1.3.2.2.i|1f.g.o.e.2.2.z.6.2.2.a.1.7|1g.f.o.c.3.3.y.b.i|1h.e.p.a.4.3.x.d.h|1h.e.p.a.4.2.v.g.h|1h.c.r.a.4.2.u.i.g|1h.b.t.8.5.1.v.j.f|1h.a.u.8.11.i.g|1h.a.u.7.12.i.g|1h.9.w.6.12.h.h|1h.9.w.5.13.5.3.9.h|1h.6.1.2.w.2.15.2.9.6.i|1h.7.2g.5.a.1.8|1h.7.2g.3.c.2.7|1h.5.2w.2.8|1h.4.2k.1.b.1.a|1i.4.2t.1.c|1i.3.2s.2.d|1i.3.37|1i.3.37|1j.2.37|1j.3.36|1l.2.35|4s|4s"};
+    var HUBS=[[36.82,-1.29,58,.95,1],[32.58,.35,34,.8,1],[30.06,-1.95,24,.8,1],[39.28,-6.8,28,.65,0],[34.8,-.1,26,.6,0],[3.38,6.52,34,.65,0],[-.19,5.6,22,.55,0],[1.2,6.2,16,.5,0],[28.04,-26.2,30,.55,0],[31.24,30.04,24,.5,0],[38.75,9.02,22,.5,0],[72.88,19.07,32,.5,0],[77.2,28.6,26,.45,0],[80.27,13.08,20,.45,0],[106.8,-6.2,26,.45,0],[100.5,13.75,22,.4,0],[121,14.6,18,.4,0],[-.12,51.5,24,.4,0],[2.35,48.86,18,.35,0],[-46.6,-23.5,28,.45,0],[-58.4,-34.6,18,.35,0],[-99.1,19.4,24,.4,0],[-74,40.7,22,.35,0],[-118.2,34.05,20,.3,0],[151.2,-33.9,18,.3,0]];
+    var NS='http://www.w3.org/2000/svg',S=LAND.S,h=S/2,rm=window.matchMedia('(prefers-reduced-motion: reduce)');
+    /* Natural Earth 1 projection, matching the grid */
+    function proj(lon,lat){var l=lon*Math.PI/180,p=lat*Math.PI/180,p2=p*p,p4=p2*p2;
+      var x=l*(.8707-.131979*p2+p4*(-.013791+p4*(.003971*p2-.001529*p4))),y=p*(1.007226+p2*(.015085+p4*(-.044475+.028874*p2-.005916*p4)));
+      return[LAND.tx+LAND.k*x,LAND.ty-LAND.k*y]}
+    var dots=[],d='';
+    LAND.enc.split('|').forEach(function(row,ri){var c=0,on=false;row.split('.').forEach(function(t){var n=parseInt(t,36);if(on)for(var i=0;i<n;i++){var x=(c+i)*S+h,y=(LAND.r0+ri)*S+h;dots.push([x,y]);d+='M'+x+' '+y+'h0'}c+=n;on=!on})});
+    document.getElementById('gm-land').setAttribute('d',d);
+    var seed=7;function rnd(){seed|=0;seed=seed+0x6D2B79F5|0;var t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}
+    var act=document.getElementById('gm-act'),hubs=document.getElementById('gm-hubs'),home=proj(HUBS[0][0],HUBS[0][1]),used={};
+    HUBS.forEach(function(H){var c=proj(H[0],H[1]),best=null,bd=1e9;
+      dots.forEach(function(p,i){var dx=p[0]-c[0],dy=p[1]-c[1],dist=Math.sqrt(dx*dx+dy*dy);if(dist<bd){bd=dist;best=p}
+        if(dist>H[2]||used[i])return;var f=1-dist/H[2];if(rnd()>H[3]*(.25+.75*f))return;used[i]=1;
+        var e=document.createElementNS(NS,'circle');e.setAttribute('cx',p[0]);e.setAttribute('cy',p[1]);e.setAttribute('r',(1.5+f*.9).toFixed(2));
+        e.style.setProperty('--o',(.5+.5*f*(.4+.6*rnd())).toFixed(2));
+        var hd=Math.hypot(p[0]-home[0],p[1]-home[1]);e.style.setProperty('--dl',(.2+hd/900*1.6+rnd()*.25).toFixed(2)+'s');
+        if(rnd()<.18){e.setAttribute('class','tw');e.style.setProperty('--tw',(2.6+rnd()*3).toFixed(1)+'s');e.style.setProperty('--td',(-rnd()*5).toFixed(1)+'s')}
+        act.appendChild(e)});
+      if(H[4]&&best){var g=document.createElementNS(NS,'g');g.setAttribute('class','gm-hub');g.setAttribute('transform','translate('+best[0]+' '+best[1]+')');
+        g.style.setProperty('--dl',(1.6+hubs.childNodes.length*.2).toFixed(2)+'s');
+        g.innerHTML=(hubs.childNodes.length===0?'<line class="gm-loc" x1="0" y1="-7" x2="0.01" y2="-70"/>':'')+'<circle class="gm-ring" r="3.4"/><circle class="gm-core" r="3.2"/>';hubs.appendChild(g)}
+    });
+    /* phones: frame Africa, Europe and Asia so the activity stays legible */
+    var svg=document.getElementById('gm-svg'),full=svg.getAttribute('viewBox'),mq=window.matchMedia('(max-width:767px)');
+    function frame(){svg.setAttribute('viewBox',mq.matches?'455 140 520 330':full)}frame();
+    if(mq.addEventListener)mq.addEventListener('change',frame);else if(mq.addListener)mq.addListener(frame);
+    /* reveal + count-up (numbers only; text like "[X]+" simply fades in) */
+    var val=sec.querySelector('.gm-stat-v');
+    function count(){var t=val.textContent,m=t.match(/^(\D*)([\d,.]+)(.*)$/);if(!m||rm.matches)return;var n=parseFloat(m[2].replace(/,/g,''));if(!isFinite(n)||n<10)return;
+      var dec=(m[2].split('.')[1]||'').length,comma=m[2].indexOf(',')>=0,t0=null;
+      function fmt(v){var s=v.toFixed(dec);if(comma)s=s.replace(/\B(?=(\d{3})+(?!\d))/g,',');return m[1]+s+m[3]}
+      function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/1800),e=1-Math.pow(1-k,3);val.textContent=fmt(n*e);if(k<1)requestAnimationFrame(step);else val.textContent=t}
+      requestAnimationFrame(step)}
+    sec.classList.add('js');
+    function go(){sec.classList.add('in');setTimeout(count,500)}
+    if(rm.matches||!('IntersectionObserver' in window))sec.classList.add('in');
+    else{var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();go()}},{threshold:.2});io.observe(sec)}
+  })();
+  </script>
 
   <section id="who" data-sec="Who it's for" data-sid="who" aria-labelledby="who-title">
     <div class="wrap who-head">
