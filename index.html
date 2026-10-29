@@ -363,36 +363,56 @@ p,h1,h2,h3,ul{margin:0}
 @media (max-width:560px){.spec-grid{grid-template-columns:1fr}.spec{padding:24px 22px 26px}}
 .step-n{font-size:.76rem;font-weight:600;letter-spacing:.12em;color:var(--mute)}
 
-/* audience grid: four full-bleed cards */
-.who-head{padding-block:clamp(56px,6vw,96px) clamp(40px,5vw,64px)}
 #does.sec{padding-bottom:clamp(32px,4vw,64px)}
-.who-head .sec-head{margin-bottom:0}
-.aud{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px;background:var(--ink)}
-.aud .bleed{min-height:clamp(380px,44vw,640px)}
-/* who it's for: soft, slow zoom on the card photo when hovered */
-@media (hover:hover) and (prefers-reduced-motion:no-preference){
-  .aud .bleed .photo{transition:transform 1.1s cubic-bezier(.22,.61,.36,1)}
-  .aud .bleed:hover .photo{transform:scale(1.045)}
-}
-.aud .wrap{max-width:none;display:grid;gap:10px;padding-left:clamp(24px,3vw,48px);padding-right:clamp(24px,3vw,48px)}
-.aud .shot{top:24px;right:24px}
-/* who it's for: a frosted-glass caption card on each photo, top-left on desktop, bottom on phones */
-.aud{counter-reset:who}
-.aud .bleed{counter-increment:who}
-.aud .bleed.has-media{--inset:clamp(16px,2.2vw,32px);align-items:flex-start}
-.aud .bleed.has-media::after{background:linear-gradient(180deg,rgba(11,26,28,0) 55%,rgba(11,26,28,.16) 100%)}
-.aud .bleed.has-media > .wrap{width:46%;max-width:400px;margin:var(--inset);padding:clamp(16px,1.5vw,22px) clamp(18px,1.7vw,26px) clamp(18px,1.6vw,24px);gap:8px;border-radius:18px;background:rgba(255,255,255,.64);border:1px solid rgba(255,255,255,.8);box-shadow:0 22px 44px -18px rgba(11,26,28,.35);-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3)}
-.aud > .bleed.has-media:nth-child(2) > .wrap{width:64%;max-width:560px}
-.aud > .bleed.has-media:nth-child(2) .mute{max-width:none}
-.aud .bleed.has-media > .wrap::before{content:counter(who,decimal-leading-zero);font-size:.72rem;font-weight:600;letter-spacing:.14em;color:var(--teal-deep)}
-.aud .bleed.has-media .h-item{color:var(--ink);font-size:clamp(1.25rem,1.95vw,1.8rem);line-height:1.08;letter-spacing:-.01em;text-wrap:balance}
-.aud .bleed.has-media .mute{color:#2A4143;font-size:clamp(.95rem,1.05vw,1.05rem);line-height:1.5;max-width:24ch}
-@media (max-width:760px){
-  .aud .bleed.has-media{min-height:calc(100vw * 1.125);align-items:flex-end}
-  .aud .bleed.has-media > .wrap,.aud > .bleed.has-media:nth-child(2) > .wrap{width:auto;max-width:none;flex:1;margin:16px}
-  .aud .bleed.has-media .mute{max-width:none}
-}
-@media (max-width:760px){.aud{grid-template-columns:1fr}}
+/* features: 2×2 product gallery on a cool off-white */
+.ft{background:#F4F5F5;color:#0B1A1C;padding-block:clamp(88px,10vw,160px)}
+.ft-head{display:flex;flex-direction:column;align-items:center;text-align:center;margin:0 auto clamp(48px,6vw,88px);max-width:900px}
+.ft-head .label{color:var(--teal-deep)}
+.ft-head .h-sec{margin-top:18px;color:#0B1A1C}
+.ft-sub{margin:18px auto 0;color:#56686A;max-width:44ch;text-wrap:balance}
+.ft-grid-wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(16px,2vw,28px)}
+.ft-card{display:flex;flex-direction:column;gap:clamp(20px,2.2vw,32px);padding:clamp(24px,3vw,44px) clamp(24px,3vw,44px) 0;border-radius:28px;background:#fff;overflow:hidden;transition:box-shadow .45s ease,transform .45s cubic-bezier(.2,.7,.2,1)}
+.ft-t{margin:0;font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:clamp(1.3rem,1.9vw,1.8rem);line-height:1.05;letter-spacing:-.01em;color:#0B1A1C}
+.ft-d{margin:10px 0 0;font-size:clamp(.98rem,1.1vw,1.08rem);line-height:1.5;color:#56686A;max-width:42ch;text-wrap:pretty}
+.ft-media{position:relative;aspect-ratio:4/3;margin-top:auto;border-radius:18px 18px 0 0;overflow:hidden;background:#0E1D1F}
+.ft-media > .photo{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.ft-media > .photo.fit-contain{object-fit:contain}
+.ft-media.has-media > .ft-fb{display:none}
+.ft-fb{position:absolute;inset:0;background:radial-gradient(80% 70% at 50% 45%,#13292B 0%,#0B1A1C 75%)}
+.ft-fb svg{display:block;width:100%;height:100%;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+@media (hover:hover){.ft-card:hover{transform:translateY(-3px);box-shadow:0 30px 60px -40px rgba(11,26,28,.35)}.ft-card:hover .ft-media > .photo,.ft-card:hover .ft-fb svg{transform:scale(1.025)}}
+/* fallback line drawings */
+.ft-zone{fill:rgba(20,184,166,.12)}
+.ft-zone-line{fill:none;stroke:#14B8A6;stroke-width:2;stroke-dasharray:7 6;stroke-linejoin:round}
+.ft-ping{fill:none;stroke:#14B8A6;stroke-width:1.5;transform-box:fill-box;transform-origin:center}
+.ft-route-bg{fill:none;stroke:rgba(163,182,183,.16);stroke-width:7;stroke-linecap:round}
+.ft-route{fill:none;stroke:#14B8A6;stroke-width:3;stroke-linecap:round}
+.ft-ring{fill:none;stroke:#14B8A6;stroke-width:1.2;opacity:0;transform-box:fill-box;transform-origin:center}
+.ft-scrub-fill{transform-box:fill-box;transform-origin:left center}
+.ft.live .ft-zone-line{animation:ftDash 6s linear infinite}
+.ft.live .ft-ping{animation:ftPing 2.6s ease-out infinite}
+.ft.live .ft-scrub-fill{animation:ftScrub 7s cubic-bezier(.45,0,.55,1) infinite}
+.ft.live .ft-ring{animation:ftRing 3.6s ease-out infinite}.ft.live .ft-ring.r2{animation-delay:1.2s}.ft.live .ft-ring.r3{animation-delay:2.4s}
+.ft.live .ft-led{animation:ftLed 1.8s ease-in-out infinite}
+.ft.live .ft-row{animation:ftRow 5s ease-in-out calc(var(--i) * .5s) infinite}
+@keyframes ftDash{to{stroke-dashoffset:-26}}
+@keyframes ftPing{0%{transform:scale(.6);opacity:.9}100%{transform:scale(3);opacity:0}}
+@keyframes ftScrub{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes ftRing{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.6);opacity:0}}
+@keyframes ftLed{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes ftRow{0%,80%,100%{opacity:1}90%{opacity:.55}}
+.ft-car{display:none}.ft.live .ft-car{display:block}
+/* entry */
+.ft.js .ft-head .ft-a{opacity:0;transform:translateY(14px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.ft.js .ft-head .ft-a:nth-child(2){transition-delay:.08s}.ft.js .ft-head .ft-a:nth-child(3){transition-delay:.18s}
+.ft.js .ft-head.in .ft-a{opacity:1;transform:none}
+.ft.js .ft-card{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.7,.2,1) calc(var(--i) % 2 * .12s),transform .9s cubic-bezier(.2,.7,.2,1) calc(var(--i) % 2 * .12s),box-shadow .45s ease}
+.ft.js .ft-card.in{opacity:1;transform:none}
+.ft.js.in .ft-a,.ft.js.in .ft-card{opacity:1;transform:none}
+@media (hover:hover){.ft.js .ft-card.in:hover{transform:translateY(-3px)}}
+@media (prefers-reduced-motion:reduce){.ft *{animation:none!important;transition:none!important}.ft-car{display:none!important}}
+@media (max-width:860px){.ft-grid-wrap{grid-template-columns:1fr}.ft-card{max-width:620px;width:100%;margin-inline:auto}}
+@media (max-width:767px){.ft{padding-block:72px}.ft-card{border-radius:22px;padding:24px 22px 0}.ft-media{border-radius:14px 14px 0 0}}
 .gap-top{margin-top:2px}
 
 /* footer: Figure-style — wordmark + sign-up left, big numbered menu right, blurred photo behind */
@@ -644,7 +664,7 @@ p,h1,h2,h3,ul{margin:0}
       <ul>
         <li><a href="#how" data-k="nav.1" data-l="Menu link 1">How it works</a></li>
         <li><a href="#explorer" data-k="nav.2" data-l="Menu link 2">Explorer</a></li>
-        <li><a href="#who" data-k="nav.3" data-l="Menu link 3">Who it's for</a></li>
+        <li><a href="#features" data-k="nav.3" data-l="Menu link 3">Features</a></li>
       </ul>
     </nav>
     <a class="btn" href="https://dev.canopy.roam-electric.com/pricing#lead-request-form" data-k="nav.cta" data-l="Header button" data-hk="link.demo" data-hl="Book a demo button (all)">Book a demo</a>
@@ -1129,36 +1149,48 @@ p,h1,h2,h3,ul{margin:0}
   </section>
 
 
-  <section id="who" data-sec="Who it's for" data-sid="who" aria-labelledby="who-title">
-    <div class="wrap who-head">
-      <div class="sec-head">
-        <p class="label" data-k="who.label" data-l="Small label">Who it's for</p>
-        <h2 id="who-title" class="h-sec" data-k="who.title" data-l="Headline">Made for everyone who keeps electric fleets moving.</h2>
+  <!-- Features: four Canopy capabilities in a 2×2 product gallery, each with an editable image / video holder -->
+  <section id="features" class="ft" data-sec="Features" data-sid="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <div class="ft-head">
+        <p class="label ft-a" data-k="ft.label" data-l="Small label">Built for daily operations</p>
+        <h2 id="features-title" class="h-sec ft-a" data-k="ft.title" data-l="Headline">More than a dot on a map.</h2>
+        <p class="lede ft-sub ft-a" data-k="ft.sub" data-l="Subheadline">The tools behind every vehicle, battery and journey.</p>
+      </div>
+      <div class="ft-grid-wrap">
+        <article class="ft-card" style="--i:0">
+          <div class="ft-text"><h3 class="ft-t" data-k="ft.1.t" data-l="Feature 1 title">Geofencing</h3><p class="ft-d" data-k="ft.1.d" data-l="Feature 1 text">Set boundaries. Know when vehicles enter or leave.</p></div>
+          <div class="ft-media" data-slot="ft-geo" data-slot-l="Geofencing — image / video (4:3)" data-slot-hint="A Canopy screen showing geofencing, 2400 × 1800 px (4:3). Videos loop muted." data-fit-option data-lazy data-slot-empty="Nothing uploaded yet. The site shows a simple teal line drawing until you add one."><div class="ft-fb" aria-hidden="true"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><g class="ft-grid" stroke="rgba(163,182,183,.07)" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M0 250H400M50 0V300M100 0V300M150 0V300M200 0V300M250 0V300M300 0V300M350 0V300"/></g><path d="M-10 214C70 196 120 232 196 206S330 150 410 170" fill="none" stroke="rgba(163,182,183,.16)" stroke-width="5"/><path d="M118 -10C140 80 128 170 160 310" fill="none" stroke="rgba(163,182,183,.12)" stroke-width="4"/><path class="ft-zone" d="M122 92L238 70L300 136L262 226L150 232L104 160Z"/><path class="ft-zone-line" d="M122 92L238 70L300 136L262 226L150 232L104 160Z"/><g fill="#EAF2F1"><circle cx="170" cy="130" r="4"/><circle cx="214" cy="112" r="4"/><circle cx="238" cy="172" r="4"/><circle cx="182" cy="196" r="4"/></g><circle class="ft-ping" cx="318" cy="196" r="6"/><circle cx="318" cy="196" r="4.5" fill="#14B8A6"/></svg></div></div>
+        </article>
+        <article class="ft-card" style="--i:1">
+          <div class="ft-text"><h3 class="ft-t" data-k="ft.2.t" data-l="Feature 2 title">Trip history</h3><p class="ft-d" data-k="ft.2.d" data-l="Feature 2 text">Replay journeys. Understand every route.</p></div>
+          <div class="ft-media" data-slot="ft-trip" data-slot-l="Trip history — image / video (4:3)" data-slot-hint="A Canopy screen showing trip history, 2400 × 1800 px (4:3). Videos loop muted." data-fit-option data-lazy data-slot-empty="Nothing uploaded yet. The site shows a simple teal line drawing until you add one."><div class="ft-fb" aria-hidden="true"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><g class="ft-grid" stroke="rgba(163,182,183,.07)" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M0 250H400M50 0V300M100 0V300M150 0V300M200 0V300M250 0V300M300 0V300M350 0V300"/></g><path class="ft-route-bg" d="M64 222C96 222 104 160 146 156S198 206 238 196 262 110 300 104 338 84 344 70"/><path id="ft-route" class="ft-route" d="M64 222C96 222 104 160 146 156S198 206 238 196 262 110 300 104 338 84 344 70" pathLength="1"/><circle cx="64" cy="222" r="7" fill="none" stroke="#EAF2F1" stroke-width="2"/><circle cx="344" cy="70" r="6" fill="#14B8A6"/><circle class="ft-car" r="5" fill="#fff"><animateMotion dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines=".45 0 .55 1"><mpath href="#ft-route"/></animateMotion></circle><g class="ft-scrub"><rect x="64" y="262" width="280" height="3" rx="1.5" fill="rgba(163,182,183,.22)"/><rect class="ft-scrub-fill" x="64" y="262" width="280" height="3" rx="1.5" fill="#14B8A6"/></g></svg></div></div>
+        </article>
+        <article class="ft-card" style="--i:2">
+          <div class="ft-text"><h3 class="ft-t" data-k="ft.3.t" data-l="Feature 3 title">Device health</h3><p class="ft-d" data-k="ft.3.d" data-l="Feature 3 text">See connectivity and device status at a glance.</p></div>
+          <div class="ft-media" data-slot="ft-dev" data-slot-l="Device health — image / video (4:3)" data-slot-hint="A Canopy screen showing device health, 2400 × 1800 px (4:3). Videos loop muted." data-fit-option data-lazy data-slot-empty="Nothing uploaded yet. The site shows a simple teal line drawing until you add one."><div class="ft-fb" aria-hidden="true"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><g class="ft-grid" stroke="rgba(163,182,183,.07)" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M0 250H400M50 0V300M100 0V300M150 0V300M200 0V300M250 0V300M300 0V300M350 0V300"/></g><circle class="ft-ring r1" cx="200" cy="146" r="38"/><circle class="ft-ring r2" cx="200" cy="146" r="38"/><circle class="ft-ring r3" cx="200" cy="146" r="38"/><rect x="172" y="122" width="56" height="48" rx="10" fill="#0B1A1C" stroke="#14B8A6" stroke-width="2"/><path d="M186 156v-6M194 156v-10M202 156v-14M210 156v-18" stroke="#EAF2F1" stroke-width="3" stroke-linecap="round"/><circle cx="218" cy="132" r="3" fill="#14B8A6" class="ft-led"/><g class="ft-status"><circle cx="150" cy="238" r="4" fill="#14B8A6"/><circle cx="180" cy="238" r="4" fill="#14B8A6"/><circle cx="210" cy="238" r="4" fill="#14B8A6"/><circle cx="240" cy="238" r="4" fill="rgba(163,182,183,.4)"/><circle cx="270" cy="238" r="4" fill="#14B8A6"/></g></svg></div></div>
+        </article>
+        <article class="ft-card" style="--i:3">
+          <div class="ft-text"><h3 class="ft-t" data-k="ft.4.t" data-l="Feature 4 title">Asset management</h3><p class="ft-d" data-k="ft.4.d" data-l="Feature 4 text">Keep vehicles and batteries organized.</p></div>
+          <div class="ft-media" data-slot="ft-asset" data-slot-l="Asset management — image / video (4:3)" data-slot-hint="A Canopy screen showing asset management, 2400 × 1800 px (4:3). Videos loop muted." data-fit-option data-lazy data-slot-empty="Nothing uploaded yet. The site shows a simple teal line drawing until you add one."><div class="ft-fb" aria-hidden="true"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><g class="ft-grid" stroke="rgba(163,182,183,.07)" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M0 250H400M50 0V300M100 0V300M150 0V300M200 0V300M250 0V300M300 0V300M350 0V300"/></g><g class="ft-row" style="--i:0"><rect x="76" y="58" width="248" height="32" rx="9" fill="rgba(234,242,241,.06)" stroke="rgba(163,182,183,.14)"/><circle cx="96" cy="74" r="8" fill="none" stroke="#14B8A6" stroke-width="1.6"/><rect x="114" y="70" width="92" height="4" rx="2" fill="rgba(234,242,241,.55)"/><rect x="114" y="78" width="52" height="3" rx="1.5" fill="rgba(163,182,183,.3)"/><rect x="270" y="69" width="38" height="10" rx="5" fill="rgba(20,184,166,.22)"/><circle cx="278" cy="74" r="2.5" fill="#14B8A6"/></g><g class="ft-row" style="--i:1"><rect x="76" y="100" width="248" height="32" rx="9" fill="rgba(234,242,241,.06)" stroke="rgba(163,182,183,.14)"/><circle cx="96" cy="116" r="8" fill="none" stroke="#14B8A6" stroke-width="1.6"/><rect x="114" y="112" width="74" height="4" rx="2" fill="rgba(234,242,241,.55)"/><rect x="114" y="120" width="64" height="3" rx="1.5" fill="rgba(163,182,183,.3)"/><rect x="270" y="111" width="38" height="10" rx="5" fill="rgba(20,184,166,.22)"/><circle cx="278" cy="116" r="2.5" fill="#14B8A6"/></g><g class="ft-row" style="--i:2"><rect x="76" y="142" width="248" height="32" rx="9" fill="rgba(234,242,241,.06)" stroke="rgba(163,182,183,.14)"/><circle cx="96" cy="158" r="8" fill="none" stroke="#14B8A6" stroke-width="1.6"/><rect x="114" y="154" width="108" height="4" rx="2" fill="rgba(234,242,241,.55)"/><rect x="114" y="162" width="40" height="3" rx="1.5" fill="rgba(163,182,183,.3)"/><rect x="270" y="153" width="38" height="10" rx="5" fill="rgba(163,182,183,.18)"/><circle cx="278" cy="158" r="2.5" fill="#A3B6B7"/></g><g class="ft-row" style="--i:3"><rect x="76" y="184" width="248" height="32" rx="9" fill="rgba(234,242,241,.06)" stroke="rgba(163,182,183,.14)"/><circle cx="96" cy="200" r="8" fill="none" stroke="#14B8A6" stroke-width="1.6"/><rect x="114" y="196" width="66" height="4" rx="2" fill="rgba(234,242,241,.55)"/><rect x="114" y="204" width="58" height="3" rx="1.5" fill="rgba(163,182,183,.3)"/><rect x="270" y="195" width="38" height="10" rx="5" fill="rgba(20,184,166,.22)"/><circle cx="278" cy="200" r="2.5" fill="#14B8A6"/></g><g class="ft-row" style="--i:4"><rect x="76" y="226" width="248" height="32" rx="9" fill="rgba(234,242,241,.06)" stroke="rgba(163,182,183,.14)"/><circle cx="96" cy="242" r="8" fill="none" stroke="#14B8A6" stroke-width="1.6"/><rect x="114" y="238" width="86" height="4" rx="2" fill="rgba(234,242,241,.55)"/><rect x="114" y="246" width="46" height="3" rx="1.5" fill="rgba(163,182,183,.3)"/><rect x="270" y="237" width="38" height="10" rx="5" fill="rgba(20,184,166,.22)"/><circle cx="278" cy="242" r="2.5" fill="#14B8A6"/></g></svg></div></div>
+        </article>
       </div>
     </div>
-    <div class="aud">
-      <article class="bleed has-media" data-slot="who1" data-slot-l="Card 1 · Lenders" data-default-media="images/who-lenders.webp">
-        <canvas data-seed="5101" aria-hidden="true"></canvas>
-        <picture class="default-pic"><img class="photo" src="images/who-lenders.webp" alt="A financier reviews documents beside a laptop, with electric scooters visible through the office window" width="1920" height="2160" loading="lazy"></picture>
-        <div class="wrap"><h3 class="h-item" data-k="who.1.t" data-l="Card 1 title">Lenders and financiers</h3><p class="mute" data-k="who.1.d" data-l="Card 1 text">Know the asset behind every loan.</p></div>
-      </article>
-      <article class="bleed has-media" data-slot="who2" data-slot-l="Card 2 · Fleets" data-default-media="images/who-fleets.webp">
-        <canvas data-seed="6229" aria-hidden="true"></canvas>
-        <picture class="default-pic"><img class="photo" src="images/who-fleets.webp" alt="A fleet manager checks a tablet beside a rider on an electric scooter at a depot, with a row of parked scooters in the foreground" width="1920" height="2160" loading="lazy"></picture>
-        <div class="wrap"><h3 class="h-item" data-k="who.2.t" data-l="Card 2 title">Fleet and delivery operators</h3><p class="mute" data-k="who.2.d" data-l="Card 2 text">One map for every vehicle, every brand.</p></div>
-      </article>
-      <article class="bleed has-media" data-slot="who3" data-slot-l="Card 3 · Vehicle makers" data-default-media="images/who-makers.webp">
-        <canvas data-seed="7351" aria-hidden="true"></canvas>
-        <picture class="default-pic"><img class="photo" src="images/who-makers.webp" alt="A technician kneels to work on an electric motorcycle's battery bay on a service stand in a workshop" width="1920" height="2160" loading="lazy"></picture>
-        <div class="wrap"><h3 class="h-item" data-k="who.3.t" data-l="Card 3 title">Vehicle makers</h3><p class="mute" data-k="who.3.d" data-l="Card 3 text">Back your battery warranty with real data.</p></div>
-      </article>
-      <article class="bleed has-media" data-slot="who4" data-slot-l="Card 4 · Swap networks" data-default-media="images/who-swap.webp">
-        <canvas data-seed="8461" aria-hidden="true"></canvas>
-        <picture class="default-pic"><img class="photo" src="images/who-swap.webp" alt="A rider in a helmet hands off a battery pack to an attendant at a battery-swap cabinet, with her scooter parked nearby" width="1920" height="2160" loading="lazy"></picture>
-        <div class="wrap"><h3 class="h-item" data-k="who.4.t" data-l="Card 4 title">Battery-swap networks</h3><p class="mute" data-k="who.4.d" data-l="Card 4 text">Track every battery, not just every bike.</p></div>
-      </article>
-    </div>
   </section>
+  <script>
+  /* Features: reveal on scroll; animations and uploaded videos only run while the section is on screen */
+  (function(){
+    var sec=document.getElementById('features');if(!sec)return;
+    var rm=window.matchMedia('(prefers-reduced-motion: reduce)');
+    sec.classList.add('js');
+    function vids(on){[].forEach.call(sec.querySelectorAll('.ft-media video'),function(v){if(on&&!rm.matches){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})}
+    if(rm.matches||!('IntersectionObserver' in window)){sec.classList.add('in');return}
+    var head=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');head.unobserve(e.target)}})},{threshold:.2});
+    head.observe(sec.querySelector('.ft-head'));[].forEach.call(sec.querySelectorAll('.ft-card'),function(c){head.observe(c)});
+    new IntersectionObserver(function(es){var on=es[0].isIntersecting;sec.classList.toggle('live',on);vids(on)}).observe(sec);
+    document.addEventListener('canopy:media',function(){vids(sec.classList.contains('live'))});
+  })();
+  </script>
 
   <section id="film" class="bleed band light gap-top has-media" data-sec="Built for the worst day" data-sid="worst" data-slot="worst" data-slot-l="Section background" data-default-media="images/worst-day.webp" aria-labelledby="worst-title">
     <canvas data-seed="9173" aria-hidden="true"></canvas>
@@ -1280,7 +1312,7 @@ p,h1,h2,h3,ul{margin:0}
       <ol>
         <li><a href="#how"><span class="n">01</span><span class="t" data-k="foot.n1" data-l="Menu item 1">How it works</span></a></li>
         <li><a href="#explorer"><span class="n">02</span><span class="t" data-k="foot.n2" data-l="Menu item 2">Explorer</span></a></li>
-        <li><a href="#who"><span class="n">03</span><span class="t" data-k="foot.n3" data-l="Menu item 3">Who it's for</span></a></li>
+        <li><a href="#features"><span class="n">03</span><span class="t" data-k="foot.n3" data-l="Menu item 3">Features</span></a></li>
         <li><a href="#film"><span class="n">04</span><span class="t" data-k="foot.n4" data-l="Menu item 4">The film</span></a></li>
         <li><a href="https://dev.canopy.roam-electric.com/pricing#lead-request-form" data-hk="link.demo"><span class="n">05</span><span class="t" data-k="foot.n5" data-l="Menu item 5">Book a demo</span></a></li>
       </ol>
@@ -1421,7 +1453,7 @@ p,h1,h2,h3,ul{margin:0}
       else if(ctl){el.controls=true;el.loop=true;el.preload='metadata'}
       else{el.loop=true;if(!reduceMotion){el.autoplay=true;el.setAttribute('autoplay','')}}
       el.src=src;if(alt)el.setAttribute('aria-label',alt);
-    }else{el=document.createElement('img');el.src=src;el.alt=alt||'';el.decoding='async';if(ctl&&!forAdmin)el.loading='lazy'}
+    }else{el=document.createElement('img');el.src=src;el.alt=alt||'';el.decoding='async';if((ctl||(slotEl&&slotEl.hasAttribute('data-lazy')))&&!forAdmin)el.loading='lazy'}
     if(m.fit==='contain')el.classList.add('fit-contain');
     return el;
   }
