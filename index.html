@@ -307,14 +307,36 @@ p,h1,h2,h3,ul{margin:0}
 .gm-foot{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:720px;margin:clamp(-96px,-4.6vw,-28px) auto 0;padding-inline:16px}
 .gm-copy{display:flex;flex-direction:column;align-items:center}
 .gm-eyebrow{margin:0;font-size:clamp(.74rem,.95vw,.9rem);font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:#2EC8B6}
-.gm-title{margin:clamp(14px,1.3vw,20px) 0 0;font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:var(--h-size);line-height:1.02;letter-spacing:-.01em;color:#fff}
+.gm-title{margin:clamp(14px,1.3vw,20px) auto 0;color:#fff}
 .gm-title span{display:block}
 .gm-lede{margin:clamp(12px,1.2vw,18px) auto 0;max-width:34ch;color:#D3DCDB;font-size:clamp(.98rem,1.15vw,1.15rem);line-height:1.55}
 .gm-stat{margin-top:clamp(32px,3.4vw,52px);display:flex;flex-direction:column;align-items:center}
 .gm-stat-l{display:flex;align-items:center;gap:16px;margin:0;font-size:clamp(.74rem,.95vw,.9rem);font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:#D5DFDE}
 .gm-stat-l i{width:8px;height:8px;border-radius:50%;background:#2EE6CF;box-shadow:0 0 8px rgba(46,230,207,.75);animation:gmLive 2.4s ease-in-out infinite}
 @keyframes gmLive{0%,100%{opacity:1}50%{opacity:.3}}
-.gm-stat-v{margin:clamp(10px,1.2vw,18px) 0 0;font-family:var(--f-head);font-weight:800;font-size:clamp(2.4rem,3.9vw,4rem);line-height:1;letter-spacing:-.01em;color:#fff;font-variant-numeric:tabular-nums}
+.gm-stat-v{margin:clamp(10px,1.2vw,18px) 0 0;font-family:var(--f-head);font-weight:800;font-size:var(--h-size);line-height:1;letter-spacing:-.02em;color:#fff;font-variant-numeric:tabular-nums}
+.gm-hub{cursor:pointer}
+.gm-hb{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.gm-hub *{pointer-events:none}
+.gm-hub .gm-hit{fill:transparent;pointer-events:all}
+.gm-hub.on .gm-r1,.gm-hub.on .gm-r2,.gm-hub.on .gm-r3{opacity:1}
+.gm-hub.on .gm-hglow{animation:none;opacity:1}
+.gm-hub.on .gm-beam{stroke-width:2}
+.gm-hub .gm-hb>*{transition:opacity .3s ease}
+.gm-hub.on .gm-core{fill:#2EE6CF;stroke:#fff}
+.gm-spot{opacity:0;transition:opacity .5s ease;filter:brightness(1.6) drop-shadow(0 0 2px rgba(255,248,232,.9))}
+.gm.spot .gm-spot{opacity:1}
+.gm-arc{fill:none;stroke:rgba(46,230,207,.45);stroke-width:.9;stroke-dasharray:1;stroke-dashoffset:1;animation:gmArc 3.2s ease-in-out forwards}
+.gm-arc-dot{fill:none;stroke:#B6FFF5;stroke-width:2.2;stroke-linecap:round;stroke-dasharray:.04 1;stroke-dashoffset:.04;filter:drop-shadow(0 0 2px rgba(46,230,207,.9));animation:gmArcDot 3.2s ease-in-out forwards}
+@keyframes gmArc{0%{stroke-dashoffset:1;opacity:1}45%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes gmArcDot{0%{stroke-dashoffset:.04;opacity:1}55%{stroke-dashoffset:-1;opacity:1}56%,100%{opacity:0;stroke-dashoffset:-1}}
+.gm-tip{position:absolute;z-index:3;transform:translate(-50%,calc(-100% - 22px)) translateY(6px);opacity:0;transition:opacity .25s ease,transform .25s ease;pointer-events:none;display:grid;gap:2px;min-width:140px;padding:10px 14px 11px;border-radius:12px;background:rgba(9,18,19,.82);border:1px solid rgba(46,230,207,.35);box-shadow:0 18px 40px -18px rgba(0,0,0,.8),0 0 24px -8px rgba(46,230,207,.35);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);text-align:left;white-space:nowrap}
+.gm-tip.in{opacity:1;transform:translate(-50%,calc(-100% - 22px))}
+.gm-tip[hidden]{display:none}
+.gm-tip-c{font-family:var(--f-head);font-weight:800;font-size:.92rem;letter-spacing:.01em;text-transform:uppercase;color:#fff}
+.gm-tip-n{font-size:.78rem;color:#A3B6B7}
+.gm-tip-s{display:inline-flex;align-items:center;gap:7px;margin-top:4px;font-size:.66rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#2EE6CF}
+.gm-tip-s i{width:6px;height:6px;border-radius:50%;background:#2EE6CF;box-shadow:0 0 6px rgba(46,230,207,.9);animation:gmLive 1.6s ease-in-out infinite}
 /* entry */
 .gm.js .gm-land,.gm.js .gm-l,.gm.js .gm-tw,.gm.js .gm-hub{opacity:0}
 .gm.js .gm-land{transition:opacity 1.2s ease}
@@ -1150,11 +1172,11 @@ p,h1,h2,h3,ul{margin:0}
 
   <!-- Global view: night-lights world map (Miller projection, country borders), teal hub beacons, framed with crosshairs -->
   <section id="global" class="gm" data-sec="Global view" data-sid="global" aria-labelledby="global-title">
-    <div class="gm-map" aria-hidden="true"><svg id="gm-svg" viewBox="0 0 1200 585" preserveAspectRatio="xMidYMid meet"><defs><radialGradient id="gm-gt"><stop offset="0" stop-color="#2EE6CF" stop-opacity=".5"/><stop offset=".45" stop-color="#14B8A6" stop-opacity=".14"/><stop offset="1" stop-color="#14B8A6" stop-opacity="0"/></radialGradient><linearGradient id="gm-beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2EE6CF" stop-opacity="0"/><stop offset=".55" stop-color="#2EE6CF" stop-opacity=".45"/><stop offset="1" stop-color="#7FF5E6" stop-opacity="1"/></linearGradient></defs><image class="gm-land" href="images/world-land.svg" width="1200" height="585"/><image class="gm-l gm-l2" href="images/world-lights-2.svg" width="1200" height="585"/><image class="gm-l gm-l1" href="images/world-lights-1.svg" width="1200" height="585"/><image class="gm-l gm-l0" href="images/world-lights-0.svg" width="1200" height="585"/><g class="gm-tw" id="gm-tw"></g><g class="gm-hubs" id="gm-hubs"></g></svg></div>
+    <div class="gm-map"><div class="gm-tip" id="gm-tip" role="status" aria-live="polite" hidden><span class="gm-tip-c"></span><span class="gm-tip-n"></span><span class="gm-tip-s"><i></i>Live</span></div><svg id="gm-svg" aria-hidden="true" viewBox="0 0 1200 585" preserveAspectRatio="xMidYMid meet"><defs><radialGradient id="gm-spotg"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><mask id="gm-spotm" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="585"><circle id="gm-spotc" cx="-200" cy="-200" r="95" fill="url(#gm-spotg)"/></mask><linearGradient id="gm-arcg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2EE6CF" stop-opacity="0"/><stop offset=".5" stop-color="#2EE6CF" stop-opacity=".9"/><stop offset="1" stop-color="#2EE6CF" stop-opacity="0"/></linearGradient><radialGradient id="gm-gt"><stop offset="0" stop-color="#2EE6CF" stop-opacity=".5"/><stop offset=".45" stop-color="#14B8A6" stop-opacity=".14"/><stop offset="1" stop-color="#14B8A6" stop-opacity="0"/></radialGradient><linearGradient id="gm-beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2EE6CF" stop-opacity="0"/><stop offset=".55" stop-color="#2EE6CF" stop-opacity=".45"/><stop offset="1" stop-color="#7FF5E6" stop-opacity="1"/></linearGradient></defs><image class="gm-land" href="images/world-land.svg" width="1200" height="585"/><image class="gm-l gm-l2" href="images/world-lights-2.svg" width="1200" height="585"/><image class="gm-l gm-l1" href="images/world-lights-1.svg" width="1200" height="585"/><image class="gm-l gm-l0" href="images/world-lights-0.svg" width="1200" height="585"/><g class="gm-spot" mask="url(#gm-spotm)"><image href="images/world-lights-1.svg" width="1200" height="585"/><image href="images/world-lights-0.svg" width="1200" height="585"/></g><g class="gm-arcs" id="gm-arcs"></g><g class="gm-tw" id="gm-tw"></g><g class="gm-hubs" id="gm-hubs"></g></svg></div>
     <div class="gm-foot">
       <div class="gm-copy">
         <p class="gm-eyebrow gm-a" style="--d:0s" data-k="gm.label" data-l="Small label">Global view</p>
-        <h2 id="global-title" class="gm-title gm-a" style="--d:.08s"><span data-k="gm.title.1" data-l="Headline line 1">One fleet.</span> <span data-k="gm.title.2" data-l="Headline line 2">One live map.</span></h2>
+        <h2 id="global-title" class="h-sec gm-title gm-a" style="--d:.08s"><span data-k="gm.title.1" data-l="Headline line 1">One fleet.</span> <span data-k="gm.title.2" data-l="Headline line 2">One live map.</span></h2>
         <p class="gm-lede gm-a" style="--d:.24s" data-k="gm.sub" data-l="Supporting text">See vehicles, batteries and activity across your network in real time.</p>
       </div>
       <div class="gm-stat gm-a" style="--d:.4s">
@@ -1168,15 +1190,40 @@ p,h1,h2,h3,ul{margin:0}
      HUBS: [x, y, beam height] in map units — the seven teal beacons. */
   (function(){
     var sec=document.getElementById('global');if(!sec)return;
-    var HUBS=[[206, 255.8, 97], [345, 224.2, 79], [617.3, 186.4, 108], [894.5, 297.3, 68], [471.7, 417.3, 83], [693.5, 463.2, 57], [1104, 491.3, 61]],TW=[[662.2,200.9],[728.7,394.3],[865.6,329.4],[823.5,287.2],[981.1,284.8],[206.2,253.2],[748.7,257],[1001,272.1],[349.8,231],[641.4,182.3],[416.8,439.4],[442.3,447.8],[984.6,369.6],[976.3,247.9],[992,232.6],[313,255.9],[596.6,186.5],[1103.3,489.8],[353.6,230.4],[938.4,296.4],[248.5,216.6],[588.2,231.8],[869.7,299.7],[598.3,354.1],[957.2,394.3],[572.1,274.3],[601.2,187.6],[880.1,283.7],[837.7,275.7],[268.4,192],[694.6,227.4],[956.1,338.3],[1035.2,258.1],[1175.8,527.4],[639.4,333.9],[614.2,192.3],[980.5,254.9],[981.2,294.9],[274.3,260.1],[977.6,397.2],[756.6,289.6],[698.3,190.8],[662.1,489],[887.3,264.6],[957.5,272.4],[865.5,303.1],[655.3,196.8],[749.9,258.9],[939.6,363.5],[202.3,254.2],[861.8,315.4],[688.2,194.4],[999.7,270.3],[617,188.1],[710.2,233.5],[311.8,227.5],[353.6,230.4],[953.8,302.6],[354.2,218],[933,324.6]];
+    var HUBS=[[205.9,255.8,97,"Los Angeles","United States"],[353.3,230.2,79,"New York","United States"],[616.3,181.2,108,"Amsterdam","Netherlands"],[894.5,297.3,68,"Kolkata","India"],[471.7,417.3,83,"Salvador","Brazil"],[693.5,463.2,57,"Johannesburg","South Africa"],[1104,491.2,61,"Sydney","Australia"],[722.7,378.1,118,"Nairobi","Kenya",.62],[708.6,372.7,78,"Kampala","Uganda",.62],[730.9,396.5,62,"Dar es Salaam","Tanzania",.62]],TW=[[662.2,200.9],[728.7,394.3],[865.6,329.4],[823.5,287.2],[981.1,284.8],[206.2,253.2],[748.7,257],[1001,272.1],[349.8,231],[641.4,182.3],[416.8,439.4],[442.3,447.8],[984.6,369.6],[976.3,247.9],[992,232.6],[313,255.9],[596.6,186.5],[1103.3,489.8],[353.6,230.4],[938.4,296.4],[248.5,216.6],[588.2,231.8],[869.7,299.7],[598.3,354.1],[957.2,394.3],[572.1,274.3],[601.2,187.6],[880.1,283.7],[837.7,275.7],[268.4,192],[694.6,227.4],[956.1,338.3],[1035.2,258.1],[1175.8,527.4],[639.4,333.9],[614.2,192.3],[980.5,254.9],[981.2,294.9],[274.3,260.1],[977.6,397.2],[756.6,289.6],[698.3,190.8],[662.1,489],[887.3,264.6],[957.5,272.4],[865.5,303.1],[655.3,196.8],[749.9,258.9],[939.6,363.5],[202.3,254.2],[861.8,315.4],[688.2,194.4],[999.7,270.3],[617,188.1],[710.2,233.5],[311.8,227.5],[353.6,230.4],[953.8,302.6],[354.2,218],[933,324.6]];
     var NS='http://www.w3.org/2000/svg',rm=window.matchMedia('(prefers-reduced-motion: reduce)');
     var tw=document.getElementById('gm-tw');
     TW.forEach(function(t,i){var c=document.createElementNS(NS,'circle');c.setAttribute('cx',t[0]);c.setAttribute('cy',t[1]);c.setAttribute('r','1.2');c.style.setProperty('--tw',(2.2+(i%7)*.55).toFixed(2)+'s');c.style.setProperty('--td',(-(i*.71)%5).toFixed(2)+'s');tw.appendChild(c)});
     var hb=document.getElementById('gm-hubs');
-    HUBS.forEach(function(h,i){var g=document.createElementNS(NS,'g');g.setAttribute('class','gm-hub');g.setAttribute('transform','translate('+h[0]+' '+h[1]+')');
-      g.style.setProperty('--dl',(1.6+i*.18).toFixed(2)+'s');g.style.setProperty('--ph',(-(i*.47)).toFixed(2)+'s');
-      g.innerHTML='<circle class="gm-hglow" r="34" fill="url(#gm-gt)"/><line class="gm-beam" x1="0" y1="-4" x2="0.01" y2="'+(-h[2])+'" pathLength="1"/><circle class="gm-pulse" r="14"/><circle class="gm-r3" r="13.5"/><circle class="gm-r2" r="9.2"/><circle class="gm-r1" r="5.4"/><circle class="gm-core" r="2.6"/>';
-      hb.appendChild(g)});
+    var hubEls=[];
+    HUBS.forEach(function(h,i){var g=document.createElementNS(NS,'g'),sc=h[5]||1;g.setAttribute('class','gm-hub');g.setAttribute('transform','translate('+h[0]+' '+h[1]+')');
+      g.style.setProperty('--dl',(1.6+i*.16).toFixed(2)+'s');g.style.setProperty('--ph',(-(i*.47)).toFixed(2)+'s');
+      g.innerHTML='<line class="gm-beam" x1="0" y1="-4" x2="0.01" y2="'+(-h[2])+'" pathLength="1"/><g class="gm-hb" transform="scale('+sc+')"><circle class="gm-hglow" r="34" fill="url(#gm-gt)"/><circle class="gm-pulse" r="14"/><circle class="gm-r3" r="13.5"/><circle class="gm-r2" r="9.2"/><circle class="gm-r1" r="5.4"/><circle class="gm-core" r="2.6"/><circle class="gm-hit" r="18"/></g>';
+      hb.appendChild(g);hubEls.push(g)});
+    /* lively: data pulses travel along faint arcs from East Africa to the other hubs, a few at a time */
+    var arcs=document.getElementById('gm-arcs'),svgEl=document.getElementById('gm-svg'),EA=[7,8,9];
+    function arc(a,b){var x1=a[0],y1=a[1],x2=b[0],y2=b[1],mx=(x1+x2)/2,my=(y1+y2)/2,d=Math.hypot(x2-x1,y2-y1);return'M'+x1+' '+y1+' Q'+mx.toFixed(1)+' '+(my-d*.28).toFixed(1)+' '+x2+' '+y2}
+    function fire(from,to){var p=document.createElementNS(NS,'path');p.setAttribute('d',arc(HUBS[from],HUBS[to]));p.setAttribute('class','gm-arc');p.setAttribute('pathLength','1');arcs.appendChild(p);
+      var q=document.createElementNS(NS,'path');q.setAttribute('d',p.getAttribute('d'));q.setAttribute('class','gm-arc-dot');q.setAttribute('pathLength','1');arcs.appendChild(q);
+      setTimeout(function(){p.remove();q.remove()},3200)}
+    var timer=null,onScreen=false;
+    function loop(){if(!onScreen||document.hidden)return;var f=EA[Math.floor(Math.random()*3)],t=Math.floor(Math.random()*7);fire(f,t);timer=setTimeout(loop,1500+Math.random()*1400)}
+    /* hover: a soft spotlight brightens the lights under the cursor; beacons show their city */
+    var spot=document.getElementById('gm-spotc'),tip=document.getElementById('gm-tip'),mapEl=sec.querySelector('.gm-map'),active=null;
+    function toMap(e){var pt=svgEl.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;var m=svgEl.getScreenCTM();return m?pt.matrixTransform(m.inverse()):null}
+    function showTip(i){var h=HUBS[i],g=hubEls[i];if(active!==null&&active!==i)hubEls[active].classList.remove('on');active=i;g.classList.add('on');
+      tip.querySelector('.gm-tip-c').textContent=h[3];tip.querySelector('.gm-tip-n').textContent=h[4];tip.hidden=false;
+      var r=g.querySelector('.gm-core').getBoundingClientRect(),R=mapEl.getBoundingClientRect();tip.style.left=(r.left+r.width/2-R.left)+'px';tip.style.top=(r.top-R.top)+'px';
+      requestAnimationFrame(function(){tip.classList.add('in')})}
+    function hideTip(){if(active!==null)hubEls[active].classList.remove('on');active=null;tip.classList.remove('in');tip.hidden=true}
+    hubEls.forEach(function(g,i){g.addEventListener('mouseenter',function(){showTip(i)});g.addEventListener('mouseleave',hideTip);
+      g.addEventListener('click',function(e){e.stopPropagation();if(active===i)hideTip();else showTip(i)})});
+    document.addEventListener('click',function(){if(active!==null)hideTip()});
+    if(!rm.matches){
+      mapEl.addEventListener('pointermove',function(e){if(e.pointerType!=='mouse')return;var p=toMap(e);if(!p)return;spot.setAttribute('cx',p.x.toFixed(1));spot.setAttribute('cy',p.y.toFixed(1));sec.classList.add('spot')});
+      mapEl.addEventListener('pointerleave',function(){sec.classList.remove('spot')});
+      if('IntersectionObserver' in window)new IntersectionObserver(function(es){onScreen=es[0].isIntersecting;clearTimeout(timer);if(onScreen&&sec.classList.contains('in'))timer=setTimeout(loop,2600)}).observe(mapEl);
+    }
     /* reveal + count-up (numbers only; text such as "[X]+" simply fades in) */
     var val=sec.querySelector('.gm-stat-v');
     function count(){var t=val.textContent,m=t.match(/^(\D*)([\d,.]+)(.*)$/);if(!m||rm.matches)return;var n=parseFloat(m[2].replace(/,/g,''));if(!isFinite(n)||n<10)return;
@@ -1185,7 +1232,7 @@ p,h1,h2,h3,ul{margin:0}
       function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/1800),e=1-Math.pow(1-k,3);val.textContent=fmt(n*e);if(k<1)requestAnimationFrame(step);else val.textContent=t}
       requestAnimationFrame(step)}
     sec.classList.add('js');
-    function go(){sec.classList.add('in');setTimeout(count,500)}
+    function go(){sec.classList.add('in');setTimeout(count,500);if(onScreen&&!rm.matches){clearTimeout(timer);timer=setTimeout(loop,2600)}}
     if(rm.matches||!('IntersectionObserver' in window))sec.classList.add('in');
     else{var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();go()}},{threshold:.15});io.observe(sec)}
   })();
