@@ -290,13 +290,8 @@ p,h1,h2,h3,ul{margin:0}
 @media (max-width:767px){.xs{padding-block:80px 72px}.xs::after{display:none}.xs::before{background-size:56px 56px}.xs-btns{margin-top:32px}.xs-frame{padding:12px}.xs-grid{gap:44px}}
 @media (max-width:479px){.xs-btn{flex:1 1 100%}}
 /* Global view: night-lights world map inside a thin crosshair frame; copy lower-left, live stat lower-right */
-.gm{position:relative;overflow:hidden;background:#091213;color:#fff;padding:clamp(56px,5.5vw,84px) clamp(16px,2.5vw,36px) clamp(56px,5.5vw,84px)}
-.gm-frame{position:absolute;inset:clamp(14px,2.2vw,36px);border:1px solid rgba(170,190,190,.1);pointer-events:none}
-.gm-x{position:absolute;width:15px;height:15px;transform:translate(-50%,-50%)}
-.gm-x::before,.gm-x::after{content:"";position:absolute;background:rgba(200,215,215,.42)}
-.gm-x::before{left:7px;top:0;width:1px;height:15px}.gm-x::after{top:7px;left:0;height:1px;width:15px}
-.gm-x.in::before,.gm-x.in::after{background:rgba(200,215,215,.22)}
-.gm-map{position:relative;max-width:1460px;margin:0 auto;padding-inline:clamp(0px,3vw,48px)}
+.gm{position:relative;overflow:hidden;background:#091213;color:#fff;padding:clamp(28px,3vw,48px) clamp(16px,2.5vw,36px) clamp(64px,6vw,104px)}
+.gm-map{position:relative;max-width:1560px;margin:0 auto;padding-inline:clamp(0px,1.5vw,24px)}
 .gm-map svg{display:block;width:100%;height:auto;overflow:visible}
 .gm-l0{filter:drop-shadow(0 0 1.4px rgba(255,248,232,.85))}
 .gm-tw circle{fill:#fff;opacity:0;animation:gmTw var(--tw,4s) ease-in-out var(--td,0s) infinite}
@@ -309,17 +304,17 @@ p,h1,h2,h3,ul{margin:0}
 .gm-pulse{stroke-width:.8;transform-box:fill-box;transform-origin:center;animation:gmPulse 3.4s ease-out var(--ph,0s) infinite}
 @keyframes gmPulse{0%{transform:scale(.4);opacity:.8}100%{transform:scale(1.9);opacity:0}}
 .gm-core{fill:#fff;stroke:#2EE6CF;stroke-width:.8;filter:drop-shadow(0 0 2px rgba(46,230,207,.9))}
-.gm-foot{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;gap:40px;max-width:1460px;margin:clamp(-230px,-13vw,-90px) auto 0;padding-inline:clamp(16px,3.4vw,52px)}
-.gm-copy{max-width:520px}
-.gm-eyebrow{margin:0;font-size:clamp(.72rem,.9vw,.86rem);font-weight:500;letter-spacing:.3em;text-transform:uppercase;color:#2EC8B6}
-.gm-title{margin:clamp(14px,1.4vw,22px) 0 0;font-family:var(--f-head);font-weight:500;text-transform:uppercase;font-size:clamp(1.9rem,3.25vw,3.3rem);line-height:1.12;letter-spacing:.01em;color:#fff}
+.gm-foot{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:720px;margin:clamp(-96px,-4.6vw,-28px) auto 0;padding-inline:16px}
+.gm-copy{display:flex;flex-direction:column;align-items:center}
+.gm-eyebrow{margin:0;font-size:clamp(.74rem,.95vw,.9rem);font-weight:500;letter-spacing:.42em;text-transform:uppercase;color:#2EC8B6}
+.gm-title{margin:clamp(14px,1.3vw,20px) 0 0;font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:var(--h-size);line-height:1.02;letter-spacing:-.01em;color:#fff}
 .gm-title span{display:block}
-.gm-lede{margin:clamp(14px,1.4vw,22px) 0 0;max-width:36ch;color:#A3B6B7;font-size:clamp(.98rem,1.2vw,1.18rem);line-height:1.55}
-.gm-stat{flex:none;text-align:left}
-.gm-stat-l{display:flex;align-items:center;gap:14px;margin:0;font-size:clamp(.72rem,.9vw,.86rem);font-weight:500;letter-spacing:.28em;text-transform:uppercase;color:#D5DFDE}
-.gm-stat-l i{width:6px;height:10px;border-radius:50%;background:#2EE6CF;box-shadow:0 0 8px rgba(46,230,207,.7);animation:gmLive 2.4s ease-in-out infinite}
-@keyframes gmLive{0%,100%{opacity:1}50%{opacity:.45}}
-.gm-stat-v{margin:clamp(6px,.8vw,12px) 0 0;font-family:var(--f-head);font-weight:500;font-size:clamp(2.6rem,4.3vw,4.6rem);line-height:1;letter-spacing:-.01em;color:#fff;font-variant-numeric:tabular-nums}
+.gm-lede{margin:clamp(12px,1.2vw,18px) auto 0;max-width:34ch;color:#D3DCDB;font-size:clamp(.98rem,1.15vw,1.15rem);line-height:1.55}
+.gm-stat{margin-top:clamp(32px,3.4vw,52px);display:flex;flex-direction:column;align-items:center}
+.gm-stat-l{display:flex;align-items:center;gap:16px;margin:0;font-size:clamp(.74rem,.95vw,.9rem);font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:#D5DFDE}
+.gm-stat-l i{width:8px;height:8px;border-radius:50%;background:#2EE6CF;box-shadow:0 0 8px rgba(46,230,207,.75);animation:gmLive 2.4s ease-in-out infinite}
+@keyframes gmLive{0%,100%{opacity:1}50%{opacity:.3}}
+.gm-stat-v{margin:clamp(10px,1.2vw,18px) 0 0;font-family:var(--f-head);font-weight:800;font-size:clamp(2.4rem,3.9vw,4rem);line-height:1;letter-spacing:-.01em;color:#fff;font-variant-numeric:tabular-nums}
 /* entry */
 .gm.js .gm-land,.gm.js .gm-l,.gm.js .gm-tw,.gm.js .gm-hub{opacity:0}
 .gm.js .gm-land{transition:opacity 1.2s ease}
@@ -332,8 +327,7 @@ p,h1,h2,h3,ul{margin:0}
 .gm.js.in .gm-beam{stroke-dashoffset:0}
 .gm.js.in .gm-a{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.gm *{animation:none!important;transition:none!important}}
-@media (max-width:1023px){.gm-x.in{display:none}.gm-foot{margin-top:-40px}}
-@media (max-width:767px){.gm{padding:64px 16px 56px}.gm-map{padding:0;margin-inline:-8px}.gm-foot{flex-direction:column;align-items:flex-start;gap:36px;margin-top:28px;padding-inline:8px}.gm-x:not(.in){display:block}.gm-x[style*="top:30%"],.gm-x[style*="top:57%"]{display:none}}
+@media (max-width:767px){.gm{padding:48px 12px 64px}.gm-map{padding:0;margin-inline:-6px}.gm-foot{margin-top:20px}.gm-stat{margin-top:36px}}
 /* explorer specs: four rounded cards, each led by a big figure */
 .spec-head{margin-bottom:24px}
 .spec-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
@@ -1156,7 +1150,6 @@ p,h1,h2,h3,ul{margin:0}
 
   <!-- Global view: night-lights world map (Miller projection, country borders), teal hub beacons, framed with crosshairs -->
   <section id="global" class="gm" data-sec="Global view" data-sid="global" aria-labelledby="global-title">
-    <div class="gm-frame" aria-hidden="true"><span class="gm-x" style="left:0%;top:0%"></span><span class="gm-x" style="left:50%;top:0%"></span><span class="gm-x" style="left:100%;top:0%"></span><span class="gm-x" style="left:0%;top:30%"></span><span class="gm-x" style="left:100%;top:30%"></span><span class="gm-x" style="left:0%;top:57%"></span><span class="gm-x" style="left:100%;top:57%"></span><span class="gm-x" style="left:0%;top:100%"></span><span class="gm-x" style="left:50%;top:100%"></span><span class="gm-x" style="left:100%;top:100%"></span><span class="gm-x in" style="left:14.6%;top:45%"></span><span class="gm-x in" style="left:22.3%;top:52.5%"></span><span class="gm-x in" style="left:35.2%;top:33.5%"></span><span class="gm-x in" style="left:43.6%;top:58.5%"></span><span class="gm-x in" style="left:64.4%;top:52%"></span><span class="gm-x in" style="left:64.4%;top:72.5%"></span><span class="gm-x in" style="left:35.8%;top:72.5%"></span><span class="gm-x in" style="left:87.6%;top:39%"></span></div>
     <div class="gm-map" aria-hidden="true"><svg id="gm-svg" viewBox="0 0 1200 585" preserveAspectRatio="xMidYMid meet"><defs><radialGradient id="gm-gt"><stop offset="0" stop-color="#2EE6CF" stop-opacity=".5"/><stop offset=".45" stop-color="#14B8A6" stop-opacity=".14"/><stop offset="1" stop-color="#14B8A6" stop-opacity="0"/></radialGradient><linearGradient id="gm-beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2EE6CF" stop-opacity="0"/><stop offset=".55" stop-color="#2EE6CF" stop-opacity=".45"/><stop offset="1" stop-color="#7FF5E6" stop-opacity="1"/></linearGradient></defs><image class="gm-land" href="images/world-land.svg" width="1200" height="585"/><image class="gm-l gm-l2" href="images/world-lights-2.svg" width="1200" height="585"/><image class="gm-l gm-l1" href="images/world-lights-1.svg" width="1200" height="585"/><image class="gm-l gm-l0" href="images/world-lights-0.svg" width="1200" height="585"/><g class="gm-tw" id="gm-tw"></g><g class="gm-hubs" id="gm-hubs"></g></svg></div>
     <div class="gm-foot">
       <div class="gm-copy">
