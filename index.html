@@ -370,28 +370,28 @@ p,h1,h2,h3,ul{margin:0}
 .step-n{font-size:.76rem;font-weight:600;letter-spacing:.12em;color:var(--mute)}
 
 #does.sec{padding-bottom:clamp(32px,4vw,64px)}
-/* features: 2×2 product gallery on a cool off-white */
-.ft{background:#F4F5F5;color:#0B1A1C;padding-block:clamp(88px,10vw,160px)}
-.ft-head{display:flex;flex-direction:column;align-items:center;text-align:center;margin:0 auto clamp(48px,6vw,88px);max-width:900px}
+/* features: Apple-style product tiles. Each tile takes its colour from the top edge of its picture, so text and image read as one surface */
+.ft{background:#FFFFFF;color:#0B1A1C;padding-block:clamp(96px,11vw,176px) clamp(96px,10vw,160px)}
+.ft-head{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:end;gap:24px 48px;margin-bottom:clamp(44px,5vw,80px)}
 .ft-head .label{color:var(--teal-deep)}
-.ft-head .h-sec{margin-top:18px;color:#0B1A1C}
-.ft-sub{margin:18px auto 0;color:#56686A;max-width:44ch;text-wrap:balance}
-.ft-grid-wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(10px,1.2vw,18px);padding-inline:clamp(10px,1.2vw,18px)}
-.ft-card{display:flex;flex-direction:column;padding:0;border-radius:28px;background:#fff;overflow:hidden;transition:box-shadow .45s ease,transform .45s cubic-bezier(.2,.7,.2,1)}
-.ft-text{padding:clamp(28px,3.2vw,52px) clamp(28px,3.4vw,56px) clamp(24px,2.6vw,40px)}
-.ft-t{margin:0;font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:clamp(1.3rem,1.9vw,1.8rem);line-height:1.05;letter-spacing:-.01em;color:#0B1A1C}
-.ft-d{margin:10px 0 0;font-size:clamp(.98rem,1.1vw,1.08rem);line-height:1.5;color:#56686A;max-width:42ch;text-wrap:pretty}
-.ft-media{position:relative;aspect-ratio:4/3;margin-top:auto;border-radius:0;overflow:hidden;background:#0E1D1F}
-.ft-media > .photo{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.ft-head .h-sec{margin-top:18px;color:#0B1A1C;max-width:13em}
+.ft-sub{margin:0 0 .35em;justify-self:end;max-width:24ch;font-size:clamp(1.15rem,1.55vw,1.5rem);line-height:1.35;font-weight:500;letter-spacing:-.01em;color:#7A8A8C;text-wrap:balance}
+.ft-grid-wrap{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,1.5vw,22px);max-width:1520px;margin:0 auto;padding-inline:clamp(14px,2vw,32px)}
+.ft-card{--tile:#F2F5F6;position:relative;display:flex;flex-direction:column;border-radius:30px;background:var(--tile);overflow:hidden;isolation:isolate;transition:background-color .6s ease}
+.ft-card.dark{--tile:#0B1A1C}
+.ft-text{position:relative;z-index:1;padding:clamp(34px,4vw,64px) clamp(28px,4vw,64px) 0;text-align:center}
+.ft-t{margin:0;font-size:clamp(.74rem,.85vw,.84rem);font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-deep)}
+.ft-d{margin:12px auto 0;max-width:19ch;font-family:var(--f-head);font-weight:800;font-size:clamp(1.45rem,2.35vw,2.35rem);line-height:1.1;letter-spacing:-.022em;color:#0B1A1C;text-wrap:balance}
+.ft-card.dark .ft-t{color:#2EC8B6}.ft-card.dark .ft-d{color:#fff}
+.ft-media{position:relative;aspect-ratio:4/3;margin-top:clamp(8px,1.4vw,20px);overflow:hidden;background:transparent;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 12%);mask-image:linear-gradient(180deg,transparent 0,#000 12%)}
+.ft-media > .photo,.ft-media > .default-pic .photo{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;transform-origin:50% 60%;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
 .ft-media > .photo.fit-contain{object-fit:contain}
-.ft-media.has-media > .ft-fb{display:none}
 .ft-media > .default-pic{position:absolute;inset:0;display:block}
-.ft-media > .default-pic .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
 .ft-media.has-upload > .default-pic{display:none}
-@media (hover:hover){.ft-card:hover .ft-media > .default-pic .photo{transform:scale(1.025)}}
-.ft-fb{position:absolute;inset:0;background:radial-gradient(80% 70% at 50% 45%,#13292B 0%,#0B1A1C 75%)}
-.ft-fb svg{display:block;width:100%;height:100%;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-@media (hover:hover){.ft-card:hover{transform:translateY(-3px);box-shadow:0 30px 60px -40px rgba(11,26,28,.35)}.ft-card:hover .ft-media > .photo,.ft-card:hover .ft-fb svg{transform:scale(1.025)}}
+.ft-media.has-media > .ft-fb{display:none}
+.ft-fb{position:absolute;inset:0;background:radial-gradient(70% 70% at 50% 55%,#13292B 0%,#0B1A1C 72%)}
+.ft-fb svg{display:block;width:100%;height:100%;transform-origin:50% 60%;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+@media (hover:hover){.ft-card:hover .ft-media > .photo,.ft-card:hover .ft-media > .default-pic .photo,.ft-card:hover .ft-fb svg{transform:scale(1.035)}}
 /* fallback line drawings */
 .ft-zone{fill:rgba(20,184,166,.12)}
 .ft-zone-line{fill:none;stroke:#14B8A6;stroke-width:2;stroke-dasharray:7 6;stroke-linejoin:round}
@@ -414,16 +414,17 @@ p,h1,h2,h3,ul{margin:0}
 @keyframes ftRow{0%,80%,100%{opacity:1}90%{opacity:.55}}
 .ft-car{display:none}.ft.live .ft-car{display:block}
 /* entry */
-.ft.js .ft-head .ft-a{opacity:0;transform:translateY(14px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
-.ft.js .ft-head .ft-a:nth-child(2){transition-delay:.08s}.ft.js .ft-head .ft-a:nth-child(3){transition-delay:.18s}
+.ft.js .ft-head .ft-a{opacity:0;transform:translateY(16px);transition:opacity 1s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform 1s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
 .ft.js .ft-head.in .ft-a{opacity:1;transform:none}
-.ft.js .ft-card{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.7,.2,1) calc(var(--i) % 2 * .12s),transform .9s cubic-bezier(.2,.7,.2,1) calc(var(--i) % 2 * .12s),box-shadow .45s ease}
+.ft.js .ft-card{opacity:0;transform:translateY(40px);transition:opacity 1.1s cubic-bezier(.2,.7,.2,1) calc(var(--i) % 2 * .14s),transform 1.1s cubic-bezier(.2,.7,.2,1) calc(var(--i) % 2 * .14s),background-color .6s ease}
+.ft.js .ft-card .ft-media{transform:scale(1.04);transition:transform 1.6s cubic-bezier(.2,.7,.2,1) calc(var(--i) % 2 * .14s + .1s)}
 .ft.js .ft-card.in{opacity:1;transform:none}
-.ft.js.in .ft-a,.ft.js.in .ft-card{opacity:1;transform:none}
-@media (hover:hover){.ft.js .ft-card.in:hover{transform:translateY(-3px)}}
+.ft.js .ft-card.in .ft-media{transform:none}
+.ft.js.in .ft-a,.ft.js.in .ft-card{opacity:1;transform:none}.ft.js.in .ft-media{transform:none}
 @media (prefers-reduced-motion:reduce){.ft *{animation:none!important;transition:none!important}.ft-car{display:none!important}}
+@media (max-width:900px){.ft-head{grid-template-columns:1fr}.ft-sub{justify-self:start;max-width:30ch}}
 @media (max-width:860px){.ft-grid-wrap{grid-template-columns:1fr}}
-@media (max-width:767px){.ft{padding-block:72px}.ft-card{border-radius:20px}.ft-text{padding:24px 22px 20px}}
+@media (max-width:767px){.ft{padding-block:80px}.ft-card{border-radius:24px}.ft-text{padding:32px 24px 0}.ft-d{font-size:clamp(1.4rem,6.4vw,1.8rem)}}
 .gap-top{margin-top:2px}
 
 /* footer: Figure-style — wordmark + sign-up left, big numbered menu right, blurred photo behind */
@@ -1164,9 +1165,11 @@ p,h1,h2,h3,ul{margin:0}
   <section id="features" class="ft" data-sec="Features" data-sid="features" aria-labelledby="features-title">
     <div class="wrap">
       <div class="ft-head">
-        <p class="label ft-a" data-k="ft.label" data-l="Small label">Built for daily operations</p>
-        <h2 id="features-title" class="h-sec ft-a" data-k="ft.title" data-l="Headline">More than a dot on a map.</h2>
-        <p class="lede ft-sub ft-a" data-k="ft.sub" data-l="Subheadline">The tools behind every vehicle, battery and journey.</p>
+        <div class="ft-head-l">
+          <p class="label ft-a" style="--d:0s" data-k="ft.label" data-l="Small label">Built for daily operations</p>
+          <h2 id="features-title" class="h-sec ft-a" style="--d:.08s" data-k="ft.title" data-l="Headline">More than a dot on a map.</h2>
+        </div>
+        <p class="ft-sub ft-a" style="--d:.2s" data-k="ft.sub" data-l="Subheadline">The tools behind every vehicle, battery and journey.</p>
       </div>
     </div>
     <div class="ft-grid-wrap">
@@ -1194,6 +1197,16 @@ p,h1,h2,h3,ul{margin:0}
     var sec=document.getElementById('features');if(!sec)return;
     var rm=window.matchMedia('(prefers-reduced-motion: reduce)');
     sec.classList.add('js');
+    /* tile colour = the average colour along the top of its picture; dark tile when there is no picture */
+    var cv=document.createElement('canvas');cv.width=24;cv.height=2;var cx=cv.getContext&&cv.getContext('2d',{willReadFrequently:true});
+    function tint(card){var m=card.querySelector('.ft-media'),el=m.querySelector(':scope > .photo')||(m.classList.contains('has-media')?m.querySelector('.default-pic .photo'):null);
+      if(!el){card.classList.add('dark');card.style.removeProperty('--tile');return}
+      card.classList.remove('dark');
+      function go(){try{var w=el.videoWidth||el.naturalWidth,h=el.videoHeight||el.naturalHeight;if(!w||!cx)return;cx.drawImage(el,0,0,w,Math.max(1,h*.05),0,0,24,2);var d=cx.getImageData(0,0,24,2).data,r=0,g=0,b=0,n=d.length/4;for(var i=0;i<d.length;i+=4){r+=d[i];g+=d[i+1];b+=d[i+2]}r=Math.round(r/n);g=Math.round(g/n);b=Math.round(b/n);
+        card.style.setProperty('--tile','rgb('+r+','+g+','+b+')');card.classList.toggle('dark',(.2126*r+.7152*g+.0722*b)/255<.45)}catch(e){}}
+      if(el.tagName==='VIDEO'){if(el.readyState>=2)go();else el.addEventListener('loadeddata',go,{once:true})}else if(el.complete&&el.naturalWidth)go();else el.addEventListener('load',go,{once:true})}
+    function tintAll(){[].forEach.call(sec.querySelectorAll('.ft-card'),tint)}
+    tintAll();document.addEventListener('canopy:media',tintAll);
     function vids(on){[].forEach.call(sec.querySelectorAll('.ft-media video'),function(v){if(on&&!rm.matches){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})}
     if(rm.matches||!('IntersectionObserver' in window)){sec.classList.add('in');return}
     var head=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');head.unobserve(e.target)}})},{threshold:.2});
