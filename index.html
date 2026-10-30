@@ -88,7 +88,8 @@ p,h1,h2,h3,ul{margin:0}
 
 .hero{min-height:clamp(600px,90vh,960px)}
 .bleed.has-upload > .hero-pic{display:none}
-.hero-pic .photo{object-position:82% 50%}
+.hero-pic .photo{object-position:90% 50%}
+@media (min-aspect-ratio:1001/1000) and (max-aspect-ratio:3/2){.hero-pic .photo{object-position:64% 50%}.hero.light .lede{max-width:min(400px,40vw)}}
 @media (max-aspect-ratio:1/1){.hero-pic .photo{top:-18%;height:115%;object-position:50% 50%}}
 @media (max-aspect-ratio:1/1) and (max-height:780px){.hero-pic .photo{top:-24%}}
 /* light hero: dark text on a bright photo */
@@ -104,7 +105,7 @@ p,h1,h2,h3,ul{margin:0}
   .hero.light .lede{max-width:36ch;font-size:1rem}
   .hero.light .wrap{gap:18px;padding-top:32px;padding-bottom:calc(32px + 6vh);padding-bottom:calc(32px + 6svh)}
 }
-@media (min-aspect-ratio:1001/1000){.hero.light > .wrap{transform:translateY(-20%)}}
+@media (min-aspect-ratio:1001/1000){.hero.light{align-items:center}.hero.light > .wrap{transform:none;padding-top:clamp(72px,9vh,104px);padding-bottom:clamp(24px,4vh,48px)}}
 .hero.light .btn.ghost{color:var(--ink);border-color:rgba(11,26,28,.5)}
 .hero.light .btn.ghost:hover{border-color:var(--ink)}
 .top{color:var(--ink)}
@@ -688,8 +689,8 @@ p,h1,h2,h3,ul{margin:0}
   <section class="bleed hero light has-media" data-sec="Hero" data-sid="hero" data-slot="hero" data-slot-l="Hero background" data-default-media="images/hero-desktop.webp" aria-labelledby="hero-title">
     <canvas data-seed="1931" aria-hidden="true"></canvas>
     <picture class="hero-pic">
-      <source media="(max-aspect-ratio: 1/1)" srcset="images/hero-mobile.webp?v=4">
-      <img class="photo" src="images/hero-desktop.webp?v=3" alt="The black Explorer device floating above a bright, reflective white surface with soft arcs of light behind it" width="3172" height="1512" fetchpriority="high">
+      <source media="(max-aspect-ratio: 1/1)" srcset="images/hero-mobile.webp?v=5">
+      <img class="photo" src="images/hero-desktop.webp?v=5" alt="The black Explorer device floating above a bright, reflective white surface with soft arcs of light behind it" width="3200" height="1412" fetchpriority="high">
     </picture>
     <div class="wrap">
       <h1 id="hero-title" class="h-hero" data-k="hero.title" data-l="Headline">Every electric vehicle. Under one Canopy.</h1>
