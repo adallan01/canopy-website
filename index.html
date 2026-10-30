@@ -88,8 +88,8 @@ p,h1,h2,h3,ul{margin:0}
 
 .hero{min-height:clamp(600px,90vh,960px)}
 .bleed.has-upload > .hero-pic{display:none}
-.hero-pic .photo{object-position:68% 50%}
-@media (max-aspect-ratio:1/1){.hero-pic .photo{top:-18%;height:115%;object-position:60% 50%}}
+.hero-pic .photo{object-position:82% 50%}
+@media (max-aspect-ratio:1/1){.hero-pic .photo{top:-18%;height:115%;object-position:50% 50%}}
 @media (max-aspect-ratio:1/1) and (max-height:780px){.hero-pic .photo{top:-24%}}
 /* light hero: dark text on a bright photo */
 .hero.light{background:#E9ECEB;color:var(--ink)}
@@ -688,8 +688,8 @@ p,h1,h2,h3,ul{margin:0}
   <section class="bleed hero light has-media" data-sec="Hero" data-sid="hero" data-slot="hero" data-slot-l="Hero background" data-default-media="images/hero-desktop.webp" aria-labelledby="hero-title">
     <canvas data-seed="1931" aria-hidden="true"></canvas>
     <picture class="hero-pic">
-      <source media="(max-aspect-ratio: 1/1)" srcset="images/hero-mobile.webp">
-      <img class="photo" src="images/hero-desktop.webp" alt="A white electric motorcycle, scooter and cargo three-wheeler parked on a pale concrete forecourt" width="2688" height="1520" fetchpriority="high">
+      <source media="(max-aspect-ratio: 1/1)" srcset="images/hero-mobile.webp?v=4">
+      <img class="photo" src="images/hero-desktop.webp?v=3" alt="The black Explorer device floating above a bright, reflective white surface with soft arcs of light behind it" width="3172" height="1512" fetchpriority="high">
     </picture>
     <div class="wrap">
       <h1 id="hero-title" class="h-hero" data-k="hero.title" data-l="Headline">Every electric vehicle. Under one Canopy.</h1>
