@@ -148,10 +148,12 @@ p,h1,h2,h3,ul{margin:0}
 .stats-band::after{content:"";grid-column:1;grid-row:1;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(238,240,239,0) 0%,rgba(238,240,239,.04) 18%,rgba(238,240,239,.14) 34%,rgba(238,240,239,.3) 50%,rgba(238,240,239,.52) 66%,rgba(238,240,239,.76) 82%,rgba(238,240,239,.92) 93%,#EEF0EF 100%)}
 .stats-band:not(.has-media)::after{display:none}
 @media (min-width:861px){
-  .stats-band{background:#EEF1F6}
+  .stats-band{background:#E6E7EB}
   .stats-band > .default-pic,.stats-band > .photo,.stats-band::after{grid-column:1 / -1}
   .stats-band .photo{object-position:0% 50%}
+  .stats-band::after{background:linear-gradient(90deg,rgba(232,233,237,0) 0%,rgba(232,233,237,0) 52%,rgba(232,233,237,.35) 70%,rgba(232,233,237,.45) 100%)}
 }
+
 @media (min-width:861px) and (max-width:1199px){
   .stats-band .stats-col{padding-left:clamp(48px,7vw,84px)}
   .stats-band::after{background:linear-gradient(90deg,rgba(238,241,246,0) 0%,rgba(238,241,246,0) 46%,rgba(238,241,246,.4) 62%,rgba(238,241,246,.62) 80%,rgba(238,241,246,.7) 100%)}
@@ -172,10 +174,10 @@ p,h1,h2,h3,ul{margin:0}
 .stats-band.fx .stat.in .stat-l{opacity:1;transform:none}
 .stats-band.fx .stat.done .stat-src{visibility:visible}
 @media (max-width:860px){
-  .stats-band{grid-template-columns:1fr;background:#EEF1F6}
+  .stats-band{grid-template-columns:1fr;background:#E9E9ED}
   .stats-band .photo{object-position:50% 50%}
   .stats-band > .default-pic,.stats-band > .photo,.stats-band::after{grid-column:1;grid-row:1;height:auto;aspect-ratio:4/3;min-height:0}
-  .stats-band::after{background:linear-gradient(180deg,rgba(238,241,246,0) 0%,rgba(238,241,246,0) 72%,rgba(238,241,246,.6) 90%,#EEF1F6 100%)}
+  .stats-band::after{background:linear-gradient(180deg,rgba(233,233,237,0) 0%,rgba(233,233,237,0) 72%,rgba(233,233,237,.6) 90%,#E9E9ED 100%)}
   .stats-band:not(.has-media) .stats-col{padding-top:48px}
   .stats-col{grid-column:1;grid-row:2;padding:8px 24px 64px}
 }
@@ -775,7 +777,7 @@ p,h1,h2,h3,ul{margin:0}
   </script>
 
   <section id="numbers" class="stats-band has-media" data-sec="Numbers" data-sid="numbers" data-slot="numbers" data-slot-l="Numbers image" data-default-media="images/numbers.webp" aria-label="Canopy in numbers">
-    <picture class="default-pic"><source media="(max-width:860px)" srcset="images/numbers-mobile.webp?v=2"><img class="photo" src="images/numbers.webp?v=8" alt="An exploded view of the Explorer device: the black lid and base, the sealing gasket, the circuit board with its connector and cellular module, and the backup battery" width="2600" height="1004" loading="lazy" decoding="async"></picture>
+    <picture class="default-pic"><source media="(max-width:860px)" srcset="images/numbers-mobile.webp?v=3"><img class="photo" src="images/numbers.webp?v=9" alt="An exploded view of the Explorer device: lid, circuit board with connector and cellular module, backup battery and base" width="2400" height="1339" loading="lazy" decoding="async"></picture>
     <div class="stats-col">
       <dl class="stats-list">
         <div class="stat"><dt class="stat-l" data-k="num.1.l" data-l="Number 1 label">Vehicles connected</dt><dd class="stat-v"><span class="stat-src" data-k="num.1.v" data-l="Number 1">[X]+</span></dd></div>
