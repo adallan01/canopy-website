@@ -347,10 +347,10 @@ p,h1,h2,h3,ul{margin:0}
 .gm-hub.on .gm-core{fill:#2EE6CF;stroke:#fff}
 .gm-spot{opacity:0;transition:opacity .5s ease;filter:brightness(1.6) drop-shadow(0 0 2px rgba(255,248,232,.9))}
 .gm.spot .gm-spot{opacity:1}
-.gm-arc{fill:none;stroke:rgba(46,230,207,.45);stroke-width:.9;stroke-dasharray:1;stroke-dashoffset:1;animation:gmArc 3.2s ease-in-out forwards}
-.gm-arc-dot{fill:none;stroke:#B6FFF5;stroke-width:2.2;stroke-linecap:round;stroke-dasharray:.04 1;stroke-dashoffset:.04;filter:drop-shadow(0 0 2px rgba(46,230,207,.9));animation:gmArcDot 3.2s ease-in-out forwards}
+.gm-arc{fill:none;stroke:rgba(46,230,207,.28);stroke-width:.7;stroke-dasharray:1;stroke-dashoffset:1;animation:gmArc 5.5s ease-in-out forwards}
+.gm-arc-dot{fill:none;stroke:#B6FFF5;stroke-width:1.6;stroke-linecap:round;stroke-dasharray:.002 1;stroke-dashoffset:.002;stroke-width:2.6;opacity:.8;filter:drop-shadow(0 0 1.5px rgba(46,230,207,.7));animation:gmArcDot 5.5s ease-in-out forwards}
 @keyframes gmArc{0%{stroke-dashoffset:1;opacity:1}45%{stroke-dashoffset:0;opacity:1}100%{stroke-dashoffset:0;opacity:0}}
-@keyframes gmArcDot{0%{stroke-dashoffset:.04;opacity:1}55%{stroke-dashoffset:-1;opacity:1}56%,100%{opacity:0;stroke-dashoffset:-1}}
+@keyframes gmArcDot{0%{stroke-dashoffset:.002;opacity:.85}55%{stroke-dashoffset:-1;opacity:.85}56%,100%{opacity:0;stroke-dashoffset:-1}}
 .gm-tip{position:absolute;z-index:3;transform:translate(-50%,calc(-100% - 22px)) translateY(6px);opacity:0;transition:opacity .25s ease,transform .25s ease;pointer-events:none;display:grid;gap:2px;min-width:140px;padding:10px 14px 11px;border-radius:12px;background:rgba(9,18,19,.82);border:1px solid rgba(46,230,207,.35);box-shadow:0 18px 40px -18px rgba(0,0,0,.8),0 0 24px -8px rgba(46,230,207,.35);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);text-align:left;white-space:nowrap}
 .gm-tip.in{opacity:1;transform:translate(-50%,calc(-100% - 22px))}
 .gm-tip[hidden]{display:none}
@@ -1267,16 +1267,16 @@ p,h1,h2,h3,ul{margin:0}
     var hubEls=[];
     HUBS.forEach(function(h,i){var g=document.createElementNS(NS,'g'),sc=h[5]||1;g.setAttribute('class','gm-hub');g.setAttribute('transform','translate('+h[0]+' '+h[1]+')');
       g.style.setProperty('--dl',(1.6+i*.16).toFixed(2)+'s');g.style.setProperty('--ph',(-(i*.47)).toFixed(2)+'s');
-      g.innerHTML='<line class="gm-beam" x1="0" y1="-4" x2="0.01" y2="'+(-h[2])+'" pathLength="1"/><g class="gm-hb" transform="scale('+sc+')"><circle class="gm-hglow" r="34" fill="url(#gm-gt)"/><circle class="gm-pulse" r="14"/><circle class="gm-r3" r="13.5"/><circle class="gm-r2" r="9.2"/><circle class="gm-r1" r="5.4"/><circle class="gm-core" r="2.6"/><circle class="gm-hit" r="18"/></g>';
+      g.innerHTML='<g class="gm-hb" transform="scale('+sc+')"><circle class="gm-hglow" r="34" fill="url(#gm-gt)"/><circle class="gm-pulse" r="14"/><circle class="gm-r3" r="13.5"/><circle class="gm-r2" r="9.2"/><circle class="gm-r1" r="5.4"/><circle class="gm-core" r="2.6"/><circle class="gm-hit" r="18"/></g>';
       hb.appendChild(g);hubEls.push(g)});
     /* lively: data pulses travel along faint arcs from East Africa to the other hubs, a few at a time */
     var arcs=document.getElementById('gm-arcs'),svgEl=document.getElementById('gm-svg'),EA=[7,8,9];
     function arc(a,b){var x1=a[0],y1=a[1],x2=b[0],y2=b[1],mx=(x1+x2)/2,my=(y1+y2)/2,d=Math.hypot(x2-x1,y2-y1);return'M'+x1+' '+y1+' Q'+mx.toFixed(1)+' '+(my-d*.28).toFixed(1)+' '+x2+' '+y2}
     function fire(from,to){var p=document.createElementNS(NS,'path');p.setAttribute('d',arc(HUBS[from],HUBS[to]));p.setAttribute('class','gm-arc');p.setAttribute('pathLength','1');arcs.appendChild(p);
       var q=document.createElementNS(NS,'path');q.setAttribute('d',p.getAttribute('d'));q.setAttribute('class','gm-arc-dot');q.setAttribute('pathLength','1');arcs.appendChild(q);
-      setTimeout(function(){p.remove();q.remove()},3200)}
+      setTimeout(function(){p.remove();q.remove()},5600)}
     var timer=null,onScreen=false;
-    function loop(){if(!onScreen||document.hidden)return;var f=EA[Math.floor(Math.random()*3)],t=Math.floor(Math.random()*7);fire(f,t);timer=setTimeout(loop,1500+Math.random()*1400)}
+    function loop(){if(!onScreen||document.hidden)return;var f=EA[Math.floor(Math.random()*3)],t=Math.floor(Math.random()*7);fire(f,t);timer=setTimeout(loop,5000+Math.random()*3000)}
     /* hover: a soft spotlight brightens the lights under the cursor; beacons show their city */
     var spot=document.getElementById('gm-spotc'),tip=document.getElementById('gm-tip'),mapEl=sec.querySelector('.gm-map'),active=null;
     function toMap(e){var pt=svgEl.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;var m=svgEl.getScreenCTM();return m?pt.matrixTransform(m.inverse()):null}
