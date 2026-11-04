@@ -139,6 +139,17 @@ p,h1,h2,h3,ul{margin:0}
   .showcase-media{margin:clamp(10px,2vh,28px) auto 0;width:min(100%,calc((100vh - 268px) * 1.815));width:min(100%,calc((100svh - 268px) * 1.815));min-width:min(100%,820px)}
 }
 .showcase-media:not(.has-media){aspect-ratio:16/8.5;border-radius:24px;background:linear-gradient(180deg,rgba(11,26,28,.035),rgba(11,26,28,.06))}
+/* Explorer sequence: pinned canvas on the frames' own light grey */
+.xp{position:relative;background:#E3E1EA;overflow:hidden}
+.xp-pin{position:relative;height:100vh;height:100svh;display:grid;place-items:center}
+.xp-canvas{display:block;width:100%;height:100%;opacity:0;transition:opacity .6s ease}
+.xp.xp-ready .xp-canvas{opacity:1}
+.xp-still{display:none;width:min(100%,1280px);height:auto;margin:auto;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent),linear-gradient(transparent,#000 10%,#000 90%,transparent);-webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent),linear-gradient(transparent,#000 10%,#000 90%,transparent);mask-composite:intersect}
+.xp.xp-static .xp-pin{height:auto;padding-block:clamp(32px,5vw,72px)}
+.xp.xp-static .xp-canvas{display:none}
+.xp.xp-static .xp-still{display:block}
+.xp.xp-native{overflow:visible}
+.xp.xp-native .xp-pin{position:sticky;top:0}
 /* numbers (Figure-style spec list): photo on the left melting into the band, stats stacked on the right */
 .stats-band{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);background:#EEF0EF;color:var(--ink);overflow:hidden}
 .stats-band > .default-pic,.stats-band > .photo{grid-column:1;grid-row:1;position:relative;display:block;min-height:100%}
@@ -773,6 +784,66 @@ p,h1,h2,h3,ul{margin:0}
     var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(count()!==n)build()},200)});
     if(reduce.addEventListener)reduce.addEventListener('change',build);
     build();
+  })();
+  </script>
+
+  <!-- Explorer, taken apart: a scroll-driven image sequence (31 frames, images/explorer-seq/). GSAP ScrollTrigger pins the
+       section and maps scroll position to frame; the frames already contain the motion, nothing else is animated. -->
+  <section id="explode" class="xp" data-sec="Explorer sequence" data-sid="explode" aria-label="The Explorer device, from assembled to exploded view">
+    <div class="xp-pin">
+      <canvas class="xp-canvas" role="img" aria-label="The Canopy Explorer device separates into its lid, circuit board, backup battery and base as you scroll"></canvas>
+      <img class="xp-still" src="images/explorer-seq/frame-031.webp" alt="Exploded view of the Canopy Explorer: lid, circuit board with connector and cellular module, backup battery and base" width="1280" height="720" loading="lazy" decoding="async">
+    </div>
+  </section>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script>
+  (function(){
+    var sec=document.getElementById('explode');if(!sec)return;
+    var N=31,W=1280,H=720,BG='#E3E1EA';
+    var src=function(i){return 'images/explorer-seq/frame-'+String(i+1).padStart(3,'0')+'.webp'};
+    var rm=window.matchMedia('(prefers-reduced-motion: reduce)');
+    /* reduced motion: a still of the exploded device, no pinning */
+    if(rm.matches){sec.classList.add('xp-static');return}
+    var cv=sec.querySelector('.xp-canvas'),ctx=cv.getContext('2d'),frames=new Array(N),state={f:0},drawn=-1,raf=0,cw=0,ch=0;
+    sec.classList.add('xp-live');
+    /* canvas sized to its box at device pixel ratio (capped at 2 to keep memory sane) */
+    function size(){var r=cv.getBoundingClientRect(),d=Math.min(window.devicePixelRatio||1,2);cw=Math.max(1,Math.round(r.width*d));ch=Math.max(1,Math.round(r.height*d));
+      if(cv.width!==cw||cv.height!==ch){cv.width=cw;cv.height=ch;drawn=-1}}
+    /* nearest loaded frame, so a fast scroll never shows a blank */
+    function nearest(i){if(frames[i]&&frames[i].ok)return i;for(var k=1;k<N;k++){if(i-k>=0&&frames[i-k]&&frames[i-k].ok)return i-k;if(i+k<N&&frames[i+k]&&frames[i+k].ok)return i+k}return -1}
+    function draw(){raf=0;var i=Math.round(state.f),j=nearest(i);if(j<0||j===drawn)return;var im=frames[j].img;
+      /* contain-fit; on tall screens frame the device a little tighter (background trimmed, product never cropped) */
+      var sx=0,sy=0,sw=W,sh=H;if(cw/ch<1.2){sx=W*.12;sw=W*.70;sy=H*.03;sh=H*.94}
+      var k=Math.min(cw/sw,ch/sh),dw=sw*k,dh=sh*k,dx=(cw-dw)/2,dy=(ch-dh)/2;
+      ctx.fillStyle=BG;ctx.fillRect(0,0,cw,ch);ctx.drawImage(im,sx,sy,sw,sh,dx,dy,dw,dh);feather(dx,dy,dw,dh);drawn=j}
+    /* soften the frame's outer edge into the section colour so no rectangle is visible */
+    function feather(x,y,w,h){var f=Math.round(Math.min(w,h)*.09),c0=BG,c1='rgba(227,225,234,0)',g;
+      [[x,y,x,y+f,x,y,w,f],[x,y+h,x,y+h-f,x,y+h-f,w,f],[x,y,x+f,y,x,y,f,h],[x+w,y,x+w-f,y,x+w-f,y,f,h]].forEach(function(a){g=ctx.createLinearGradient(a[0],a[1],a[2],a[3]);g.addColorStop(0,c0);g.addColorStop(1,c1);ctx.fillStyle=g;ctx.fillRect(a[4]-1,a[5]-1,a[6]+2,a[7]+2)})}
+    function req(){if(!raf)raf=requestAnimationFrame(draw)}
+    function load(i,cb){if(frames[i])return cb&&cb();var im=new Image(),o={img:im,ok:false};frames[i]=o;im.decoding='async';
+      im.onload=function(){(im.decode?im.decode():Promise.resolve()).catch(function(){}).then(function(){o.ok=true;if(Math.abs(i-state.f)<1.5||drawn<0)req();cb&&cb()})};
+      im.onerror=function(){o.err=true;cb&&cb()};im.src=src(i)}
+    /* first frame before anything else, then the rest in order of distance from the current frame */
+    var started=false;
+    function queue(){if(started)return;started=true;var c=Math.round(state.f),order=[];for(var k=0;k<N;k++)order.push(k);order.sort(function(a,b){return Math.abs(a-c)-Math.abs(b-c)});
+      var p=0,active=0;function next(){while(active<4&&p<order.length){var i=order[p++];if(frames[i])continue;active++;load(i,function(){active--;next()})}}next()}
+    size();load(0,function(){sec.classList.add('xp-ready');req()});
+    new IntersectionObserver(function(es){if(es[0].isIntersecting)queue()},{rootMargin:'150% 0px'}).observe(sec);
+    window.addEventListener('resize',function(){size();req()});
+    function setF(v){var n=Math.max(0,Math.min(N-1,v));if(n!==state.f){state.f=n;if(!frames[Math.round(n)])load(Math.round(n));req()}}
+    var dist=function(){return window.innerHeight*(window.innerWidth<768?1.6:2.5)};
+    if(window.gsap&&window.ScrollTrigger){
+      gsap.registerPlugin(ScrollTrigger);
+      var tw=gsap.to(state,{f:N-1,ease:'none',onUpdate:function(){var n=state.f;state.f=-1;setF(n)}});
+      ScrollTrigger.create({trigger:sec,start:'top top',end:function(){return '+='+dist()},pin:true,scrub:.5,anticipatePin:1,invalidateOnRefresh:true,animation:tw});
+      var refresh=function(){ScrollTrigger.refresh()};
+      window.addEventListener('load',refresh);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refresh);document.addEventListener('canopy:media',refresh);
+    }else{
+      /* GSAP unavailable: same behaviour with a sticky stage and the native scroll position */
+      sec.classList.add('xp-native');var on=function(){sec.style.height=(window.innerHeight+dist())+'px';var r=sec.getBoundingClientRect(),p=Math.max(0,Math.min(1,-r.top/dist()));setF(p*(N-1))};
+      window.addEventListener('scroll',on,{passive:true});window.addEventListener('resize',on);on();
+    }
   })();
   </script>
 
