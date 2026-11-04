@@ -169,7 +169,7 @@ p,h1,h2,h3,ul{margin:0}
 /* motion: before a row plays, its rule is undrawn, label hidden, figure shows the zeroed state */
 /* numbers: explode sequence canvas behind the stats */
 .nb-seq{display:none}
-.stats-band.nb-live{background:#E3E1EA}
+.stats-band.nb-live{background:#E5E3EA}
 .stats-band.nb-live > .default-pic,.stats-band.nb-live::after{display:none}
 .stats-band.nb-live .nb-seq{display:block;grid-row:1;position:relative;min-height:100vh;min-height:100svh}
 .nb-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity .6s ease}
@@ -793,7 +793,7 @@ p,h1,h2,h3,ul{margin:0}
   </script>
 
 
-  <!-- Numbers: the Explorer explode sequence (images/explorer-seq/, 31 frames) plays behind the stats; GSAP ScrollTrigger pins the
+  <!-- Numbers: the Explorer explode sequence (images/explorer-seq/, 145 frames) plays behind the stats; GSAP ScrollTrigger pins the
        section and maps scroll position to frame. -->
   <section id="numbers" class="stats-band has-media" data-sec="Numbers" data-sid="numbers" data-slot="numbers" data-slot-l="Numbers image" data-default-media="images/numbers.webp" aria-label="Canopy in numbers">
     <picture class="default-pic"><source media="(max-width:860px)" srcset="images/numbers-mobile.webp?v=5"><img class="photo" src="images/numbers.webp?v=11" alt="An exploded view of the Explorer device in light grey: lid, circuit board with connector, backup battery and base" width="2400" height="1342" loading="lazy" decoding="async"></picture>
@@ -856,7 +856,7 @@ p,h1,h2,h3,ul{margin:0}
   (function(){
     var sec=document.getElementById('numbers');if(!sec)return;
     var stage=sec.querySelector('.nb-seq'),cv=sec.querySelector('.nb-canvas');if(!cv)return;
-    var N=31,W=1280,H=720,BG='#E3E1EA',BG0='rgba(227,225,234,0)';
+    var N=145,W=800,H=450,BG='#E5E3EA',BG0='rgba(229,227,234,0)';
     var src=function(i){return 'images/explorer-seq/frame-'+String(i+1).padStart(3,'0')+'.webp'};
     /* reduced motion, or an image uploaded in the editor: keep the still picture */
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||sec.classList.contains('has-upload'))return;
@@ -870,7 +870,7 @@ p,h1,h2,h3,ul{margin:0}
       [[x,y,x,y+f,x,y,w,f],[x,y+h,x,y+h-f,x,y+h-f,w,f],[x,y,x+f,y,x,y,f,h],[x+w,y,x+w-f,y,x+w-f,y,f,h]].forEach(function(a){g=ctx.createLinearGradient(a[0],a[1],a[2],a[3]);g.addColorStop(0,BG);g.addColorStop(1,BG0);ctx.fillStyle=g;ctx.fillRect(a[4]-1,a[5]-1,a[6]+2,a[7]+2)})}
     function draw(){raf=0;var j=nearest(Math.round(state.f));if(j<0||j===drawn)return;var im=frames[j].img;
       /* source window: the part of the frame the device moves within (background trimmed, product never cropped) */
-      var sx=W*.15,sy=H*.03,sw=W*.65,sh=H*.94;
+      var sx=W*.09,sy=H*.02,sw=W*.62,sh=H*.94;
       /* desktop: the device sits in the left part, clear of the stats; phones: centred in the stage */
       var bx=0,by=0,bw=cw,bh=ch;if(!mqM.matches){var st=sec.querySelector('.stat').getBoundingClientRect(),cr=cv.getBoundingClientRect();bw=Math.max(cw*.45,(st.left-cr.left)*dpr-cw*.02);bx=0}
       var k=Math.min(bw/sw,bh/sh)*(mqM.matches?.98:.96),dw=sw*k,dh=sh*k,dx=bx+(bw-dw)/2,dy=by+(bh-dh)/2;
@@ -881,7 +881,7 @@ p,h1,h2,h3,ul{margin:0}
       im.onerror=function(){o.err=true;cb&&cb()};im.src=src(i)}
     var started=false;
     function queue(){if(started)return;started=true;var c=Math.round(state.f),order=[];for(var k=0;k<N;k++)order.push(k);order.sort(function(a,b){return Math.abs(a-c)-Math.abs(b-c)});
-      var p=0,active=0;function next(){while(active<4&&p<order.length){var i=order[p++];if(frames[i])continue;active++;load(i,function(){active--;next()})}}next()}
+      var p=0,active=0;function next(){while(active<6&&p<order.length){var i=order[p++];if(frames[i])continue;active++;load(i,function(){active--;next()})}}next()}
     size();load(0,function(){sec.classList.add('nb-ready');req()});
     new IntersectionObserver(function(es){if(es[0].isIntersecting)queue()},{rootMargin:'150% 0px'}).observe(sec);
     function setF(v){var n=Math.max(0,Math.min(N-1,v));if(n!==state.f){state.f=n;if(!frames[Math.round(n)])load(Math.round(n));req()}}
