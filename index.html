@@ -895,7 +895,9 @@ p,h1,h2,h3,ul{margin:0}
       ['(min-width:861px)','(max-width:860px)'].forEach(function(q){mm.add(q,function(){
         var proxy={f:state.f};
         var tw=gsap.to(proxy,{f:N-1,ease:'none',onUpdate:function(){setF(proxy.f)}});
-        ScrollTrigger.create({trigger:target(),start:'top top',end:function(){return '+='+dist()},pin:target(),scrub:.5,anticipatePin:1,invalidateOnRefresh:true,animation:tw,onRefresh:function(){size();req()}});
+        /* pin while the section fills the screen; the frames start advancing as soon as the section comes into view */
+        ScrollTrigger.create({trigger:target(),start:'top top',end:function(){return '+='+dist()},pin:target(),anticipatePin:1,invalidateOnRefresh:true,onRefresh:function(){size();req()}});
+        ScrollTrigger.create({trigger:target(),start:'top 85%',end:function(){return 'top top-='+dist()},scrub:.5,invalidateOnRefresh:true,animation:tw});
       })});
       var refresh=function(){ScrollTrigger.refresh()};
       window.addEventListener('load',refresh);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refresh);
