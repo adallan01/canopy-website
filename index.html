@@ -874,7 +874,7 @@ p,h1,h2,h3,ul{margin:0}
       /* desktop: the device sits in the left part, clear of the stats; phones: centred in the stage */
       var bx=0,by=0,bw=cw,bh=ch;if(!mqM.matches){var st=sec.querySelector('.stat').getBoundingClientRect(),cr=cv.getBoundingClientRect();bw=Math.max(cw*.45,(st.left-cr.left)*dpr-cw*.02);bx=0}
       var k=Math.min(bw/sw,bh/sh)*(mqM.matches?.98:.96),dw=sw*k,dh=sh*k,dx=bx+(bw-dw)/2,dy=by+(bh-dh)/2;
-      ctx.fillStyle=BG;ctx.fillRect(0,0,cw,ch);ctx.drawImage(im,sx,sy,sw,sh,dx,dy,dw,dh);feather(dx,dy,dw,dh);drawn=j}
+      ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.fillStyle=BG;ctx.fillRect(0,0,cw,ch);ctx.drawImage(im,sx,sy,sw,sh,dx,dy,dw,dh);feather(dx,dy,dw,dh);drawn=j}
     function req(){if(!raf)raf=requestAnimationFrame(draw)}
     function load(i,cb){if(frames[i])return cb&&cb();var im=new Image(),o={img:im,ok:false};frames[i]=o;im.decoding='async';
       im.onload=function(){(im.decode?im.decode():Promise.resolve()).catch(function(){}).then(function(){o.ok=true;if(Math.abs(i-state.f)<1.5||drawn<0)req();cb&&cb()})};
