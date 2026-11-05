@@ -652,7 +652,9 @@ p,h1,h2,h3,ul{margin:0}
 .sys-nl{font-size:.92rem;font-weight:600;line-height:1.25}
 .sys-ns{font-size:.78rem;line-height:1.35;color:var(--s-mute)}
 /* 01 categories: compact 3-column selector; icon above label on desktop */
-.sys-stage[data-stage="1"] .sys-cats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:8px;align-content:stretch}
+.sys-stage[data-stage="1"] .sys-cats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:1fr;gap:12px 16px;align-content:stretch}
+/* left-column routes only show while that card is active */
+.sys .sys-lines path.ghost:not(.hi){opacity:0!important}
 .sys-stage[data-stage="1"] .sys-sb{justify-content:flex-start}
 .sys-cat{gap:10px;padding:9px 10px 9px 9px;min-height:58px}
 .sys-cat .sys-ic{width:34px;height:34px}
@@ -1267,8 +1269,13 @@ p,h1,h2,h3,ul{margin:0}
       svg.setAttribute('viewBox','0 0 '+D.width.toFixed(1)+' '+D.height.toFixed(1));
       var vb=V.map(function(v){return box(nodes[v],D)}),ex=box(nodes.explorer,D),tr=box(nodes.trackers,D),hb=box(nodes.hub,D),ob=O.map(function(o){return box(nodes[o],D)}),sl=box(nodes.safelock,D);
       var R=10,bx1=(Math.max.apply(null,vb.map(function(b){return b.r}))+ex.l)/2,jy=(ex.m+tr.m)/2,bx2=(ex.r+hb.l)/2,yh=hb.m,bx3=(hb.r+ob[0].l)/2;
-      var rr=function(i){var j=Math.min(V.length-1,i-i%2+1);return Math.max(vb[i].r,vb[j].m===vb[i].m||Math.abs(vb[j].m-vb[i].m)<2?vb[j].r:vb[i].r)};
-      vb.forEach(function(b,i){var x=rr(i);pathEls['v'+i].setAttribute('d',rpath([[x,b.m],[bx1,b.m],[bx1,jy]],R))});
+      /* right-hand and full-width cards connect straight across; a left-hand card's line leaves its own edge, runs down the gap
+         between the columns and along the gap under its row, so it never passes behind another card */
+      vb.forEach(function(b,i){var p=vb[i+1],left=p&&Math.abs(p.m-b.m)<2&&p.l>b.r,el=pathEls['v'+i];
+        el.classList.toggle('ghost',!!left);
+        if(!left){el.setAttribute('d',rpath([[b.r,b.m],[bx1,b.m],[bx1,jy]],R));return}
+        var cx=(b.r+p.l)/2,nx=vb[i+2],gy=nx?(b.b+nx.t)/2:b.b+6;
+        el.setAttribute('d',rpath([[b.r,b.m],[cx,b.m],[cx,gy],[bx1,gy],[bx1,jy]],5))});
       pathEls.c1.setAttribute('d',rpath([[bx1,jy],[bx1,ex.m],[ex.l,ex.m]],R));
       pathEls.c2.setAttribute('d',rpath([[bx1,jy],[bx1,tr.m],[tr.l,tr.m]],R));
       pathEls.h1.setAttribute('d',rpath([[ex.r,ex.m],[bx2,ex.m],[bx2,yh],[hb.l,yh]],R));
