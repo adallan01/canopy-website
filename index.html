@@ -617,7 +617,7 @@ p,h1,h2,h3,ul{margin:0}
 .sys-head .h-sec{max-width:none}
 .sys-head .lede{color:var(--s-mute);max-width:42ch}
 /* diagram */
-.sys-diagram{position:relative;display:grid;grid-template-columns:minmax(0,1.22fr) minmax(0,.98fr) minmax(0,1.32fr) minmax(0,1.02fr);column-gap:clamp(48px,5.2vw,92px)}
+.sys-diagram{position:relative;display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1fr) minmax(0,1.4fr) minmax(0,1.06fr);column-gap:clamp(52px,6vw,100px)}
 .sys-lines{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:0}
 .sys-lines path{fill:none;stroke:var(--s-line);stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round;transition:stroke .35s ease,stroke-width .35s ease,opacity .35s ease}
 .sys-lines path.hi{stroke:var(--teal-deep);stroke-width:1.8}
@@ -652,11 +652,11 @@ p,h1,h2,h3,ul{margin:0}
 .sys-nl{font-size:.92rem;font-weight:600;line-height:1.25}
 .sys-ns{font-size:.78rem;line-height:1.35;color:var(--s-mute)}
 /* 01 categories: compact 3-column selector; icon above label on desktop */
-.sys-stage[data-stage="1"] .sys-cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-content:center}
-.sys-cat{flex-direction:column;justify-content:flex-start;align-items:center;text-align:center;gap:9px;padding:14px 6px 12px;min-height:100px;box-shadow:none}
-.sys-cat .sys-ic{width:36px;height:36px}
-.sys-cat .sys-nt{justify-items:center}
-.sys-cat .sys-nl{font-size:.76rem;line-height:1.22;text-wrap:balance}
+.sys-stage[data-stage="1"] .sys-cats{gap:6px}
+.sys-cat{gap:11px;padding:7px 12px 7px 8px;box-shadow:none}
+.sys-cat .sys-ic{width:32px;height:32px;border-radius:8px}
+.sys-cat .sys-ic svg{width:18px;height:18px}
+.sys-cat .sys-nl{font-size:.88rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sys-cat.on{box-shadow:0 0 0 3px rgba(20,184,166,.14)}
 .sys-node-lg{padding:14px 16px 14px 12px}
 .sys-node-lg .sys-ic{width:42px;height:42px;border-radius:10px}
@@ -716,9 +716,9 @@ p,h1,h2,h3,ul{margin:0}
   .sys-sk{justify-content:center}
   .sys-sb{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .sys-stage[data-stage="1"] .sys-cats{grid-template-columns:repeat(3,minmax(0,1fr));max-width:760px;width:100%;margin:0 auto}
-  .sys-cat{flex-direction:row;justify-content:flex-start;text-align:left;gap:11px;padding:10px 12px 10px 10px;min-height:0}
-  .sys-cat .sys-nt{justify-items:start}
-  .sys-cat .sys-nl{font-size:.86rem}
+  .sys-stage[data-stage="1"] .sys-cats{display:grid}
+  .sys-cat{padding:10px 12px 10px 10px}
+  .sys-cat .sys-nl{white-space:normal}
   .sys-stage[data-stage="3"] .sys-sb{display:block;max-width:560px;width:100%;margin:0 auto}
   .sys-node-aux{grid-column:1 / -1;margin-top:0}
 }
@@ -1202,23 +1202,23 @@ p,h1,h2,h3,ul{margin:0}
     sec.classList.add('js');
 
     var nodes={};[].forEach.call(dia.querySelectorAll('.sys-node'),function(b){nodes[b.dataset.node]=b});
-    var V=['v0','v1','v2','v3','v4','v5','v6','v7','v8'],O=['o0','o1','o2','o3'],cats=dia.querySelector('.sys-cats');
+    var V=['v0','v1','v2','v3','v4','v5','v6','v7','v8'],O=['o0','o1','o2','o3'];
 
     /* edges: id -> [from, to, group]; J1..J3 are junctions on the buses between stages */
     var EDGES={c1:['J1','explorer','c'],c2:['J1','trackers','c'],h1:['explorer','hub','h'],h2:['trackers','hub','h'],s:['hub','safelock','o']};
-    EDGES.vg=['cats','J1','v'];   /* the category grid has one connector, leaving from the active category's row */
+    V.forEach(function(v,i){EDGES['v'+i]=[v,'J1','v']});
     O.forEach(function(o,i){EDGES['o'+i]=['hub',o,'o']});
     function rel(id){
-      if(!id)return['vg','c1','h1','o0'];   /* default: one quiet route through the system */
-      if(/^v\d$/.test(id))return['vg','c1','c2','h1','h2'];
-      if(id==='explorer')return['vg','c1','h1'];
-      if(id==='trackers')return['vg','c2','h2'];
+      if(!id)return['v0','c1','h1','o0'];   /* default: one quiet route through the system */
+      if(/^v\d$/.test(id))return['v'+id.slice(1),'c1','c2','h1','h2'];
+      if(id==='explorer')return V.map(function(_,i){return'v'+i}).concat(['c1','h1']);
+      if(id==='trackers')return V.map(function(_,i){return'v'+i}).concat(['c2','h2']);
       if(id==='hub')return['h1','h2','s'].concat(O.map(function(_,i){return'o'+i}));
       if(/^o\d$/.test(id))return['o'+id.slice(1),'h1','h2'];
       if(id==='safelock')return['s','h1','h2'];
       return[];
     }
-    var DOTS={J1:{g:'v',e:['c1','c2','vg']},J2:{g:'h',e:['h1','h2']},P1:{g:'h',e:['h1','h2']},J3:{g:'o',e:['s'].concat(O.map(function(_,i){return'o'+i}))},P2:{g:'o',e:['s'].concat(O.map(function(_,i){return'o'+i}))}};
+    var DOTS={J1:{g:'v',e:['c1','c2'].concat(V.map(function(_,i){return'v'+i}))},J2:{g:'h',e:['h1','h2']},P1:{g:'h',e:['h1','h2']},J3:{g:'o',e:['s'].concat(O.map(function(_,i){return'o'+i}))},P2:{g:'o',e:['s'].concat(O.map(function(_,i){return'o'+i}))}};
 
     var pathEls={},dotEls={};
     Object.keys(EDGES).forEach(function(id){
@@ -1254,10 +1254,9 @@ p,h1,h2,h3,ul{margin:0}
       if(mqNarrow.matches)return;
       var D=dia.getBoundingClientRect();
       svg.setAttribute('viewBox','0 0 '+D.width.toFixed(1)+' '+D.height.toFixed(1));
-      var cg=box(cats,D),ex=box(nodes.explorer,D),tr=box(nodes.trackers,D),hb=box(nodes.hub,D),ob=O.map(function(o){return box(nodes[o],D)}),sl=box(nodes.safelock,D);
-      var R=10,bx1=(cg.r+ex.l)/2,jy=(ex.m+tr.m)/2,bx2=(ex.r+hb.l)/2,yh=hb.m,bx3=(hb.r+ob[0].l)/2;
-      var act=preview||sel,ay=(act&&/^v\d$/.test(act))?box(nodes[act],D).m:cg.m;
-      pathEls.vg.setAttribute('d',rpath([[cg.r,ay],[bx1,ay],[bx1,jy]],R));
+      var vb=V.map(function(v){return box(nodes[v],D)}),ex=box(nodes.explorer,D),tr=box(nodes.trackers,D),hb=box(nodes.hub,D),ob=O.map(function(o){return box(nodes[o],D)}),sl=box(nodes.safelock,D);
+      var R=10,bx1=(vb[0].r+ex.l)/2,jy=(ex.m+tr.m)/2,bx2=(ex.r+hb.l)/2,yh=hb.m,bx3=(hb.r+ob[0].l)/2;
+      vb.forEach(function(b,i){pathEls['v'+i].setAttribute('d',rpath([[b.r,b.m],[bx1,b.m],[bx1,jy]],R))});
       pathEls.c1.setAttribute('d',rpath([[bx1,jy],[bx1,ex.m],[ex.l,ex.m]],R));
       pathEls.c2.setAttribute('d',rpath([[bx1,jy],[bx1,tr.m],[tr.l,tr.m]],R));
       pathEls.h1.setAttribute('d',rpath([[ex.r,ex.m],[bx2,ex.m],[bx2,yh],[hb.l,yh]],R));
@@ -1275,9 +1274,6 @@ p,h1,h2,h3,ul{margin:0}
       dia.classList.toggle('focus',focus);
       var relNodes={};if(id)relNodes[id]=1;
       Object.keys(pathEls).forEach(function(e){var on=hi.indexOf(e)>=0;pathEls[e].classList.toggle('hi',on);if(on){relNodes[EDGES[e][0]]=1;relNodes[EDGES[e][1]]=1}});
-      /* the grid connector relates to every category, except when one category is the focus */
-      if(relNodes.cats&&!(id&&/^v\d$/.test(id)))V.forEach(function(v){relNodes[v]=1});
-      layout();
       Object.keys(dotEls).forEach(function(k){dotEls[k].classList.toggle('hi',DOTS[k].e.some(function(e){return hi.indexOf(e)>=0}))});
       /* lit lines and dots sit on top of the grey ones */
       hi.forEach(function(e){svg.appendChild(pathEls[e])});Object.keys(dotEls).forEach(function(k){svg.appendChild(dotEls[k])});
@@ -1303,7 +1299,7 @@ p,h1,h2,h3,ul{margin:0}
 
     /* reveal in order: vehicles → lines → connectivity → lines → Canopy → lines → insight */
     var steps=['r1','r2','r3','r4','r5','r6','r7'],started=false;
-    function finish(){dia.classList.add('done')}
+    function finish(){dia.classList.add('done');layout()}
     function run(){
       if(started)return;started=true;layout();
       if(mqRM.matches){steps.forEach(function(s){dia.classList.add(s)});finish();return}
