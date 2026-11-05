@@ -742,26 +742,6 @@ p,h1,h2,h3,ul{margin:0}
   .sys .sys-stage > *,.sys .sys-node,.sys .sys-hub,.sys .sys-lines path,.sys .sys-lines circle{transition:none!important}
   .sys .sys-lines circle.sys-flow{display:none}
 }
-/* Smooth section transitions.
-   1. Lenis eases wheel scrolling (touch stays native).
-   2. Runs of plain-colour sections share one fixed backdrop whose colour blends as each boundary crosses the screen.
-   3. Photo sections fade softly into the colour of their neighbours. */
-html.lenis,html.lenis body{height:auto}
-.lenis.lenis-smooth{scroll-behavior:auto!important}
-.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
-.lenis.lenis-stopped{overflow:hidden}
-.lenis.lenis-smooth iframe{pointer-events:none}
-#bgfx{position:fixed;inset:0;z-index:-1;pointer-events:none;background:#0B1A1C}
-html.bgfx #how,html.bgfx #explorer,html.bgfx #explorer-specs,html.bgfx #system,html.bgfx #does,html.bgfx #devices,html.bgfx #features{background-color:transparent}
-.hero.light::before,#why::before,#film::before,#demo::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none}
-.hero.light::before{background:linear-gradient(0deg,#EEF0EF 0,rgba(238,240,239,0) clamp(64px,8vw,140px))}
-#why::before{background:linear-gradient(180deg,#EEEEEF 0,rgba(238,238,239,0) clamp(56px,7vw,120px))}
-#film::before{background:linear-gradient(180deg,#FFFFFF 0,rgba(255,255,255,0) clamp(56px,7vw,120px))}
-#demo::before{background:linear-gradient(180deg,#091213 0,rgba(9,18,19,0) clamp(64px,8vw,150px))}
-@media (min-width:1024px){
-  #why::before{background:linear-gradient(180deg,#EEEEEF 0,rgba(238,238,239,0) clamp(56px,7vw,120px)),linear-gradient(0deg,#0B1A1C 0,rgba(11,26,28,.55) clamp(40px,4vw,72px),rgba(11,26,28,0) clamp(110px,12vw,220px))}
-  #film::before{background:linear-gradient(180deg,#FFFFFF 0,rgba(255,255,255,0) clamp(56px,7vw,120px)),linear-gradient(0deg,#091213 0,rgba(9,18,19,.55) clamp(40px,4vw,72px),rgba(9,18,19,0) clamp(110px,12vw,220px))}
-}
 </style>
 </head>
 <body>
@@ -1046,7 +1026,7 @@ html.bgfx #how,html.bgfx #explorer,html.bgfx #explorer-specs,html.bgfx #system,h
     /* arrows: go to the previous / next card; while the cards are pinned this moves the page to the matching scroll point */
     [].forEach.call(btns,function(b){b.addEventListener('click',function(){
       var i=Math.max(0,Math.min(tiles.length-1,cur()+(+b.dataset.dir))),o=Math.min(tiles[i].offsetLeft-tiles[0].offsetLeft,max());
-      if(st&&max()>0){var y=st.start+(st.end-st.start)*(o/max());if(window.canopyLenis)canopyLenis.scrollTo(y,{duration:.9,easing:function(x){return 1-Math.pow(1-x,3)}});else window.scrollTo({top:y,behavior:rm.matches?'auto':'smooth'})}
+      if(st&&max()>0){window.scrollTo({top:st.start+(st.end-st.start)*(o/max()),behavior:rm.matches?'auto':'smooth'})}
       else tr.scrollTo({left:o,behavior:rm.matches?'auto':'smooth'})})});
     tr.addEventListener('scroll',function(){window.requestAnimationFrame(upd)},{passive:true});window.addEventListener('resize',upd);upd();
     sec.classList.add('js');
@@ -1095,7 +1075,7 @@ html.bgfx #how,html.bgfx #explorer,html.bgfx #explorer-specs,html.bgfx #system,h
     if(rm.matches||!('IntersectionObserver' in window))go();
     else{var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();go()}},{threshold:.18});io.observe(s)}
     var b=s.querySelector('.xs-btn-p');
-    if(b)b.addEventListener('click',function(e){var t=document.getElementById('system');if(!t)return;e.preventDefault();if(window.canopyLenis)canopyLenis.scrollTo(t,{duration:1.3,easing:function(x){return 1-Math.pow(1-x,4)}});else t.scrollIntoView({behavior:rm.matches?'auto':'smooth',block:'start'});if(history.replaceState)history.replaceState(null,'','#system')});
+    if(b)b.addEventListener('click',function(e){var t=document.getElementById('system');if(!t)return;e.preventDefault();t.scrollIntoView({behavior:rm.matches?'auto':'smooth',block:'start'});if(history.replaceState)history.replaceState(null,'','#system')});
   })();
   </script>
   <section id="explorer-specs" class="specs" data-sec="Explorer" data-sid="explorer" aria-label="Explorer specifications">
@@ -2092,57 +2072,6 @@ html.bgfx #how,html.bgfx #explorer,html.bgfx #explorer-specs,html.bgfx #system,h
   }
 
   route();
-})();
-</script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
-<script>
-/* Smooth section transitions: eased wheel scrolling + one backdrop whose colour blends between plain-colour sections */
-(function(){
-  var rm=window.matchMedia('(prefers-reduced-motion: reduce)');
-  /* 1. eased wheel scrolling (touch keeps the phone's own scrolling) */
-  if(window.Lenis&&!rm.matches){
-    var lenis=new Lenis({lerp:.085,smoothWheel:true,syncTouch:false,
-      prevent:function(n){return n.id==='admin'},
-      virtualScroll:function(e){return Math.abs(e.deltaX)<=Math.abs(e.deltaY)}});
-    window.canopyLenis=lenis;
-    if(window.gsap){
-      if(window.ScrollTrigger)lenis.on('scroll',ScrollTrigger.update);
-      gsap.ticker.add(function(t){lenis.raf(t*1000)});gsap.ticker.lagSmoothing(0);
-    }else{requestAnimationFrame(function f(t){lenis.raf(t);requestAnimationFrame(f)})}
-    var ease=function(x){return 1-Math.pow(1-x,4)};
-    document.addEventListener('click',function(e){
-      if(e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey)return;
-      var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;
-      var h=a.getAttribute('href'),t=(h==='#'||h==='#top')?0:document.getElementById(h.slice(1));
-      if(t===null||(t&&t.closest('#admin')))return;
-      e.preventDefault();lenis.scrollTo(t,{duration:1.3,easing:ease});
-      if(history.replaceState)history.replaceState(null,'',h);
-    });
-  }
-  /* 2. plain-colour sections share a fixed backdrop; its colour blends as each boundary moves up the screen */
-  var ids=['how','explorer','explorer-specs','system','does','devices','features'];
-  var secs=ids.map(function(i){return document.getElementById(i)}).filter(Boolean);
-  if(secs.length<2)return;
-  function rgb(c){var m=c.match(/[\d.]+/g)||[0,0,0,0];return {c:[+m[0],+m[1],+m[2]],a:m.length>3?+m[3]:1}}
-  var base=rgb(getComputedStyle(document.body).backgroundColor).c;
-  var C=secs.map(function(s){var v=rgb(getComputedStyle(s).backgroundColor);return v.a>0?v.c:base});
-  var fx=document.createElement('div');fx.id='bgfx';fx.setAttribute('aria-hidden','true');
-  document.body.insertBefore(fx,document.body.firstChild);
-  document.documentElement.classList.add('bgfx');
-  var last='',queued=false;
-  function paint(){
-    queued=false;
-    var vh=window.innerHeight,c=C[0];
-    for(var i=1;i<secs.length;i++){
-      var b=secs[i].getBoundingClientRect().top,p=(vh*.92-b)/(vh*.55);
-      if(p<=0)break;if(p>1)p=1;p=p*p*(3-2*p);
-      var A=C[i-1],B=C[i];c=[A[0]+(B[0]-A[0])*p,A[1]+(B[1]-A[1])*p,A[2]+(B[2]-A[2])*p];
-    }
-    var s='rgb('+Math.round(c[0])+','+Math.round(c[1])+','+Math.round(c[2])+')';
-    if(s!==last){fx.style.backgroundColor=s;last=s}
-  }
-  function q(){if(!queued){queued=true;requestAnimationFrame(paint)}}
-  window.addEventListener('scroll',q,{passive:true});window.addEventListener('resize',q);window.addEventListener('load',q);paint();
 })();
 </script>
 </body>
