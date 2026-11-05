@@ -271,7 +271,7 @@ p,h1,h2,h3,ul{margin:0}
 .rows.three{grid-template-columns:repeat(3,minmax(0,1fr))}
 /* how it works: an image holder under each step, bottoms aligned */
 /* how it works: Apple-style tile gallery */
-.hw{background:var(--ink);color:#fff;padding-block:clamp(96px,11vw,176px) clamp(80px,9vw,140px);overflow:hidden}
+.hw{background:var(--ink);color:#fff;padding-block:clamp(96px,11vw,176px) clamp(24px,2.5vw,40px);overflow:hidden}
 .hw-head{margin-bottom:clamp(40px,5vw,80px)}
 .hw-head .label{color:var(--teal)}
 .hw-h{margin:18px 0 0;font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:var(--h-size);line-height:1.05;letter-spacing:-.015em;max-width:900px;text-wrap:balance}
@@ -310,7 +310,7 @@ p,h1,h2,h3,ul{margin:0}
 @media (max-width:560px){.rows,.rows.three{grid-template-columns:1fr}}
 .specs{padding-block:clamp(48px,6vw,80px)}
 /* Explorer hardware showcase: dark, technical, ProvenMetal-inspired */
-.xs{position:relative;isolation:isolate;overflow:hidden;background:#0B1A1C;color:#fff;padding-block:clamp(96px,10.5vw,168px)}
+.xs{position:relative;isolation:isolate;overflow:hidden;background:#0B1A1C;color:#fff;padding-block:clamp(40px,4.5vw,72px) clamp(96px,10.5vw,168px)}
 .xs::before,.xs::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;-webkit-mask-image:radial-gradient(ellipse 75% 70% at 62% 50%,#000 30%,transparent 100%);mask-image:radial-gradient(ellipse 75% 70% at 62% 50%,#000 30%,transparent 100%)}
 .xs::before{background-image:linear-gradient(rgba(163,182,183,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(163,182,183,.06) 1px,transparent 1px);background-size:80px 80px;background-position:center center}
 .xs::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cpath d='M80 75.5v9M75.5 80h9' stroke='%23A3B6B7' stroke-opacity='.32' stroke-width='1'/%3E%3C/svg%3E");background-size:160px 160px;background-position:calc(50% - 80px) calc(50% - 80px)}
