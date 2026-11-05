@@ -277,7 +277,7 @@ p,h1,h2,h3,ul{margin:0}
 .hw-h{margin:18px 0 0;font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:var(--h-size);line-height:1.05;letter-spacing:-.015em;max-width:900px;text-wrap:balance}
 .hw-track{--pad:max(24px,calc((100vw - var(--wrap)) / 2 + 24px));display:flex;gap:clamp(14px,1.6vw,24px);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:var(--pad);padding:4px var(--pad) 8px;scrollbar-width:none;outline:none}
 .hw-track::-webkit-scrollbar{display:none}
-.hw-tile{flex:0 0 min(76vw,1080px);scroll-snap-align:start;display:flex;flex-direction:column;border-radius:32px;overflow:hidden;background:#EEEEF2;color:#0B1A1C;isolation:isolate}
+.hw-tile{flex:0 0 min(76vw,1080px,calc((100vh - 330px) * 1.55));flex-basis:min(76vw,1080px,calc((100svh - 330px) * 1.55));scroll-snap-align:start;display:flex;flex-direction:column;border-radius:32px;overflow:hidden;background:#EEEEF2;color:#0B1A1C;isolation:isolate}
 .hw-text{position:relative;z-index:1;padding:clamp(28px,3.4vw,56px) clamp(28px,3.6vw,60px) 0}
 .hw-n{display:block;font-size:.8rem;font-weight:700;letter-spacing:.16em;color:var(--teal-deep)}
 .hw-t{margin:12px 0 0;font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:clamp(2.2rem,5vw,4.6rem);line-height:.95;letter-spacing:-.03em}
@@ -291,11 +291,13 @@ p,h1,h2,h3,ul{margin:0}
 .hw-btn:hover:not(:disabled){background:rgba(255,255,255,.22)}
 .hw-btn:disabled{opacity:.35;cursor:default}
 .hw-btn:focus-visible,.hw-track:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.hw.hw-scrub .hw-track{scroll-snap-type:none;overflow-x:hidden}
+.hw-stage{padding-block:8px}
 .hw.js .hw-head > *,.hw.js .hw-tile{opacity:0;transform:translateY(28px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
 .hw.js .hw-h{transition-delay:.08s}.hw.js .hw-tile{transition-delay:calc(.2s + var(--i) * .12s)}
 .hw.js.in .hw-head > *,.hw.js.in .hw-tile{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.hw *{transition:none!important}}
-@media (max-width:767px){.hw-tile{flex-basis:86vw;border-radius:24px}.hw-text{padding:26px 22px 0}.hw-nav{display:none}}
+@media (max-width:767px){.hw-tile{flex-basis:86vw;border-radius:24px}.hw-text{padding:26px 22px 0}}
 #does .rows{row-gap:48px}
 #does .rows > div{display:flex;flex-direction:column;gap:10px}
 #does .rows p{margin-bottom:22px}
@@ -974,6 +976,7 @@ p,h1,h2,h3,ul{margin:0}
       <p class="label" data-k="how.label" data-l="Small label">How it works</p>
       <h2 id="how-title" class="hw-h" data-k="how.title" data-l="Headline">Simple to start. Smart from day one.</h2>
     </div>
+    <div class="hw-stage">
     <div class="hw-track" tabindex="0" aria-label="Three steps">
         <article class="hw-tile" style="--i:0">
           <div class="hw-text"><span class="hw-n">01</span><h3 class="hw-t" data-k="how.1.t" data-l="Step 1 title">Connect.</h3><p class="hw-d" data-k="how.1.d" data-l="Step 1 text">Fit the Explorer device, or link the trackers you already use.</p></div>
@@ -992,19 +995,32 @@ p,h1,h2,h3,ul{margin:0}
       <button type="button" class="hw-btn" data-dir="-1" aria-label="Previous step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
       <button type="button" class="hw-btn" data-dir="1" aria-label="Next step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
     </div>
+    </div>
   </section>
   <script>
   (function(){
     var sec=document.getElementById('how');if(!sec)return;
-    var tr=sec.querySelector('.hw-track'),tiles=[].slice.call(tr.querySelectorAll('.hw-tile')),btns=sec.querySelectorAll('.hw-btn');
-    var rm=window.matchMedia('(prefers-reduced-motion: reduce)');
-    function step(){return tiles.length>1?tiles[1].offsetLeft-tiles[0].offsetLeft:tr.clientWidth}
-    function upd(){var max=tr.scrollWidth-tr.clientWidth-2;btns[0].disabled=tr.scrollLeft<=2;btns[1].disabled=tr.scrollLeft>=max}
-    [].forEach.call(btns,function(b){b.addEventListener('click',function(){tr.scrollBy({left:step()*(+b.dataset.dir),behavior:rm.matches?'auto':'smooth'})})});
+    var stage=sec.querySelector('.hw-stage'),tr=sec.querySelector('.hw-track'),tiles=[].slice.call(tr.querySelectorAll('.hw-tile')),btns=sec.querySelectorAll('.hw-btn');
+    var rm=window.matchMedia('(prefers-reduced-motion: reduce)'),st=null;
+    function max(){return Math.max(0,tr.scrollWidth-tr.clientWidth)}
+    function upd(){var m=max()-2;btns[0].disabled=tr.scrollLeft<=2;btns[1].disabled=tr.scrollLeft>=m}
+    function cur(){var x=tr.scrollLeft,best=0,d=1e9;tiles.forEach(function(t,i){var o=Math.min(t.offsetLeft-tiles[0].offsetLeft,max()),k=Math.abs(o-x);if(k<d){d=k;best=i}});return best}
+    /* arrows: go to the previous / next card; while the cards are pinned this moves the page to the matching scroll point */
+    [].forEach.call(btns,function(b){b.addEventListener('click',function(){
+      var i=Math.max(0,Math.min(tiles.length-1,cur()+(+b.dataset.dir))),o=Math.min(tiles[i].offsetLeft-tiles[0].offsetLeft,max());
+      if(st&&max()>0){window.scrollTo({top:st.start+(st.end-st.start)*(o/max()),behavior:rm.matches?'auto':'smooth'})}
+      else tr.scrollTo({left:o,behavior:rm.matches?'auto':'smooth'})})});
     tr.addEventListener('scroll',function(){window.requestAnimationFrame(upd)},{passive:true});window.addEventListener('resize',upd);upd();
     sec.classList.add('js');
-    if(rm.matches||!('IntersectionObserver' in window)){sec.classList.add('in');return}
-    var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();sec.classList.add('in')}},{threshold:.18});io.observe(sec);
+    if(rm.matches||!('IntersectionObserver' in window))sec.classList.add('in');
+    else{var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();sec.classList.add('in')}},{threshold:.18});io.observe(sec)}
+    /* scrolling down slides the cards left: the card row pins in the middle of the screen while the page scroll moves it */
+    if(rm.matches||!(window.gsap&&window.ScrollTrigger))return;
+    gsap.registerPlugin(ScrollTrigger);
+    sec.classList.add('hw-scrub');
+    var tw=gsap.to(tr,{scrollLeft:function(){return max()},ease:'none',onUpdate:upd});
+    st=ScrollTrigger.create({trigger:stage,start:'center center',end:function(){return '+='+Math.max(1,max())*1.15},pin:true,scrub:.6,anticipatePin:1,invalidateOnRefresh:true,animation:tw});
+    window.addEventListener('load',function(){ScrollTrigger.refresh()});
   })();
   </script>
 
