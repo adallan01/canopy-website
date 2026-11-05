@@ -183,7 +183,7 @@ p,h1,h2,h3,ul{margin:0}
   .stats-band.nb-live .stat{padding:clamp(14px,3vh,52px) 0 clamp(10px,1.6vh,24px)}
 }
 @media (max-width:860px){
-  .stats-band.nb-live .nb-seq{grid-column:1;min-height:0;height:max(260px,min(calc(100vw * 796 / 900),calc(100vh - 500px)));height:max(260px,min(calc(100vw * 796 / 900),calc(100svh - 500px)))}
+  .stats-band.nb-live .nb-seq{grid-column:1;min-height:0;height:max(260px,min(calc(100vw * 828 / 900),calc(100vh - 500px)));height:max(260px,min(calc(100vw * 828 / 900),calc(100svh - 500px)))}
   .stats-band.nb-live .stats-col{padding-top:24px}
 }
 .stats-band.fx .stat::after{transform:scaleX(0);transition:transform 1.1s cubic-bezier(.22,.61,.36,1)}
@@ -900,17 +900,17 @@ p,h1,h2,h3,ul{margin:0}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script>
   /* Numbers: Explorer explode sequence. 145 frames per set: images/explorer-seq/d/ (1920×1080, desktop) and
-     images/explorer-seq/m/ (900×796 crop around the device, phones). Scroll position picks the frame; nothing else moves. */
+     images/explorer-seq/m/ (900×828 crop around the device, phones). Scroll position picks the frame; nothing else moves. */
   (function(){
     var sec=document.getElementById('numbers');if(!sec)return;
     var stage=sec.querySelector('.nb-seq'),cv=sec.querySelector('.nb-canvas');if(!cv)return;
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||sec.classList.contains('has-upload'))return;
     var N=145,BG="#EEEDF0",mqM=window.matchMedia('(max-width:860px)');
     /* device extent inside each set's frame (fractions): used to place it clear of the stats */
-    var SETS={d:{dir:'d',W:1920,H:1080,x0:.166,x1:.608},m:{dir:'m',W:900,H:796,x0:.07,x1:.93}};
+    var SETS={d:{dir:'d',W:1920,H:1080,x0:.178,x1:.596},m:{dir:'m',W:900,H:828,x0:.07,x1:.93}};
     /* T[i] = scroll progress (0..1) at which frame i shows, measured from how much each frame changes, so the
        motion per scroll step is even (the source has a bigger jump every 4th frame) */
-    var T=[0.0,0.0022,0.0042,0.0062,0.0083,0.0105,0.0126,0.0147,0.017,0.0203,0.0224,0.0245,0.0268,0.029,0.0312,0.0334,0.0358,0.0382,0.0405,0.0429,0.0462,0.0491,0.0519,0.0549,0.059,0.0624,0.0657,0.0693,0.0746,0.0789,0.083,0.087,0.0932,0.0986,0.1034,0.1084,0.1161,0.1228,0.1285,0.1345,0.1434,0.1512,0.1579,0.1648,0.175,0.1835,0.1912,0.1987,0.2098,0.2191,0.227,0.2351,0.2467,0.2556,0.264,0.2723,0.2843,0.2936,0.3023,0.3113,0.324,0.3337,0.3431,0.3527,0.3662,0.3768,0.3869,0.3972,0.412,0.4235,0.4343,0.4449,0.4607,0.4724,0.4835,0.4944,0.5102,0.5221,0.5332,0.5441,0.5603,0.5722,0.5833,0.5947,0.6114,0.6239,0.6352,0.6463,0.6627,0.6744,0.6851,0.6952,0.7099,0.7204,0.73,0.7394,0.7527,0.7624,0.7711,0.7798,0.7923,0.801,0.8091,0.8169,0.8285,0.8365,0.8439,0.8509,0.8616,0.8687,0.8752,0.8815,0.8909,0.8972,0.9028,0.9085,0.9165,0.9219,0.9265,0.9311,0.9374,0.9419,0.9457,0.9492,0.9536,0.9571,0.9598,0.9622,0.9646,0.9672,0.9693,0.9713,0.9736,0.9763,0.9783,0.9803,0.9826,0.985,0.987,0.9891,0.9913,0.9937,0.9957,0.9978,1.0];
+    var T=[0.0,0.0026,0.0049,0.007,0.0091,0.0114,0.0136,0.0158,0.018,0.0217,0.0238,0.026,0.0284,0.031,0.0334,0.036,0.0387,0.0416,0.0443,0.0472,0.0503,0.0536,0.0568,0.0602,0.0652,0.0691,0.073,0.0769,0.0812,0.0858,0.0902,0.0946,0.0991,0.104,0.1088,0.1136,0.1186,0.1239,0.129,0.1342,0.1396,0.1452,0.1507,0.1563,0.1621,0.1681,0.174,0.1801,0.1892,0.1959,0.2023,0.2089,0.2155,0.2226,0.2294,0.2363,0.2433,0.2508,0.2582,0.2655,0.273,0.2809,0.2887,0.2967,0.3048,0.3135,0.3221,0.3309,0.3397,0.3491,0.3583,0.3676,0.3818,0.3919,0.4018,0.4118,0.4218,0.4328,0.4431,0.4535,0.4637,0.4746,0.4851,0.4958,0.5061,0.5174,0.5282,0.5392,0.5499,0.5614,0.5724,0.5835,0.5941,0.6055,0.6164,0.6273,0.6439,0.655,0.6656,0.6761,0.6859,0.6967,0.7068,0.7169,0.7265,0.7369,0.7468,0.7566,0.7659,0.776,0.7853,0.7947,0.8035,0.8132,0.8221,0.831,0.8394,0.8485,0.8569,0.8653,0.8784,0.8865,0.8941,0.9016,0.9087,0.9161,0.9229,0.9296,0.9356,0.942,0.9478,0.9534,0.9587,0.9641,0.9689,0.9734,0.9774,0.9814,0.9848,0.9879,0.9906,0.9933,0.9955,0.9977,1.0];
     function frameAt(p){if(p<=0)return 0;if(p>=1)return N-1;var lo=0,hi=N-1;while(hi-lo>1){var m=(lo+hi)>>1;if(T[m]<=p)lo=m;else hi=m}return (p-T[lo])/((T[hi]-T[lo])||1)<.5?lo:hi}
     var set=null,frames=null,ctx=cv.getContext('2d',{alpha:false}),p=0,shown=-1,raf=0,cw=0,ch=0,dpr=1,geo=null,loadAll=null;
     sec.classList.add('nb-live');
