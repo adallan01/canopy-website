@@ -178,6 +178,9 @@ p,h1,h2,h3,ul{margin:0}
   .stats-band.nb-live{min-height:100vh;min-height:100svh}
   .stats-band.nb-live .nb-seq{grid-column:1 / -1}
   .stats-band.nb-live .stats-col{align-self:center}
+  .stats-band.nb-live{height:100vh;height:100svh;min-height:0}
+  .stats-band.nb-live .stats-col{padding-block:clamp(20px,4vh,72px)}
+  .stats-band.nb-live .stat{padding:clamp(14px,3vh,52px) 0 clamp(10px,1.6vh,24px)}
 }
 @media (max-width:860px){
   .stats-band.nb-live .nb-seq{grid-column:1;min-height:0;height:max(260px,min(calc(100vw * 796 / 900),calc(100vh - 500px)));height:max(260px,min(calc(100vw * 796 / 900),calc(100svh - 500px)))}
