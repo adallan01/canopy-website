@@ -684,10 +684,10 @@ p,h1,h2,h3,ul{margin:0}
 .sys.js .sys-diagram:not(.r3) .sys-stage[data-stage="2"] .sys-node,
 .sys.js .sys-diagram:not(.r7) .sys-stage[data-stage="4"] .sys-node{opacity:0;transform:translateY(10px)}
 .sys.js .sys-diagram:not(.r5) .sys-hub{opacity:0;transform:scale(.97)}
-.sys.js .sys-stage > *{transition:opacity .6s ease,transform .6s cubic-bezier(.22,.61,.36,1)}
-.sys.js .sys-diagram:not(.done) .sys-node{transition-delay:calc(var(--i,0) * 80ms)}
-.sys.js .sys-diagram:not(.done) .sys-hub{transition:opacity .8s ease,transform .8s cubic-bezier(.22,.61,.36,1),box-shadow .8s ease,border-color .8s ease}
-.sys.js .sys-lines path.draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .9s cubic-bezier(.65,0,.35,1),stroke .35s ease,stroke-width .35s ease,opacity .35s ease}
+.sys.js .sys-stage > *{transition:opacity .35s ease,transform .35s cubic-bezier(.22,.61,.36,1)}
+.sys.js .sys-diagram:not(.done) .sys-node{transition-delay:calc(var(--i,0) * 35ms)}
+.sys.js .sys-diagram:not(.done) .sys-hub{transition:opacity .4s ease,transform .4s cubic-bezier(.22,.61,.36,1),box-shadow .4s ease,border-color .4s ease}
+.sys.js .sys-lines path.draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .4s cubic-bezier(.65,0,.35,1),stroke .35s ease,stroke-width .35s ease,opacity .35s ease}
 .sys.js .sys-diagram.r2 .sys-lines [data-g="v"],
 .sys.js .sys-diagram.r4 .sys-lines [data-g="c"],
 .sys.js .sys-diagram.r4 .sys-lines [data-g="h"],
@@ -1286,17 +1286,17 @@ p,h1,h2,h3,ul{margin:0}
     function run(){
       if(started)return;started=true;layout();
       if(mqRM.matches){steps.forEach(function(s){dia.classList.add(s)});finish();return}
-      var t=[0,420,900,1260,1700,2150,2500];
-      steps.forEach(function(s,i){setTimeout(function(){dia.classList.add(s);if(s==='r7')setTimeout(finish,500)},t[i])});
+      var t=[0,140,300,420,560,700,820];
+      steps.forEach(function(s,i){setTimeout(function(){dia.classList.add(s);if(s==='r7')setTimeout(finish,250)},t[i])});
     }
     function runStage(n){var map={1:['r1','r2'],2:['r3','r4'],3:['r5','r6'],4:['r7']};(map[n]||[]).forEach(function(s){dia.classList.add(s)});if(['r1','r3','r5','r7'].every(function(s){return dia.classList.contains(s)}))finish()}
     if(mqRM.matches){started=true;steps.forEach(function(s){dia.classList.add(s)});finish()}
     else if('IntersectionObserver' in window){
       if(mqNarrow.matches){
-        var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){so.unobserve(e.target);runStage(e.target.dataset.stage)}})},{threshold:.25});
+        var so=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){so.unobserve(e.target);runStage(e.target.dataset.stage)}})},{threshold:0,rootMargin:'0px 0px -10% 0px'});
         [].forEach.call(dia.querySelectorAll('.sys-stage'),function(s){so.observe(s)});
       }else{
-        var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();run()}},{threshold:.3});io.observe(dia);
+        var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();run()}},{threshold:0,rootMargin:'0px 0px -12% 0px'});io.observe(dia);
       }
     }else{steps.forEach(function(s){dia.classList.add(s)});finish()}
 
