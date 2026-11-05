@@ -270,9 +270,35 @@ p,h1,h2,h3,ul{margin:0}
 .rows p{color:var(--mute);font-size:1rem;max-width:34ch}
 .rows.three{grid-template-columns:repeat(3,minmax(0,1fr))}
 /* how it works: an image holder under each step, bottoms aligned */
-#how .rows,#does .rows{row-gap:48px}
-#how .rows > div,#does .rows > div{display:flex;flex-direction:column;gap:10px}
-#how .rows p,#does .rows p{margin-bottom:22px}
+/* how it works: Apple-style tile gallery */
+.hw{background:var(--ink);color:#fff;padding-block:clamp(96px,11vw,176px) clamp(80px,9vw,140px);overflow:hidden}
+.hw-head{margin-bottom:clamp(40px,5vw,80px)}
+.hw-head .label{color:var(--teal)}
+.hw-h{margin:18px 0 0;font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:clamp(2.6rem,6vw,6rem);line-height:.98;letter-spacing:-.03em;max-width:none;text-wrap:balance}
+.hw-track{--pad:max(24px,calc((100vw - var(--wrap)) / 2 + 24px));display:flex;gap:clamp(14px,1.6vw,24px);overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:var(--pad);padding:4px var(--pad) 8px;scrollbar-width:none;outline:none}
+.hw-track::-webkit-scrollbar{display:none}
+.hw-tile{flex:0 0 min(76vw,1080px);scroll-snap-align:start;display:flex;flex-direction:column;border-radius:32px;overflow:hidden;background:#EEEEF2;color:#0B1A1C;isolation:isolate}
+.hw-text{position:relative;z-index:1;padding:clamp(28px,3.4vw,56px) clamp(28px,3.6vw,60px) 0}
+.hw-n{display:block;font-size:.8rem;font-weight:700;letter-spacing:.16em;color:var(--teal-deep)}
+.hw-t{margin:12px 0 0;font-family:var(--f-head);font-weight:800;text-transform:uppercase;font-size:clamp(2.2rem,5vw,4.6rem);line-height:.95;letter-spacing:-.03em}
+.hw-d{margin:14px 0 0;max-width:30ch;font-size:clamp(1.02rem,1.35vw,1.3rem);line-height:1.45;font-weight:500;color:#56686A}
+#how .hw-pic{aspect-ratio:16/9;margin-top:clamp(-40px,-2vw,-12px);border-radius:0;background:transparent;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 16%);mask-image:linear-gradient(180deg,transparent 0,#000 16%)}
+#how .hw-pic > .photo,#how .hw-pic > .default-pic .photo{transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+@media (hover:hover){#how .hw-tile:hover .hw-pic .photo{transform:scale(1.03)}}
+.hw-nav{display:flex;justify-content:flex-end;gap:12px;margin-top:clamp(20px,2.4vw,32px)}
+.hw-btn{width:48px;height:48px;border-radius:50%;border:0;display:grid;place-items:center;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;transition:background-color .25s ease,opacity .25s ease}
+.hw-btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.hw-btn:hover:not(:disabled){background:rgba(255,255,255,.22)}
+.hw-btn:disabled{opacity:.35;cursor:default}
+.hw-btn:focus-visible,.hw-track:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+.hw.js .hw-head > *,.hw.js .hw-tile{opacity:0;transform:translateY(28px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.hw.js .hw-h{transition-delay:.08s}.hw.js .hw-tile{transition-delay:calc(.2s + var(--i) * .12s)}
+.hw.js.in .hw-head > *,.hw.js.in .hw-tile{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.hw *{transition:none!important}}
+@media (max-width:767px){.hw-tile{flex-basis:86vw;border-radius:24px}.hw-text{padding:26px 22px 0}.hw-nav{display:none}.hw-h{font-size:clamp(2.2rem,11vw,3.4rem)}}
+#does .rows{row-gap:48px}
+#does .rows > div{display:flex;flex-direction:column;gap:10px}
+#does .rows p{margin-bottom:22px}
 .step-pic{position:relative;overflow:hidden;aspect-ratio:4/3;margin-top:auto;background:var(--ink-2);border-radius:16px}
 .step-pic > canvas,.step-pic > .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .step-pic.has-media > canvas{display:none}
@@ -942,19 +968,45 @@ p,h1,h2,h3,ul{margin:0}
     </div>
   </section>
 
-  <section id="how" class="sec" data-sec="How it works" data-sid="how" aria-labelledby="how-title">
-    <div class="wrap">
-      <div class="sec-head">
-        <p class="label" data-k="how.label" data-l="Small label">How it works</p>
-        <h2 id="how-title" class="h-sec" data-k="how.title" data-l="Headline">Simple to start. Smart from day one.</h2>
-      </div>
-      <div class="rows three">
-        <div><span class="step-n">01</span><h3 class="h-item" data-k="how.1.t" data-l="Step 1 title">Connect.</h3><p data-k="how.1.d" data-l="Step 1 text">Fit the Explorer device, or link the trackers you already use.</p><div class="step-pic has-media" data-slot="how1" data-slot-l="Step 1 image" data-default-media="images/how-connect.webp"><canvas data-seed="3121" aria-hidden="true"></canvas><picture class="default-pic"><img class="photo" src="images/how-connect.webp?v=2" alt="The black Canopy Explorer device floating above a light surface, its wiring connector facing out" width="1600" height="1200" loading="lazy"></picture></div></div>
-        <div><span class="step-n">02</span><h3 class="h-item" data-k="how.2.t" data-l="Step 2 title">See.</h3><p data-k="how.2.d" data-l="Step 2 text">Every vehicle and every battery, live on one map, on web and mobile.</p><div class="step-pic has-media" data-slot="how2" data-slot-l="Step 2 image" data-default-media="images/how-see.webp"><canvas data-seed="3242" aria-hidden="true"></canvas><picture class="default-pic"><img class="photo" src="images/how-see.webp?v=2" alt="A laptop showing the Canopy live map, with vehicle pins and a short list of vehicles" width="1600" height="1200" loading="lazy"></picture></div></div>
-        <div><span class="step-n">03</span><h3 class="h-item" data-k="how.3.t" data-l="Step 3 title">Act.</h3><p data-k="how.3.d" data-l="Step 3 text">Get alerts, ask questions in plain words, and stop a vehicle safely.</p><div class="step-pic has-media" data-slot="how3" data-slot-l="Step 3 image" data-default-media="images/how-act.webp"><canvas data-seed="3363" aria-hidden="true"></canvas><picture class="default-pic"><img class="photo" src="images/how-act.webp?v=2" alt="The Explorer device beside a phone showing the Canopy lock control and a route on a map" width="1600" height="1200" loading="lazy"></picture></div></div>
-      </div>
+  <!-- How it works: Apple-style tile gallery. Big headline, three large swipeable tiles; images stay editable (how1–how3) -->
+  <section id="how" class="hw" data-sec="How it works" data-sid="how" aria-labelledby="how-title">
+    <div class="wrap hw-head">
+      <p class="label" data-k="how.label" data-l="Small label">How it works</p>
+      <h2 id="how-title" class="hw-h" data-k="how.title" data-l="Headline">Simple to start. Smart from day one.</h2>
+    </div>
+    <div class="hw-track" tabindex="0" aria-label="Three steps">
+        <article class="hw-tile" style="--i:0">
+          <div class="hw-text"><span class="hw-n">01</span><h3 class="hw-t" data-k="how.1.t" data-l="Step 1 title">Connect.</h3><p class="hw-d" data-k="how.1.d" data-l="Step 1 text">Fit the Explorer device, or link the trackers you already use.</p></div>
+          <div class="step-pic hw-pic has-media" data-slot="how1" data-slot-l="Step 1 image" data-default-media="images/how-connect.webp"><canvas data-seed="3121" aria-hidden="true"></canvas><picture class="default-pic"><img class="photo" src="images/how-connect.webp?v=3" alt="The black Canopy Explorer device floating above a light surface, its wiring connector facing out" width="1672" height="941" loading="lazy"></picture></div>
+        </article>
+        <article class="hw-tile" style="--i:1">
+          <div class="hw-text"><span class="hw-n">02</span><h3 class="hw-t" data-k="how.2.t" data-l="Step 2 title">See.</h3><p class="hw-d" data-k="how.2.d" data-l="Step 2 text">Every vehicle and every battery, live on one map, on web and mobile.</p></div>
+          <div class="step-pic hw-pic has-media" data-slot="how2" data-slot-l="Step 2 image" data-default-media="images/how-see.webp"><canvas data-seed="3242" aria-hidden="true"></canvas><picture class="default-pic"><img class="photo" src="images/how-see.webp?v=3" alt="A laptop showing the Canopy live map, with vehicle pins and a short list of vehicles" width="1672" height="941" loading="lazy"></picture></div>
+        </article>
+        <article class="hw-tile" style="--i:2">
+          <div class="hw-text"><span class="hw-n">03</span><h3 class="hw-t" data-k="how.3.t" data-l="Step 3 title">Act.</h3><p class="hw-d" data-k="how.3.d" data-l="Step 3 text">Get alerts, ask questions in plain words, and stop a vehicle safely.</p></div>
+          <div class="step-pic hw-pic has-media" data-slot="how3" data-slot-l="Step 3 image" data-default-media="images/how-act.webp"><canvas data-seed="3363" aria-hidden="true"></canvas><picture class="default-pic"><img class="photo" src="images/how-act.webp?v=3" alt="The Explorer device beside a phone showing the Canopy lock control and a route on a map" width="1672" height="941" loading="lazy"></picture></div>
+        </article>
+    </div>
+    <div class="wrap hw-nav">
+      <button type="button" class="hw-btn" data-dir="-1" aria-label="Previous step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" class="hw-btn" data-dir="1" aria-label="Next step"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
     </div>
   </section>
+  <script>
+  (function(){
+    var sec=document.getElementById('how');if(!sec)return;
+    var tr=sec.querySelector('.hw-track'),tiles=[].slice.call(tr.querySelectorAll('.hw-tile')),btns=sec.querySelectorAll('.hw-btn');
+    var rm=window.matchMedia('(prefers-reduced-motion: reduce)');
+    function step(){return tiles.length>1?tiles[1].offsetLeft-tiles[0].offsetLeft:tr.clientWidth}
+    function upd(){var max=tr.scrollWidth-tr.clientWidth-2;btns[0].disabled=tr.scrollLeft<=2;btns[1].disabled=tr.scrollLeft>=max}
+    [].forEach.call(btns,function(b){b.addEventListener('click',function(){tr.scrollBy({left:step()*(+b.dataset.dir),behavior:rm.matches?'auto':'smooth'})})});
+    tr.addEventListener('scroll',function(){window.requestAnimationFrame(upd)},{passive:true});window.addEventListener('resize',upd);upd();
+    sec.classList.add('js');
+    if(rm.matches||!('IntersectionObserver' in window)){sec.classList.add('in');return}
+    var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();sec.classList.add('in')}},{threshold:.18});io.observe(sec);
+  })();
+  </script>
 
   <!-- Explorer hardware showcase: copy left, technical illustration right (editable image / video slot) -->
   <section id="explorer" class="xs" data-sec="Explorer" data-sid="explorer" aria-labelledby="explorer-title">
