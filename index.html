@@ -617,7 +617,7 @@ p,h1,h2,h3,ul{margin:0}
 .sys-head .h-sec{max-width:none}
 .sys-head .lede{color:var(--s-mute);max-width:42ch}
 /* diagram */
-.sys-diagram{position:relative;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr) minmax(0,1.42fr) minmax(0,1.08fr);column-gap:clamp(52px,6.2vw,104px)}
+.sys-diagram{position:relative;display:grid;grid-template-columns:minmax(0,1.22fr) minmax(0,.98fr) minmax(0,1.32fr) minmax(0,1.02fr);column-gap:clamp(48px,5.2vw,92px)}
 .sys-lines{position:absolute;left:0;top:0;width:100%;height:100%;overflow:visible;pointer-events:none;z-index:0}
 .sys-lines path{fill:none;stroke:var(--s-line);stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round;transition:stroke .35s ease,stroke-width .35s ease,opacity .35s ease}
 .sys-lines path.hi{stroke:var(--teal-deep);stroke-width:1.8}
@@ -651,6 +651,13 @@ p,h1,h2,h3,ul{margin:0}
 .sys-nt{display:grid;gap:3px;min-width:0}
 .sys-nl{font-size:.92rem;font-weight:600;line-height:1.25}
 .sys-ns{font-size:.78rem;line-height:1.35;color:var(--s-mute)}
+/* 01 categories: compact 3-column selector; icon above label on desktop */
+.sys-stage[data-stage="1"] .sys-cats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-content:center}
+.sys-cat{flex-direction:column;justify-content:flex-start;align-items:center;text-align:center;gap:9px;padding:14px 6px 12px;min-height:100px;box-shadow:none}
+.sys-cat .sys-ic{width:36px;height:36px}
+.sys-cat .sys-nt{justify-items:center}
+.sys-cat .sys-nl{font-size:.76rem;line-height:1.22;text-wrap:balance}
+.sys-cat.on{box-shadow:0 0 0 3px rgba(20,184,166,.14)}
 .sys-node-lg{padding:14px 16px 14px 12px}
 .sys-node-lg .sys-ic{width:42px;height:42px;border-radius:10px}
 .sys-node-lg .sys-ic svg{width:22px;height:22px}
@@ -708,16 +715,17 @@ p,h1,h2,h3,ul{margin:0}
   .sys-sh{min-height:0;margin-bottom:16px;text-align:center}
   .sys-sk{justify-content:center}
   .sys-sb{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-  .sys-stage[data-stage="1"] .sys-sb{grid-template-columns:repeat(6,minmax(0,1fr))}
-  .sys-stage[data-stage="1"] .sys-node{grid-column:span 2}
-  .sys-stage[data-stage="1"] .sys-node:nth-child(4){grid-column:2 / span 2}
+  .sys-stage[data-stage="1"] .sys-cats{grid-template-columns:repeat(3,minmax(0,1fr));max-width:760px;width:100%;margin:0 auto}
+  .sys-cat{flex-direction:row;justify-content:flex-start;text-align:left;gap:11px;padding:10px 12px 10px 10px;min-height:0}
+  .sys-cat .sys-nt{justify-items:start}
+  .sys-cat .sys-nl{font-size:.86rem}
   .sys-stage[data-stage="3"] .sys-sb{display:block;max-width:560px;width:100%;margin:0 auto}
   .sys-node-aux{grid-column:1 / -1;margin-top:0}
 }
 @media (max-width:639px){
-  .sys-stage[data-stage="1"] .sys-sb{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .sys-stage[data-stage="1"] .sys-node,.sys-stage[data-stage="1"] .sys-node:nth-child(4){grid-column:auto}
-  .sys-stage[data-stage="1"] .sys-node:last-child{grid-column:1 / -1}
+  .sys-stage[data-stage="1"] .sys-cats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sys-stage[data-stage="1"] .sys-cat:last-child{grid-column:1 / -1}
+  .sys-cat .sys-nl{font-size:.82rem}
   .sys-node{padding:9px 10px 9px 9px;gap:10px}
   .sys-ic{width:32px;height:32px}
   .sys-node-lg .sys-ic{width:36px;height:36px}
@@ -1082,6 +1090,11 @@ p,h1,h2,h3,ul{margin:0}
       <symbol id="si-scooter" viewBox="0 0 24 24"><circle cx="5.5" cy="17.5" r="2.6"/><circle cx="18.5" cy="17.5" r="2.6"/><path d="M5.5 17.5h8.5l3.2-10.5"/><path d="M15.6 7h3.2"/><path d="M6 14.5h4.5"/></symbol>
       <symbol id="si-trike" viewBox="0 0 24 24"><path d="M2.5 15v-5a4 4 0 0 1 4-4H11v9"/><path d="M11 8.5h10.5V15"/><path d="M2.5 15h1.5M8 15h7M19 15h2.5"/><circle cx="6" cy="16.5" r="2"/><circle cx="17" cy="16.5" r="2"/></symbol>
       <symbol id="si-car" viewBox="0 0 24 24"><path d="M3 15.5v-3l2-4.5A2 2 0 0 1 6.8 7h8.4a2 2 0 0 1 1.6.8L20 12l1 1v2.5"/><path d="M3 15.5h1.5M9.5 15.5h5M19.5 15.5H21"/><circle cx="7" cy="16" r="2.3"/><circle cx="17" cy="16" r="2.3"/><path d="M5 12h15"/></symbol>
+      <symbol id="si-pickup" viewBox="0 0 24 24"><path d="M2.5 15.5V12h8.5V8.2h4.6l3 3.8h2.9v3.5"/><path d="M15 8.2V12h4.6"/><path d="M2.5 15.5h2.2M9.3 15.5h5.4M19.3 15.5h2.2"/><circle cx="7" cy="16" r="2.3"/><circle cx="17" cy="16" r="2.3"/></symbol>
+      <symbol id="si-van" viewBox="0 0 24 24"><path d="M2.5 15.5V7.5a1 1 0 0 1 1-1H14l4 4.5 2.5 1.2a1 1 0 0 1 .5.9v2.4"/><path d="M14 6.5V11h4"/><path d="M8 6.5V11"/><path d="M2.5 15.5h1.7M8.8 15.5h6.4M19.8 15.5H21"/><circle cx="6.5" cy="16" r="2.3"/><circle cx="17.5" cy="16" r="2.3"/></symbol>
+      <symbol id="si-ltruck" viewBox="0 0 24 24"><path d="M13.5 15.5V5.5h-11v10"/><path d="M13.5 9h4.3l3.2 3.6v2.9"/><path d="M2.5 15.5h1.7M8.8 15.5h6.4M19.8 15.5H21"/><circle cx="6.5" cy="16" r="2.3"/><circle cx="17.5" cy="16" r="2.3"/></symbol>
+      <symbol id="si-htruck" viewBox="0 0 24 24"><rect x="1.5" y="4.5" width="12.5" height="9" rx=".8"/><path d="M15.5 13.5V7h3.2a1 1 0 0 1 .8.4l2.2 3.1a1 1 0 0 1 .2.6v2.4"/><path d="M15.5 9.8h5"/><path d="M14 12h1.5"/><circle cx="4.2" cy="15.6" r="1.7"/><circle cx="7.6" cy="15.6" r="1.7"/><circle cx="18.4" cy="15.6" r="1.7"/></symbol>
+      <symbol id="si-bus" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12.5" rx="2.5"/><path d="M3 11h18"/><path d="M9 4v7M15 4v7"/><path d="M6.5 16.5v2M17.5 16.5v2"/><path d="M6 14h1.5M16.5 14H18"/></symbol>
       <symbol id="si-battery" viewBox="0 0 24 24"><rect x="3" y="7" width="16" height="10" rx="2"/><path d="M21 10.5v3"/><path d="M11.5 9 9 12.5h3.5L10 15"/></symbol>
       <symbol id="si-explorer" viewBox="0 0 24 24"><rect x="3" y="6.5" width="13" height="11" rx="2"/><path d="M16 9.5h4v5h-4"/><path d="M17.6 11.2v1.6M19 11.2v1.6"/><path d="M6.5 10h5M6.5 13h3"/></symbol>
       <symbol id="si-tracker" viewBox="0 0 24 24"><rect x="8" y="10" width="8" height="10.5" rx="2"/><path d="M12 14v.01"/><path d="M8.6 6.6a4.8 4.8 0 0 1 6.8 0"/><path d="M6.2 4.2a8.2 8.2 0 0 1 11.6 0"/></symbol>
@@ -1131,12 +1144,16 @@ p,h1,h2,h3,ul{margin:0}
 
         <div class="sys-stage" data-stage="1">
           <div class="sys-sh"><p class="sys-sk"><b>01</b><span data-k="sys.s1.k" data-l="Stage 1 name">Vehicles &amp; batteries</span></p><p class="sys-st" data-k="sys.s1.t" data-l="Stage 1 line">Every brand. Every asset.</p></div>
-          <div class="sys-sb">
-            <button type="button" class="sys-node" data-node="v0" style="--i:0"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-moto"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.moto" data-l="Node · Motorcycles">Motorcycles</span></span></button>
-            <button type="button" class="sys-node" data-node="v1" style="--i:1"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-scooter"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.scooter" data-l="Node · Scooters">Scooters</span></span></button>
-            <button type="button" class="sys-node" data-node="v2" style="--i:2"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-trike"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.trike" data-l="Node · Three-wheelers">Three-wheelers</span></span></button>
-            <button type="button" class="sys-node" data-node="v3" style="--i:3"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-car"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.car" data-l="Node · Compact cars">Compact cars</span></span></button>
-            <button type="button" class="sys-node" data-node="v4" style="--i:4"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-battery"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.battery" data-l="Node · Batteries">Batteries</span></span></button>
+          <div class="sys-sb sys-cats" role="group" aria-label="Vehicle and asset categories">
+            <button type="button" class="sys-node sys-cat" data-node="v0" style="--i:0"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-moto"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.moto" data-l="Node · Motorcycles">Motorcycles</span></span></button>
+            <button type="button" class="sys-node sys-cat" data-node="v1" style="--i:1"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-scooter"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.scooter" data-l="Node · Scooters">Scooters</span></span></button>
+            <button type="button" class="sys-node sys-cat" data-node="v2" style="--i:2"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-trike"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.trike" data-l="Node · Three-wheelers">Three-wheelers</span></span></button>
+            <button type="button" class="sys-node sys-cat" data-node="v3" style="--i:3"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-pickup"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.pickup" data-l="Node · Cars &amp; Pickups">Cars &amp; Pickups</span></span></button>
+            <button type="button" class="sys-node sys-cat" data-node="v4" style="--i:4"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-van"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.van" data-l="Node · Delivery Vans">Delivery Vans</span></span></button>
+            <button type="button" class="sys-node sys-cat" data-node="v5" style="--i:5"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-ltruck"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.ltruck" data-l="Node · Light Trucks">Light Trucks</span></span></button>
+            <button type="button" class="sys-node sys-cat" data-node="v6" style="--i:6"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-htruck"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.htruck" data-l="Node · Heavy Trucks">Heavy Trucks</span></span></button>
+            <button type="button" class="sys-node sys-cat" data-node="v7" style="--i:7"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-bus"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.bus" data-l="Node · Buses &amp; Minibuses">Buses &amp; Minibuses</span></span></button>
+            <button type="button" class="sys-node sys-cat" data-node="v8" style="--i:8"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-battery"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.battery" data-l="Node · Batteries">Batteries</span></span></button>
           </div>
         </div>
 
@@ -1185,23 +1202,23 @@ p,h1,h2,h3,ul{margin:0}
     sec.classList.add('js');
 
     var nodes={};[].forEach.call(dia.querySelectorAll('.sys-node'),function(b){nodes[b.dataset.node]=b});
-    var V=['v0','v1','v2','v3','v4'],O=['o0','o1','o2','o3'];
+    var V=['v0','v1','v2','v3','v4','v5','v6','v7','v8'],O=['o0','o1','o2','o3'],cats=dia.querySelector('.sys-cats');
 
     /* edges: id -> [from, to, group]; J1..J3 are junctions on the buses between stages */
     var EDGES={c1:['J1','explorer','c'],c2:['J1','trackers','c'],h1:['explorer','hub','h'],h2:['trackers','hub','h'],s:['hub','safelock','o']};
-    V.forEach(function(v,i){EDGES['v'+i]=[v,'J1','v']});
+    EDGES.vg=['cats','J1','v'];   /* the category grid has one connector, leaving from the active category's row */
     O.forEach(function(o,i){EDGES['o'+i]=['hub',o,'o']});
     function rel(id){
-      if(!id)return['v0','c1','h1','o0'];   /* default: one quiet route through the system */
-      if(/^v\d$/.test(id))return['v'+id.slice(1),'c1','c2','h1','h2'];
-      if(id==='explorer')return V.map(function(_,i){return'v'+i}).concat(['c1','h1']);
-      if(id==='trackers')return V.map(function(_,i){return'v'+i}).concat(['c2','h2']);
+      if(!id)return['vg','c1','h1','o0'];   /* default: one quiet route through the system */
+      if(/^v\d$/.test(id))return['vg','c1','c2','h1','h2'];
+      if(id==='explorer')return['vg','c1','h1'];
+      if(id==='trackers')return['vg','c2','h2'];
       if(id==='hub')return['h1','h2','s'].concat(O.map(function(_,i){return'o'+i}));
       if(/^o\d$/.test(id))return['o'+id.slice(1),'h1','h2'];
       if(id==='safelock')return['s','h1','h2'];
       return[];
     }
-    var DOTS={J1:{g:'v',e:['c1','c2'].concat(V.map(function(_,i){return'v'+i}))},J2:{g:'h',e:['h1','h2']},P1:{g:'h',e:['h1','h2']},J3:{g:'o',e:['s'].concat(O.map(function(_,i){return'o'+i}))},P2:{g:'o',e:['s'].concat(O.map(function(_,i){return'o'+i}))}};
+    var DOTS={J1:{g:'v',e:['c1','c2','vg']},J2:{g:'h',e:['h1','h2']},P1:{g:'h',e:['h1','h2']},J3:{g:'o',e:['s'].concat(O.map(function(_,i){return'o'+i}))},P2:{g:'o',e:['s'].concat(O.map(function(_,i){return'o'+i}))}};
 
     var pathEls={},dotEls={};
     Object.keys(EDGES).forEach(function(id){
@@ -1237,9 +1254,10 @@ p,h1,h2,h3,ul{margin:0}
       if(mqNarrow.matches)return;
       var D=dia.getBoundingClientRect();
       svg.setAttribute('viewBox','0 0 '+D.width.toFixed(1)+' '+D.height.toFixed(1));
-      var vb=V.map(function(v){return box(nodes[v],D)}),ex=box(nodes.explorer,D),tr=box(nodes.trackers,D),hb=box(nodes.hub,D),ob=O.map(function(o){return box(nodes[o],D)}),sl=box(nodes.safelock,D);
-      var R=10,bx1=(vb[0].r+ex.l)/2,jy=(ex.m+tr.m)/2,bx2=(ex.r+hb.l)/2,yh=hb.m,bx3=(hb.r+ob[0].l)/2;
-      vb.forEach(function(b,i){pathEls['v'+i].setAttribute('d',rpath([[b.r,b.m],[bx1,b.m],[bx1,jy]],R))});
+      var cg=box(cats,D),ex=box(nodes.explorer,D),tr=box(nodes.trackers,D),hb=box(nodes.hub,D),ob=O.map(function(o){return box(nodes[o],D)}),sl=box(nodes.safelock,D);
+      var R=10,bx1=(cg.r+ex.l)/2,jy=(ex.m+tr.m)/2,bx2=(ex.r+hb.l)/2,yh=hb.m,bx3=(hb.r+ob[0].l)/2;
+      var act=preview||sel,ay=(act&&/^v\d$/.test(act))?box(nodes[act],D).m:cg.m;
+      pathEls.vg.setAttribute('d',rpath([[cg.r,ay],[bx1,ay],[bx1,jy]],R));
       pathEls.c1.setAttribute('d',rpath([[bx1,jy],[bx1,ex.m],[ex.l,ex.m]],R));
       pathEls.c2.setAttribute('d',rpath([[bx1,jy],[bx1,tr.m],[tr.l,tr.m]],R));
       pathEls.h1.setAttribute('d',rpath([[ex.r,ex.m],[bx2,ex.m],[bx2,yh],[hb.l,yh]],R));
@@ -1257,6 +1275,9 @@ p,h1,h2,h3,ul{margin:0}
       dia.classList.toggle('focus',focus);
       var relNodes={};if(id)relNodes[id]=1;
       Object.keys(pathEls).forEach(function(e){var on=hi.indexOf(e)>=0;pathEls[e].classList.toggle('hi',on);if(on){relNodes[EDGES[e][0]]=1;relNodes[EDGES[e][1]]=1}});
+      /* the grid connector relates to every category, except when one category is the focus */
+      if(relNodes.cats&&!(id&&/^v\d$/.test(id)))V.forEach(function(v){relNodes[v]=1});
+      layout();
       Object.keys(dotEls).forEach(function(k){dotEls[k].classList.toggle('hi',DOTS[k].e.some(function(e){return hi.indexOf(e)>=0}))});
       /* lit lines and dots sit on top of the grey ones */
       hi.forEach(function(e){svg.appendChild(pathEls[e])});Object.keys(dotEls).forEach(function(k){svg.appendChild(dotEls[k])});
