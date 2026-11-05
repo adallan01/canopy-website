@@ -224,14 +224,16 @@ p,h1,h2,h3,ul{margin:0}
 #why.band.light .h-sec{max-width:13.5em}
 #why.band > .wrap{gap:18px}
 @media (min-width:1024px){
-  #why.band{align-items:center;min-height:0;aspect-ratio:2400/1351}
-  #why.band > .wrap{padding-block:clamp(40px,4vw,72px)}
+  /* text sits on the clear wall, its top level with the laptop screen, ending well above the desk line */
+  #why.band{align-items:flex-start;min-height:0;aspect-ratio:2400/1351}
+  #why.band > .wrap{gap:0;padding-block:calc(100vw * 1351 / 2400 * .175) 0}
   #why.band.light .photo{object-position:100% 50%}
-  #why.band.light::after{background:linear-gradient(90deg,rgba(255,255,255,.6) 0%,rgba(255,255,255,.3) 30%,rgba(255,255,255,0) 50%)}
-  #why.band.light .h-sec{max-width:11em}
-  #why.band.light .lede{max-width:24em}
+  #why.band.light::after{background:linear-gradient(90deg,rgba(244,244,245,.55) 0%,rgba(244,244,245,.28) 28%,rgba(244,244,245,0) 46%)}
+  #why.band.light .label{letter-spacing:.18em}
+  #why.band.light .h-sec{margin-top:clamp(16px,1.5vw,24px);max-width:11em;line-height:1.02}
+  #why.band.light .lede{margin-top:clamp(18px,1.7vw,28px);max-width:27ch;font-size:clamp(1.02rem,1.25vw,1.3rem);line-height:1.5;color:#33484A;text-wrap:pretty}
 }
-@media (min-width:1024px) and (max-width:1279px){#why.band.light .lede{max-width:min(21em,33vw)}#why.band.light .h-sec{font-size:clamp(2rem,3.3vw,3rem)}}
+@media (min-width:1024px) and (max-width:1279px){#why.band.light .h-sec{font-size:clamp(2rem,3.4vw,3rem)}#why.band.light .lede{max-width:25ch}}
 /* upright tablets: photo on top, text on a light panel below (same idea as phones) */
 @media (min-width:768px) and (max-width:1023px){
   #why.band.light{min-height:860px}
