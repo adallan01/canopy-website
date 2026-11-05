@@ -226,7 +226,7 @@ p,h1,h2,h3,ul{margin:0}
 @media (min-width:1024px){
   /* text sits on the clear wall, its top level with the laptop screen, ending well above the desk line */
   #why.band{align-items:flex-start;min-height:0;aspect-ratio:2400/1351}
-  #why.band > .wrap{gap:0;padding-block:calc(100vw * 1351 / 2400 * .175) 0}
+  #why.band > .wrap{gap:0;padding-block:calc(100vw * 1351 / 2400 * .25) 0}
   #why.band.light .photo{object-position:100% 50%}
   #why.band.light::after{background:linear-gradient(90deg,rgba(244,244,245,.55) 0%,rgba(244,244,245,.28) 28%,rgba(244,244,245,0) 46%)}
   #why.band.light .label{letter-spacing:.18em}
@@ -237,11 +237,11 @@ p,h1,h2,h3,ul{margin:0}
 /* upright tablets: photo on top, text on a light panel below (same idea as phones) */
 @media (min-width:768px) and (max-width:1023px){
   #why.band.light{min-height:860px}
-  #why.band.light .photo{height:calc(100% - 300px);object-position:88% 50%}
+  #why.band.light .photo{height:calc(100% - 300px);object-position:60% 40%}
   #why.band.light::after{background:linear-gradient(0deg,#E9ECEB 0%,#E9ECEB 300px,rgba(233,236,235,0) 400px)}
   #why.band.light .lede{max-width:34em}
 }
-@media (max-width:767px){#why.band.light .h-sec{font-size:min(1.7rem,calc((100vw - 32px) / 12.8))}}
+@media (max-width:767px){#why.band.light .h-sec{font-size:min(1.7rem,calc((100vw - 32px) / 12.8))}#why.band.light .photo{object-position:8% 50%}}
 #film.band > .wrap{transform:translateY(-85%)}
 #film.band.light .btn.ghost{color:var(--ink);border-color:rgba(11,26,28,.5)}
 #film.band.light .btn.ghost:hover{border-color:var(--ink)}
@@ -980,7 +980,7 @@ p,h1,h2,h3,ul{margin:0}
 
   <section id="why" class="bleed band light has-media" data-sec="Why it matters" data-sid="why" data-slot="why" data-slot-l="Section background" data-default-media="images/why-it-matters.webp" aria-labelledby="why-title">
     <canvas data-seed="2207" aria-hidden="true"></canvas>
-    <picture class="default-pic"><source media="(max-width:767px)" srcset="images/why-mobile.webp?v=6"><img class="photo" src="images/why-it-matters.webp?v=6" alt="A laptop showing a live fleet map, a printed spreadsheet and a phone with a vehicle battery reading on a light desk" width="2400" height="1351" loading="lazy"></picture>
+    <picture class="default-pic"><source media="(max-width:767px)" srcset="images/why-mobile.webp?v=8"><img class="photo" src="images/why-it-matters.webp?v=7" alt="A bright office desk with two monitors, one showing a live fleet map and the other a vehicle list, beside a window" width="2400" height="1351" loading="lazy"></picture>
     <div class="wrap">
       <p class="label" data-k="why.label" data-l="Small label">Why it matters</p>
       <h2 id="why-title" class="h-sec" data-k="why.title" data-l="Headline">Fleets evolve. Tools don’t.</h2>
