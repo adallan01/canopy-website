@@ -248,8 +248,7 @@ p,h1,h2,h3,ul{margin:0}
 #film > .default-pic .photo{transform:scaleX(-1)}
 @media (min-width:768px){#film.band.light::after{background:linear-gradient(270deg,rgba(255,255,255,.75) 0%,rgba(255,255,255,.4) 30%,rgba(255,255,255,0) 50%)}#film.band > .wrap{justify-items:end;text-align:right}#film .btns{justify-content:flex-end}}
 @media (max-width:767px){#film.band > .wrap{transform:none}#film.band.light > .default-pic .photo{object-position:90% 50%}}
-#demo.band > .photo{object-position:50% 50%}
-#demo.band > .wrap{transform:translateY(-30%)}.band .wrap{display:grid;gap:20px}
+.band .wrap{display:grid;gap:20px}
 .band .shot{top:28px}
 .bleed.has-upload > .default-pic{display:none}
 /* light band: dark text on a bright photo, fade from the left */
@@ -1635,17 +1634,6 @@ p,h1,h2,h3,ul{margin:0}
   })();
   </script>
 
-  <section id="demo" class="bleed band gap-top has-media" data-sec="Closing" data-sid="closing" data-slot="closing" data-slot-l="Section background" data-default-media="images/closing.webp" aria-labelledby="demo-title">
-    <canvas data-seed="1013" aria-hidden="true"></canvas>
-    <picture class="default-pic"><img class="photo" src="images/closing.webp" alt="A motorcycle, scooter, delivery trike and electric car lined up on a waterfront at dusk with a city skyline across the water" width="2688" height="1520" loading="lazy"></picture>
-    <div class="wrap">
-      <h2 id="demo-title" class="h-sec" data-k="close.title" data-l="Headline">See your fleet under one Canopy.</h2>
-      <div class="btns">
-        <a class="btn" href="https://dev.canopy.roam-electric.com/pricing#lead-request-form" data-k="close.cta1" data-l="Main button" data-hk="link.demo">Book a demo</a>
-        <a class="btn ghost" href="https://canopy.roam-electric.com/demo" data-k="close.cta2" data-l="Second button" data-hk="link.fleet" data-hl="Explore the demo fleet button">Explore the demo fleet</a>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer class="fig has-media" data-sec="Footer" data-sid="footer" data-slot="footer" data-slot-l="Footer background (uploads shown blurred)" data-default-media="images/footer.webp">
@@ -1671,7 +1659,7 @@ p,h1,h2,h3,ul{margin:0}
         <a href="#top" data-hk="link.s4" data-hl="YouTube channel" aria-label="Canopy on YouTube"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4" fill="currentColor"/><path d="M10 9l5 3-5 3z" fill="#0B1A1C"/></svg></a>
         <a href="#top" data-hk="link.s5" data-hl="TikTok profile" aria-label="Canopy on TikTok"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3v12.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M13 3c.4 2.6 2.4 4.6 5 5"/></svg></a>
       </div>
-      <a class="fig-contact" href="#demo" data-hk="link.contact" data-hl="Contact us link"><span data-k="foot.contact" data-l="Contact link text">Contact us</span><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></a>
+      <a class="fig-contact" href="https://dev.canopy.roam-electric.com/pricing#lead-request-form" data-hk="link.contact" data-hl="Contact us link"><span data-k="foot.contact" data-l="Contact link text">Contact us</span><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12L12 4M5.5 4H12v6.5"/></svg></a>
     </div>
     <nav class="fig-nav" aria-label="Footer">
       <ol>
