@@ -1475,7 +1475,7 @@ p,h1,h2,h3,ul{margin:0}
     function tween(ms,fn,ease){return new Promise(function(r){var t0=performance.now();(function f(t){var k=Math.min(1,(t-t0)/ms);fn(ease?ease(k):k);if(k<1)requestAnimationFrame(f);else r()})(t0)})}
     var outCubic=function(k){return 1-Math.pow(1-k,3)},outQuad=function(k){return 1-Math.pow(1-k,2.2)};
 
-    /* 02 battery: steps down once a second, holds 5 s, refills, repeats */
+    /* 02 battery: steps down once a second, holds 8 s, refills, repeats */
     var bat=s.querySelector('[data-count]'),hl=s.querySelector('.dz-health');
     function setBat(v){bat.textContent=Math.round(v);fillSegs(v);var t=v>=80?'Good':v>=70?'Fair':'Service soon';if(hl.textContent!==t)hl.textContent=t;hl.classList.toggle('warn',v<70)}
     async function battery(){
@@ -1483,12 +1483,12 @@ p,h1,h2,h3,ul{margin:0}
       for(;;){
         var steps=[93,86,79,72,65];
         for(var i=0;i<steps.length;i++){var from=cur,to=steps[i];await tween(450,function(k){setBat(from+(to-from)*k)},outCubic);cur=to;await sleep(550)}
-        await sleep(5000);
+        await sleep(8000);
         var f0=cur;await tween(900,function(k){setBat(f0+(100-f0)*k)},outCubic);cur=100;await sleep(900);
       }
     }
 
-    /* 03 stop: 38 km/h eases down to 0 over 4 s (slowing near the end), stops, locks, holds 5 s, repeats */
+    /* 03 stop: 38 km/h eases down to 0 over 4 s (slowing near the end), stops, locks, holds 8 s, repeats */
     var spd=s.querySelector('[data-speed]'),st=s.querySelector('.dz-status'),stb=st.querySelector('b');
     function moving(){st.classList.remove('locked');stb.textContent='Moving'}
     async function stop(){
@@ -1497,12 +1497,12 @@ p,h1,h2,h3,ul{margin:0}
         await tween(4000,function(k){spd.textContent=Math.ceil(38*(1-k)-.001)},outQuad);
         stb.textContent='Stopped';await sleep(700);
         st.classList.add('locked');stb.textContent='Locked';
-        await sleep(5000);
+        await sleep(8000);
         moving();await tween(900,function(k){spd.textContent=Math.round(38*k)},outCubic);
       }
     }
 
-    /* 04 ask: a short back-and-forth with Rover; holds 5 s, fades, starts again */
+    /* 04 ask: a short back-and-forth with Rover; holds 8 s, fades, starts again */
     var chat=s.querySelector('.dz-chat');
     var SPARK='<svg viewBox="0 0 24 24"><path d="M12 3.5l1.9 5 5 1.9-5 1.9-1.9 5-1.9-5-5-1.9 5-1.9z"/></svg>';
     var CONVO=[['q','Which bikes are overdue for service?'],['a','3 bikes. Bike 14 is the most overdue.'],
@@ -1529,7 +1529,7 @@ p,h1,h2,h3,ul{margin:0}
             dots.textContent=text;await sleep(1300);
           }
         }
-        await sleep(5000);chat.classList.add('out');await sleep(550);
+        await sleep(8000);chat.classList.add('out');await sleep(550);
       }
     }
 
