@@ -804,6 +804,35 @@ p,h1,h2,h3,ul{margin:0}
 .dz.js .dz-head,.dz.js .dz-tile{opacity:0;transform:translateY(24px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1),border-color .45s ease}
 .dz.js.in .dz-head,.dz.js.in .dz-tile{opacity:1;transform:none}
 .dz.js .dz-tile{transition-delay:calc(var(--i) * 70ms),calc(var(--i) * 70ms),0s}
+/* What Canopy does: light theme (pale ground, white tiles, Canopy teal accents) */
+#does{background:#F4F5F5;color:#0B1A1C}
+#does .label{color:#007A7A}
+#does .dz-head .h-sec{color:#0B1A1C}
+#does .dz-accent{background:linear-gradient(90deg,#007A7A 0%,#14B8A6 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+#does .dz-tile{background:#FFFFFF;border-color:rgba(11,26,28,.07);box-shadow:0 1px 2px rgba(11,26,28,.04),0 12px 32px -18px rgba(11,26,28,.18)}
+#does .dz-tile:hover{border-color:rgba(0,122,122,.35)}
+#does .dz-n{color:#007A7A}
+#does .dz-t{color:#0B1A1C}
+#does .dz-d{color:#56686A}
+#does .dz-stage{background:#F1F4F4;border-color:rgba(11,26,28,.05)}
+#does .dz-mini,#does .dz-cap{color:#6B7E7F}
+#does .dz-map .rd{stroke:#DCE5E5}
+#does .dz-map .zone{fill:rgba(20,184,166,.10);stroke:#0E9C8C}
+#does .dz-map .car{fill:#0E9C8C}
+#does .dz-map .ring{stroke:#0E9C8C}
+#does .dz-live{background:rgba(255,255,255,.92);border-color:rgba(11,26,28,.08);color:#0B1A1C}
+#does .dz-big{color:#007A7A}
+#does .dz-big small{color:#4F9C9A}
+#does .dz-segs i{background:#DCE5E5}
+#does .dz-segs i.on{background:#14B8A6}
+#does .dz-segs i.warn{background:#E0962E}
+#does .dz-health.warn{color:#B86F0E}
+#does .dz-status{background:#E3EBEB;color:#0B1A1C}
+#does .dz-status.locked{background:#007A7A;color:#FFFFFF}
+#does .dz-m.q .b{background:#007A7A;color:#FFFFFF}
+#does .dz-m.a .b{background:#FFFFFF;color:#0B1A1C;box-shadow:0 1px 2px rgba(11,26,28,.08)}
+#does .dz-m.a svg{stroke:#0E9C8C}
+#does .dz-dots i{background:#7A8C8D}
 @media (max-width:1099px){.dz-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.dz-stage{height:200px}}
 @media (max-width:639px){.dz-grid{grid-template-columns:minmax(0,1fr);gap:12px}.dz-tile{border-radius:24px}.dz-copy{padding-bottom:22px}.dz-stage{height:190px}.dz-d{max-width:34ch}}
 @media (prefers-reduced-motion:reduce){.dz.js .dz-head,.dz.js .dz-tile{opacity:1;transform:none;transition:none}.dz-map .ring,.dz-m .cur,.dz-dots i{animation:none!important}.dz-status,.dz-status .sh,.dz-segs i,.dz-m,.dz-m .b,.dz-chat{transition:none}}
