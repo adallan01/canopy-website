@@ -1123,7 +1123,7 @@ p,h1,h2,h3,ul{margin:0}
     /* arrows: go to the previous / next card; while the cards are pinned this moves the page to the matching scroll point */
     [].forEach.call(btns,function(b){b.addEventListener('click',function(){
       var i=Math.max(0,Math.min(tiles.length-1,cur()+(+b.dataset.dir))),o=Math.min(tiles[i].offsetLeft-tiles[0].offsetLeft,max());
-      if(st&&max()>0){window.scrollTo({top:st.start+(st.end-st.start)*(o/max()),behavior:rm.matches?'auto':'smooth'})}
+      if(st&&max()>0){var q=o/max();window.scrollTo({top:st.start+hold()+move()*(Math.acos(1-2*q)/Math.PI),behavior:rm.matches?'auto':'smooth'})}
       else tr.scrollTo({left:o,behavior:rm.matches?'auto':'smooth'})})});
     tr.addEventListener('scroll',function(){window.requestAnimationFrame(upd)},{passive:true});window.addEventListener('resize',upd);upd();
     sec.classList.add('js');
@@ -1133,12 +1133,19 @@ p,h1,h2,h3,ul{margin:0}
     if(rm.matches||!(window.gsap&&window.ScrollTrigger))return;
     gsap.registerPlugin(ScrollTrigger);
     sec.classList.add('hw-scrub');
-    var tw=gsap.to(tr,{scrollLeft:function(){return max()},ease:'none',onUpdate:upd});
-    st=ScrollTrigger.create({trigger:stage,start:'center center',end:function(){return '+='+Math.max(1,max())*1.15},pin:true,scrub:.6,anticipatePin:1,invalidateOnRefresh:true,animation:tw});
+    /* the row holds still for a short stretch of scrolling when it pins and again after the last card,
+       and the cards ease in and out of their slide, so arriving and leaving never feels abrupt */
+    function hold(){return Math.round(window.innerHeight*.45)}
+    function move(){return Math.max(1,max())*1.15}
+    var tw=gsap.timeline({onUpdate:upd})
+      .to({},{duration:function(){return hold()}})
+      .to(tr,{scrollLeft:function(){return max()},duration:function(){return move()},ease:'sine.inOut'})
+      .to({},{duration:function(){return hold()}});
+    st=ScrollTrigger.create({trigger:stage,start:'center center',end:function(){return '+='+(move()+2*hold())},pin:true,scrub:1,anticipatePin:1,invalidateOnRefresh:true,animation:tw});
     window.addEventListener('load',function(){ScrollTrigger.refresh()});
     /* sideways gestures move the cards too: a trackpad swipe, shift + wheel, or dragging the row with the mouse or a finger.
        Each one is turned into the matching page scroll, so the cards and the pin stay in step with normal scrolling. */
-    function ratio(){var m=max();return m>0?(st.end-st.start)/m:0}
+    function ratio(){var m=max();return m>0?move()/m:0}
     stage.addEventListener('wheel',function(e){
       var dx=e.deltaX,dy=e.deltaY;
       if(e.shiftKey&&!dx){dx=dy}else if(Math.abs(dx)<=Math.abs(dy))return;
