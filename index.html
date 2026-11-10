@@ -296,6 +296,7 @@ p,h1,h2,h3,ul{margin:0}
 .hw-btn:disabled{opacity:.35;cursor:default}
 .hw-btn:focus-visible,.hw-track:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
 .hw.hw-scrub .hw-track{scroll-snap-type:none;overflow-x:hidden}
+.hw-scrub .hw-track{touch-action:pan-y;cursor:grab}.hw-scrub.hw-drag .hw-track{cursor:grabbing;user-select:none;-webkit-user-select:none}.hw-scrub .hw-track img{-webkit-user-drag:none;user-drag:none}
 .hw-stage{padding-block:8px}
 .hw.js .hw-head > *,.hw.js .hw-tile{opacity:0;transform:translateY(28px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
 .hw.js .hw-h{transition-delay:.08s}.hw.js .hw-tile{transition-delay:calc(.2s + var(--i) * .12s)}
@@ -1135,6 +1136,32 @@ p,h1,h2,h3,ul{margin:0}
     var tw=gsap.to(tr,{scrollLeft:function(){return max()},ease:'none',onUpdate:upd});
     st=ScrollTrigger.create({trigger:stage,start:'center center',end:function(){return '+='+Math.max(1,max())*1.15},pin:true,scrub:.6,anticipatePin:1,invalidateOnRefresh:true,animation:tw});
     window.addEventListener('load',function(){ScrollTrigger.refresh()});
+    /* sideways gestures move the cards too: a trackpad swipe, shift + wheel, or dragging the row with the mouse or a finger.
+       Each one is turned into the matching page scroll, so the cards and the pin stay in step with normal scrolling. */
+    function ratio(){var m=max();return m>0?(st.end-st.start)/m:0}
+    stage.addEventListener('wheel',function(e){
+      var dx=e.deltaX,dy=e.deltaY;
+      if(e.shiftKey&&!dx){dx=dy}else if(Math.abs(dx)<=Math.abs(dy))return;
+      var k=ratio();if(!dx||!k)return;
+      var mul=e.deltaMode===1?16:e.deltaMode===2?window.innerHeight:1;
+      e.preventDefault();window.scrollBy(0,dx*mul*k);
+    },{passive:false});
+    var drag=null,dragged=false;
+    tr.addEventListener('dragstart',function(e){e.preventDefault()});
+    tr.addEventListener('pointerdown',function(e){if(e.button!==0)return;dragged=false;drag={x:e.clientX,y:e.clientY,id:e.pointerId,on:false}});
+    window.addEventListener('pointermove',function(e){
+      if(!drag||e.pointerId!==drag.id)return;
+      var dx=e.clientX-drag.x,dy=e.clientY-drag.y;
+      if(!drag.on){
+        if(Math.abs(dx)<6&&Math.abs(dy)<6)return;
+        if(Math.abs(dy)>Math.abs(dx)){drag=null;return}
+        drag.on=dragged=true;sec.classList.add('hw-drag');try{tr.setPointerCapture(e.pointerId)}catch(_){}
+      }
+      window.scrollBy(0,-dx*ratio());drag.x=e.clientX;drag.y=e.clientY;
+    });
+    function endDrag(){drag=null;sec.classList.remove('hw-drag')}
+    window.addEventListener('pointerup',endDrag);window.addEventListener('pointercancel',endDrag);
+    tr.addEventListener('click',function(e){if(dragged){e.preventDefault();e.stopPropagation();dragged=false}},true);
   })();
   </script>
 
