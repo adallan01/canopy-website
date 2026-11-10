@@ -243,6 +243,9 @@ p,h1,h2,h3,ul{margin:0}
 }
 @media (max-width:767px){#why.band.light .h-sec{font-size:min(1.7rem,calc((100vw - 32px) / 12.8))}#why.band.light .photo{object-position:50% 50%}}
 #film.band > .wrap{transform:translateY(-85%)}
+/* no dark seam under Features: the sky fades up into the white section above */
+#film.gap-top{margin-top:0;background:#FFFFFF}
+#film::before{content:"";position:absolute;left:0;right:0;top:0;height:clamp(90px,10vw,180px);z-index:1;pointer-events:none;background:linear-gradient(180deg,#FFFFFF 0%,rgba(255,255,255,.85) 30%,rgba(255,255,255,0) 100%)}
 #film.band.light .btn.ghost{color:var(--ink);border-color:rgba(11,26,28,.5)}
 #film.band.light .btn.ghost:hover{border-color:var(--ink)}
 #film > .default-pic .photo{transform:scaleX(-1)}
