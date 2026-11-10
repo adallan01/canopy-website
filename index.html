@@ -296,6 +296,7 @@ p,h1,h2,h3,ul{margin:0}
 .hw-btn:disabled{opacity:.35;cursor:default}
 .hw-btn:focus-visible,.hw-track:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
 .hw.hw-scrub .hw-track{scroll-snap-type:none;overflow-x:hidden}
+.hw-rail{display:flex;flex:none;gap:inherit;will-change:transform;backface-visibility:hidden}
 .hw-scrub .hw-track{touch-action:pan-y;cursor:grab}.hw-scrub.hw-drag .hw-track{cursor:grabbing;user-select:none;-webkit-user-select:none}.hw-scrub .hw-track img{-webkit-user-drag:none;user-drag:none}
 .hw-stage{padding-block:8px}
 .hw.js .hw-head > *,.hw.js .hw-tile{opacity:0;transform:translateY(28px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
@@ -1119,9 +1120,13 @@ p,h1,h2,h3,ul{margin:0}
     var sec=document.getElementById('how');if(!sec)return;
     var stage=sec.querySelector('.hw-stage'),tr=sec.querySelector('.hw-track'),tiles=[].slice.call(tr.querySelectorAll('.hw-tile')),btns=sec.querySelectorAll('.hw-btn');
     var rm=window.matchMedia('(prefers-reduced-motion: reduce)'),st=null;
-    function max(){return Math.max(0,tr.scrollWidth-tr.clientWidth)}
-    function upd(){var m=max()-2;btns[0].disabled=tr.scrollLeft<=2;btns[1].disabled=tr.scrollLeft>=m}
-    function cur(){var x=tr.scrollLeft,best=0,d=1e9;tiles.forEach(function(t,i){var o=Math.min(t.offsetLeft-tiles[0].offsetLeft,max()),k=Math.abs(o-x);if(k<d){d=k;best=i}});return best}
+    /* rail: while the cards are scroll-driven they sit in one inner row that is moved with a GPU transform (smooth),
+       instead of animating the track's scroll position (steps in whole pixels and stutters) */
+    var rail=null,pos=0;
+    function max(){if(rail){var cs=getComputedStyle(tr);return Math.max(0,rail.offsetWidth+parseFloat(cs.paddingLeft)+parseFloat(cs.paddingRight)-tr.clientWidth)}return Math.max(0,tr.scrollWidth-tr.clientWidth)}
+    function sl(){return rail?pos:tr.scrollLeft}
+    function upd(){var m=max()-2,x=sl();btns[0].disabled=x<=2;btns[1].disabled=x>=m}
+    function cur(){var x=sl(),best=0,d=1e9;tiles.forEach(function(t,i){var o=Math.min(t.offsetLeft-tiles[0].offsetLeft,max()),k=Math.abs(o-x);if(k<d){d=k;best=i}});return best}
     /* arrows: go to the previous / next card; while the cards are pinned this moves the page to the matching scroll point */
     [].forEach.call(btns,function(b){b.addEventListener('click',function(){
       var i=Math.max(0,Math.min(tiles.length-1,cur()+(+b.dataset.dir))),o=Math.min(tiles[i].offsetLeft-tiles[0].offsetLeft,max());
@@ -1135,13 +1140,14 @@ p,h1,h2,h3,ul{margin:0}
     if(rm.matches||!(window.gsap&&window.ScrollTrigger))return;
     gsap.registerPlugin(ScrollTrigger);
     sec.classList.add('hw-scrub');
+    rail=document.createElement('div');rail.className='hw-rail';tiles.forEach(function(t){rail.appendChild(t)});tr.appendChild(rail);tr.scrollLeft=0;
     /* the row holds still for a short stretch of scrolling when it pins and again after the last card,
        and the cards ease in and out of their slide, so arriving and leaving never feels abrupt */
     function hold(){return Math.round(window.innerHeight*.45)}
     function move(){return Math.max(1,max())*1.15}
-    var tw=gsap.timeline({onUpdate:upd})
+    var tw=gsap.timeline({onUpdate:function(){pos=-gsap.getProperty(rail,'x');upd()}})
       .to({},{duration:function(){return hold()}})
-      .to(tr,{scrollLeft:function(){return max()},duration:function(){return move()},ease:'sine.inOut'})
+      .to(rail,{x:function(){return -max()},duration:function(){return move()},ease:'sine.inOut',force3D:true})
       .to({},{duration:function(){return hold()}});
     st=ScrollTrigger.create({trigger:stage,start:'center center',end:function(){return '+='+(move()+2*hold())},pin:true,scrub:1,anticipatePin:1,invalidateOnRefresh:true,animation:tw});
     window.addEventListener('load',function(){ScrollTrigger.refresh()});
