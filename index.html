@@ -15,6 +15,8 @@
 /* Layout: Figure-style one-pager. Near-black ground, full-bleed image bands, huge extra-bold caps headlines, label/value spec rows. No motion.
    Admin view (#admin): light, calm workspace — sticky save bar, section list, one card per section. */
 :root{
+  /* motion: one set of values for every non-scrubbed entrance on the page */
+  --m-dur:.85s;--m-ease:cubic-bezier(.22,.61,.36,1);--m-rise:24px;
   --h-size:clamp(2rem,3.8vw,3.6rem);      /* one size for the hero and every section headline */
   color-scheme:dark;
   --ink:#0B1A1C;        /* page ground */
@@ -302,8 +304,8 @@ p,h1,h2,h3,ul{margin:0}
 .hw-rail{display:flex;flex:none;gap:inherit;will-change:transform;backface-visibility:hidden}
 .hw-scrub .hw-track{touch-action:pan-y;cursor:grab}.hw-scrub.hw-drag .hw-track{cursor:grabbing;user-select:none;-webkit-user-select:none}.hw-scrub .hw-track img{-webkit-user-drag:none;user-drag:none}
 .hw-stage{padding-block:8px}
-.hw.js .hw-head > *,.hw.js .hw-tile{opacity:0;transform:translateY(28px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
-.hw.js .hw-h{transition-delay:.08s}.hw.js .hw-tile{transition-delay:calc(.2s + var(--i) * .12s)}
+.hw.js .hw-head > *,.hw.js .hw-tile{opacity:0;transform:translateY(var(--m-rise));transition:opacity var(--m-dur) var(--m-ease),transform var(--m-dur) var(--m-ease)}
+.hw.js .hw-h{transition-delay:.08s}.hw.js .hw-tile{transition-delay:calc(.1s + var(--i) * .1s)}
 .hw.js.in .hw-head > *,.hw.js.in .hw-tile{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.hw *{transition:none!important}}
 @media (max-width:767px){.hw-tile{flex-basis:86vw;border-radius:24px}.hw-text{padding:26px 22px 0}}
@@ -346,12 +348,12 @@ p,h1,h2,h3,ul{margin:0}
 .xs-media > .photo,.xs-media > .default-pic .photo{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block}
 .xs-media.has-upload > .default-pic{display:none}
 /* entry: copy rises in order, the frame draws itself, then the hardware settles in */
-.xs.js .xs-a{opacity:0;transform:translateY(14px);transition:opacity .9s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform .9s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+.xs.js .xs-a{opacity:0;transform:translateY(14px);transition:opacity var(--m-dur) var(--m-ease) var(--d,0s),transform var(--m-dur) var(--m-ease) var(--d,0s)}
 .xs.js .xs-ln.t,.xs.js .xs-ln.b{transform:scaleX(0)}.xs.js .xs-ln.l,.xs.js .xs-ln.r{transform:scaleY(0)}
 .xs.js .xs-ln{transition:transform 1.1s cubic-bezier(.65,0,.35,1)}
 .xs-ln.t{transform-origin:left}.xs-ln.r{transform-origin:top;transition-delay:.25s!important}.xs-ln.b{transform-origin:right;transition-delay:.5s!important}.xs-ln.l{transform-origin:bottom;transition-delay:.75s!important}
 .xs.js .xs-c{opacity:0;transition:opacity .6s ease 1.25s}
-.xs.js .xs-media{opacity:0;transform:translateY(16px);transition:opacity 1.3s ease .55s,transform 1.4s cubic-bezier(.2,.7,.2,1) .55s}
+.xs.js .xs-media{opacity:0;transform:translateY(16px);transition:opacity .9s ease .3s,transform 1s var(--m-ease) .3s}
 .xs.js.in .xs-a,.xs.js.in .xs-media{opacity:1;transform:none}
 .xs.js.in .xs-ln{transform:none}
 .xs.js.in .xs-c{opacity:1}
@@ -411,11 +413,11 @@ p,h1,h2,h3,ul{margin:0}
 /* entry */
 .gm.js .gm-land,.gm.js .gm-l,.gm.js .gm-tw,.gm.js .gm-hub{opacity:0}
 .gm.js .gm-land{transition:opacity 1.2s ease}
-.gm.js .gm-l2{transition:opacity 1.4s ease .3s}.gm.js .gm-l1{transition:opacity 1.4s ease .7s}.gm.js .gm-l0{transition:opacity 1.4s ease 1.1s}
-.gm.js .gm-tw{transition:opacity 1s ease 2s}
+.gm.js .gm-l2{transition:opacity 1.1s ease .2s}.gm.js .gm-l1{transition:opacity 1.1s ease .45s}.gm.js .gm-l0{transition:opacity 1.1s ease .7s}
+.gm.js .gm-tw{transition:opacity .9s ease 1.2s}
 .gm.js .gm-hub{transition:opacity .7s ease var(--dl,1.6s)}
 .gm.js .gm-beam{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset 1.3s cubic-bezier(.65,0,.35,1) calc(var(--dl,1.6s) + .3s)}
-.gm.js .gm-a{opacity:0;transform:translateY(14px);transition:opacity .9s cubic-bezier(.2,.7,.2,1) calc(.5s + var(--d,0s)),transform .9s cubic-bezier(.2,.7,.2,1) calc(.5s + var(--d,0s))}
+.gm.js .gm-a{opacity:0;transform:translateY(14px);transition:opacity var(--m-dur) var(--m-ease) calc(.25s + var(--d,0s)),transform var(--m-dur) var(--m-ease) calc(.25s + var(--d,0s))}
 .gm.js.in .gm-land,.gm.js.in .gm-l,.gm.js.in .gm-tw,.gm.js.in .gm-hub{opacity:1}
 .gm.js.in .gm-beam{stroke-dashoffset:0}
 .gm.js.in .gm-a{opacity:1;transform:none}
@@ -481,10 +483,10 @@ p,h1,h2,h3,ul{margin:0}
 @keyframes ftRow{0%,80%,100%{opacity:1}90%{opacity:.55}}
 .ft-car{display:none}.ft.live .ft-car{display:block}
 /* entry */
-.ft.js .ft-head .ft-a{opacity:0;transform:translateY(16px);transition:opacity 1s cubic-bezier(.2,.7,.2,1) var(--d,0s),transform 1s cubic-bezier(.2,.7,.2,1) var(--d,0s)}
+.ft.js .ft-head .ft-a{opacity:0;transform:translateY(16px);transition:opacity var(--m-dur) var(--m-ease) var(--d,0s),transform var(--m-dur) var(--m-ease) var(--d,0s)}
 .ft.js .ft-head.in .ft-a{opacity:1;transform:none}
-.ft.js .ft-card{opacity:0;transform:translateY(40px);transition:opacity 1.1s cubic-bezier(.2,.7,.2,1) calc(var(--i) % 2 * .14s),transform 1.1s cubic-bezier(.2,.7,.2,1) calc(var(--i) % 2 * .14s),background-color .6s ease}
-.ft.js .ft-card .ft-media{transform:scale(1.04);transition:transform 1.6s cubic-bezier(.2,.7,.2,1) calc(var(--i) % 2 * .14s + .1s)}
+.ft.js .ft-card{opacity:0;transform:translateY(var(--m-rise));transition:opacity var(--m-dur) var(--m-ease) calc(var(--i) % 2 * .1s),transform var(--m-dur) var(--m-ease) calc(var(--i) % 2 * .1s),background-color .6s ease}
+.ft.js .ft-card .ft-media{transform:scale(1.02);transition:transform 1.1s var(--m-ease) calc(var(--i) % 2 * .1s)}
 .ft.js .ft-card.in{opacity:1;transform:none}
 .ft.js .ft-card.in .ft-media{transform:none}
 .ft.js.in .ft-a,.ft.js.in .ft-card{opacity:1;transform:none}.ft.js.in .ft-media{transform:none}
@@ -1058,19 +1060,22 @@ p,h1,h2,h3,ul{margin:0}
     function setP(v){v=Math.max(0,Math.min(1,v));if(v===p)return;p=v;near();req()}
     var onMQ=function(){pick();size();req()};if(mqM.addEventListener)mqM.addEventListener('change',onMQ);else if(mqM.addListener)mqM.addListener(onMQ);
     window.addEventListener('resize',function(){size();req()});
-    var dist=function(){return window.innerHeight*(mqM.matches?1.6:2.5)};
+    /* scroll travel for the 145 frames: about 3.2 screens on desktop, 2 on phones, plus a short hold on the finished view */
+    var dist=function(){return window.innerHeight*(mqM.matches?2:3.2)};
     var hold=function(){return Math.round(window.innerHeight*.45)};
     /* phones: pin the whole section (device above the stats) when it fits the screen, otherwise just the device */
     var target=function(){return (mqM.matches&&sec.offsetHeight>window.innerHeight)?stage:sec};
     if(window.gsap&&window.ScrollTrigger){
       gsap.registerPlugin(ScrollTrigger);
+      /* phones: the address bar showing / hiding must not re-measure the pinned sections (stops jitter) */
+      ScrollTrigger.config({ignoreMobileResize:true});
       var mm=gsap.matchMedia();
       ['(min-width:861px)','(max-width:860px)'].forEach(function(q){mm.add(q,function(){
         var proxy={v:p},tw=gsap.to(proxy,{v:1,ease:'sine.inOut',onUpdate:function(){setP(proxy.v)}});
-        /* pin while the section fills the screen; frames start advancing as soon as it comes into view, ease in and out,
+        /* pin while the section fills the screen; frames start advancing as the section settles in (from the starting pose), ease in and out,
            and the finished exploded view holds for a short stretch of scrolling before Why it matters arrives */
         ScrollTrigger.create({trigger:target(),start:'top top',end:function(){return '+='+(dist()+hold())},pin:target(),anticipatePin:1,invalidateOnRefresh:true,onRefresh:function(){size();req()}});
-        ScrollTrigger.create({trigger:target(),start:'top 85%',end:function(){return 'top top-='+dist()},scrub:1,invalidateOnRefresh:true,animation:tw});
+        ScrollTrigger.create({trigger:target(),start:'top 45%',end:function(){return 'top top-='+dist()},scrub:1,invalidateOnRefresh:true,animation:tw});
       })});
       var refresh=function(){ScrollTrigger.refresh()};
       window.addEventListener('load',refresh);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refresh);
@@ -1139,25 +1144,33 @@ p,h1,h2,h3,ul{margin:0}
     sec.classList.add('js');
     if(rm.matches||!('IntersectionObserver' in window))sec.classList.add('in');
     else{var io=new IntersectionObserver(function(es){if(es[0].isIntersecting){io.disconnect();sec.classList.add('in')}},{threshold:.18});io.observe(sec)}
-    /* scrolling down slides the cards left: the card row pins in the middle of the screen while the page scroll moves it */
+    /* tablets and desktops: scrolling down slides the cards left while the row is pinned in the middle of the screen.
+       Phones keep a native, finger-driven swipe carousel (no pin), which is quicker and never blocks the page. */
     if(rm.matches||!(window.gsap&&window.ScrollTrigger))return;
     gsap.registerPlugin(ScrollTrigger);
-    sec.classList.add('hw-scrub');
-    rail=document.createElement('div');rail.className='hw-rail';tiles.forEach(function(t){rail.appendChild(t)});tr.appendChild(rail);tr.scrollLeft=0;
     /* the row holds still for a short stretch of scrolling when it pins and again after the last card,
        and the cards ease in and out of their slide, so arriving and leaving never feels abrupt */
     function hold(){return Math.round(window.innerHeight*.45)}
     function move(){return Math.max(1,max())*1.15}
-    var tw=gsap.timeline({onUpdate:function(){pos=-gsap.getProperty(rail,'x');upd()}})
-      .to({},{duration:function(){return hold()}})
-      .to(rail,{x:function(){return -max()},duration:function(){return move()},ease:'sine.inOut',force3D:true})
-      .to({},{duration:function(){return hold()}});
-    st=ScrollTrigger.create({trigger:stage,start:'center center',end:function(){return '+='+(move()+2*hold())},pin:true,scrub:1,anticipatePin:1,invalidateOnRefresh:true,animation:tw});
-    window.addEventListener('load',function(){ScrollTrigger.refresh()});
-    /* sideways gestures move the cards too: a trackpad swipe, shift + wheel, or dragging the row with the mouse or a finger.
+    function ratio(){var m=max();return st&&m>0?move()/m:0}
+    gsap.matchMedia().add('(min-width:768px)',function(){
+      sec.classList.add('hw-scrub');
+      rail=document.createElement('div');rail.className='hw-rail';tiles.forEach(function(t){rail.appendChild(t)});tr.appendChild(rail);tr.scrollLeft=0;pos=0;
+      var tw=gsap.timeline({onUpdate:function(){pos=-gsap.getProperty(rail,'x');upd()}})
+        .to({},{duration:function(){return hold()}})
+        .to(rail,{x:function(){return -max()},duration:function(){return move()},ease:'sine.inOut',force3D:true})
+        .to({},{duration:function(){return hold()}});
+      st=ScrollTrigger.create({trigger:stage,start:'center center',end:function(){return '+='+(move()+2*hold())},pin:true,pinSpacing:true,scrub:1,anticipatePin:1,invalidateOnRefresh:true,animation:tw});
+      upd();
+      return function(){ /* leaving the desktop layout: put the cards back into the native carousel */
+        st=null;tiles.forEach(function(t){tr.appendChild(t)});if(rail.parentNode)rail.parentNode.removeChild(rail);rail=null;pos=0;
+        sec.classList.remove('hw-scrub','hw-drag');tr.scrollLeft=0;upd();
+      };
+    });
+    /* sideways gestures move the pinned cards too: a trackpad swipe, shift + wheel, or dragging the row with the mouse.
        Each one is turned into the matching page scroll, so the cards and the pin stay in step with normal scrolling. */
-    function ratio(){var m=max();return m>0?move()/m:0}
     stage.addEventListener('wheel',function(e){
+      if(!st)return;
       var dx=e.deltaX,dy=e.deltaY;
       if(e.shiftKey&&!dx){dx=dy}else if(Math.abs(dx)<=Math.abs(dy))return;
       var k=ratio();if(!dx||!k)return;
@@ -1165,10 +1178,10 @@ p,h1,h2,h3,ul{margin:0}
       e.preventDefault();window.scrollBy(0,dx*mul*k);
     },{passive:false});
     var drag=null,dragged=false;
-    tr.addEventListener('dragstart',function(e){e.preventDefault()});
-    tr.addEventListener('pointerdown',function(e){if(e.button!==0)return;dragged=false;drag={x:e.clientX,y:e.clientY,id:e.pointerId,on:false}});
+    tr.addEventListener('dragstart',function(e){if(st)e.preventDefault()});
+    tr.addEventListener('pointerdown',function(e){if(!st||e.button!==0)return;dragged=false;drag={x:e.clientX,y:e.clientY,id:e.pointerId,on:false}});
     window.addEventListener('pointermove',function(e){
-      if(!drag||e.pointerId!==drag.id)return;
+      if(!drag||!st||e.pointerId!==drag.id)return;
       var dx=e.clientX-drag.x,dy=e.clientY-drag.y;
       if(!drag.on){
         if(Math.abs(dx)<6&&Math.abs(dy)<6)return;
@@ -1176,10 +1189,11 @@ p,h1,h2,h3,ul{margin:0}
         drag.on=dragged=true;sec.classList.add('hw-drag');try{tr.setPointerCapture(e.pointerId)}catch(_){}
       }
       window.scrollBy(0,-dx*ratio());drag.x=e.clientX;drag.y=e.clientY;
-    });
+    },{passive:true});
     function endDrag(){drag=null;sec.classList.remove('hw-drag')}
     window.addEventListener('pointerup',endDrag);window.addEventListener('pointercancel',endDrag);
     tr.addEventListener('click',function(e){if(dragged){e.preventDefault();e.stopPropagation();dragged=false}},true);
+    window.addEventListener('load',function(){ScrollTrigger.refresh()});
   })();
   </script>
 
@@ -2316,6 +2330,23 @@ p,h1,h2,h3,ul{margin:0}
   }
 
   route();
+})();
+</script>
+
+<script>
+/* in-page links (#how, #top, ...) glide to their section with native smooth scrolling; reduced motion jumps */
+(function(){
+  var rm=window.matchMedia('(prefers-reduced-motion: reduce)');
+  document.addEventListener('click',function(e){
+    if(e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+    var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a||a.closest('#admin'))return;
+    var h=a.getAttribute('href'),t=(h==='#'||h==='#top')?null:document.getElementById(h.slice(1));
+    if(h.length>1&&h!=='#top'&&!t)return;
+    e.preventDefault();
+    var y=t?t.getBoundingClientRect().top+window.pageYOffset:0;
+    window.scrollTo({top:y,behavior:rm.matches?'auto':'smooth'});
+    if(history.replaceState)history.replaceState(null,'',h);
+  });
 })();
 </script>
 </body>
