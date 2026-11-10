@@ -1055,16 +1055,18 @@ p,h1,h2,h3,ul{margin:0}
     var onMQ=function(){pick();size();req()};if(mqM.addEventListener)mqM.addEventListener('change',onMQ);else if(mqM.addListener)mqM.addListener(onMQ);
     window.addEventListener('resize',function(){size();req()});
     var dist=function(){return window.innerHeight*(mqM.matches?1.6:2.5)};
+    var hold=function(){return Math.round(window.innerHeight*.45)};
     /* phones: pin the whole section (device above the stats) when it fits the screen, otherwise just the device */
     var target=function(){return (mqM.matches&&sec.offsetHeight>window.innerHeight)?stage:sec};
     if(window.gsap&&window.ScrollTrigger){
       gsap.registerPlugin(ScrollTrigger);
       var mm=gsap.matchMedia();
       ['(min-width:861px)','(max-width:860px)'].forEach(function(q){mm.add(q,function(){
-        var proxy={v:p},tw=gsap.to(proxy,{v:1,ease:'none',onUpdate:function(){setP(proxy.v)}});
-        /* pin while the section fills the screen; frames start advancing as soon as it comes into view */
-        ScrollTrigger.create({trigger:target(),start:'top top',end:function(){return '+='+dist()},pin:target(),anticipatePin:1,invalidateOnRefresh:true,onRefresh:function(){size();req()}});
-        ScrollTrigger.create({trigger:target(),start:'top 85%',end:function(){return 'top top-='+dist()},scrub:.6,invalidateOnRefresh:true,animation:tw});
+        var proxy={v:p},tw=gsap.to(proxy,{v:1,ease:'sine.inOut',onUpdate:function(){setP(proxy.v)}});
+        /* pin while the section fills the screen; frames start advancing as soon as it comes into view, ease in and out,
+           and the finished exploded view holds for a short stretch of scrolling before Why it matters arrives */
+        ScrollTrigger.create({trigger:target(),start:'top top',end:function(){return '+='+(dist()+hold())},pin:target(),anticipatePin:1,invalidateOnRefresh:true,onRefresh:function(){size();req()}});
+        ScrollTrigger.create({trigger:target(),start:'top 85%',end:function(){return 'top top-='+dist()},scrub:1,invalidateOnRefresh:true,animation:tw});
       })});
       var refresh=function(){ScrollTrigger.refresh()};
       window.addEventListener('load',refresh);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(refresh);
