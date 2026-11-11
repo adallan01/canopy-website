@@ -56,6 +56,7 @@ p,h1,h2,h3,ul{margin:0}
 .label{display:flex;align-items:center;gap:12px;font-size:.76rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--teal)}
 .label::before{content:none}
 .band.light .label{color:var(--teal-deep)}
+.hero.light .label{color:var(--teal-deep)}
 .lede{font-size:clamp(1.05rem,1.5vw,1.3rem);line-height:1.5;max-width:44ch}
 .mute{color:var(--mute)}
 
@@ -854,9 +855,9 @@ p,h1,h2,h3,ul{margin:0}
     <a class="logo" href="#top" aria-label="Canopy home"><img class="logo-img" src="canopy-logo-black.svg" alt="Canopy" width="123" height="38"></a>
     <nav aria-label="Main">
       <ul>
-        <li><a href="#how" data-k="nav.1" data-l="Menu link 1">How it works</a></li>
+        <li><a href="#how" data-k="nav.1" data-l="Menu link 1">Platform</a></li>
         <li><a href="#explorer" data-k="nav.2" data-l="Menu link 2">Explorer</a></li>
-        <li><a href="#features" data-k="nav.3" data-l="Menu link 3">Features</a></li>
+        <li><a href="#features" data-k="nav.3" data-l="Menu link 3">Capabilities</a></li>
       </ul>
     </nav>
     <a class="btn" href="https://dev.canopy.roam-electric.com/pricing#lead-request-form" data-k="nav.cta" data-l="Header button" data-hk="link.demo" data-hl="Book a demo button (all)">Book a demo</a>
@@ -872,8 +873,9 @@ p,h1,h2,h3,ul{margin:0}
       <img class="photo" src="images/hero-desktop.webp?v=5" alt="The black Explorer device floating above a bright, reflective white surface with soft arcs of light behind it" width="3200" height="1412" fetchpriority="high">
     </picture>
     <div class="wrap">
+      <p class="label" data-k="hero.label" data-l="Small label">Fleet intelligence platform</p>
       <h1 id="hero-title" class="h-hero" data-k="hero.title" data-l="Headline">Every electric vehicle. Under one Canopy.</h1>
-      <p class="lede" data-k="hero.sub" data-l="Subheadline">See every vehicle and every battery in one place, whatever the brand.</p>
+      <p class="lede" data-k="hero.sub" data-l="Subheadline">Real-time telemetry for every vehicle and battery. Any brand.</p>
       <div class="btns">
         <a class="btn" href="https://dev.canopy.roam-electric.com/pricing#lead-request-form" data-k="hero.cta1" data-l="Main button" data-hk="link.demo">Book a demo</a>
         <a class="btn ghost" href="#film" data-k="hero.cta2" data-l="Second button" data-hk="link.film" data-hl="Watch the film button (all)">Watch the film</a>
@@ -950,9 +952,9 @@ p,h1,h2,h3,ul{margin:0}
     <div class="stats-col">
       <dl class="stats-list">
         <div class="stat"><dt class="stat-l" data-k="num.1.l" data-l="Number 1 label">Vehicles connected</dt><dd class="stat-v"><span class="stat-src" data-k="num.1.v" data-l="Number 1">[X]+</span></dd></div>
-        <div class="stat"><dt class="stat-l" data-k="num.2.l" data-l="Number 2 label">Backup power if cut off</dt><dd class="stat-v"><span class="stat-src" data-k="num.2.v" data-l="Number 2">72+ hrs</span></dd></div>
-        <div class="stat"><dt class="stat-l" data-k="num.3.l" data-l="Number 3 label">To find a vehicle without GPS</dt><dd class="stat-v"><span class="stat-src" data-k="num.3.v" data-l="Number 3">3 ways</span></dd></div>
-        <div class="stat"><dt class="stat-l" data-k="num.4.l" data-l="Number 4 label">One platform for mixed fleets</dt><dd class="stat-v"><span class="stat-src" data-k="num.4.v" data-l="Number 4">Any brand</span></dd></div>
+        <div class="stat"><dt class="stat-l" data-k="num.2.l" data-l="Number 2 label">Backup runtime on power loss</dt><dd class="stat-v"><span class="stat-src" data-k="num.2.v" data-l="Number 2">72+ hrs</span></dd></div>
+        <div class="stat"><dt class="stat-l" data-k="num.3.l" data-l="Number 3 label">GPS, cell and Bluetooth positioning</dt><dd class="stat-v"><span class="stat-src" data-k="num.3.v" data-l="Number 3">3 ways</span></dd></div>
+        <div class="stat"><dt class="stat-l" data-k="num.4.l" data-l="Number 4 label">Brand-agnostic by design</dt><dd class="stat-v"><span class="stat-src" data-k="num.4.v" data-l="Number 4">Any brand</span></dd></div>
       </dl>
     </div>
   </section>
@@ -1090,30 +1092,30 @@ p,h1,h2,h3,ul{margin:0}
     <canvas data-seed="2207" aria-hidden="true"></canvas>
     <picture class="default-pic"><source media="(max-width:767px)" srcset="images/why-mobile.webp?v=9"><img class="photo" src="images/why-it-matters.webp?v=8" alt="A bright office desk with two monitors running Canopy, one showing the vehicle list and the other the reports page, beside a window" width="2006" height="941" loading="lazy"></picture>
     <div class="wrap">
-      <p class="label" data-k="why.label" data-l="Small label">Why it matters</p>
-      <h2 id="why-title" class="h-sec" data-k="why.title" data-l="Headline">Fleets evolve. Tools don’t.</h2>
-      <p class="lede mute" data-k="why.sub" data-l="Subheadline">Managing electric fleets still means juggling disconnected apps, trackers and spreadsheets.</p>
+      <p class="label" data-k="why.label" data-l="Small label">01 The problem</p>
+      <h2 id="why-title" class="h-sec" data-k="why.title" data-l="Headline">Fleets went electric. The stack didn’t.</h2>
+      <p class="lede mute" data-k="why.sub" data-l="Subheadline">Fragmented apps, trackers and spreadsheets can’t run a modern fleet.</p>
     </div>
   </section>
 
   <!-- How it works: Apple-style tile gallery. Big headline, three large swipeable tiles; images stay editable (how1–how3) -->
   <section id="how" class="hw" data-sec="How it works" data-sid="how" aria-labelledby="how-title">
     <div class="wrap hw-head">
-      <p class="label" data-k="how.label" data-l="Small label">How it works</p>
-      <h2 id="how-title" class="hw-h" data-k="how.title" data-l="Headline">Simple to start. Smart from day one.</h2>
+      <p class="label" data-k="how.label" data-l="Small label">02 How it works</p>
+      <h2 id="how-title" class="hw-h" data-k="how.title" data-l="Headline">Deploy. Monitor. Act.</h2>
     </div>
     <div class="hw-stage">
     <div class="hw-track" tabindex="0" aria-label="Three steps">
         <article class="hw-tile" style="--i:0">
-          <div class="hw-text"><span class="hw-n">01</span><h3 class="hw-t" data-k="how.1.t" data-l="Step 1 title">Connect.</h3><p class="hw-d" data-k="how.1.d" data-l="Step 1 text">Fit the Explorer device, or link the trackers you already use.</p></div>
+          <div class="hw-text"><span class="hw-n">01</span><h3 class="hw-t" data-k="how.1.t" data-l="Step 1 title">Connect.</h3><p class="hw-d" data-k="how.1.d" data-l="Step 1 text">Install Explorer or integrate your existing trackers.</p></div>
           <div class="step-pic hw-pic has-media" data-slot="how1" data-slot-l="Step 1 image" data-default-media="images/how-connect.webp"><canvas data-seed="3121" aria-hidden="true"></canvas><picture class="default-pic"><img class="photo" src="images/how-connect.webp?v=4" alt="The black Canopy Explorer device floating above a light surface, its wiring connector facing out" width="1672" height="941" loading="lazy"></picture></div>
         </article>
         <article class="hw-tile" style="--i:1">
-          <div class="hw-text"><span class="hw-n">02</span><h3 class="hw-t" data-k="how.2.t" data-l="Step 2 title">See.</h3><p class="hw-d" data-k="how.2.d" data-l="Step 2 text">Every vehicle and every battery, live on one map, on web and mobile.</p></div>
+          <div class="hw-text"><span class="hw-n">02</span><h3 class="hw-t" data-k="how.2.t" data-l="Step 2 title">See.</h3><p class="hw-d" data-k="how.2.d" data-l="Step 2 text">Live vehicle and battery telemetry on one map.</p></div>
           <div class="step-pic hw-pic has-media" data-slot="how2" data-slot-l="Step 2 image" data-default-media="images/how-see.webp"><canvas data-seed="3242" aria-hidden="true"></canvas><picture class="default-pic"><img class="photo" src="images/how-see.webp?v=5" alt="A laptop showing the Canopy live map on satellite view, with vehicle pins and a list of vehicles and their status" width="1672" height="941" loading="lazy"></picture></div>
         </article>
         <article class="hw-tile" style="--i:2">
-          <div class="hw-text"><span class="hw-n">03</span><h3 class="hw-t" data-k="how.3.t" data-l="Step 3 title">Act.</h3><p class="hw-d" data-k="how.3.d" data-l="Step 3 text">Get alerts, ask questions in plain words, and stop a vehicle safely.</p></div>
+          <div class="hw-text"><span class="hw-n">03</span><h3 class="hw-t" data-k="how.3.t" data-l="Step 3 title">Act.</h3><p class="hw-d" data-k="how.3.d" data-l="Step 3 text">Receive alerts, ask Rover AI and use Safe Lock where supported.</p></div>
           <div class="step-pic hw-pic has-media" data-slot="how3" data-slot-l="Step 3 image" data-default-media="images/how-act.webp"><canvas data-seed="3363" aria-hidden="true"></canvas><picture class="default-pic"><img class="photo" src="images/how-act.webp?v=5" alt="The Explorer device beside a phone showing Canopy alerts, sorted into critical, warning and general" width="1672" height="941" loading="lazy"></picture></div>
         </article>
     </div>
@@ -1201,9 +1203,9 @@ p,h1,h2,h3,ul{margin:0}
   <section id="explorer" class="xs" data-sec="Explorer" data-sid="explorer" aria-labelledby="explorer-title">
     <div class="wrap xs-grid">
       <div class="xs-copy">
-        <p class="label xs-a" style="--d:0s" data-k="xs.label" data-l="Small label">Inside the technology</p>
-        <h2 id="explorer-title" class="h-sec xs-a" style="--d:.08s"><span data-k="xs.title.1" data-l="Headline line 1">Small device.</span> <span data-k="xs.title.2" data-l="Headline line 2">Big intelligence.</span></h2>
-        <p class="xs-lede xs-a" style="--d:.28s" data-k="xs.sub" data-l="Supporting text">Purpose-built electronics that connect vehicle and battery data to Canopy, even in demanding real-world conditions.</p>
+        <p class="label xs-a" style="--d:0s" data-k="xs.label" data-l="Small label">03 Hardware</p>
+        <h2 id="explorer-title" class="h-sec xs-a" style="--d:.08s"><span data-k="xs.title.1" data-l="Headline line 1">Edge hardware.</span> <span data-k="xs.title.2" data-l="Headline line 2">Built for the field.</span></h2>
+        <p class="xs-lede xs-a" style="--d:.28s" data-k="xs.sub" data-l="Supporting text">Purpose-built electronics connecting vehicle and battery data to Canopy in demanding field conditions.</p>
         <div class="xs-btns xs-a" style="--d:.44s">
           <a class="xs-btn xs-btn-p" href="#system" data-k="xs.cta1" data-l="Main button">Explore the system</a>
           <a class="xs-btn xs-btn-g" href="https://dev.canopy.roam-electric.com/pricing#lead-request-form" data-k="xs.cta2" data-l="Second button" data-hk="link.demo">Book a demo</a>
@@ -1235,12 +1237,12 @@ p,h1,h2,h3,ul{margin:0}
   </script>
   <section id="explorer-specs" class="specs" data-sec="Explorer" data-sid="explorer" aria-label="Explorer specifications">
     <div class="wrap">
-      <p class="label spec-head" data-k="exp.specs.label" data-l="Specs label">Explorer at a glance</p>
+      <p class="label spec-head" data-k="exp.specs.label" data-l="Specs label">Explorer / Specifications</p>
       <div class="spec-grid">
-        <div class="spec"><span class="spec-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19v-3M10 19v-6M15 19v-9M20 19V5"/></svg></span><span class="spec-val" data-k="exp.1.v" data-l="Spec 1 figure">4G</span><h3 class="spec-t" data-k="exp.1.t" data-l="Spec 1 title">Always connected</h3><p data-k="exp.1.d" data-l="Spec 1 text">4G, with 3G and 2G backup.</p></div>
-        <div class="spec"><span class="spec-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.8-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 15.2 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/></svg></span><span class="spec-val" data-k="exp.2.v" data-l="Spec 2 figure">3 ways</span><h3 class="spec-t" data-k="exp.2.t" data-l="Spec 2 title">Never lost</h3><p data-k="exp.2.d" data-l="Spec 2 text">Finds vehicles through cell towers and Bluetooth when GPS drops.</p></div>
-        <div class="spec"><span class="spec-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5.2c0 4.5-3 8.3-7 9.8-4-1.5-7-5.3-7-9.8V6l7-3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></span><span class="spec-val" data-k="exp.3.v" data-l="Spec 3 figure">72+ hrs</span><h3 class="spec-t" data-k="exp.3.t" data-l="Spec 3 title">Hard to silence</h3><p data-k="exp.3.d" data-l="Spec 3 text">Keeps reporting for 72+ hours if its power is cut.</p></div>
-        <div class="spec"><span class="spec-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg></span><span class="spec-val" data-k="exp.4.v" data-l="Spec 4 figure">Live + OTA</span><h3 class="spec-t" data-k="exp.4.t" data-l="Spec 4 title">Reads the vehicle</h3><p data-k="exp.4.d" data-l="Spec 4 text">Battery and motor data from the bike, with updates over the air.</p></div>
+        <div class="spec"><span class="spec-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 19v-3M10 19v-6M15 19v-9M20 19V5"/></svg></span><span class="spec-val" data-k="exp.1.v" data-l="Spec 1 figure">4G</span><h3 class="spec-t" data-k="exp.1.t" data-l="Spec 1 title">Connectivity</h3><p data-k="exp.1.d" data-l="Spec 1 text">4G with 3G and 2G fallback.</p></div>
+        <div class="spec"><span class="spec-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.8-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 15.2 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.3"/></svg></span><span class="spec-val" data-k="exp.2.v" data-l="Spec 2 figure">3 layers</span><h3 class="spec-t" data-k="exp.2.t" data-l="Spec 2 title">Positioning</h3><p data-k="exp.2.d" data-l="Spec 2 text">GPS, cell-tower and Bluetooth positioning.</p></div>
+        <div class="spec"><span class="spec-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5.2c0 4.5-3 8.3-7 9.8-4-1.5-7-5.3-7-9.8V6l7-3z"/><path d="M9 12l2.2 2.2L15.5 10"/></svg></span><span class="spec-val" data-k="exp.3.v" data-l="Spec 3 figure">72+ hrs</span><h3 class="spec-t" data-k="exp.3.t" data-l="Spec 3 title">Tamper resilience</h3><p data-k="exp.3.d" data-l="Spec 3 text">Keeps transmitting after power is cut.</p></div>
+        <div class="spec"><span class="spec-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4"/></svg></span><span class="spec-val" data-k="exp.4.v" data-l="Spec 4 figure">Live + OTA</span><h3 class="spec-t" data-k="exp.4.t" data-l="Spec 4 title">Vehicle data</h3><p data-k="exp.4.d" data-l="Spec 4 text">Battery and motor telemetry, with over-the-air updates.</p></div>
       </div>
     </div>
   </section>
@@ -1296,9 +1298,9 @@ p,h1,h2,h3,ul{margin:0}
 
     <div class="wrap">
       <div class="sys-head">
-        <p class="label" data-k="sys.label" data-l="Small label">The Canopy system</p>
-        <h2 id="system-title" class="h-sec" data-k="sys.title" data-l="Headline">Every vehicle. One connected view.</h2>
-        <p class="lede" data-k="sys.sub" data-l="Subheadline">From vehicle data to smarter decisions. Everything flows through Canopy.</p>
+        <p class="label" data-k="sys.label" data-l="Small label">04 Architecture</p>
+        <h2 id="system-title" class="h-sec" data-k="sys.title" data-l="Headline">From vehicle to decision. One stack.</h2>
+        <p class="lede" data-k="sys.sub" data-l="Subheadline">Vehicle data in. Decisions out.</p>
       </div>
 
       <div class="sys-diagram" id="sys-diagram">
@@ -1322,8 +1324,8 @@ p,h1,h2,h3,ul{margin:0}
         <div class="sys-stage" data-stage="2">
           <div class="sys-sh"><p class="sys-sk"><b>02</b><span data-k="sys.s2.k" data-l="Stage 2 name">Connectivity</span></p><p class="sys-st" data-k="sys.s2.t" data-l="Stage 2 line">Connected at the source.</p></div>
           <div class="sys-sb">
-            <button type="button" class="sys-node sys-node-lg" data-node="explorer" style="--i:0"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-explorer"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.explorer" data-l="Node · Explorer">Explorer</span><span class="sys-ns" data-k="sys.n.explorer.s" data-l="Node · Explorer line">Canopy's connectivity device</span></span></button>
-            <button type="button" class="sys-node sys-node-lg" data-node="trackers" style="--i:1"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-tracker"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.trackers" data-l="Node · Compatible trackers">Compatible trackers</span><span class="sys-ns" data-k="sys.n.trackers.s" data-l="Node · Trackers line">Supported existing devices</span></span></button>
+            <button type="button" class="sys-node sys-node-lg" data-node="explorer" style="--i:0"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-explorer"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.explorer" data-l="Node · Explorer">Explorer</span><span class="sys-ns" data-k="sys.n.explorer.s" data-l="Node · Explorer line">Canopy telematics unit.</span></span></button>
+            <button type="button" class="sys-node sys-node-lg" data-node="trackers" style="--i:1"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-tracker"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.trackers" data-l="Node · Compatible trackers">Compatible trackers</span><span class="sys-ns" data-k="sys.n.trackers.s" data-l="Node · Trackers line">Supported existing tracking hardware.</span></span></button>
           </div>
         </div>
 
@@ -1339,13 +1341,13 @@ p,h1,h2,h3,ul{margin:0}
         </div>
 
         <div class="sys-stage" data-stage="4">
-          <div class="sys-sh"><p class="sys-sk"><b>04</b><span data-k="sys.s4.k" data-l="Stage 4 name">Insight &amp; action</span></p><p class="sys-st" data-k="sys.s4.t" data-l="Stage 4 line">Track. Monitor. Understand. Act.</p></div>
+          <div class="sys-sh"><p class="sys-sk"><b>04</b><span data-k="sys.s4.k" data-l="Stage 4 name">Insight &amp; action</span></p><p class="sys-st" data-k="sys.s4.t" data-l="Stage 4 line">Track. Analyse. Act.</p></div>
           <div class="sys-sb">
             <button type="button" class="sys-node" data-node="o0" style="--i:0"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-pin"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.live" data-l="Node · Live visibility">Live visibility</span><span class="sys-ns" data-k="sys.n.live.s" data-l="Node · Live visibility line">Locations, zones and trip history</span></span></button>
             <button type="button" class="sys-node" data-node="o1" style="--i:1"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-bhealth"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.bat" data-l="Node · Battery intelligence">Battery intelligence</span><span class="sys-ns" data-k="sys.n.bat.s" data-l="Node · Battery line">Battery health and performance</span></span></button>
             <button type="button" class="sys-node" data-node="o2" style="--i:2"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-bell"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.alerts" data-l="Node · Smart alerts">Smart alerts</span><span class="sys-ns" data-k="sys.n.alerts.s" data-l="Node · Alerts line">Operational and geofence notifications</span></span></button>
-            <button type="button" class="sys-node" data-node="o3" style="--i:3"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-rover"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.rover" data-l="Node · Rover AI">Rover AI</span><span class="sys-ns" data-k="sys.n.rover.s" data-l="Node · Rover AI line">Fleet answers in natural language</span></span></button>
-            <button type="button" class="sys-node sys-node-aux" data-node="safelock" style="--i:4"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-lock"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.lock" data-l="Node · Safe Lock">Safe Lock</span><span class="sys-ns" data-k="sys.n.lock.s" data-l="Node · Safe Lock line">Only after a safe stop, where supported</span></span></button>
+            <button type="button" class="sys-node" data-node="o3" style="--i:3"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-rover"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.rover" data-l="Node · Rover AI">Rover AI</span><span class="sys-ns" data-k="sys.n.rover.s" data-l="Node · Rover AI line">Natural-language fleet queries.</span></span></button>
+            <button type="button" class="sys-node sys-node-aux" data-node="safelock" style="--i:4"><span class="sys-ic"><svg viewBox="0 0 24 24"><use href="#si-lock"/></svg></span><span class="sys-nt"><span class="sys-nl" data-k="sys.n.lock" data-l="Node · Safe Lock">Safe Lock</span><span class="sys-ns" data-k="sys.n.lock.s" data-l="Node · Safe Lock line">Remote immobilisation after a safe stop, where supported.</span></span></button>
           </div>
         </div>
       </div>
@@ -1516,12 +1518,12 @@ p,h1,h2,h3,ul{margin:0}
   <section id="does" class="dz" data-sec="What Canopy does" data-sid="does" aria-labelledby="does-title">
     <div class="wrap">
       <div class="dz-head">
-        <p class="label" data-k="does.label" data-l="Small label">What Canopy does</p>
+        <p class="label" data-k="does.label" data-l="Small label">05 Capabilities</p>
         <h2 id="does-title" class="h-sec"><span data-k="does.title" data-l="Headline">Your fleet.</span> <span class="dz-accent" data-k="does.title2" data-l="Headline, second part (teal)">One app.</span></h2>
       </div>
       <ol class="dz-grid" role="list">
         <li class="dz-tile" style="--i:0">
-          <div class="dz-copy"><span class="dz-n" aria-hidden="true">01</span><h3 class="dz-t" data-k="does.1.t" data-l="Feature 1 title">See every vehicle.</h3><p class="dz-d" data-k="does.1.d" data-l="Feature 1 text">Track locations, trips and zones.</p></div>
+          <div class="dz-copy"><span class="dz-n" aria-hidden="true">01</span><h3 class="dz-t" data-k="does.1.t" data-l="Feature 1 title">See every vehicle.</h3><p class="dz-d" data-k="does.1.d" data-l="Feature 1 text">Live GPS, trip replay and geofence alerts.</p></div>
           <div class="dz-stage" aria-hidden="true">
             <svg class="dz-map" viewBox="0 0 300 200" preserveAspectRatio="xMidYMid slice">
               <path class="rd" d="M-20 150 C 50 140, 80 70, 160 78 S 270 46, 330 22"/><path class="rd" d="M58 -10 L 92 220"/><path class="rd" d="M-10 88 L 320 118"/><path class="rd" d="M228 -10 C 214 70, 252 130, 240 220"/>
@@ -1535,21 +1537,21 @@ p,h1,h2,h3,ul{margin:0}
           </div>
         </li>
         <li class="dz-tile" style="--i:1">
-          <div class="dz-copy"><span class="dz-n" aria-hidden="true">02</span><h3 class="dz-t" data-k="does.2.t" data-l="Feature 2 title">Know every battery.</h3><p class="dz-d" data-k="does.2.d" data-l="Feature 2 text">Monitor battery health and performance.</p></div>
+          <div class="dz-copy"><span class="dz-n" aria-hidden="true">02</span><h3 class="dz-t" data-k="does.2.t" data-l="Feature 2 title">Know every battery.</h3><p class="dz-d" data-k="does.2.d" data-l="Feature 2 text">Monitor battery health and performance over time.</p></div>
           <div class="dz-stage" aria-hidden="true">
             <span class="dz-mini">Battery health</span>
             <div class="dz-bat"><div class="dz-big"><span data-count="96">96</span><small>%</small></div><div class="dz-segs"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="dz-cap"><span class="dz-health">Good</span><span>12 packs</span></div></div>
           </div>
         </li>
         <li class="dz-tile" style="--i:2">
-          <div class="dz-copy"><span class="dz-n" aria-hidden="true">03</span><h3 class="dz-t" data-k="does.3.t" data-l="Feature 3 title">Stop safely.</h3><p class="dz-d" data-k="does.3.d" data-l="Feature 3 text">Lock only after a safe stop, where supported.</p></div>
+          <div class="dz-copy"><span class="dz-n" aria-hidden="true">03</span><h3 class="dz-t" data-k="does.3.t" data-l="Feature 3 title">Stop safely.</h3><p class="dz-d" data-k="does.3.d" data-l="Feature 3 text">Safe Lock engages only after a safe stop, where supported.</p></div>
           <div class="dz-stage" aria-hidden="true">
             <span class="dz-mini">Speed</span>
             <div class="dz-stop"><div class="dz-big"><span data-speed="0">0</span><small>km/h</small></div><span class="dz-status locked"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9.5" rx="2.2"/><path class="sh" d="M8.3 11V8.2a3.7 3.7 0 0 1 7.4 0V11"/></svg><b>Locked</b></span></div>
           </div>
         </li>
         <li class="dz-tile" style="--i:3">
-          <div class="dz-copy"><span class="dz-n" aria-hidden="true">04</span><h3 class="dz-t" data-k="does.4.t" data-l="Feature 4 title">Just ask.</h3><p class="dz-d" data-k="does.4.d" data-l="Feature 4 text">Ask Rover AI. Get answers in seconds.</p></div>
+          <div class="dz-copy"><span class="dz-n" aria-hidden="true">04</span><h3 class="dz-t" data-k="does.4.t" data-l="Feature 4 title">Just ask.</h3><p class="dz-d" data-k="does.4.d" data-l="Feature 4 text">Rover AI turns fleet questions into answers.</p></div>
           <div class="dz-stage" aria-hidden="true">
             <span class="dz-mini">Rover AI</span>
             <div class="dz-chat"><div class="dz-m q"><div><div class="b">Which bikes are overdue for service?</div></div></div><div class="dz-m a"><div><div class="b"><svg viewBox="0 0 24 24"><path d="M12 3.5l1.9 5 5 1.9-5 1.9-1.9 5-1.9-5-5-1.9 5-1.9z"/></svg><span>3 bikes. Bike 14 is the most overdue.</span></div></div></div></div>
@@ -1647,11 +1649,11 @@ p,h1,h2,h3,ul{margin:0}
     <div class="wrap">
       <div class="sc-head">
         <div class="sc-title">
-          <p class="label" data-k="dev.label" data-l="Small label">Canopy across devices</p>
+          <p class="label" data-k="dev.label" data-l="Small label">Cross-platform</p>
           <h2 id="devices-title" class="h-sec" data-k="dev.title" data-l="Headline">One platform. Every screen.</h2>
         </div>
         <div class="sc-copy">
-          <p class="lede" data-k="dev.sub" data-l="Subheadline">Manage your entire fleet, from desktop to mobile.</p>
+          <p class="lede" data-k="dev.sub" data-l="Subheadline">The same live data on desktop, tablet and mobile.</p>
           <ul class="sc-chips" aria-label="What you can see">
             <li data-k="dev.chip1" data-l="Chip 1">Live map</li>
             <li data-k="dev.chip2" data-l="Chip 2">Battery health</li>
@@ -1669,25 +1671,25 @@ p,h1,h2,h3,ul{margin:0}
   <section id="features" class="ft" data-sec="Features" data-sid="features" aria-labelledby="features-title">
     <div class="wrap">
       <div class="ft-head">
-        <p class="label ft-a" style="--d:0s" data-k="ft.label" data-l="Small label">Built for daily operations</p>
-        <div class="ft-statement ft-a" style="--d:.1s"><h2 id="features-title" class="ft-h" data-k="ft.title" data-l="Headline">More than a dot on a map.</h2> <p class="ft-sub" data-k="ft.sub" data-l="Subheadline">The tools behind every vehicle, battery and journey.</p></div>
+        <p class="label ft-a" style="--d:0s" data-k="ft.label" data-l="Small label">06 Operations</p>
+        <div class="ft-statement ft-a" style="--d:.1s"><h2 id="features-title" class="ft-h" data-k="ft.title" data-l="Headline">More than a dot on a map.</h2> <p class="ft-sub" data-k="ft.sub" data-l="Subheadline">Operational tools for every vehicle, battery and trip.</p></div>
       </div>
     </div>
     <div class="ft-grid-wrap">
         <article class="ft-card" style="--i:0">
-          <div class="ft-text"><h3 class="ft-t" data-k="ft.1.t" data-l="Feature 1 title">Geofencing</h3><p class="ft-d" data-k="ft.1.d" data-l="Feature 1 text">Set boundaries. Know when vehicles enter or leave.</p></div>
+          <div class="ft-text"><h3 class="ft-t" data-k="ft.1.t" data-l="Feature 1 title">Geofencing</h3><p class="ft-d" data-k="ft.1.d" data-l="Feature 1 text">Virtual boundaries with vehicle entry and exit alerts.</p></div>
           <div class="ft-media has-media" data-slot="ft-geo" data-default-media="images/feat-geofencing.webp" data-slot-l="Geofencing — image / video (4:3)" data-slot-hint="A Canopy screen showing geofencing, 2400 × 1800 px (4:3). Videos loop muted." data-fit-option data-lazy data-slot-empty="Nothing uploaded yet. The site shows a simple teal line drawing until you add one."><picture class="default-pic"><img class="photo" src="images/feat-geofencing.webp?v=4" alt="The Canopy live map: a list of vehicles with status and battery level beside a satellite map of Nairobi with zone boundaries and vehicle pins" width="1448" height="1086" loading="lazy" decoding="async"></picture><div class="ft-fb" aria-hidden="true"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><g class="ft-grid" stroke="rgba(163,182,183,.07)" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M0 250H400M50 0V300M100 0V300M150 0V300M200 0V300M250 0V300M300 0V300M350 0V300"/></g><path d="M-10 214C70 196 120 232 196 206S330 150 410 170" fill="none" stroke="rgba(163,182,183,.16)" stroke-width="5"/><path d="M118 -10C140 80 128 170 160 310" fill="none" stroke="rgba(163,182,183,.12)" stroke-width="4"/><path class="ft-zone" d="M122 92L238 70L300 136L262 226L150 232L104 160Z"/><path class="ft-zone-line" d="M122 92L238 70L300 136L262 226L150 232L104 160Z"/><g fill="#EAF2F1"><circle cx="170" cy="130" r="4"/><circle cx="214" cy="112" r="4"/><circle cx="238" cy="172" r="4"/><circle cx="182" cy="196" r="4"/></g><circle class="ft-ping" cx="318" cy="196" r="6"/><circle cx="318" cy="196" r="4.5" fill="#14B8A6"/></svg></div></div>
         </article>
         <article class="ft-card" style="--i:1">
-          <div class="ft-text"><h3 class="ft-t" data-k="ft.2.t" data-l="Feature 2 title">Trip history</h3><p class="ft-d" data-k="ft.2.d" data-l="Feature 2 text">Replay journeys. Understand every route.</p></div>
+          <div class="ft-text"><h3 class="ft-t" data-k="ft.2.t" data-l="Feature 2 title">Trip history</h3><p class="ft-d" data-k="ft.2.d" data-l="Feature 2 text">Replay recorded journeys and review routes.</p></div>
           <div class="ft-media has-media" data-slot="ft-trip" data-default-media="images/feat-trip-history.webp" data-slot-l="Trip history — image / video (4:3)" data-slot-hint="A Canopy screen showing trip history, 2400 × 1800 px (4:3). Videos loop muted." data-fit-option data-lazy data-slot-empty="Nothing uploaded yet. The site shows a simple teal line drawing until you add one."><picture class="default-pic"><img class="photo" src="images/feat-trip-history.webp?v=4" alt="Canopy trip history: a device list, a satellite map of Nairobi and a list of trips with play and reset controls" width="1448" height="1086" loading="lazy" decoding="async"></picture><div class="ft-fb" aria-hidden="true"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><g class="ft-grid" stroke="rgba(163,182,183,.07)" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M0 250H400M50 0V300M100 0V300M150 0V300M200 0V300M250 0V300M300 0V300M350 0V300"/></g><path class="ft-route-bg" d="M64 222C96 222 104 160 146 156S198 206 238 196 262 110 300 104 338 84 344 70"/><path id="ft-route" class="ft-route" d="M64 222C96 222 104 160 146 156S198 206 238 196 262 110 300 104 338 84 344 70" pathLength="1"/><circle cx="64" cy="222" r="7" fill="none" stroke="#EAF2F1" stroke-width="2"/><circle cx="344" cy="70" r="6" fill="#14B8A6"/><circle class="ft-car" r="5" fill="#fff"><animateMotion dur="7s" repeatCount="indefinite" calcMode="spline" keyTimes="0;1" keySplines=".45 0 .55 1"><mpath href="#ft-route"/></animateMotion></circle><g class="ft-scrub"><rect x="64" y="262" width="280" height="3" rx="1.5" fill="rgba(163,182,183,.22)"/><rect class="ft-scrub-fill" x="64" y="262" width="280" height="3" rx="1.5" fill="#14B8A6"/></g></svg></div></div>
         </article>
         <article class="ft-card" style="--i:2">
-          <div class="ft-text"><h3 class="ft-t" data-k="ft.3.t" data-l="Feature 3 title">Device health</h3><p class="ft-d" data-k="ft.3.d" data-l="Feature 3 text">See connectivity and device status at a glance.</p></div>
+          <div class="ft-text"><h3 class="ft-t" data-k="ft.3.t" data-l="Feature 3 title">Device health</h3><p class="ft-d" data-k="ft.3.d" data-l="Feature 3 text">Monitor device connectivity and hardware status.</p></div>
           <div class="ft-media has-media" data-slot="ft-dev" data-default-media="images/feat-device-health.webp" data-slot-l="Device health — image / video (4:3)" data-slot-hint="A Canopy screen showing device health, 2400 × 1800 px (4:3). Videos loop muted." data-fit-option data-lazy data-slot-empty="Nothing uploaded yet. The site shows a simple teal line drawing until you add one."><picture class="default-pic"><img class="photo" src="images/feat-device-health.webp?v=4" alt="The Explorer circuit board on its own: the cellular module, processor, antenna and wiring connector on a green board" width="1448" height="1086" loading="lazy" decoding="async"></picture><div class="ft-fb" aria-hidden="true"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><g class="ft-grid" stroke="rgba(163,182,183,.07)" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M0 250H400M50 0V300M100 0V300M150 0V300M200 0V300M250 0V300M300 0V300M350 0V300"/></g><circle class="ft-ring r1" cx="200" cy="146" r="38"/><circle class="ft-ring r2" cx="200" cy="146" r="38"/><circle class="ft-ring r3" cx="200" cy="146" r="38"/><rect x="172" y="122" width="56" height="48" rx="10" fill="#0B1A1C" stroke="#14B8A6" stroke-width="2"/><path d="M186 156v-6M194 156v-10M202 156v-14M210 156v-18" stroke="#EAF2F1" stroke-width="3" stroke-linecap="round"/><circle cx="218" cy="132" r="3" fill="#14B8A6" class="ft-led"/><g class="ft-status"><circle cx="150" cy="238" r="4" fill="#14B8A6"/><circle cx="180" cy="238" r="4" fill="#14B8A6"/><circle cx="210" cy="238" r="4" fill="#14B8A6"/><circle cx="240" cy="238" r="4" fill="rgba(163,182,183,.4)"/><circle cx="270" cy="238" r="4" fill="#14B8A6"/></g></svg></div></div>
         </article>
         <article class="ft-card" style="--i:3">
-          <div class="ft-text"><h3 class="ft-t" data-k="ft.4.t" data-l="Feature 4 title">Asset management</h3><p class="ft-d" data-k="ft.4.d" data-l="Feature 4 text">Keep vehicles and batteries organized.</p></div>
+          <div class="ft-text"><h3 class="ft-t" data-k="ft.4.t" data-l="Feature 4 title">Asset management</h3><p class="ft-d" data-k="ft.4.d" data-l="Feature 4 text">Every vehicle and battery, organized and tracked.</p></div>
           <div class="ft-media has-media" data-slot="ft-asset" data-default-media="images/feat-asset-management.webp" data-slot-l="Asset management — image / video (4:3)" data-slot-hint="A Canopy screen showing asset management, 2400 × 1800 px (4:3). Videos loop muted." data-fit-option data-lazy data-slot-empty="Nothing uploaded yet. The site shows a simple teal line drawing until you add one."><picture class="default-pic"><img class="photo" src="images/feat-asset-management.webp?v=4" alt="The Canopy vehicles screen: fleet totals for moving, idling, parked and offline, above a table of vehicles with status, battery, distance, location, firmware and lock status" width="1448" height="1086" loading="lazy" decoding="async"></picture><div class="ft-fb" aria-hidden="true"><svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice"><g class="ft-grid" stroke="rgba(163,182,183,.07)" stroke-width="1"><path d="M0 50H400M0 100H400M0 150H400M0 200H400M0 250H400M50 0V300M100 0V300M150 0V300M200 0V300M250 0V300M300 0V300M350 0V300"/></g><g class="ft-row" style="--i:0"><rect x="76" y="58" width="248" height="32" rx="9" fill="rgba(234,242,241,.06)" stroke="rgba(163,182,183,.14)"/><circle cx="96" cy="74" r="8" fill="none" stroke="#14B8A6" stroke-width="1.6"/><rect x="114" y="70" width="92" height="4" rx="2" fill="rgba(234,242,241,.55)"/><rect x="114" y="78" width="52" height="3" rx="1.5" fill="rgba(163,182,183,.3)"/><rect x="270" y="69" width="38" height="10" rx="5" fill="rgba(20,184,166,.22)"/><circle cx="278" cy="74" r="2.5" fill="#14B8A6"/></g><g class="ft-row" style="--i:1"><rect x="76" y="100" width="248" height="32" rx="9" fill="rgba(234,242,241,.06)" stroke="rgba(163,182,183,.14)"/><circle cx="96" cy="116" r="8" fill="none" stroke="#14B8A6" stroke-width="1.6"/><rect x="114" y="112" width="74" height="4" rx="2" fill="rgba(234,242,241,.55)"/><rect x="114" y="120" width="64" height="3" rx="1.5" fill="rgba(163,182,183,.3)"/><rect x="270" y="111" width="38" height="10" rx="5" fill="rgba(20,184,166,.22)"/><circle cx="278" cy="116" r="2.5" fill="#14B8A6"/></g><g class="ft-row" style="--i:2"><rect x="76" y="142" width="248" height="32" rx="9" fill="rgba(234,242,241,.06)" stroke="rgba(163,182,183,.14)"/><circle cx="96" cy="158" r="8" fill="none" stroke="#14B8A6" stroke-width="1.6"/><rect x="114" y="154" width="108" height="4" rx="2" fill="rgba(234,242,241,.55)"/><rect x="114" y="162" width="40" height="3" rx="1.5" fill="rgba(163,182,183,.3)"/><rect x="270" y="153" width="38" height="10" rx="5" fill="rgba(163,182,183,.18)"/><circle cx="278" cy="158" r="2.5" fill="#A3B6B7"/></g><g class="ft-row" style="--i:3"><rect x="76" y="184" width="248" height="32" rx="9" fill="rgba(234,242,241,.06)" stroke="rgba(163,182,183,.14)"/><circle cx="96" cy="200" r="8" fill="none" stroke="#14B8A6" stroke-width="1.6"/><rect x="114" y="196" width="66" height="4" rx="2" fill="rgba(234,242,241,.55)"/><rect x="114" y="204" width="58" height="3" rx="1.5" fill="rgba(163,182,183,.3)"/><rect x="270" y="195" width="38" height="10" rx="5" fill="rgba(20,184,166,.22)"/><circle cx="278" cy="200" r="2.5" fill="#14B8A6"/></g><g class="ft-row" style="--i:4"><rect x="76" y="226" width="248" height="32" rx="9" fill="rgba(234,242,241,.06)" stroke="rgba(163,182,183,.14)"/><circle cx="96" cy="242" r="8" fill="none" stroke="#14B8A6" stroke-width="1.6"/><rect x="114" y="238" width="86" height="4" rx="2" fill="rgba(234,242,241,.55)"/><rect x="114" y="246" width="46" height="3" rx="1.5" fill="rgba(163,182,183,.3)"/><rect x="270" y="237" width="38" height="10" rx="5" fill="rgba(20,184,166,.22)"/><circle cx="278" cy="242" r="2.5" fill="#14B8A6"/></g></svg></div></div>
         </article>
       </div>
@@ -1721,6 +1723,7 @@ p,h1,h2,h3,ul{margin:0}
     <canvas data-seed="9173" aria-hidden="true"></canvas>
     <picture class="default-pic"><img class="photo" src="images/worst-day.webp" alt="A rider kneels to repair an electric motorcycle on a wet mountain road while a companion looks on" width="2688" height="1520" loading="lazy"></picture>
     <div class="wrap">
+      <p class="label" data-k="worst.label" data-l="Small label">07 Field-tested</p>
       <h2 id="worst-title" class="h-sec" data-k="worst.title" data-l="Headline">Built for the worst day.</h2>
       <p class="lede mute" data-k="worst.sub" data-l="Subheadline">Weak signal. Rough roads. Cut wires.</p>
       <div class="btns"><a class="btn ghost" href="#film" data-k="worst.cta" data-l="Button" data-hk="link.film">Watch the film</a></div>
@@ -1732,9 +1735,9 @@ p,h1,h2,h3,ul{margin:0}
     <div class="gm-map"><div class="gm-tip" id="gm-tip" role="status" aria-live="polite" hidden><span class="gm-tip-c"></span><span class="gm-tip-n"></span><span class="gm-tip-s"><i></i>Live</span></div><svg id="gm-svg" aria-hidden="true" viewBox="0 0 1200 585" preserveAspectRatio="xMidYMid meet"><defs><radialGradient id="gm-spotg"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><mask id="gm-spotm" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="585"><circle id="gm-spotc" cx="-200" cy="-200" r="95" fill="url(#gm-spotg)"/></mask><linearGradient id="gm-arcg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2EE6CF" stop-opacity="0"/><stop offset=".5" stop-color="#2EE6CF" stop-opacity=".9"/><stop offset="1" stop-color="#2EE6CF" stop-opacity="0"/></linearGradient><radialGradient id="gm-gt"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".38"/><stop offset=".45" stop-color="#FFFFFF" stop-opacity=".14"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient><linearGradient id="gm-beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2EE6CF" stop-opacity="0"/><stop offset=".55" stop-color="#2EE6CF" stop-opacity=".45"/><stop offset="1" stop-color="#7FF5E6" stop-opacity="1"/></linearGradient></defs><image class="gm-land" href="images/world-land.svg" width="1200" height="585"/><image class="gm-l gm-l2" href="images/world-lights-2.svg" width="1200" height="585"/><image class="gm-l gm-l1" href="images/world-lights-1.svg" width="1200" height="585"/><image class="gm-l gm-l0" href="images/world-lights-0.svg" width="1200" height="585"/><g class="gm-spot" mask="url(#gm-spotm)"><image href="images/world-lights-1.svg" width="1200" height="585"/><image href="images/world-lights-0.svg" width="1200" height="585"/></g><g class="gm-arcs" id="gm-arcs"></g><g class="gm-tw" id="gm-tw"></g><g class="gm-hubs" id="gm-hubs"></g></svg></div>
     <div class="gm-foot">
       <div class="gm-copy">
-        <p class="gm-eyebrow gm-a" style="--d:0s" data-k="gm.label" data-l="Small label">Global view</p>
+        <p class="gm-eyebrow gm-a" style="--d:0s" data-k="gm.label" data-l="Small label">08 Network</p>
         <h2 id="global-title" class="h-sec gm-title gm-a" style="--d:.08s"><span data-k="gm.title.1" data-l="Headline line 1">One fleet.</span> <span data-k="gm.title.2" data-l="Headline line 2">One live map.</span></h2>
-        <p class="gm-lede gm-a" style="--d:.24s" data-k="gm.sub" data-l="Supporting text">See vehicles, batteries and activity across your network in real time.</p>
+        <p class="gm-lede gm-a" style="--d:.24s" data-k="gm.sub" data-l="Supporting text">Every vehicle, battery and event across your network, in real time.</p>
       </div>
       <div class="gm-stat gm-a" style="--d:.4s">
         <p class="gm-stat-l"><i aria-hidden="true"></i><span data-k="gm.stat.l" data-l="Stat label">Live assets</span></p>
@@ -1804,13 +1807,13 @@ p,h1,h2,h3,ul{margin:0}
     <div class="fig-left">
       <a class="fig-mark" href="#top" aria-label="Canopy home"><img src="canopy-logo-white.svg" alt="Canopy" width="123" height="38"></a>
       <div class="fig-keep">
-        <h3 data-k="foot.keep" data-l="Sign-up heading">Keep up with us</h3>
-        <p data-k="foot.keep.sub" data-l="Sign-up text">Get news, new episodes and product updates.</p>
+        <h3 data-k="foot.keep" data-l="Sign-up heading">Get the changelog.</h3>
+        <p data-k="foot.keep.sub" data-l="Sign-up text">Product updates, new episodes and release notes.</p>
       </div>
       <form class="fig-form" id="signup" novalidate>
-        <label for="signup-email">Email address</label>
-        <input id="signup-email" name="email" type="email" placeholder="Email address*" autocomplete="email" required>
-        <button type="submit" data-k="foot.signup" data-l="Sign-up button">Sign up</button>
+        <label for="signup-email">Work email</label>
+        <input id="signup-email" name="email" type="email" placeholder="Work email*" autocomplete="email" required>
+        <button type="submit" data-k="foot.signup" data-l="Sign-up button">Subscribe</button>
       </form>
       <p class="note" id="signup-note" role="status"></p>
       <div class="fig-social">
@@ -1824,9 +1827,9 @@ p,h1,h2,h3,ul{margin:0}
     </div>
     <nav class="fig-nav" aria-label="Footer">
       <ol>
-        <li><a href="#how"><span class="n">01</span><span class="t" data-k="foot.n1" data-l="Menu item 1">How it works</span></a></li>
+        <li><a href="#how"><span class="n">01</span><span class="t" data-k="foot.n1" data-l="Menu item 1">Platform</span></a></li>
         <li><a href="#explorer"><span class="n">02</span><span class="t" data-k="foot.n2" data-l="Menu item 2">Explorer</span></a></li>
-        <li><a href="#features"><span class="n">03</span><span class="t" data-k="foot.n3" data-l="Menu item 3">Features</span></a></li>
+        <li><a href="#features"><span class="n">03</span><span class="t" data-k="foot.n3" data-l="Menu item 3">Capabilities</span></a></li>
         <li><a href="#film"><span class="n">04</span><span class="t" data-k="foot.n4" data-l="Menu item 4">The film</span></a></li>
         <li><a href="https://dev.canopy.roam-electric.com/pricing#lead-request-form" data-hk="link.demo"><span class="n">05</span><span class="t" data-k="foot.n5" data-l="Menu item 5">Book a demo</span></a></li>
       </ol>
@@ -1838,7 +1841,6 @@ p,h1,h2,h3,ul{margin:0}
       <a href="#top" data-k="foot.terms" data-l="Terms link" data-hk="link.terms" data-hl="Terms page">Terms &amp; Conditions</a>
       <a href="#top" data-k="foot.privacy" data-l="Privacy link" data-hk="link.privacy" data-hl="Privacy page">Privacy Policy</a>
       <a href="#top" data-k="foot.cookies" data-l="Cookies link" data-hk="link.cookies" data-hl="Cookies page">Cookies</a>
-      <a href="#admin">Admin</a>
     </nav>
   </div>
 </footer>
