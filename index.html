@@ -1391,10 +1391,19 @@ p,h1,h2,h3,ul{margin:0}
     Object.keys(DOTS).forEach(function(id){var c=document.createElementNS(NS,'circle');c.setAttribute('r','3.5');c.dataset.g=DOTS[id].g;c.setAttribute('class','jn');svg.appendChild(c);dotEls[id]=c});
     /* travelling pulses: one small light per line, shown only on lit lines once the diagram has built */
     var flowEls={},flowOK=!mqRM.matches&&typeof SVGAnimateMotionElement!=='undefined';
+    /* the pulses live in one group that always stays the last thing in the drawing. They are never moved in the DOM:
+       moving an element that carries animateMotion restarts it, and for a frame it is drawn at the drawing's top-left
+       corner (beside the 01 label), which showed up as a blinking red dot. */
+    var flowG=document.createElementNS(NS,'g');flowG.setAttribute('class','sys-flows');svg.appendChild(flowG);
+    /* and as a safety net, the corner itself is masked out for the pulses (no line ever runs there) */
+    (function(){var mk=document.createElementNS(NS,'mask');mk.id='sys-flow-mask';mk.setAttribute('maskUnits','userSpaceOnUse');mk.setAttribute('x','-100');mk.setAttribute('y','-100');mk.setAttribute('width','20000');mk.setAttribute('height','20000');
+      var w=document.createElementNS(NS,'rect');w.setAttribute('x','-100');w.setAttribute('y','-100');w.setAttribute('width','20000');w.setAttribute('height','20000');w.setAttribute('fill','#fff');
+      var k=document.createElementNS(NS,'rect');k.setAttribute('x','-24');k.setAttribute('y','-24');k.setAttribute('width','48');k.setAttribute('height','48');k.setAttribute('fill','#000');
+      mk.appendChild(w);mk.appendChild(k);var d=document.createElementNS(NS,'defs');d.appendChild(mk);svg.insertBefore(d,svg.firstChild);flowG.setAttribute('mask','url(#sys-flow-mask)')})();
     if(flowOK)Object.keys(EDGES).forEach(function(id,i){
       var c=document.createElementNS(NS,'circle');c.setAttribute('r','4');c.setAttribute('class','sys-flow');
       var a=document.createElementNS(NS,'animateMotion');a.setAttribute('dur',(id.charAt(0)==='v'?2.2:2.6)+'s');a.setAttribute('repeatCount','indefinite');a.setAttribute('begin',(-(i*0.37)%2.2).toFixed(2)+'s');a.setAttribute('calcMode','spline');a.setAttribute('keyTimes','0;1');a.setAttribute('keySplines','.45 0 .55 1');
-      var m=document.createElementNS(NS,'mpath');m.setAttribute('href','#sys-e-'+id);a.appendChild(m);c.appendChild(a);svg.appendChild(c);flowEls[id]=c;
+      var m=document.createElementNS(NS,'mpath');m.setAttribute('href','#sys-e-'+id);a.appendChild(m);c.appendChild(a);flowG.appendChild(c);flowEls[id]=c;
     });
 
     /* orthogonal path with soft rounded corners */
@@ -1452,8 +1461,8 @@ p,h1,h2,h3,ul{margin:0}
       Object.keys(pathEls).forEach(function(e){var on=hi.indexOf(e)>=0;pathEls[e].classList.toggle('hi',on);if(on){relNodes[EDGES[e][0]]=1;relNodes[EDGES[e][1]]=1}});
       Object.keys(dotEls).forEach(function(k){dotEls[k].classList.toggle('hi',DOTS[k].e.some(function(e){return hi.indexOf(e)>=0}))});
       /* lit lines and dots sit on top of the grey ones */
-      hi.forEach(function(e){svg.appendChild(pathEls[e])});Object.keys(dotEls).forEach(function(k){svg.appendChild(dotEls[k])});
-      Object.keys(flowEls).forEach(function(e){var on=hi.indexOf(e)>=0;flowEls[e].classList.toggle('on',on);flowEls[e].classList.toggle('hi',on);if(on)svg.appendChild(flowEls[e])});
+      hi.forEach(function(e){svg.insertBefore(pathEls[e],flowG)});Object.keys(dotEls).forEach(function(k){svg.insertBefore(dotEls[k],flowG)});
+      Object.keys(flowEls).forEach(function(e){var on=hi.indexOf(e)>=0;flowEls[e].classList.toggle('on',on);flowEls[e].classList.toggle('hi',on)});
       Object.keys(nodes).forEach(function(n){
         nodes[n].classList.toggle('on',n===sel);
         nodes[n].classList.toggle('dim',focus&&!relNodes[n]);
