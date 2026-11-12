@@ -1799,9 +1799,9 @@ p,h1,h2,h3,ul{margin:0}
       s.classList.remove('q1','q2','q3');            /* the previous round clears away */
       var lead=first?1500:900;                       /* the first round waits for the window to settle */
       at(lead,function(){s.classList.add('q1')});    /* the question arrives */
-      at(lead+1000,function(){s.classList.add('q2')});/* Rover thinks */
-      at(lead+2700,function(){s.classList.add('q3')});/* Rover answers */
-      at(lead+2700+500+2000,function(){if(running)cycle(false)}); /* answered, held for two seconds, round again */
+      at(lead+550,function(){s.classList.add('q2')}); /* Rover thinks, briefly */
+      at(lead+1550,function(){s.classList.add('q3')});/* Rover answers */
+      at(lead+1550+500+2000,function(){if(running)cycle(false)}); /* answered, held for two seconds, round again */
     }
     var io=new IntersectionObserver(function(es){
       var on=es[0].isIntersecting;
