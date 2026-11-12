@@ -1788,23 +1788,34 @@ p,h1,h2,h3,ul{margin:0}
     </div>
   </section>
   <script>
-  /* Rover AI: one entrance sequence, played once when the section arrives. No pinning, no scroll scrubbing.
-     The markup holds the finished conversation, so without JS (or with reduced motion) it simply shows. */
+  /* Rover AI: the conversation plays on a loop while the section is on screen. Each round shows the question,
+     a moment of thinking, then Rover's answer, holds it for two seconds and starts again. It pauses when the
+     section scrolls away. The markup holds the finished conversation, so without JS (or with reduced motion)
+     it simply shows. No pinning and no scroll scrubbing. */
   (function(){
     var s=document.getElementById('rover');if(!s)return;
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
     s.classList.add('js');
-    var t=[];
-    function step(c,ms){t.push(setTimeout(function(){s.classList.add(c)},ms))}
+    var timers=[],running=false,played=false;
+    function stop(){timers.forEach(clearTimeout);timers=[]}
+    function at(ms,fn){timers.push(setTimeout(fn,ms))}
+    function cycle(first){
+      s.classList.remove('q1','q2','q3');            /* the previous round clears away */
+      var lead=first?1500:900;                       /* the first round waits for the window to settle */
+      at(lead,function(){s.classList.add('q1')});    /* the question arrives */
+      at(lead+1000,function(){s.classList.add('q2')});/* Rover thinks */
+      at(lead+2700,function(){s.classList.add('q3')});/* Rover answers */
+      at(lead+2700+500+2000,function(){if(running)cycle(false)}); /* answered, held for two seconds, round again */
+    }
     var io=new IntersectionObserver(function(es){
-      if(!es[0].isIntersecting)return;io.disconnect();
-      s.classList.add('in');          /* the window and copy settle */
-      step('q1',1500);                /* the question arrives */
-      step('q2',2500);                /* Rover thinks */
-      step('q3',4200);                /* Rover answers, and it stays */
+      var on=es[0].isIntersecting;
+      if(on===running)return;
+      running=on;
+      if(on){s.classList.add('in');cycle(!played);played=true}
+      else{stop();s.classList.remove('q1','q2','q3')}
     },{threshold:.25});
     io.observe(s);
-    window.addEventListener('pagehide',function(){t.forEach(clearTimeout)});
+    window.addEventListener('pagehide',function(){running=false;stop()});
   })();
   </script>
 
