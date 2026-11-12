@@ -247,15 +247,9 @@ p,h1,h2,h3,ul{margin:0}
   #why.band.light .lede{max-width:34em}
 }
 @media (max-width:767px){#why.band.light .h-sec{font-size:min(1.7rem,calc((100vw - 32px) / 12.8))}#why.band.light .photo{object-position:50% 50%}}
-#film.band > .wrap{transform:translateY(-85%)}
 /* no dark seam under Features: the sky fades up into the white section above */
-#film.gap-top{margin-top:0;background:#E6F0FD}
-#film::before{content:"";position:absolute;left:0;right:0;top:0;height:clamp(90px,10vw,180px);z-index:1;pointer-events:none;background:linear-gradient(180deg,#E6F0FD 0%,rgba(230,240,253,.85) 30%,rgba(230,240,253,0) 100%)}
-#film.band.light .btn.ghost{color:var(--ink);border-color:rgba(11,26,28,.5)}
-#film.band.light .btn.ghost:hover{border-color:var(--ink)}
-#film > .default-pic .photo{transform:scaleX(-1)}
-@media (min-width:768px){#film.band.light::after{background:linear-gradient(270deg,rgba(255,255,255,.75) 0%,rgba(255,255,255,.4) 30%,rgba(255,255,255,0) 50%)}#film.band > .wrap{justify-items:end;text-align:right}#film .btns{justify-content:flex-end}}
-@media (max-width:767px){#film.band > .wrap{transform:none}#film.band.light > .default-pic .photo{object-position:90% 50%}}
+@media (min-width:768px){}
+@media (max-width:767px){}
 .band .wrap{display:grid;gap:var(--eg)}
 .band .shot{top:28px}
 .bleed.has-upload > .default-pic{display:none}
@@ -496,7 +490,6 @@ p,h1,h2,h3,ul{margin:0}
 @media (prefers-reduced-motion:reduce){.ft *{animation:none!important;transition:none!important}.ft-car{display:none!important}}
 @media (max-width:860px){.ft-grid-wrap{grid-template-columns:1fr}}
 @media (max-width:767px){.ft{padding-block:80px}.ft-card{border-radius:22px}.ft-head{align-items:flex-start;text-align:left}.ft-statement .ft-sub{margin-left:0}.ft-text{padding:32px 24px 0}.ft-d{font-size:clamp(1.4rem,6.4vw,1.8rem)}}
-.gap-top{margin-top:2px}
 
 /* footer: Figure-style — wordmark + sign-up left, big numbered menu right, blurred photo behind */
 .fig{position:relative;overflow:hidden;background:#0E2224;margin-top:2px}
@@ -934,7 +927,6 @@ p,h1,h2,h3,ul{margin:0}
       <p class="lede" data-k="hero.sub" data-l="Subheadline">Real-time telemetry for every vehicle and battery. Any brand.</p>
       <div class="btns">
         <a class="btn" href="https://dev.canopy.roam-electric.com/pricing#lead-request-form" data-k="hero.cta1" data-l="Main button" data-hk="link.demo">Book a demo</a>
-        <a class="btn ghost" href="#film" data-k="hero.cta2" data-l="Second button" data-hk="link.film" data-hl="Watch the film button (all)">Watch the film</a>
       </div>
     </div>
   </section>
@@ -1823,17 +1815,6 @@ p,h1,h2,h3,ul{margin:0}
   })();
   </script>
 
-  <section id="film" class="bleed band light gap-top has-media" data-sec="Built for the worst day" data-sid="worst" data-slot="worst" data-slot-l="Section background" data-default-media="images/worst-day.webp" aria-labelledby="worst-title">
-    <canvas data-seed="9173" aria-hidden="true"></canvas>
-    <picture class="default-pic"><img class="photo" src="images/worst-day.webp" alt="A rider kneels to repair an electric motorcycle on a wet mountain road while a companion looks on" width="2688" height="1520" loading="lazy"></picture>
-    <div class="wrap">
-      <p class="label" data-k="worst.label" data-l="Small label">07 Field-tested</p>
-      <h2 id="worst-title" class="h-sec" data-k="worst.title" data-l="Headline">Built for the worst day.</h2>
-      <p class="lede mute" data-k="worst.sub" data-l="Subheadline">Weak signal. Rough roads. Cut wires.</p>
-      <div class="btns"><a class="btn ghost" href="#film" data-k="worst.cta" data-l="Button" data-hk="link.film">Watch the film</a></div>
-    </div>
-  </section>
-
   <!-- Global view: night-lights world map (Miller projection, country borders), teal hub beacons, framed with crosshairs -->
   <section id="global" class="gm" data-sec="Global view" data-sid="global" aria-labelledby="global-title">
     <div class="gm-map"><div class="gm-tip" id="gm-tip" role="status" aria-live="polite" hidden><span class="gm-tip-c"></span><span class="gm-tip-n"></span><span class="gm-tip-s"><i></i>Live</span></div><svg id="gm-svg" aria-hidden="true" viewBox="0 0 1200 585" preserveAspectRatio="xMidYMid meet"><defs><radialGradient id="gm-spotg"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#fff" stop-opacity=".45"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient><mask id="gm-spotm" maskUnits="userSpaceOnUse" x="0" y="0" width="1200" height="585"><circle id="gm-spotc" cx="-200" cy="-200" r="95" fill="url(#gm-spotg)"/></mask><linearGradient id="gm-arcg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2EE6CF" stop-opacity="0"/><stop offset=".5" stop-color="#2EE6CF" stop-opacity=".9"/><stop offset="1" stop-color="#2EE6CF" stop-opacity="0"/></linearGradient><radialGradient id="gm-gt"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".38"/><stop offset=".45" stop-color="#FFFFFF" stop-opacity=".14"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient><linearGradient id="gm-beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2EE6CF" stop-opacity="0"/><stop offset=".55" stop-color="#2EE6CF" stop-opacity=".45"/><stop offset="1" stop-color="#7FF5E6" stop-opacity="1"/></linearGradient></defs><image class="gm-land" href="images/world-land.svg" width="1200" height="585"/><image class="gm-l gm-l2" href="images/world-lights-2.svg" width="1200" height="585"/><image class="gm-l gm-l1" href="images/world-lights-1.svg" width="1200" height="585"/><image class="gm-l gm-l0" href="images/world-lights-0.svg" width="1200" height="585"/><g class="gm-spot" mask="url(#gm-spotm)"><image href="images/world-lights-1.svg" width="1200" height="585"/><image href="images/world-lights-0.svg" width="1200" height="585"/></g><g class="gm-arcs" id="gm-arcs"></g><g class="gm-tw" id="gm-tw"></g><g class="gm-hubs" id="gm-hubs"></g></svg></div>
@@ -1934,8 +1915,7 @@ p,h1,h2,h3,ul{margin:0}
         <li><a href="#how"><span class="n">01</span><span class="t" data-k="foot.n1" data-l="Menu item 1">Platform</span></a></li>
         <li><a href="#explorer"><span class="n">02</span><span class="t" data-k="foot.n2" data-l="Menu item 2">Explorer</span></a></li>
         <li><a href="#features"><span class="n">03</span><span class="t" data-k="foot.n3" data-l="Menu item 3">Capabilities</span></a></li>
-        <li><a href="#film"><span class="n">04</span><span class="t" data-k="foot.n4" data-l="Menu item 4">The film</span></a></li>
-        <li><a href="https://dev.canopy.roam-electric.com/pricing#lead-request-form" data-hk="link.demo"><span class="n">05</span><span class="t" data-k="foot.n5" data-l="Menu item 5">Book a demo</span></a></li>
+        <li><a href="https://dev.canopy.roam-electric.com/pricing#lead-request-form" data-hk="link.demo"><span class="n">04</span><span class="t" data-k="foot.n5" data-l="Menu item 5">Book a demo</span></a></li>
       </ol>
     </nav>
   </div>
