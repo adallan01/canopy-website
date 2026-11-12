@@ -1140,7 +1140,7 @@ p,h1,h2,h3,ul{margin:0}
     /* arrows: go to the previous / next card; while the cards are pinned this moves the page to the matching scroll point */
     [].forEach.call(btns,function(b){b.addEventListener('click',function(){
       var i=Math.max(0,Math.min(tiles.length-1,cur()+(+b.dataset.dir))),o=Math.min(tiles[i].offsetLeft-tiles[0].offsetLeft,max());
-      if(st&&max()>0){var q=o/max();window.scrollTo({top:st.start+hold()+move()*(Math.acos(1-2*q)/Math.PI),behavior:rm.matches?'auto':'smooth'})}
+      if(st&&max()>0){var q=o/max();window.scrollTo({top:st.start+move()*(Math.acos(1-2*q)/Math.PI),behavior:rm.matches?'auto':'smooth'})}
       else tr.scrollTo({left:o,behavior:rm.matches?'auto':'smooth'})})});
     tr.addEventListener('scroll',function(){window.requestAnimationFrame(upd)},{passive:true});window.addEventListener('resize',upd);upd();
     sec.classList.add('js');
@@ -1150,19 +1150,16 @@ p,h1,h2,h3,ul{margin:0}
        Phones keep a native, finger-driven swipe carousel (no pin), which is quicker and never blocks the page. */
     if(rm.matches||!(window.gsap&&window.ScrollTrigger))return;
     gsap.registerPlugin(ScrollTrigger);
-    /* the row holds still for a short stretch of scrolling when it pins and again after the last card,
-       and the cards ease in and out of their slide, so arriving and leaving never feels abrupt */
-    function hold(){return Math.round(window.innerHeight*.45)}
-    function move(){return Math.max(1,max())*1.15}
+    /* the cards start moving as soon as the row pins and release as the last card lands: no standing-still
+       stretches. The eased slide means they still gather pace gently and settle gently. */
+    function move(){return Math.max(1,max())*1.35}
     function ratio(){var m=max();return st&&m>0?move()/m:0}
     gsap.matchMedia().add('(min-width:768px)',function(){
       sec.classList.add('hw-scrub');
       rail=document.createElement('div');rail.className='hw-rail';tiles.forEach(function(t){rail.appendChild(t)});tr.appendChild(rail);tr.scrollLeft=0;pos=0;
       var tw=gsap.timeline({onUpdate:function(){pos=-gsap.getProperty(rail,'x');upd()}})
-        .to({},{duration:function(){return hold()}})
-        .to(rail,{x:function(){return -max()},duration:function(){return move()},ease:'sine.inOut',force3D:true})
-        .to({},{duration:function(){return hold()}});
-      st=ScrollTrigger.create({trigger:stage,start:'center center',end:function(){return '+='+(move()+2*hold())},pin:true,pinSpacing:true,scrub:1,anticipatePin:1,invalidateOnRefresh:true,animation:tw});
+        .to(rail,{x:function(){return -max()},duration:function(){return move()},ease:'sine.inOut',force3D:true});
+      st=ScrollTrigger.create({trigger:stage,start:'center center',end:function(){return '+='+move()},pin:true,pinSpacing:true,scrub:1,anticipatePin:1,invalidateOnRefresh:true,animation:tw});
       upd();
       return function(){ /* leaving the desktop layout: put the cards back into the native carousel */
         st=null;tiles.forEach(function(t){tr.appendChild(t)});if(rail.parentNode)rail.parentNode.removeChild(rail);rail=null;pos=0;
