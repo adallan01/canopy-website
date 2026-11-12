@@ -247,8 +247,8 @@ p,h1,h2,h3,ul{margin:0}
 @media (max-width:767px){#why.band.light .h-sec{font-size:min(1.7rem,calc((100vw - 32px) / 12.8))}#why.band.light .photo{object-position:50% 50%}}
 #film.band > .wrap{transform:translateY(-85%)}
 /* no dark seam under Features: the sky fades up into the white section above */
-#film.gap-top{margin-top:0;background:#091F20}
-#film::before{content:"";position:absolute;left:0;right:0;top:0;height:clamp(90px,10vw,180px);z-index:1;pointer-events:none;background:linear-gradient(180deg,#091F20 0%,rgba(9,31,32,.85) 30%,rgba(9,31,32,0) 100%)}
+#film.gap-top{margin-top:0;background:#E6F0FD}
+#film::before{content:"";position:absolute;left:0;right:0;top:0;height:clamp(90px,10vw,180px);z-index:1;pointer-events:none;background:linear-gradient(180deg,#E6F0FD 0%,rgba(230,240,253,.85) 30%,rgba(230,240,253,0) 100%)}
 #film.band.light .btn.ghost{color:var(--ink);border-color:rgba(11,26,28,.5)}
 #film.band.light .btn.ghost:hover{border-color:var(--ink)}
 #film > .default-pic .photo{transform:scaleX(-1)}
@@ -848,16 +848,18 @@ p,h1,h2,h3,ul{margin:0}
 @media (prefers-reduced-motion:reduce){.dz.js .dz-head,.dz.js .dz-tile{opacity:1;transform:none;transition:none}.dz-map .ring,.dz-m .cur,.dz-dots i{animation:none!important}.dz-status,.dz-status .sh,.dz-segs i,.dz-m,.dz-m .b,.dz-chat{transition:none}}
 /* Rover AI: the real product window on its glass panels, with the conversation drawn as live text
    inside it (sharp at any size, and editable). No pinning and no scroll scrubbing in this section. */
-.rv{background:#091F20;color:#fff;padding-block:clamp(88px,9vw,140px);overflow:hidden}
+.rv{background:#E6F0FD;background-image:radial-gradient(120% 92% at 76% 42%,#DAEAFD 0%,#E6F0FD 58%),linear-gradient(100deg,#F5F9FE 0%,rgba(245,249,254,0) 54%);color:var(--ink);padding-block:clamp(88px,9vw,140px);overflow:hidden}
+.rv .label{color:var(--teal-deep)}
+.rv .h-sec{color:var(--ink)}
 .rv-grid{display:grid;gap:clamp(36px,4.5vw,64px);align-items:center}
 .rv .h-sec{text-wrap:wrap}  /* the two lines are set in the markup; balancing would re-break them */
 .rv-l2{display:block}
-.rv-lede{margin:clamp(16px,1.7vw,26px) 0 0;max-width:34ch;font-size:clamp(1.02rem,1.2vw,1.26rem);line-height:1.55;color:#A4C2C2;text-wrap:pretty}
-.rv-note{margin:clamp(14px,1.4vw,20px) 0 0;font-size:.82rem;line-height:1.5;color:#6B8A8A}
-.rv-stage{position:relative;margin:0;container-type:inline-size}
+.rv-lede{margin:clamp(16px,1.7vw,26px) 0 0;max-width:34ch;font-size:clamp(1.02rem,1.2vw,1.26rem);line-height:1.55;color:#33484A;text-wrap:pretty}
+.rv-note{margin:clamp(14px,1.4vw,20px) 0 0;font-size:.82rem;line-height:1.5;color:#6B8290}
+.rv-stage{position:relative;margin:0;container-type:inline-size;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 9%,#000 91%,transparent 100%)}
 /* an auto margin would make this shrink-to-fit, and a size container has no intrinsic width: set it outright */
 @media (min-width:768px) and (max-width:1099px){.rv-stage{width:min(100%,820px);justify-self:center}}
-.rv-shot{display:block;width:100%;height:auto;border-radius:clamp(14px,1.4vw,22px);box-shadow:0 40px 90px -40px rgba(0,0,0,.65)}
+.rv-shot{display:block;width:100%;height:auto;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 16%);mask-image:linear-gradient(90deg,transparent 0,#000 16%)}
 /* the message area inside the window, measured off the screenshot */
 .rv-convo{position:absolute;left:13.5%;right:13.1%;top:52.4%;bottom:25.6%;display:flex;flex-direction:column;justify-content:flex-end;gap:.55em;font-size:13px;line-height:1.35;overflow:hidden}
 .rv-convo{font-size:max(11.5px,1.75cqw)}
@@ -881,13 +883,14 @@ p,h1,h2,h3,ul{margin:0}
 .rv.js.q1 .rv-m.q,.rv.js.q2 .rv-dots,.rv.js.q3 .rv-m.r{opacity:1;transform:none}
 .rv.js.q3 .rv-dots{opacity:0;transition:opacity .25s ease}
 @media (min-width:1100px){
-  .rv-grid{grid-template-columns:minmax(0,48fr) minmax(0,52fr);gap:clamp(44px,4.5vw,80px)}
+  .rv-grid{grid-template-columns:minmax(0,40fr) minmax(0,60fr);gap:clamp(40px,4vw,68px)}
+  .rv-stage{margin-right:calc(-1 * clamp(0px,(100vw - var(--wrap))/2 + 24px,150px))}
   .rv-copy{padding-right:clamp(8px,1.5vw,28px)}
 }
 @media (max-width:767px){
   /* phones: the conversation leaves the window and sits under it, at a size people can actually read */
   .rv-stage{display:grid;gap:12px}
-  .rv-convo{position:static;justify-content:flex-start;font-size:.92rem;gap:10px;background:#FCFDFE;border:1px solid rgba(11,26,28,.06);border-radius:18px;padding:14px 13px}
+  .rv-convo{position:static;justify-content:flex-start;font-size:.92rem;gap:10px;background:#FFFFFF;border:1px solid rgba(11,26,28,.07);border-radius:18px;padding:14px 13px;box-shadow:0 10px 30px -18px rgba(11,42,60,.35)}
   .rv.js .rv-dots{position:static}
   .rv-m,.rv-m.r{max-width:92%}
 }
@@ -1775,7 +1778,7 @@ p,h1,h2,h3,ul{margin:0}
         <p class="rv-note rv-a" style="--d:.24s" data-k="rv.note" data-l="Caption under the text">Example conversation, not live fleet data</p>
       </div>
       <figure class="rv-stage">
-        <img class="rv-shot" src="images/rover-ai.webp" srcset="images/rover-ai-760.webp 760w, images/rover-ai-1024.webp 1024w, images/rover-ai.webp 1448w" sizes="(min-width:1100px) 50vw, 92vw" alt="The Canopy Rover AI window resting on soft glass panels, headed Rover and asking what you would like to know, with suggestions for a fleet summary, critical alerts and average distance" width="1448" height="1086" loading="lazy" decoding="async">
+        <img class="rv-shot" src="images/rover-ai.webp" srcset="images/rover-ai-760.webp 760w, images/rover-ai-1024.webp 1024w, images/rover-ai.webp 1448w" sizes="(min-width:1100px) 58vw, 92vw" alt="The Canopy Rover AI window resting on soft glass panels, headed Rover and asking what you would like to know, with suggestions for a fleet summary, critical alerts and average distance" width="1448" height="1086" loading="lazy" decoding="async">
         <div class="rv-convo">
           <p class="rv-m q"><span class="b" data-k="rv.q" data-l="Question in the window">Which bikes are overdue for service?</span></p>
           <p class="rv-dots" aria-hidden="true"><i></i><i></i><i></i></p>
