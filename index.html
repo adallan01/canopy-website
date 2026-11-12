@@ -1743,14 +1743,9 @@ p,h1,h2,h3,ul{margin:0}
     var sec=document.getElementById('features');if(!sec)return;
     var rm=window.matchMedia('(prefers-reduced-motion: reduce)');
     sec.classList.add('js');
-    /* tile colour = the average colour along the top of its picture; dark tile when there is no picture */
-    var cv=document.createElement('canvas');cv.width=24;cv.height=2;var cx=cv.getContext&&cv.getContext('2d',{willReadFrequently:true});
+    /* the tile keeps its own colour; a card with no picture switches to the dark tile its line drawing needs */
     function tint(card){var m=card.querySelector('.ft-media'),el=m.querySelector(':scope > .photo')||(m.classList.contains('has-media')?m.querySelector('.default-pic .photo'):null);
-      if(!el){card.classList.add('dark');card.style.removeProperty('--tile');return}
-      card.classList.remove('dark');
-      function go(){try{var w=el.videoWidth||el.naturalWidth,h=el.videoHeight||el.naturalHeight;if(!w||!cx)return;cx.drawImage(el,0,0,w,Math.max(1,h*.05),0,0,24,2);var d=cx.getImageData(0,0,24,2).data,r=0,g=0,b=0,n=d.length/4;for(var i=0;i<d.length;i+=4){r+=d[i];g+=d[i+1];b+=d[i+2]}r=Math.round(r/n);g=Math.round(g/n);b=Math.round(b/n);
-        card.style.setProperty('--tile','rgb('+r+','+g+','+b+')');card.classList.toggle('dark',(.2126*r+.7152*g+.0722*b)/255<.45)}catch(e){}}
-      if(el.tagName==='VIDEO'){if(el.readyState>=2)go();else el.addEventListener('loadeddata',go,{once:true})}else if(el.complete&&el.naturalWidth)go();else el.addEventListener('load',go,{once:true})}
+      card.classList.toggle('dark',!el);card.style.removeProperty('--tile')}
     function tintAll(){[].forEach.call(sec.querySelectorAll('.ft-card'),tint)}
     tintAll();document.addEventListener('canopy:media',tintAll);
     function vids(on){[].forEach.call(sec.querySelectorAll('.ft-media video'),function(v){if(on&&!rm.matches){var p=v.play();if(p&&p.catch)p.catch(function(){})}else v.pause()})}
