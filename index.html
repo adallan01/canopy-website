@@ -497,8 +497,8 @@ p,h1,h2,h3,ul{margin:0}
 .ft.js .ft-head .ft-a{opacity:0;transform:translateY(16px);transition:opacity var(--m-dur) var(--m-ease) var(--d,0s),transform var(--m-dur) var(--m-ease) var(--d,0s)}
 .ft.js .ft-head.in .ft-a{opacity:1;transform:none}
 .ft.js .ft-card{opacity:0;transform:translateY(var(--m-rise));transition:opacity var(--m-dur) var(--m-ease) calc(var(--i) % 2 * .1s),transform var(--m-dur) var(--m-ease) calc(var(--i) % 2 * .1s),background-color .6s ease}
-.ft.js .ft.js .ft-card.in{opacity:1;transform:none}
-.ft.js .ft.js.in .ft-a,.ft.js.in .ft-card{opacity:1;transform:none}.ft.js.in .ft-media{transform:none}
+.ft.js .ft-card.in{opacity:1;transform:none}
+.ft.js.in .ft-a,.ft.js.in .ft-card{opacity:1;transform:none}.ft.js.in .ft-media{transform:none}
 @media (prefers-reduced-motion:reduce){.ft *{animation:none!important;transition:none!important}.ft-car{display:none!important}}
 @media (max-width:860px){.ft-grid-wrap{grid-template-columns:1fr}}
 @media (max-width:767px){.ft{padding-block:80px}.ft-card{border-radius:22px}.ft-head{align-items:flex-start;text-align:left}.ft-statement .ft-sub{margin-left:0}.ft-text{padding:32px 24px 0}.ft-d{font-size:clamp(1.4rem,6.4vw,1.8rem)}}
@@ -1090,7 +1090,7 @@ p,h1,h2,h3,ul{margin:0}
     sec.classList.add('nb-live');
     function pick(){var s=mqM.matches?SETS.m:SETS.d;if(set===s)return;set=s;frames=new Array(N);shown=-1;
       if(!s.bg){var bi=new Image();s.bg={img:bi,ok:false};bi.decoding='async';
-        bi.onload=function(){s.bg.ok=true;shown=-1;req()};bi.src='images/explorer-seq/'+s.dir+'/bg.webp'}
+        bi.onload=function(){s.bg.ok=true;shown=-1;req()};bi.src='images/explorer-seq/'+s.dir+'/bg.webp?v=2'}
       load(0,function(){sec.classList.add('nb-ready');req()});if(started)queue()}
     function size(){var r=cv.getBoundingClientRect();dpr=Math.min(window.devicePixelRatio||1,2);cw=Math.max(1,Math.round(r.width*dpr));ch=Math.max(1,Math.round(r.height*dpr));
       if(cv.width!==cw||cv.height!==ch){cv.width=cw;cv.height=ch}geo=null;shown=-1}
@@ -1122,7 +1122,7 @@ p,h1,h2,h3,ul{margin:0}
       if(i===0)im.fetchPriority='high';
       im.onload=function(){(im.decode?im.decode():Promise.resolve()).catch(function(){}).then(function(){if(s!==set)return;o.ok=true;
         var c=frameAt(p);if(shown<0||Math.abs(i-c)<Math.abs(shown-c))req();cb&&cb()})};
-      im.onerror=function(){o.err=true;cb&&cb()};im.src='images/explorer-seq/'+s.dir+'/'+String(i+1).padStart(3,'0')+'.webp'}
+      im.onerror=function(){o.err=true;cb&&cb()};im.src='images/explorer-seq/'+s.dir+'/'+String(i+1).padStart(3,'0')+'.webp?v=2'}
     /* load order: every 8th frame, then every 4th -- that coarse pass alone carries the scrub, so it is all
        that is fetched on the approach. Every 2nd frame and the rest follow once the section is on screen.
        Frames around the current position jump the queue either way. */
