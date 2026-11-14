@@ -1055,20 +1055,24 @@ p,h1,h2,h3,ul{margin:0}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script>
-  /* Numbers: Explorer explode sequence. 145 frames per set: images/explorer-seq/d/ (1920×1080, desktop) and
-     images/explorer-seq/m/ (900×828 crop around the device, phones). Scroll position picks the frame; nothing else moves. */
+  /* Numbers: Explorer explode sequence. 73 frames per set, each cropped to the device itself and drawn back into
+     its place in the full frame, so the art is identical but a third of the weight: images/explorer-seq/d/ (853×843,
+     desktop) and images/explorer-seq/m/ (810×800, phones). Scroll position picks the frame; nothing else moves. */
   (function(){
     var sec=document.getElementById('numbers');if(!sec)return;
     var stage=sec.querySelector('.nb-seq'),cv=sec.querySelector('.nb-canvas');if(!cv)return;
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||sec.classList.contains('has-upload'))return;
-    var N=145,BG="#EEEDF0",mqM=window.matchMedia('(max-width:860px)');
+    var N=73,BG="#EEEDF0",mqM=window.matchMedia('(max-width:860px)');
     /* the still fallback is hidden from here on, so drop it before the browser bothers to fetch it */
     var still=sec.querySelector('.default-pic');if(still)still.remove();
-    /* device extent inside each set's frame (fractions): used to place it clear of the stats */
-    var SETS={d:{dir:'d',W:1920,H:1080,x0:.178,x1:.596},m:{dir:'m',W:900,H:828,x0:.07,x1:.93}};
+    /* W/H and x0/x1 describe the full frame and the device's extent in it (fractions), which is what places the
+       device clear of the stats. B is the part of that frame each image file actually holds -- the rest was flat
+       backdrop and is filled from the image's own edge, exactly as the area outside the frame always has been. */
+    var SETS={d:{dir:'d',W:1920,H:1080,x0:.178,x1:.596,B:[317,56,853,843]},
+              m:{dir:'m',W:900,H:828,x0:.07,x1:.93,B:[45,11,810,800]}};
     /* T[i] = scroll progress (0..1) at which frame i shows, measured from how much each frame changes, so the
        motion per scroll step is even (the source has a bigger jump every 4th frame) */
-    var T=[0.0,0.0026,0.0049,0.007,0.0091,0.0114,0.0136,0.0158,0.018,0.0217,0.0238,0.026,0.0284,0.031,0.0334,0.036,0.0387,0.0416,0.0443,0.0472,0.0503,0.0536,0.0568,0.0602,0.0652,0.0691,0.073,0.0769,0.0812,0.0858,0.0902,0.0946,0.0991,0.104,0.1088,0.1136,0.1186,0.1239,0.129,0.1342,0.1396,0.1452,0.1507,0.1563,0.1621,0.1681,0.174,0.1801,0.1892,0.1959,0.2023,0.2089,0.2155,0.2226,0.2294,0.2363,0.2433,0.2508,0.2582,0.2655,0.273,0.2809,0.2887,0.2967,0.3048,0.3135,0.3221,0.3309,0.3397,0.3491,0.3583,0.3676,0.3818,0.3919,0.4018,0.4118,0.4218,0.4328,0.4431,0.4535,0.4637,0.4746,0.4851,0.4958,0.5061,0.5174,0.5282,0.5392,0.5499,0.5614,0.5724,0.5835,0.5941,0.6055,0.6164,0.6273,0.6439,0.655,0.6656,0.6761,0.6859,0.6967,0.7068,0.7169,0.7265,0.7369,0.7468,0.7566,0.7659,0.776,0.7853,0.7947,0.8035,0.8132,0.8221,0.831,0.8394,0.8485,0.8569,0.8653,0.8784,0.8865,0.8941,0.9016,0.9087,0.9161,0.9229,0.9296,0.9356,0.942,0.9478,0.9534,0.9587,0.9641,0.9689,0.9734,0.9774,0.9814,0.9848,0.9879,0.9906,0.9933,0.9955,0.9977,1.0];
+    var T=[0,0.0049,0.0091,0.0136,0.018,0.0238,0.0284,0.0334,0.0387,0.0443,0.0503,0.0568,0.0652,0.073,0.0812,0.0902,0.0991,0.1088,0.1186,0.129,0.1396,0.1507,0.1621,0.174,0.1892,0.2023,0.2155,0.2294,0.2433,0.2582,0.273,0.2887,0.3048,0.3221,0.3397,0.3583,0.3818,0.4018,0.4218,0.4431,0.4637,0.4851,0.5061,0.5282,0.5499,0.5724,0.5941,0.6164,0.6439,0.6656,0.6859,0.7068,0.7265,0.7468,0.7659,0.7853,0.8035,0.8221,0.8394,0.8569,0.8784,0.8941,0.9087,0.9229,0.9356,0.9478,0.9587,0.9689,0.9774,0.9848,0.9906,0.9955,1];
     function frameAt(p){if(p<=0)return 0;if(p>=1)return N-1;var lo=0,hi=N-1;while(hi-lo>1){var m=(lo+hi)>>1;if(T[m]<=p)lo=m;else hi=m}return (p-T[lo])/((T[hi]-T[lo])||1)<.5?lo:hi}
     var set=null,frames=null,ctx=cv.getContext('2d',{alpha:false}),p=0,shown=-1,raf=0,cw=0,ch=0,dpr=1,geo=null;
     sec.classList.add('nb-live');
@@ -1085,12 +1089,13 @@ p,h1,h2,h3,ul{margin:0}
     var eb=document.createElement('canvas'),ex=eb.getContext('2d');
     function edge(im,sx,sy,sw,sh,dx,dy,dw,dh,horiz){var n=24;eb.width=horiz?n:1;eb.height=horiz?1:n;ex.imageSmoothingEnabled=true;ex.imageSmoothingQuality='high';
       ex.drawImage(im,sx,sy,sw,sh,0,0,eb.width,eb.height);ctx.drawImage(eb,0,0,eb.width,eb.height,dx,dy,dw,dh)}
-    function paint(im){var g=geo,W=set.W,H=set.H;
-      if(g.dy>0)edge(im,0,0,W,2,g.dx,0,g.dw,g.dy+1,true);
-      if(g.dy+g.dh<ch)edge(im,0,H-2,W,2,g.dx,g.dy+g.dh-1,g.dw,ch-g.dy-g.dh+1,true);
-      if(g.dx>0)edge(im,0,0,2,H,0,0,g.dx+1,ch,false);
-      if(g.dx+g.dw<cw)edge(im,W-2,0,2,H,g.dx+g.dw-1,0,cw-g.dx-g.dw+1,ch,false);
-      ctx.drawImage(im,g.dx,g.dy,g.dw,g.dh)}
+    function paint(im){var g=geo,B=set.B,k=g.dw/set.W,IW=B[2],IH=B[3],
+          bx=Math.round(g.dx+B[0]*k),by=Math.round(g.dy+B[1]*k),bw=Math.round(IW*k),bh=Math.round(IH*k);
+      if(by>0)edge(im,0,0,IW,2,bx,0,bw,by+1,true);
+      if(by+bh<ch)edge(im,0,IH-2,IW,2,bx,by+bh-1,bw,ch-by-bh+1,true);
+      if(bx>0)edge(im,0,0,2,IH,0,0,bx+1,ch,false);
+      if(bx+bw<cw)edge(im,IW-2,0,2,IH,bx+bw-1,0,cw-bx-bw+1,ch,false);
+      ctx.drawImage(im,bx,by,bw,bh)}
     function nearest(i){if(frames[i]&&frames[i].ok)return i;for(var k=1;k<N;k++){if(i-k>=0&&frames[i-k]&&frames[i-k].ok)return i-k;if(i+k<N&&frames[i+k]&&frames[i+k].ok)return i+k}return -1}
     function draw(){raf=0;if(!set)return;var j=nearest(frameAt(p));if(j<0||j===shown)return;if(!geo)layout();
       ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.fillStyle=BG;ctx.fillRect(0,0,cw,ch);paint(frames[j].img);shown=j}
@@ -1106,23 +1111,18 @@ p,h1,h2,h3,ul{margin:0}
     var started=false,fine=false;
     function order(strides){var o=[],seen={};strides.forEach(function(st){for(var k=0;k<N;k+=st)if(!seen[k]){seen[k]=1;o.push(k)}});o.push(N-1);return o}
     function run(list,done){var q=0,active=0,s=set;function next(){if(s!==set)return;
-      while(active<4&&q<list.length){var i=list[q++];if(frames[i])continue;active++;load(i,function(){active--;next()})}
+      while(active<6&&q<list.length){var i=list[q++];if(frames[i])continue;active++;load(i,function(){active--;next()})}
       if(!active&&q>=list.length&&done)done()}next()}
     function queue(){started=true;run(order([8,4]),function(){if(fine)run(order([2,1]))})}
     function fill(){if(fine)return;fine=true;if(started)run(order([2,1]))}
     function near(){if(!frames)return;var c=frameAt(p);for(var k=-3;k<=3;k++){var i=c+k;if(i>=0&&i<N&&!frames[i])load(i)}}
     pick();size();
-    /* Nothing is fetched while the page itself is still loading. Once the section is about a screen away the
-       coarse pass is armed, and it starts on the first idle moment after load -- so the frames never compete
-       with the top of the page. The in-between frames wait until the section is really arriving on screen. */
+    /* The coarse pass starts as soon as the section is a screen or so away -- every frame is requested at low
+       priority, so the browser already schedules them behind anything the first screen needs. The in-between
+       frames follow once the section is really arriving. */
     var go=function(){if(!started)queue()};
-    var idle=window.requestIdleCallback||function(fn){return setTimeout(fn,1200)};
-    var armed=false;
-    function arm(){if(armed||started)return;armed=true;
-      var start=function(){idle(go,{timeout:2500})};
-      if(document.readyState==='complete')start();else window.addEventListener('load',start)}
-    new IntersectionObserver(function(es){if(es[0].isIntersecting)arm()},{rootMargin:'90% 0px'}).observe(sec);
-    new IntersectionObserver(function(es){if(es[0].isIntersecting){go();fill()}},{rootMargin:'-25% 0px'}).observe(sec);
+    new IntersectionObserver(function(es){if(es[0].isIntersecting)go()},{rootMargin:'120% 0px'}).observe(sec);
+    new IntersectionObserver(function(es){if(es[0].isIntersecting){go();fill()}},{rootMargin:'-20% 0px'}).observe(sec);
     function setP(v){v=Math.max(0,Math.min(1,v));if(v===p)return;p=v;near();req()}
     var onMQ=function(){pick();size();req()};if(mqM.addEventListener)mqM.addEventListener('change',onMQ);else if(mqM.addListener)mqM.addListener(onMQ);
     window.addEventListener('resize',function(){size();req()});
