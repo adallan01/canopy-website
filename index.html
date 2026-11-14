@@ -236,15 +236,15 @@ p,h1,h2,h3,ul{margin:0}
 @media (max-width:519px){.logo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .band{min-height:clamp(440px,62vw,820px)}
 /* why it matters: text set in the open sky, top-left */
-#why.band.light{background:#EEF3F7}
+#why.band.light{background:#DCD7D8}
 #why.band.light .h-sec{max-width:13.5em}
 #why.band > .wrap{gap:var(--eg)}
 @media (min-width:1024px){
   /* text sits on the clear wall, its top level with the laptop screen, ending well above the desk line */
-  #why.band{align-items:flex-start;min-height:0;aspect-ratio:3780/1800}
-  #why.band > .wrap{gap:0;padding-block:calc(100vw * 1800 / 3780 * .2) 0}
+  #why.band{align-items:flex-start;min-height:0;aspect-ratio:1976/941}
+  #why.band > .wrap{gap:0;padding-block:calc(100vw * 941 / 1976 * .2) 0}
   #why.band.light .photo{object-position:0% 50%}
-  #why.band.light::after{background:linear-gradient(90deg,rgba(247,251,254,.5) 0%,rgba(247,251,254,.22) 24%,rgba(247,251,254,0) 38%)}
+  #why.band.light::after{background:linear-gradient(90deg,rgba(248,246,246,.5) 0%,rgba(248,246,246,.22) 22%,rgba(248,246,246,0) 36%)}
   #why.band.light .label{letter-spacing:.18em}
   #why.band.light .h-sec{margin-top:var(--eg);max-width:9.4em;line-height:1.02}
   #why.band.light .lede{margin-top:clamp(18px,1.7vw,28px);max-width:27ch;font-size:clamp(1.02rem,1.25vw,1.3rem);line-height:1.5;color:#33484A;text-wrap:pretty}
@@ -254,13 +254,13 @@ p,h1,h2,h3,ul{margin:0}
 @media (min-width:768px) and (max-width:1023px){
   #why.band.light{min-height:calc(100vw * 9 / 16 + 320px)}
   #why.band.light .photo{height:calc(100vw * 9 / 16);object-position:50% 50%}
-  #why.band.light::after{background:linear-gradient(0deg,#EEF3F7 0%,#EEF3F7 320px,rgba(238,243,247,0) calc(100vw * 9 / 16))}
+  #why.band.light::after{background:linear-gradient(0deg,#DCD7D8 0%,#DCD7D8 320px,rgba(220,215,216,0) 470px)}
   #why.band.light .lede{max-width:34em}
 }
 @media (max-width:767px){
   #why.band.light{min-height:calc(100vw * 9 / 16 + 300px)}
   #why.band.light .photo{height:calc(100vw * 9 / 16);object-position:50% 50%}
-  #why.band.light::after{background:linear-gradient(0deg,#EEF3F7 0%,#EEF3F7 300px,rgba(238,243,247,0) calc(100vw * 9 / 16))}
+  #why.band.light::after{background:linear-gradient(0deg,#DCD7D8 0%,#DCD7D8 300px,rgba(220,215,216,0) 410px)}
   #why.band.light .h-sec{font-size:min(1.7rem,calc((100vw - 32px) / 12.8))}
 }
 /* no dark seam under Features: the sky fades up into the white section above */
@@ -1173,7 +1173,7 @@ p,h1,h2,h3,ul{margin:0}
 
   <section id="why" class="bleed band light has-media" data-sec="Why it matters" data-sid="why" data-slot="why" data-slot-l="Section background" data-default-media="images/why-it-matters.webp" aria-labelledby="why-title">
     <canvas data-seed="2207" aria-hidden="true"></canvas>
-    <picture class="default-pic"><source media="(max-width:1023px)" srcset="images/why-mobile.webp?v=10 1100w, images/why-mobile-1700.webp?v=10 1700w" sizes="100vw"><img class="photo" src="images/why-it-matters.webp?v=9" srcset="images/why-it-matters-1280.webp?v=9 1280w, images/why-it-matters.webp?v=9 2560w" sizes="100vw" alt="Three Canopy screens on a pale blue field: the vehicle list, the reports page and the fleet dashboard" width="3780" height="1800" loading="lazy" decoding="async"></picture>
+    <picture class="default-pic"><source media="(max-width:1023px)" srcset="images/why-mobile.webp?v=12 1100w, images/why-mobile-1700.webp?v=12 1422w" sizes="100vw"><img class="photo" src="images/why-it-matters.webp?v=11" srcset="images/why-it-matters-1280.webp?v=11 1280w, images/why-it-matters.webp?v=11 1976w" sizes="100vw" alt="Three Canopy screens floating against a soft grey field: a live map, a vehicle list and a grid of battery levels" width="1976" height="941" loading="lazy" decoding="async"></picture>
     <div class="wrap">
       <p class="label" data-k="why.label" data-l="Small label">01 The problem</p>
       <h2 id="why-title" class="h-sec" data-k="why.title" data-l="Headline">Fleets went electric. The stack didn’t.</h2>
