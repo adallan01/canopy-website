@@ -8,13 +8,16 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>Canopy</title>
 <meta name="description" content="Canopy connects electric motorcycles, scooters, three-wheelers and small cars, so the people who finance, run and build them can see every vehicle and every battery in one place.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
-<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-<link rel="preload" as="script" crossorigin href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js">
-<link rel="preload" as="script" crossorigin href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/montserrat-800.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="fonts/montserrat-400.woff2">
 <style>
+/* Montserrat, served from here rather than Google Fonts: no third-party DNS lookup and TLS handshake
+   before the first text can be drawn. swap means the fallback shows meanwhile, never a blank page. */
+@font-face{font-family:Montserrat;font-style:normal;font-weight:400;font-display:swap;src:url(fonts/montserrat-400.woff2) format('woff2')}
+@font-face{font-family:Montserrat;font-style:normal;font-weight:500;font-display:swap;src:url(fonts/montserrat-500.woff2) format('woff2')}
+@font-face{font-family:Montserrat;font-style:normal;font-weight:600;font-display:swap;src:url(fonts/montserrat-600.woff2) format('woff2')}
+@font-face{font-family:Montserrat;font-style:normal;font-weight:700;font-display:swap;src:url(fonts/montserrat-700.woff2) format('woff2')}
+@font-face{font-family:Montserrat;font-style:normal;font-weight:800;font-display:swap;src:url(fonts/montserrat-800.woff2) format('woff2')}
 /* Layout: Figure-style one-pager. Near-black ground, full-bleed image bands, huge extra-bold caps headlines, label/value spec rows. No motion.
    Admin view (#admin): light, calm workspace — sticky save bar, section list, one card per section. */
 :root{
@@ -233,27 +236,33 @@ p,h1,h2,h3,ul{margin:0}
 @media (max-width:519px){.logo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .band{min-height:clamp(440px,62vw,820px)}
 /* why it matters: text set in the open sky, top-left */
+#why.band.light{background:#EEF3F7}
 #why.band.light .h-sec{max-width:13.5em}
 #why.band > .wrap{gap:var(--eg)}
 @media (min-width:1024px){
   /* text sits on the clear wall, its top level with the laptop screen, ending well above the desk line */
-  #why.band{align-items:flex-start;min-height:0;aspect-ratio:2006/941}
-  #why.band > .wrap{gap:0;padding-block:calc(100vw * 941 / 2006 * .21) 0}
-  #why.band.light .photo{object-position:100% 50%}
-  #why.band.light::after{background:linear-gradient(90deg,rgba(244,244,245,.55) 0%,rgba(244,244,245,.28) 28%,rgba(244,244,245,0) 46%)}
+  #why.band{align-items:flex-start;min-height:0;aspect-ratio:3780/1800}
+  #why.band > .wrap{gap:0;padding-block:calc(100vw * 1800 / 3780 * .2) 0}
+  #why.band.light .photo{object-position:0% 50%}
+  #why.band.light::after{background:linear-gradient(90deg,rgba(247,251,254,.5) 0%,rgba(247,251,254,.22) 24%,rgba(247,251,254,0) 38%)}
   #why.band.light .label{letter-spacing:.18em}
-  #why.band.light .h-sec{margin-top:var(--eg);max-width:11em;line-height:1.02}
+  #why.band.light .h-sec{margin-top:var(--eg);max-width:9.4em;line-height:1.02}
   #why.band.light .lede{margin-top:clamp(18px,1.7vw,28px);max-width:27ch;font-size:clamp(1.02rem,1.25vw,1.3rem);line-height:1.5;color:#33484A;text-wrap:pretty}
 }
-@media (min-width:1024px) and (max-width:1279px){#why.band.light .h-sec{font-size:clamp(2rem,3.4vw,3rem)}#why.band.light .lede{max-width:25ch}}
+@media (min-width:1024px) and (max-width:1279px){#why.band.light .h-sec{font-size:clamp(1.9rem,3.2vw,2.8rem)}#why.band.light .lede{max-width:24ch}}
 /* upright tablets: photo on top, text on a light panel below (same idea as phones) */
 @media (min-width:768px) and (max-width:1023px){
-  #why.band.light{min-height:860px}
-  #why.band.light .photo{height:calc(100% - 300px);object-position:55% 40%}
-  #why.band.light::after{background:linear-gradient(0deg,#E9ECEB 0%,#E9ECEB 300px,rgba(233,236,235,0) 400px)}
+  #why.band.light{min-height:calc(100vw * 9 / 16 + 320px)}
+  #why.band.light .photo{height:calc(100vw * 9 / 16);object-position:50% 50%}
+  #why.band.light::after{background:linear-gradient(0deg,#EEF3F7 0%,#EEF3F7 320px,rgba(238,243,247,0) calc(100vw * 9 / 16))}
   #why.band.light .lede{max-width:34em}
 }
-@media (max-width:767px){#why.band.light .h-sec{font-size:min(1.7rem,calc((100vw - 32px) / 12.8))}#why.band.light .photo{object-position:50% 50%}}
+@media (max-width:767px){
+  #why.band.light{min-height:calc(100vw * 9 / 16 + 300px)}
+  #why.band.light .photo{height:calc(100vw * 9 / 16);object-position:50% 50%}
+  #why.band.light::after{background:linear-gradient(0deg,#EEF3F7 0%,#EEF3F7 300px,rgba(238,243,247,0) calc(100vw * 9 / 16))}
+  #why.band.light .h-sec{font-size:min(1.7rem,calc((100vw - 32px) / 12.8))}
+}
 /* no dark seam under Features: the sky fades up into the white section above */
 @media (min-width:768px){}
 @media (max-width:767px){}
@@ -1052,8 +1061,8 @@ p,h1,h2,h3,ul{margin:0}
     rows.forEach(function(r){io.observe(r)});
   })();
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="js/gsap.min.js"></script>
+  <script src="js/ScrollTrigger.min.js"></script>
   <script>
   /* Numbers: Explorer explode sequence. 73 frames per set, each cropped to the device itself and drawn back into
      its place in the full frame, so the art is identical but a third of the weight: images/explorer-seq/d/ (853×843,
@@ -1070,13 +1079,19 @@ p,h1,h2,h3,ul{margin:0}
        backdrop and is filled from the image's own edge, exactly as the area outside the frame always has been. */
     var SETS={d:{dir:'d',W:1920,H:1080,x0:.178,x1:.596,B:[317,56,853,843]},
               m:{dir:'m',W:900,H:828,x0:.07,x1:.93,B:[45,11,810,800]}};
+    /* bg.webp per set: the backdrop on its own, the device area filled in, at a fraction of the size.
+       It is what goes behind and around each frame -- stretching the frame's own edge would smear
+       whatever the crop happens to clip (a corner of the board, say) right across the band. */
     /* T[i] = scroll progress (0..1) at which frame i shows, measured from how much each frame changes, so the
        motion per scroll step is even (the source has a bigger jump every 4th frame) */
     var T=[0,0.0049,0.0091,0.0136,0.018,0.0238,0.0284,0.0334,0.0387,0.0443,0.0503,0.0568,0.0652,0.073,0.0812,0.0902,0.0991,0.1088,0.1186,0.129,0.1396,0.1507,0.1621,0.174,0.1892,0.2023,0.2155,0.2294,0.2433,0.2582,0.273,0.2887,0.3048,0.3221,0.3397,0.3583,0.3818,0.4018,0.4218,0.4431,0.4637,0.4851,0.5061,0.5282,0.5499,0.5724,0.5941,0.6164,0.6439,0.6656,0.6859,0.7068,0.7265,0.7468,0.7659,0.7853,0.8035,0.8221,0.8394,0.8569,0.8784,0.8941,0.9087,0.9229,0.9356,0.9478,0.9587,0.9689,0.9774,0.9848,0.9906,0.9955,1];
     function frameAt(p){if(p<=0)return 0;if(p>=1)return N-1;var lo=0,hi=N-1;while(hi-lo>1){var m=(lo+hi)>>1;if(T[m]<=p)lo=m;else hi=m}return (p-T[lo])/((T[hi]-T[lo])||1)<.5?lo:hi}
     var set=null,frames=null,ctx=cv.getContext('2d',{alpha:false}),p=0,shown=-1,raf=0,cw=0,ch=0,dpr=1,geo=null;
     sec.classList.add('nb-live');
-    function pick(){var s=mqM.matches?SETS.m:SETS.d;if(set===s)return;set=s;frames=new Array(N);shown=-1;load(0,function(){sec.classList.add('nb-ready');req()});if(started)queue(true)}
+    function pick(){var s=mqM.matches?SETS.m:SETS.d;if(set===s)return;set=s;frames=new Array(N);shown=-1;
+      if(!s.bg){var bi=new Image();s.bg={img:bi,ok:false};bi.decoding='async';
+        bi.onload=function(){s.bg.ok=true;shown=-1;req()};bi.src='images/explorer-seq/'+s.dir+'/bg.webp'}
+      load(0,function(){sec.classList.add('nb-ready');req()});if(started)queue()}
     function size(){var r=cv.getBoundingClientRect();dpr=Math.min(window.devicePixelRatio||1,2);cw=Math.max(1,Math.round(r.width*dpr));ch=Math.max(1,Math.round(r.height*dpr));
       if(cv.width!==cw||cv.height!==ch){cv.width=cw;cv.height=ch}geo=null;shown=-1}
     function layout(){var W=set.W,H=set.H,k,dw,dh,dx,dy,span=set.x1-set.x0,mid=(set.x0+set.x1)/2;
@@ -1089,12 +1104,15 @@ p,h1,h2,h3,ul{margin:0}
     var eb=document.createElement('canvas'),ex=eb.getContext('2d');
     function edge(im,sx,sy,sw,sh,dx,dy,dw,dh,horiz){var n=24;eb.width=horiz?n:1;eb.height=horiz?1:n;ex.imageSmoothingEnabled=true;ex.imageSmoothingQuality='high';
       ex.drawImage(im,sx,sy,sw,sh,0,0,eb.width,eb.height);ctx.drawImage(eb,0,0,eb.width,eb.height,dx,dy,dw,dh)}
-    function paint(im){var g=geo,B=set.B,k=g.dw/set.W,IW=B[2],IH=B[3],
-          bx=Math.round(g.dx+B[0]*k),by=Math.round(g.dy+B[1]*k),bw=Math.round(IW*k),bh=Math.round(IH*k);
-      if(by>0)edge(im,0,0,IW,2,bx,0,bw,by+1,true);
-      if(by+bh<ch)edge(im,0,IH-2,IW,2,bx,by+bh-1,bw,ch-by-bh+1,true);
-      if(bx>0)edge(im,0,0,2,IH,0,0,bx+1,ch,false);
-      if(bx+bw<cw)edge(im,IW-2,0,2,IH,bx+bw-1,0,cw-bx-bw+1,ch,false);
+    function paint(im){var g=geo,B=set.B,k=g.dw/set.W,bp=set.bg,
+          bx=Math.round(g.dx+B[0]*k),by=Math.round(g.dy+B[1]*k),bw=Math.round(B[2]*k),bh=Math.round(B[3]*k);
+      if(bp&&bp.ok){var P=bp.img,PW=P.naturalWidth,PH=P.naturalHeight;
+        /* the plate fills the frame; past it, the plate's own edge carries the gradient on */
+        if(g.dy>0)edge(P,0,0,PW,2,g.dx,0,g.dw,g.dy+1,true);
+        if(g.dy+g.dh<ch)edge(P,0,PH-2,PW,2,g.dx,g.dy+g.dh-1,g.dw,ch-g.dy-g.dh+1,true);
+        if(g.dx>0)edge(P,0,0,2,PH,0,0,g.dx+1,ch,false);
+        if(g.dx+g.dw<cw)edge(P,PW-2,0,2,PH,g.dx+g.dw-1,0,cw-g.dx-g.dw+1,ch,false);
+        ctx.drawImage(P,g.dx,g.dy,g.dw,g.dh)}
       ctx.drawImage(im,bx,by,bw,bh)}
     function nearest(i){if(frames[i]&&frames[i].ok)return i;for(var k=1;k<N;k++){if(i-k>=0&&frames[i-k]&&frames[i-k].ok)return i-k;if(i+k<N&&frames[i+k]&&frames[i+k].ok)return i+k}return -1}
     function draw(){raf=0;if(!set)return;var j=nearest(frameAt(p));if(j<0||j===shown)return;if(!geo)layout();
@@ -1155,7 +1173,7 @@ p,h1,h2,h3,ul{margin:0}
 
   <section id="why" class="bleed band light has-media" data-sec="Why it matters" data-sid="why" data-slot="why" data-slot-l="Section background" data-default-media="images/why-it-matters.webp" aria-labelledby="why-title">
     <canvas data-seed="2207" aria-hidden="true"></canvas>
-    <picture class="default-pic"><source media="(max-width:767px)" srcset="images/why-mobile.webp?v=9"><img class="photo" src="images/why-it-matters.webp?v=8" alt="A bright office desk with two monitors running Canopy, one showing the vehicle list and the other the reports page, beside a window" width="2006" height="941" loading="lazy"></picture>
+    <picture class="default-pic"><source media="(max-width:1023px)" srcset="images/why-mobile.webp?v=10 1100w, images/why-mobile-1700.webp?v=10 1700w" sizes="100vw"><img class="photo" src="images/why-it-matters.webp?v=9" srcset="images/why-it-matters-1280.webp?v=9 1280w, images/why-it-matters.webp?v=9 2560w" sizes="100vw" alt="Three Canopy screens on a pale blue field: the vehicle list, the reports page and the fleet dashboard" width="3780" height="1800" loading="lazy" decoding="async"></picture>
     <div class="wrap">
       <p class="label" data-k="why.label" data-l="Small label">01 The problem</p>
       <h2 id="why-title" class="h-sec" data-k="why.title" data-l="Headline">Fleets went electric. The stack didn’t.</h2>
