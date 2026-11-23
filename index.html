@@ -1140,13 +1140,13 @@ p,h1,h2,h3,ul{margin:0}
        frames follow once the section is really arriving. */
     var go=function(){if(!started)queue()};
     new IntersectionObserver(function(es){if(es[0].isIntersecting)go()},{rootMargin:'120% 0px'}).observe(sec);
-    new IntersectionObserver(function(es){if(es[0].isIntersecting){go();fill()}},{rootMargin:'-20% 0px'}).observe(sec);
+    new IntersectionObserver(function(es){if(es[0].isIntersecting){go();fill()}},{rootMargin:'40% 0px'}).observe(sec);
     function setP(v){v=Math.max(0,Math.min(1,v));if(v===p)return;p=v;near();req()}
     var onMQ=function(){pick();size();req()};if(mqM.addEventListener)mqM.addEventListener('change',onMQ);else if(mqM.addListener)mqM.addListener(onMQ);
     window.addEventListener('resize',function(){size();req()});
-    /* scroll travel for the 145 frames: about 3.2 screens on desktop, 2 on phones, plus a short hold on the finished view */
-    var dist=function(){return window.innerHeight*(mqM.matches?2:3.2)};
-    var hold=function(){return Math.round(window.innerHeight*.45)};
+    /* scroll travel for the frames: about 1.5 screens on desktop, 1.1 on phones, plus a short hold on the finished view */
+    var dist=function(){return window.innerHeight*(mqM.matches?1.1:1.5)};
+    var hold=function(){return Math.round(window.innerHeight*.25)};
     /* phones: pin the whole section (device above the stats) when it fits the screen, otherwise just the device */
     var target=function(){return (mqM.matches&&sec.offsetHeight>window.innerHeight)?stage:sec};
     if(window.gsap&&window.ScrollTrigger){
@@ -1155,11 +1155,11 @@ p,h1,h2,h3,ul{margin:0}
       ScrollTrigger.config({ignoreMobileResize:true});
       var mm=gsap.matchMedia();
       ['(min-width:861px)','(max-width:860px)'].forEach(function(q){mm.add(q,function(){
-        var proxy={v:p},tw=gsap.to(proxy,{v:1,ease:'sine.inOut',onUpdate:function(){setP(proxy.v)}});
+        var proxy={v:p},tw=gsap.to(proxy,{v:1,ease:'none',onUpdate:function(){setP(proxy.v)}});
         /* pin while the section fills the screen; frames start advancing as the section settles in (from the starting pose), ease in and out,
            and the finished exploded view holds for a short stretch of scrolling before Why it matters arrives */
         ScrollTrigger.create({trigger:target(),start:'top top',end:function(){return '+='+(dist()+hold())},pin:target(),anticipatePin:1,invalidateOnRefresh:true,onRefresh:function(){size();req()}});
-        ScrollTrigger.create({trigger:target(),start:'top 45%',end:function(){return 'top top-='+dist()},scrub:1,invalidateOnRefresh:true,animation:tw});
+        ScrollTrigger.create({trigger:target(),start:'top 45%',end:function(){return 'top top-='+dist()},scrub:.4,invalidateOnRefresh:true,animation:tw});
       })});
       var refresh=function(){ScrollTrigger.refresh()};
       requestAnimationFrame(function(){requestAnimationFrame(refresh)});
