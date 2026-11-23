@@ -897,11 +897,14 @@ p,h1,h2,h3,ul{margin:0}
   .rv-copy{padding-right:clamp(8px,1.5vw,28px)}
 }
 @media (max-width:767px){
-  /* phones: the conversation leaves the window and sits under it, at a size people can actually read */
-  .rv-stage{display:grid;gap:12px}
-  .rv-convo{position:static;justify-content:flex-start;font-size:.92rem;gap:10px;background:#FFFFFF;border:1px solid rgba(11,26,28,.07);border-radius:18px;padding:14px 13px;box-shadow:0 10px 30px -18px rgba(11,42,60,.35)}
-  .rv.js .rv-dots{position:static}
-  .rv-m,.rv-m.r{max-width:92%}
+  /* phones: the conversation stays inside the window. The window is enlarged past the gutters (the section crops
+     its glass surround) so the chat can play at a readable size, and once the question arrives it covers the
+     starter chips -- as a real chat pushes them up out of view */
+  .rv-stage{width:calc(100vw * 1.18);margin-left:calc((100% - 100vw * 1.18) / 2)}
+  .rv-shot{-webkit-mask-image:none;mask-image:none}
+  .rv-convo{top:37.8%;font-size:max(11.5px,2.85cqw);gap:.5em;transition:background-color .35s ease}
+  .rv.js.q1 .rv-convo,.rv:not(.js) .rv-convo{background:#FCFCFE}
+  .rv-m,.rv-m.r{max-width:94%}
 }
 @media (prefers-reduced-motion:reduce){
   .rv.js .rv-a,.rv.js .rv-stage,.rv.js .rv-m,.rv.js .rv-dots{opacity:1;transform:none;transition:none}
@@ -1090,33 +1093,37 @@ p,h1,h2,h3,ul{margin:0}
     sec.classList.add('nb-live');
     function pick(){var s=mqM.matches?SETS.m:SETS.d;if(set===s)return;set=s;frames=new Array(N);shown=-1;
       if(!s.bg){var bi=new Image();s.bg={img:bi,ok:false};bi.decoding='async';
-        bi.onload=function(){s.bg.ok=true;shown=-1;req()};bi.src='images/explorer-seq/'+s.dir+'/bg.webp?v=2'}
+        bi.onload=function(){s.bg.ok=true;geo=null;shown=-1;req()};bi.src='images/explorer-seq/'+s.dir+'/bg.webp?v=2'}
       load(0,function(){sec.classList.add('nb-ready');req()});if(started)queue()}
-    function size(){var r=cv.getBoundingClientRect();dpr=Math.min(window.devicePixelRatio||1,2);cw=Math.max(1,Math.round(r.width*dpr));ch=Math.max(1,Math.round(r.height*dpr));
+    /* backing store capped at ~2.2 megapixels: the frames only carry about 1.2x the device's on-screen size, so
+       past that a bigger canvas adds no detail, only fill time. A phone keeps 2x; a 1440px desktop gets ~1.3x. */
+    function size(){var r=cv.getBoundingClientRect(),cap=Math.sqrt(2.2e6/Math.max(1,r.width*r.height));
+      dpr=Math.max(1,Math.min(window.devicePixelRatio||1,2,cap));cw=Math.max(1,Math.round(r.width*dpr));ch=Math.max(1,Math.round(r.height*dpr));
       if(cv.width!==cw||cv.height!==ch){cv.width=cw;cv.height=ch}geo=null;shown=-1}
     function layout(){var W=set.W,H=set.H,k,dw,dh,dx,dy,span=set.x1-set.x0,mid=(set.x0+set.x1)/2;
       if(set===SETS.d){var st=sec.querySelector('.stat'),cr=cv.getBoundingClientRect(),region=st?(st.getBoundingClientRect().left-cr.left)*dpr-cw*.03:cw*.55;
         k=ch/H;if(span*W*k>region*.92)k=region*.92/(span*W);dw=W*k;dh=H*k;dx=region/2-mid*dw;dy=(ch-dh)/2}
       else{k=Math.min(cw/W,ch/H);dw=W*k;dh=H*k;dx=(cw-dw)/2;dy=(ch-dh)/2}
       geo={dx:Math.round(dx),dy:Math.round(dy),dw:Math.round(dw),dh:Math.round(dh)}}
-    /* draw the frame; any strip it doesn't cover is filled from its own edge, blurred along the edge (via a tiny
-       buffer) so the light background simply continues: no seam, no fade, no streaks */
+    /* The backdrop is the same in every frame, so it is painted once per canvas size -- the plate, and past it the
+       plate's own edge carrying the gradient on (blurred through a tiny buffer: no seam, no streaks). After that
+       each frame only overwrites the rectangle the device occupies; the frames are opaque and cover it exactly. */
     var eb=document.createElement('canvas'),ex=eb.getContext('2d');
     function edge(im,sx,sy,sw,sh,dx,dy,dw,dh,horiz){var n=24;eb.width=horiz?n:1;eb.height=horiz?1:n;ex.imageSmoothingEnabled=true;ex.imageSmoothingQuality='high';
       ex.drawImage(im,sx,sy,sw,sh,0,0,eb.width,eb.height);ctx.drawImage(eb,0,0,eb.width,eb.height,dx,dy,dw,dh)}
-    function paint(im){var g=geo,B=set.B,k=g.dw/set.W,bp=set.bg,
-          bx=Math.round(g.dx+B[0]*k),by=Math.round(g.dy+B[1]*k),bw=Math.round(B[2]*k),bh=Math.round(B[3]*k);
-      if(bp&&bp.ok){var P=bp.img,PW=P.naturalWidth,PH=P.naturalHeight;
-        /* the plate fills the frame; past it, the plate's own edge carries the gradient on */
+    function backdrop(){var g=geo,bp=set.bg;ctx.fillStyle=BG;ctx.fillRect(0,0,cw,ch);
+      if(bp&&bp.ok){var P=bp.img,PW=P.naturalWidth,PH=P.naturalHeight;ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
         if(g.dy>0)edge(P,0,0,PW,2,g.dx,0,g.dw,g.dy+1,true);
         if(g.dy+g.dh<ch)edge(P,0,PH-2,PW,2,g.dx,g.dy+g.dh-1,g.dw,ch-g.dy-g.dh+1,true);
         if(g.dx>0)edge(P,0,0,2,PH,0,0,g.dx+1,ch,false);
         if(g.dx+g.dw<cw)edge(P,PW-2,0,2,PH,g.dx+g.dw-1,0,cw-g.dx-g.dw+1,ch,false);
         ctx.drawImage(P,g.dx,g.dy,g.dw,g.dh)}
-      ctx.drawImage(im,bx,by,bw,bh)}
+      var B=set.B,k=g.dw/set.W;g.b=[Math.round(g.dx+B[0]*k),Math.round(g.dy+B[1]*k),Math.round(B[2]*k),Math.round(B[3]*k)];
+      /* per frame: plain bilinear -- the device is drawn at close to its native size, where 'high' only costs time */
+      ctx.imageSmoothingQuality='low'}
     function nearest(i){if(frames[i]&&frames[i].ok)return i;for(var k=1;k<N;k++){if(i-k>=0&&frames[i-k]&&frames[i-k].ok)return i-k;if(i+k<N&&frames[i+k]&&frames[i+k].ok)return i+k}return -1}
-    function draw(){raf=0;if(!set)return;var j=nearest(frameAt(p));if(j<0||j===shown)return;if(!geo)layout();
-      ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';ctx.fillStyle=BG;ctx.fillRect(0,0,cw,ch);paint(frames[j].img);shown=j}
+    function draw(){raf=0;if(!set)return;var j=nearest(frameAt(p));if(j<0||j===shown)return;if(!geo){layout();backdrop()}
+      var b=geo.b;ctx.drawImage(frames[j].img,b[0],b[1],b[2],b[3]);shown=j}
     function req(){if(!raf)raf=requestAnimationFrame(draw)}
     function load(i,cb){if(frames[i])return cb&&cb();var s=set,im=new Image(),o={img:im,ok:false};frames[i]=o;im.decoding='async';try{im.fetchPriority='low'}catch(_){}
       if(i===0)im.fetchPriority='high';
