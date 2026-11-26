@@ -1053,7 +1053,8 @@ p,h1,h2,h3,ul{margin:0}
       if(cv.width!==cw||cv.height!==ch){cv.width=cw;cv.height=ch}geo=null;shown=-1}
     function layout(){var W=set.W,H=set.H,k,dw,dh,dx,dy,span=set.x1-set.x0,mid=(set.x0+set.x1)/2;
       if(set===SETS.d){var st=sec.querySelector('.stat'),cr=cv.getBoundingClientRect(),region=st?(st.getBoundingClientRect().left-cr.left)*dpr-cw*.03:cw*.55;
-        k=ch/H;if(span*W*k>region*.92)k=region*.92/(span*W);dw=W*k;dh=H*k;dx=region/2-mid*dw;dy=(ch-dh)/2}
+        /* as large as the room beside the stats allows: the fully opened device may fill ~92% of the height */
+        k=ch*.92/760;if(span*W*k>region*.97)k=region*.97/(span*W);dw=W*k;dh=H*k;dx=region/2-mid*dw;dy=(ch-dh)/2}
       else{k=Math.min(cw/W,ch/H);dw=W*k;dh=H*k;dx=(cw-dw)/2;dy=(ch-dh)/2}
       geo={dx:Math.round(dx),dy:Math.round(dy),dw:Math.round(dw),dh:Math.round(dh)}}
     /* The backdrop is the same in every frame, so it is painted once per canvas size -- the plate, and past it the
@@ -1128,7 +1129,7 @@ p,h1,h2,h3,ul{margin:0}
         /* pin while the section fills the screen; frames start advancing as the section settles in (from the starting pose), ease in and out,
            and the finished exploded view holds for a short stretch of scrolling before Why it matters arrives */
         ScrollTrigger.create({trigger:target(),start:'top top',end:function(){return '+='+(dist()+hold())},pin:target(),anticipatePin:1,invalidateOnRefresh:true,onRefresh:function(){size();req()}});
-        ScrollTrigger.create({trigger:target(),start:'top 45%',end:function(){return 'top top-='+dist()},scrub:.4,invalidateOnRefresh:true,animation:tw});
+        ScrollTrigger.create({trigger:target(),start:'top 80%',end:function(){return 'top top-='+dist()},scrub:.4,invalidateOnRefresh:true,animation:tw});
       })});
       var refresh=function(){ScrollTrigger.refresh()};
       requestAnimationFrame(function(){requestAnimationFrame(refresh)});
