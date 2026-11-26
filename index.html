@@ -236,30 +236,6 @@ p,h1,h2,h3,ul{margin:0}
 .usp.js .usp-head .h-sec{transition-delay:.08s}.usp.js .usp-sub{transition-delay:.16s}
 .usp.js .usp-item{transition-delay:calc(.22s + var(--i) * .07s)}
 .usp.js.in .usp-a,.usp.js.in .usp-item{opacity:1;transform:none}
-/* logo strip: room for one approved testimonial. It stays hidden until a quote is entered in the editor */
-.logo-quote{margin:clamp(28px,3vw,44px) auto 0;max-width:760px;text-align:center}
-.logo-quote blockquote{margin:0;font-size:clamp(1.05rem,1.4vw,1.32rem);line-height:1.5;font-weight:500;color:var(--ink);text-wrap:balance}
-.logo-quote figcaption{margin-top:12px;font-size:.88rem;color:#4F6567}
-.logo-quote figcaption span + span::before{content:" · "}
-/* logo strip under the hero: light band continuing the hero, names (or uploaded logos) in dark ink */
-.logo-band{background:#EEF0EF;color:var(--ink);padding-block:clamp(28px,3.5vw,48px)}
-.logo-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(16px,2vw,28px) clamp(16px,2.5vw,40px);align-items:center}
-.logo-grid.rotating{display:block}
-.logo-slots{display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr));gap:0 clamp(16px,2.5vw,40px);align-items:center}
-.logo-pool{display:none}
-.logo-slot,.logo-item{display:grid;place-items:center;min-width:0;height:clamp(44px,4.5vw,60px)}
-.logo-item{text-align:center;transition:opacity .5s ease,filter .5s ease,transform .5s ease}
-.logo-item.out{opacity:0;filter:blur(6px);transform:translateY(4px)}
-.logo-name{font-family:var(--f-head);font-weight:600;font-size:clamp(1rem,1.3vw,1.25rem);line-height:1.1;letter-spacing:-.01em;text-wrap:balance;color:rgba(11,26,28,.62)}
-.logo-band{--ls:1}
-.logo-item > .default-pic{display:grid;place-items:center;max-width:100%;min-width:0}
-.logo-item .photo{display:block;width:auto;height:calc(var(--lh,32px) * var(--ls));max-width:100%;object-fit:contain;filter:grayscale(1) brightness(0);opacity:.72}
-.logo-item.has-media .logo-name,.logo-item.has-upload .logo-name{display:none}
-.logo-item.has-upload > .default-pic{display:none}
-@media (max-width:899px){.logo-band{--ls:.85}}
-@media (max-width:519px){.logo-band{--ls:.7}}
-@media (max-width:899px){.logo-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media (max-width:519px){.logo-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .band{min-height:clamp(440px,62vw,820px)}
 /* why it matters: text set in the open sky, top-left */
 #why.band.light{background:#EEF4FC}
@@ -980,71 +956,6 @@ p,h1,h2,h3,ul{margin:0}
     </div>
   </section>
 
-  <section id="logos" class="logo-band" data-sec="Logo strip" data-sid="logos" aria-label="Organisations that run on Canopy">
-    <div class="wrap">
-      <div class="logo-grid" id="logo-grid">
-        <div class="logo-item has-media" data-slot="logo1" data-slot-l="Logo 1 · Bolt" data-default-media="images/logos/bolt.webp"><picture class="default-pic"><img class="photo" src="images/logos/bolt.webp" alt="Bolt" width="276" height="160" style="--lh:50.5px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.1" data-l="Logo 1 name">Bolt</span></div>
-        <div class="logo-item has-media" data-slot="logo2" data-slot-l="Logo 2 · Greenspoon" data-default-media="images/logos/greenspoon.webp"><picture class="default-pic"><img class="photo" src="images/logos/greenspoon.webp" alt="Greenspoon" width="416" height="160" style="--lh:46px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.2" data-l="Logo 2 name">Greenspoon</span></div>
-        <div class="logo-item has-media" data-slot="logo3" data-slot-l="Logo 3 · M-KOPA" data-default-media="images/logos/mkopa.webp"><picture class="default-pic"><img class="photo" src="images/logos/mkopa.webp" alt="M-KOPA" width="696" height="160" style="--lh:31.8px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.3" data-l="Logo 3 name">M-KOPA</span></div>
-        <div class="logo-item has-media" data-slot="logo4" data-slot-l="Logo 4 · KPLC" data-default-media="images/logos/kplc.webp"><picture class="default-pic"><img class="photo" src="images/logos/kplc.webp" alt="Kenya Power (KPLC)" width="369" height="160" style="--lh:54px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.4" data-l="Logo 4 name">KPLC</span></div>
-        <div class="logo-item has-media" data-slot="logo5" data-slot-l="Logo 5 · Wetu" data-default-media="images/logos/wetu.webp"><picture class="default-pic"><img class="photo" src="images/logos/wetu.webp" alt="WeTu" width="367" height="160" style="--lh:43.8px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.5" data-l="Logo 5 name">Wetu</span></div>
-        <div class="logo-item" data-slot="logo6" data-slot-l="Logo 6 · Fortune Credit"><span class="logo-name" data-k="logo.6" data-l="Logo 6 name">Fortune Credit</span></div>
-        <div class="logo-item has-media" data-slot="logo7" data-slot-l="Logo 7 · Watu" data-default-media="images/logos/watu.webp"><picture class="default-pic"><img class="photo" src="images/logos/watu.webp" alt="Watu" width="564" height="160" style="--lh:35.3px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.7" data-l="Logo 7 name">Watu</span></div>
-        <div class="logo-item has-media" data-slot="logo8" data-slot-l="Logo 8 · Platinum Credit" data-default-media="images/logos/platinum.webp"><picture class="default-pic"><img class="photo" src="images/logos/platinum.webp" alt="Platinum Credit" width="487" height="160" style="--lh:38.0px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.8" data-l="Logo 8 name">Platinum Credit</span></div>
-        <div class="logo-item has-media" data-slot="logo9" data-slot-l="Logo 9 · Roam" data-default-media="images/logos/roam.webp"><picture class="default-pic"><img class="photo" src="images/logos/roam.webp" alt="Roam" width="873" height="160" style="--lh:28.4px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.9" data-l="Logo 9 name">Roam</span></div>
-        <div class="logo-item has-media" data-slot="logo12" data-slot-l="Logo 12 · Total Energies" data-default-media="images/logos/total.webp"><picture class="default-pic"><img class="photo" src="images/logos/total.webp" alt="TotalEnergies" width="219" height="160" style="--lh:48px" loading="lazy" decoding="async"></picture><span class="logo-name" data-k="logo.12" data-l="Logo 12 name">Total Energies</span></div>
-      </div>
-      <figure class="logo-quote" hidden><blockquote data-k="logo.quote" data-l="Testimonial (shown only when filled in, and only with written approval)"></blockquote><figcaption><span data-k="logo.quote.name" data-l="Testimonial: name"></span><span data-k="logo.quote.role" data-l="Testimonial: role and company"></span></figcaption></figure>
-    </div>
-  </section>
-  <script>
-  /* testimonial under the logos: only appears once an approved quote has been entered in the editor */
-  (function(){
-    var q=document.querySelector('#logos .logo-quote');if(!q)return;
-    function show(){var t=q.querySelector('blockquote').textContent.trim();q.hidden=!t;
-      [].forEach.call(q.querySelectorAll('figcaption span'),function(e){e.hidden=!e.textContent.trim()})}
-    show();document.addEventListener('canopy:media',show);
-  })();
-  /* logo strip: slots swap one at a time with a soft fade, like sanalabs.com; static grid if motion is reduced */
-  (function(){
-    var grid=document.getElementById('logo-grid');if(!grid)return;
-    var items=[].slice.call(grid.querySelectorAll('.logo-item'));
-    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)');
-    var slotsEl=null,poolEl=null,slots=[],queue=[],timer=null,last=-1,onScreen=true,n=0;
-    function count(){var w=grid.clientWidth;return w<520?3:w<900?4:6}
-    function stop(){clearInterval(timer);timer=null}
-    function start(){if(!timer&&onScreen&&!document.hidden&&slotsEl)timer=setInterval(swap,2200)}
-    function build(){
-      stop();
-      items.forEach(function(it){it.classList.remove('out');grid.appendChild(it)});
-      if(slotsEl){slotsEl.remove();poolEl.remove();slotsEl=poolEl=null}
-      grid.classList.remove('rotating');n=count();
-      if(reduce.matches||items.length<=n)return;
-      slotsEl=document.createElement('div');slotsEl.className='logo-slots';slotsEl.style.setProperty('--n',n);
-      poolEl=document.createElement('div');poolEl.className='logo-pool';poolEl.setAttribute('aria-hidden','true');
-      slots=[];
-      for(var i=0;i<n;i++){var s=document.createElement('div');s.className='logo-slot';s.appendChild(items[i]);slotsEl.appendChild(s);slots.push(s)}
-      queue=items.slice(n);queue.forEach(function(it){poolEl.appendChild(it)});
-      grid.appendChild(slotsEl);grid.appendChild(poolEl);grid.classList.add('rotating');
-      start();
-    }
-    function swap(){
-      var i;do{i=Math.floor(Math.random()*n)}while(n>1&&i===last);last=i;
-      var slot=slots[i],cur=slot.firstElementChild,next=queue.shift();if(!cur||!next)return;
-      cur.classList.add('out');
-      setTimeout(function(){
-        if(cur.parentNode!==slot||!poolEl)return;
-        poolEl.appendChild(cur);cur.classList.remove('out');queue.push(cur);
-        next.classList.add('out');slot.appendChild(next);void next.offsetWidth;next.classList.remove('out');
-      },500);
-    }
-    if('IntersectionObserver' in window){new IntersectionObserver(function(e){onScreen=e[0].isIntersecting;onScreen?start():stop()}).observe(grid)}
-    document.addEventListener('visibilitychange',function(){document.hidden?stop():start()});
-    var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){if(count()!==n)build()},200)});
-    if(reduce.addEventListener)reduce.addEventListener('change',build);
-    build();
-  })();
-  </script>
 
 
   <!-- Numbers: the Explorer explode sequence (images/explorer-seq/, 145 frames) plays behind the stats; GSAP ScrollTrigger pins the
