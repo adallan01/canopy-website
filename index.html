@@ -1060,21 +1060,32 @@ p,h1,h2,h3,ul{margin:0}
        plate's own edge carrying the gradient on (blurred through a tiny buffer: no seam, no streaks). After that
        each frame only overwrites the rectangle the device occupies; the frames are opaque and cover it exactly. */
     var eb=document.createElement('canvas'),ex=eb.getContext('2d');
-    function edge(im,sx,sy,sw,sh,dx,dy,dw,dh,horiz){var n=24;eb.width=horiz?n:1;eb.height=horiz?1:n;ex.imageSmoothingEnabled=true;ex.imageSmoothingQuality='high';
-      ex.drawImage(im,sx,sy,sw,sh,0,0,eb.width,eb.height);ctx.drawImage(eb,0,0,eb.width,eb.height,dx,dy,dw,dh)}
-    function backdrop(){var g=geo,bp=set.bg;ctx.fillStyle=BG;ctx.fillRect(0,0,cw,ch);
-      if(bp&&bp.ok){var P=bp.img,PW=P.naturalWidth,PH=P.naturalHeight;ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
-        if(g.dy>0)edge(P,0,0,PW,2,g.dx,0,g.dw,g.dy+1,true);
-        if(g.dy+g.dh<ch)edge(P,0,PH-2,PW,2,g.dx,g.dy+g.dh-1,g.dw,ch-g.dy-g.dh+1,true);
-        if(g.dx>0)edge(P,0,0,2,PH,0,0,g.dx+1,ch,false);
-        if(g.dx+g.dw<cw)edge(P,PW-2,0,2,PH,g.dx+g.dw-1,0,cw-g.dx-g.dw+1,ch,false);
-        ctx.drawImage(P,g.dx,g.dy,g.dw,g.dh)}
-      var B=set.B,k=g.dw/set.W;g.b=[Math.round(g.dx+B[0]*k),Math.round(g.dy+B[1]*k),Math.round(B[2]*k),Math.round(B[3]*k)];
+    /* desktop: the device sits low while assembled and rises as it opens, which left a tall empty band above it.
+       The view follows it instead: CY is the device's vertical centre in each frame (of 1080), and each frame is
+       drawn shifted so that centre stays in the middle of the canvas. The backdrop is painted once, taller than
+       the canvas, into its own buffer, and copied in at the matching offset -- one plain blit per frame. */
+    var CY=[676, 676, 676, 676, 676, 676, 676, 676, 675, 674, 674, 672, 670, 668, 667, 664, 662, 659, 656, 653, 648, 645, 641, 636, 628, 623, 618, 612, 606, 598, 594, 588, 584, 578, 573, 568, 560, 556, 551, 547, 542, 538, 534, 529, 525, 520, 516, 512, 506, 503, 500, 498, 494, 492, 488, 482, 476, 472, 470, 469, 467, 466, 465, 464, 462, 462, 462, 461, 460, 460, 460, 460, 460];
+    var bb=document.createElement('canvas'),bc=bb.getContext('2d',{alpha:false}),M=0,lastOff=null;
+    function edge(t,im,sx,sy,sw,sh,dx,dy,dw,dh,horiz){var n=24;eb.width=horiz?n:1;eb.height=horiz?1:n;ex.imageSmoothingEnabled=true;ex.imageSmoothingQuality='high';
+      ex.drawImage(im,sx,sy,sw,sh,0,0,eb.width,eb.height);t.drawImage(eb,0,0,eb.width,eb.height,dx,dy,dw,dh)}
+    function backdrop(){var g=geo,bp=set.bg,k=g.dw/set.W,B=set.B;
+      M=set===SETS.d?Math.ceil(Math.max.apply(null,CY.map(function(c){return Math.abs(c-set.H/2)}))*k)+2:0;
+      var H2=ch+2*M,y0=g.dy+M;bb.width=cw;bb.height=H2;bc.fillStyle=BG;bc.fillRect(0,0,cw,H2);
+      if(bp&&bp.ok){var P=bp.img,PW=P.naturalWidth,PH=P.naturalHeight;bc.imageSmoothingEnabled=true;bc.imageSmoothingQuality='high';
+        if(y0>0)edge(bc,P,0,0,PW,2,g.dx,0,g.dw,y0+1,true);
+        if(y0+g.dh<H2)edge(bc,P,0,PH-2,PW,2,g.dx,y0+g.dh-1,g.dw,H2-y0-g.dh+1,true);
+        if(g.dx>0)edge(bc,P,0,0,2,PH,0,0,g.dx+1,H2,false);
+        if(g.dx+g.dw<cw)edge(bc,P,PW-2,0,2,PH,g.dx+g.dw-1,0,cw-g.dx-g.dw+1,H2,false);
+        bc.drawImage(P,g.dx,y0,g.dw,g.dh)}
+      g.b=[Math.round(g.dx+B[0]*k),Math.round(g.dy+B[1]*k),Math.round(B[2]*k),Math.round(B[3]*k)];g.k=k;lastOff=null;
       /* per frame: plain bilinear -- the device is drawn at close to its native size, where 'high' only costs time */
-      ctx.imageSmoothingQuality='low'}
+      ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='low'}
     function nearest(i){if(frames[i]&&frames[i].ok)return i;for(var k=1;k<N;k++){if(i-k>=0&&frames[i-k]&&frames[i-k].ok)return i-k;if(i+k<N&&frames[i+k]&&frames[i+k].ok)return i+k}return -1}
     function draw(){raf=0;if(!set)return;var j=nearest(frameAt(p));if(j<0||j===shown)return;if(!geo){layout();backdrop()}
-      var b=geo.b;ctx.drawImage(frames[j].img,b[0],b[1],b[2],b[3]);shown=j}
+      var b=geo.b,off=set===SETS.d&&CY[j]!=null?Math.round((CY[j]-set.H/2)*geo.k):0;
+      /* the backdrop only needs copying again when the view has moved */
+      if(off!==lastOff){ctx.drawImage(bb,0,off+M,cw,ch,0,0,cw,ch);lastOff=off}
+      ctx.drawImage(frames[j].img,b[0],b[1]-off,b[2],b[3]);shown=j}
     function req(){if(!raf)raf=requestAnimationFrame(draw)}
     function load(i,cb){if(frames[i])return cb&&cb();var s=set,im=new Image(),o={img:im,ok:false};frames[i]=o;im.decoding='async';try{im.fetchPriority='low'}catch(_){}
       if(i===0)im.fetchPriority='high';
